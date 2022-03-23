@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
+
+This file is part of "Mieliala kysely".
+
+Mieliala kysely is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, version 3 of the License.
+
+Mieliala kysely is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
+-->
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Prototype.AktiviteettiäänestysTulokset"
+             Title="Äänestyksen tulos">
+    
+    <ContentPage.Content>
+        <StackLayout>
+
+            <AbsoluteLayout Margin="15"  VerticalOptions ="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                <Label x:Name="result" Margin="5"  
+                       Text="Tähän äänestyksen tulos"
+                       FontSize="25" 
+                       HeightRequest="500"
+                       VerticalTextAlignment="Center" 
+                       HorizontalTextAlignment="Center"
+                   />
+                
+               
+            </AbsoluteLayout>
+
+            <AbsoluteLayout Margin="15"  VerticalOptions ="EndAndExpand" HorizontalOptions="CenterAndExpand">
+                <Button Text="Poistu"
+                     Clicked="PoistuClicked"
+                    
+                     CornerRadius="100"
+                     HorizontalOptions="Center"
+                     WidthRequest="150"
+                     HeightRequest="50"/>
+            </AbsoluteLayout>
+
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

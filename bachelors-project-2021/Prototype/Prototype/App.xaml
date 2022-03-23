@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
+
+This file is part of "Mieliala kysely".
+
+Mieliala kysely is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, version 3 of the License.
+
+Mieliala kysely is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
+-->
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Prototype.App">
+    <Application.Resources>
+        <Thickness x:Key="PageMargin">20</Thickness>
+
+        <!-- Colors -->
+        <Color x:Key="AppPrimaryColor">Gold</Color>
+        <!-- Vaihtoehtoja: khaki, Gold, -->
+      
+        <Color x:Key="PrimaryColor">Black</Color> 
+        <Color x:Key="SecondaryColor">black</Color>
+        <Color x:Key="TertiaryColor">Silver</Color>
+        <Color x:Key="QuaternaryColor">Gray</Color>
+        <Color x:Key="QuinaryColor">Orange</Color>
+
+        <!-- Olisi mahdollista tehdä kokonaan dark mode vaihtoehto appiin, mutta toistaiseksi vain light mode. 
+        Korjattu vain se että vaikka dark mode laitteessa, niin värit on silti ok apissa -->
+
+        <!-- Light mode colors -->
+        <Color x:Key="LightPrimaryColor">WhiteSmoke</Color>
+        <Color x:Key="LightSecondaryColor">Black</Color>
+        <Color x:Key="LightAppBackgroundColor">White</Color>
+        <Color x:Key="LightQuaternaryColor">Gray</Color>
+
+        <!-- Dark mode colors -->
+        <Color x:Key="DarkPrimaryColor">WhiteSmoke</Color>
+        <Color x:Key="DarkSecondaryColor">White</Color>
+        <Color x:Key="DarkAppBackgroundColor">Gray</Color>
+        <Color x:Key="DarkQuaternaryColor">Gray</Color>
+        <Color x:Key="DarkQuinaryColor">LightGray</Color>
+
+
+        <!-- navigattion bar colors -->
+        <Style TargetType ="NavigationPage">
+            <Setter Property="BarBackgroundColor" Value="{StaticResource AppPrimaryColor}"></Setter>
+            <Setter Property="BarTextColor" Value="{StaticResource SecondaryColor}"></Setter>
+        </Style>
+
+        <!-- Implicit styles -->
+        <Style TargetType="ContentPage"
+               ApplyToDerivedTypes="True">
+            <Setter Property="BackgroundColor"
+                    Value="{StaticResource LightAppBackgroundColor}" />
+        </Style>
+
+        <Style TargetType="Editor">
+                <Setter Property="TextColor"
+                    Value="{AppThemeBinding Light={StaticResource LightSecondaryColor}, Dark={StaticResource LightSecondaryColor}}" />
+            <Setter Property="PlaceholderColor"
+                    Value="{AppThemeBinding Light=Gray, Dark=Gray}" />
+            <Setter Property="BackgroundColor"
+                    Value="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource LightPrimaryColor}}" />
+        </Style>
+
+        <Style TargetType="Entry">
+            <Setter Property="TextColor"
+                    Value="{AppThemeBinding Light={StaticResource LightSecondaryColor}, Dark={StaticResource LightSecondaryColor}}" />
+            <Setter Property="PlaceholderColor"
+                    Value="{AppThemeBinding Light=Gray, Dark=Gray}" />
+            <Setter Property="BackgroundColor"
+                    Value="{AppThemeBinding Light={StaticResource LightPrimaryColor}, Dark={StaticResource  LightPrimaryColor}}" />
+        </Style>
+
+        <Style TargetType="Label">
+            <Setter Property="TextColor"
+                    Value="{AppThemeBinding Light={StaticResource LightSecondaryColor}, Dark={StaticResource LightSecondaryColor}}" />
+           
+        </Style>
+
+
+
+        <Style TargetType="Button">
+            <Setter Property="FontSize"
+                    Value="Medium" />
+            <Setter Property="BackgroundColor"
+                    Value="{StaticResource AppPrimaryColor}" />
+            <Setter Property="TextColor"
+                    Value="{StaticResource SecondaryColor}" />
+            <Setter Property="BorderColor"
+                    Value="{StaticResource SecondaryColor}"/>
+            <Setter Property="BorderWidth"
+                    Value="2"/>
+           
+        </Style>
+    </Application.Resources>
+</Application>

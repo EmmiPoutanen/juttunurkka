@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
+
+This file is part of "Mieliala kysely".
+
+Mieliala kysely is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, version 3 of the License.
+
+Mieliala kysely is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
+-->
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Prototype.EmojinValinta"
+             Title="Vastaa kyselyyn">
+    <ContentPage.Content>
+        <StackLayout Margin="20">
+            <Label Margin="20,10,10,50"
+                Text="{Binding introMessage }"
+                VerticalOptions="StartAndExpand"
+                TextColor="Black"
+                FontSize="22"
+                
+                HorizontalOptions="CenterAndExpand"/>
+            <Grid Margin="20, 0, 20, 70">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.2*"/>
+                    <RowDefinition Height="0.2"/>
+                    <RowDefinition Height="0.2*"/>
+                    <RowDefinition Height="0.2"/>
+                    <RowDefinition Height="0.2*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.2*"/>
+                    <ColumnDefinition Width="0.2*"/>
+                    <ColumnDefinition Width="0.2*"/>
+                    <ColumnDefinition Width="0.2*"/>
+                    <ColumnDefinition Width="0.2*"/>
+                </Grid.ColumnDefinitions>
+                <ImageButton Source="emoji0.png"
+                        Clicked="Button_Clicked"
+                        ClassId="0"
+                        x:Name="b0"
+                        Grid.Column="1"
+                        BackgroundColor="Transparent"
+                        BorderColor="Transparent"/>
+                <ImageButton Source="emoji1.png"
+                        Clicked="Button_Clicked"
+                        ClassId="1"
+                        x:Name="b1"
+                        Grid.Column="3"
+                        BackgroundColor="Transparent"
+                        BorderColor="Transparent"/>
+                <ImageButton Source="emoji2.png"
+                        Clicked="Button_Clicked"
+                        ClassId="2"
+                        x:Name="b2"
+                        Grid.Column="0"
+                        Grid.Row="2"
+                        BackgroundColor="Transparent"
+                        BorderColor="Transparent"/>
+                <ImageButton Source="emoji3.png"
+                        Clicked="Button_Clicked"
+                        ClassId="3"
+                        x:Name="b3"
+                        Grid.Column="2"
+                        Grid.Row="2"
+                        BackgroundColor="Transparent"
+                        BorderColor="Transparent"/>
+                <ImageButton Source="emoji4.png"
+                        Clicked="Button_Clicked"
+                        ClassId="4"
+                        x:Name="b4"
+                        Grid.Column="4"
+                        Grid.Row="2"
+                        BackgroundColor="Transparent"
+                        BorderColor="Transparent"/>
+                <ImageButton Source="emoji5.png"
+                        Clicked="Button_Clicked"
+                        ClassId="5"
+                        x:Name="b5"
+                        Grid.Column="1"
+                        Grid.Row="4"
+                        BackgroundColor="Transparent"
+                        BorderColor="Transparent"/>
+                <ImageButton Source="emoji6.png"
+                        Clicked="Button_Clicked"
+                        ClassId="6"
+                        x:Name="b6"
+                        Grid.Column="3"
+                        Grid.Row="4"
+                        BackgroundColor="Transparent"
+                        BorderColor="Transparent"/>
+            </Grid>
+            <Button Text="Vastaa"
+                    Font="Bold, 19"
+                    x:Name="Vastaus"
+                    Clicked="Vastaa_Clicked"
+                    CornerRadius="15"
+                    HeightRequest="65"
+                    IsEnabled="False"
+                    HorizontalOptions="Center"
+                    VerticalOptions="EndAndExpand"
+                    WidthRequest="150"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

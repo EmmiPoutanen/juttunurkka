@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
+
+This file is part of "Mieliala kysely".
+
+Mieliala kysely is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, version 3 of the License.
+
+Mieliala kysely is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
+-->
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Prototype.OdotetaanVastauksiaClient">
+    <ContentPage.Content>
+		<StackLayout>
+
+            <Label Text="Odotetaan muita vastaajia..."
+                    Margin="0,20,0,0"
+                    FontSize="20"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"/>
+
+            <ActivityIndicator IsRunning="true" 
+                                Color="{StaticResource AppPrimaryColor}"
+                               HorizontalOptions="Center"
+                               VerticalOptions="CenterAndExpand"
+                               Margin="0,170,0,0"
+                               Scale="2.5"/>
+
+            <Button Text="Poistu kyselystä"
+                    Clicked="Poistu"
+                    Margin="0, 0, 0, 10"
+                    CornerRadius="40"
+                    WidthRequest="200"
+                    HeightRequest="75"
+                    HorizontalOptions="Center"
+                    VerticalOptions="EndAndExpand"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

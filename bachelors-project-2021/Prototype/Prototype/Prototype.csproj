@@ -1,0 +1,101 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>portable</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="KyselynTulokset\YhteenvetoClient.xaml.cs">
+      <DependentUpon>YhteenvetoClient.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="KyselynTulokset\LisätiedotClient.xaml.cs">
+      <DependentUpon>LisätiedotClient.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="LuoKysely\Omakysymys.xaml.cs">
+      <DependentUpon>Omakysymys.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="VastaaKyselyyn\EmojinValinta.xaml.cs">
+      <DependentUpon>EmojinValinta.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="KyselynTulokset\TabbedViewClient.xaml.cs">
+      <DependentUpon>TabbedViewClient.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+	
+	
+  <ItemGroup>
+    <EmbeddedResource Update="AktiviteettiÄänestys\AktiviteettiäänestysTulokset.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="AktiviteettiÄänestys\AktiviteettiäänestysEka.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="AktiviteettiÄänestys\AktiviteettiäänestysToka.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="KyselynTulokset\LisätiedotHost.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="KyselynTulokset\TabbedViewHost.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="KyselynTulokset\YhteenVetoHost.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="LuoKysely\Omakysymys.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="TallennetutKyselyt\KyselynTarkastelu.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="LuoKysely\LuoKyselyEmojit.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="LuoKysely\LuoKyselyJohdatus.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="LuoKysely\LuoKyselyLopetus.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="LuoKysely\LuoKyselyToimenpiteet.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="TallennetutKyselyt\TallennetutKyselyt.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="KyselynTulokset\LisätiedotClient.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="AktiviteettiÄänestys\TulostenOdotus.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="VastaaKyselyyn\EmojinValinta.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="KyselynTulokset\YhteenvetoClient.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="KyselynTulokset\TabbedViewClient.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="VastaaKyselyyn\OdotetaanVastauksia.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="VastaaKyselyyn\OdotetaanVastauksiaClient.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>  
+  </ItemGroup>
+	
+</Project>

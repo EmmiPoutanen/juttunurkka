@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
+
+This file is part of "Mieliala kysely".
+
+Mieliala kysely is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, version 3 of the License.
+
+Mieliala kysely is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
+-->
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Prototype.TallennetutKyselyt"
+             >
+
+    
+    <!-- custom back button solution -->
+    <NavigationPage.TitleView >
+
+       
+        
+        <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+            <ImageButton Source="backBtn.png"
+                         BackgroundColor="Transparent"
+                         HorizontalOptions="Start"
+                         Clicked="BackBtnClicked"
+                         Margin="0"
+                         HeightRequest="17"
+                         WidthRequest="17"/>
+
+            <Label Text="Tallennetut kyselyt"
+                   Margin="20,0,0,0"
+                   FontSize="20" 
+                   HorizontalOptions="Center"  
+                   VerticalOptions="Center"/>
+        </StackLayout>
+
+      
+        
+    </NavigationPage.TitleView>
+
+    <StackLayout>
+		<Button  Text="Oletuskysely"
+                 Clicked="OletusClicked" 
+                 Margin="20,20,20,20"
+                 CornerRadius="100"
+                 HorizontalOptions="Center"
+                 WidthRequest="300"
+                 HeightRequest="50"
+                 IsEnabled="True"/>
+		
+        <CollectionView Margin="20"
+                        ItemsSource="{Binding Surveys}"
+                        SelectionMode="Single"
+                        SelectionChanged="OnListSelection">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="1"
+                          RowDefinitions="Auto, *"
+                          ColumnDefinitions="Auto, *"  >
+                        
+                        <Label 
+                               Text="{Binding}"
+                               FontSize="22"
+                               HorizontalOptions="Start"/>
+
+
+                        <!-- Separator -->
+                        <BoxView HeightRequest="1"
+                                BackgroundColor="DarkGray"
+                                Grid.ColumnSpan="2"
+                                Grid.Row="2"
+                                VerticalOptions="End"/>
+
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+
+        <Button  x:Name="TButton"
+                 Text="Avaa"
+                 Clicked="AvaaClicked" 
+                 Margin="0,0,0,20"
+                 CornerRadius="100"
+                 HorizontalOptions="Center"
+                 WidthRequest="150"
+                 HeightRequest="50"
+                 IsEnabled="False"/>
+
+
+    </StackLayout>
+
+
+</ContentPage>

@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
+
+This file is part of "Mieliala kysely".
+
+Mieliala kysely is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, version 3 of the License.
+
+Mieliala kysely is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
+-->
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Prototype.LuoKyselyJohdatus"
+             Title="Juttunurkka"
+             >
+
+    <StackLayout  Spacing="40">
+
+        <Label Grid.Column="2"
+            Text="Luo juttunurkka"
+            VerticalOptions="StartAndExpand" 
+            HorizontalOptions="CenterAndExpand"
+            HorizontalTextAlignment="Center"
+            FontAttributes="Bold"
+            FontSize="30"
+            TextColor="#4383EF" 
+            Margin="0,50,0,0"
+        />
+
+        <Picker Title="Aseta kysymys"  
+            x:Name="KysymysPicker"
+            SelectedIndexChanged="OnPickerSelectedIndexChanged"
+            VerticalOptions="StartAndExpand" 
+            HorizontalOptions="CenterAndExpand"
+            WidthRequest="340"
+            Margin="0,0,0,250"
+            ItemsSource="{Binding Intros}"
+            ItemDisplayBinding="{Binding introMessage}">
+
+            
+            <Picker.Items>
+                <x:String>Mitä kuuluu tänään?</x:String>
+                <x:String>Mikä fiilis?</x:String>
+                <x:String>Luo oma kysymys...</x:String>
+            </Picker.Items>
+           
+        </Picker>
+
+        <Grid 
+            RowDefinitions="Auto, Auto"
+            ColumnDefinitions="Auto, Auto"
+            VerticalOptions="End"
+            HorizontalOptions="CenterAndExpand">
+
+            <Button Grid.Column="1"
+                x:Name="EdellinenBtn"
+                Text="Edellinen"
+                Clicked="EdellinenButtonClicked"
+                VerticalOptions="EndAndExpand"
+                HorizontalOptions="CenterAndExpand" 
+                Font="19"
+                Margin="20,0,10,40"
+                CornerRadius="10"
+                HeightRequest="50"
+                WidthRequest="150"
+            />
+
+            <Button Grid.Column="2" 
+                x:Name="JatkaBtn"
+                Text="Jatka"
+                Clicked="JatkaButtonClicked" 
+                VerticalOptions="EndAndExpand" 
+                HorizontalOptions="CenterAndExpand" 
+                Font="19"
+                Margin="20,0,10,40"
+                CornerRadius="10"
+                HeightRequest="50"
+                WidthRequest="150"
+            />
+
+        </Grid>
+
+    </StackLayout>
+
+</ContentPage>

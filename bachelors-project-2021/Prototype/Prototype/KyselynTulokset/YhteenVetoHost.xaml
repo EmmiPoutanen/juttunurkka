@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
+
+This file is part of "Mieliala kysely".
+
+Mieliala kysely is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, version 3 of the License.
+
+Mieliala kysely is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
+-->
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Prototype.YhteenVetoHost"
+             Title="Yhteenveto">
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid Margin="20, 50, 20, 50">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.2*"/>
+                    <RowDefinition Height="0.2*"/>
+                    <RowDefinition Height="0.2*"/>
+                    <RowDefinition Height="0.2*"/>
+                    <RowDefinition Height="0.2*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.2*"/>
+                    <ColumnDefinition Width="0.2*"/>
+                    <ColumnDefinition Width="0.2*"/>
+                    <ColumnDefinition Width="0.2*"/>
+                    <ColumnDefinition Width="0.2*"/>
+                </Grid.ColumnDefinitions>
+                <Image Source="{Binding resultImages[0]}" 
+                       Grid.Column="2"
+                       Grid.Row="2"
+                       Scale="{Binding resultScale[0]}"/>
+                
+                <Image Source="{Binding resultImages[1]}"
+                       Grid.Column="1"
+                       Scale="{Binding resultScale[1]}"/>
+
+                <Image Source="{Binding resultImages[2]}"
+                       Grid.Column="3"
+                       Scale="{Binding resultScale[2]}"/>
+
+                <Image Source="{Binding resultImages[3]}" 
+                       Grid.Column="4"
+                       Grid.Row="2"
+                       Scale="{Binding resultScale[3]}"/>
+
+                <Image Source="{Binding resultImages[4]}" 
+                       Grid.Column="3"
+                       Grid.Row="4"
+                       Scale="{Binding resultScale[4]}"/>
+
+                <Image Source="{Binding resultImages[5]}" 
+                       Grid.Column="1"
+                       Grid.Row="4"
+                       Scale="{Binding resultScale[5]}"/>
+
+                <Image Source="{Binding resultImages[6]}"
+                       Grid.Column="0"
+                       Grid.Row="2"
+                       Scale="{Binding resultScale[6]}"/>
+            </Grid>
+            <Button Text="Lopeta Kysely"
+                    Margin="0, 0, 0, 20"
+                    Clicked="LopetaClicked"
+                    CornerRadius="15"
+                    VerticalOptions="End"
+                    HorizontalOptions="Center"
+                    BackgroundColor="Gold"/>
+            <Button Text="Jatka harjoitukseen"
+                    Margin="0, 0, 0, 20"
+                    Clicked="JatkaClicked"
+                    CornerRadius="15"
+                    VerticalOptions="End"
+                    HorizontalOptions="Center"
+                    BackgroundColor="Gold"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
+
+This file is part of "Mieliala kysely".
+
+Mieliala kysely is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, version 3 of the License.
+
+Mieliala kysely is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
+-->
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Prototype.AktiviteettiäänestysToka"
+             Title="Aktiviteetti äänestys 2/2">
+    
+    <ContentPage.Content>
+
+        
+        <StackLayout Margin="10">
+
+            <Grid Margin="0">
+
+                <Label Margin="10,0,0,0"
+                       Text="Äänestä aktiviteettiä"
+                       TextColor="Black"
+                       VerticalOptions="Start" 
+                       HorizontalOptions="Start"
+                       FontSize="20"/>
+
+                <Label Text="10"
+                   x:Name="timer"
+                   Margin="15,0, 20,0"
+                   FontAttributes="Bold"
+                   FontSize="20"
+                   TextColor="Gold"
+                   VerticalOptions="Start" 
+                   HorizontalOptions="End" />
+
+            </Grid>
+            
+            <StackLayout HorizontalOptions="Center" VerticalOptions="Center"
+					         Orientation="Vertical"
+                             WidthRequest="200"
+                             >
+
+              
+
+                <CollectionView x:Name="Collection"
+                                    ItemsSource= "{Binding Items}"
+                                    SelectionMode= "Single" 
+                                    SelectedItem="{Binding Selected, Mode=TwoWay}"
+                                    Margin="0,20,0,0">
+
+					<CollectionView.ItemTemplate>
+						<DataTemplate>
+                            <Grid Padding="1"
+                                    RowDefinitions="Auto, *"
+                                    ColumnDefinitions="Auto, *"  >
+
+                                <Label  Text="{Binding}" 
+                                        Margin="5"
+                                        TextColor="Black"
+                                        FontSize="20"/>
+
+
+                                <!-- Separator -->
+                                <BoxView HeightRequest="1"
+                                        BackgroundColor="DarkGray"
+                                        Grid.ColumnSpan="2"
+                                        Grid.Row="2"
+                                        VerticalOptions="End"/>
+
+
+                            </Grid>
+
+                        </DataTemplate>
+					</CollectionView.ItemTemplate>
+				</CollectionView>
+			</StackLayout>
+		</StackLayout>
+    </ContentPage.Content>
+</ContentPage>

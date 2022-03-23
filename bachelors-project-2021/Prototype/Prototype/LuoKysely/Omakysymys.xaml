@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Prototype.Omakysymys"
+             Title="">
+
+
+
+    <StackLayout  Spacing="40">
+
+        <Label Grid.Column="2"
+            Text="Luo oma kysymys"
+            VerticalOptions="StartAndExpand" 
+            HorizontalOptions="CenterAndExpand"
+            HorizontalTextAlignment="Center"
+            FontAttributes="Bold"
+            FontSize="30"
+            TextColor="#4383EF" 
+            Margin="0,50,0,0"
+        />
+
+
+        <Frame Padding="10"
+            VerticalOptions="StartAndExpand" 
+            HorizontalOptions="CenterAndExpand"
+            BorderColor="#4383EF"
+            Margin="0,0,0,330"
+            CornerRadius="10"
+            HeightRequest="150"
+            WidthRequest="300"
+            >
+            <Entry Placeholder="Kirjoita teksti..."
+                       VerticalOptions="StartAndExpand"
+                       MaxLength="50"
+                       BackgroundColor="White"
+                 />
+        </Frame>
+
+
+        <Grid 
+            RowDefinitions="Auto, Auto"
+            ColumnDefinitions="Auto, Auto"
+            VerticalOptions="End"
+            HorizontalOptions="CenterAndExpand">
+
+            <Button Grid.Column="1"
+                Text="Edellinen"
+                Clicked="EdellinenButtonClicked"
+                VerticalOptions="EndAndExpand"
+                HorizontalOptions="CenterAndExpand" 
+                Font="19"
+                Margin="20,0,10,40"
+                CornerRadius="10"
+                HeightRequest="50"
+                WidthRequest="150"
+            />
+
+            <Button Grid.Column="2" 
+                Text="Jatka"
+                Clicked="JatkaButtonClicked" 
+                VerticalOptions="EndAndExpand" 
+                HorizontalOptions="CenterAndExpand" 
+                Font="19"
+                Margin="20,0,10,40"
+                CornerRadius="10"
+                HeightRequest="50"
+                WidthRequest="150"
+                
+            />
+
+        </Grid>
+
+    </StackLayout>
+
+</ContentPage>
