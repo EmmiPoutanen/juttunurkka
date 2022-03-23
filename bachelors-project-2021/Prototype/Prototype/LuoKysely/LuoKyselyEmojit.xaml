@@ -53,7 +53,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
                    />
             <CheckBox Color="Black"
                       IsChecked="False"
-                      CheckedChanged="OnCheckBoxCheckedChanged"/>
+                      CheckedChanged="OnAllCheckBoxCheckedChanged"/>
 
         </StackLayout>
 
@@ -90,6 +90,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
                         <!-- Green-->
                         <CheckBox x:Name="Checkbox"
                                   IsChecked = "false"
+                                  CheckedChanged="OnCheckBoxCheckedChanged"
                                   Color="Black"
                                   Grid.Row="1"
                                   Grid.Column="1"

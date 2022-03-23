@@ -31,9 +31,13 @@ namespace Prototype
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LuoKyselyLopetus : ContentPage
     {
+        public string introMessage { get; set; } = "Kysymys: ";
         public LuoKyselyLopetus()
         {
             InitializeComponent();
+            Survey s = SurveyManager.GetInstance().GetSurvey();
+            introMessage += s.introMessage;
+            BindingContext = this;
 
             //NameEditor.Text = SurveyManager.GetInstance().GetSurvey().Name;
             //KeyEditor.Text = SurveyManager.GetInstance().GetSurvey().RoomCode;

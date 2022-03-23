@@ -95,8 +95,8 @@ namespace Prototype
                 {
                     await Navigation.PushAsync(new Omakysymys());
                 }
-                //ottaa talteen kysymyksen
-                string selectedItem = string.Empty;
+                //ottaa talteen kysymyksen(ainaki yrittää)
+                //string selectedItem = string.Empty;
                 selectedItem = KysymysPicker.Items[KysymysPicker.SelectedIndex];
                 //var selectedItem = KysymysPicker[selectedIndex];
                 JatkaBtn.IsEnabled = true;

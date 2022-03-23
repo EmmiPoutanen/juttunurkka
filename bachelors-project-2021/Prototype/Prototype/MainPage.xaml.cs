@@ -240,7 +240,7 @@ namespace Prototype
         {
             // siirrytään "luo uus kysely" sivulle
             Main.GetInstance().CreateNewSurvey();
-            await Navigation.PushAsync(new LuoKyselyJohdatus());
+            await Navigation.PushAsync(new Opettajanhuone());
         }
 
         async void TallennetutKyselytClicked(object sender, EventArgs e)

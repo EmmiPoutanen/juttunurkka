@@ -78,7 +78,12 @@ namespace Prototype
 
         void OnCheckBoxCheckedChanged(object sender, CheckedChangedEventArgs e)
         {
-            
+           
+        }
+
+        void OnAllCheckBoxCheckedChanged(object sender, CheckedChangedEventArgs e)
+        {
+
         }
 
 
