@@ -76,6 +76,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
             <Button Grid.Column="2" 
                 x:Name="JatkaBtn"
                 Text="Jatka"
+                IsEnabled="False"
                 Clicked="JatkaButtonClicked" 
                 VerticalOptions="EndAndExpand" 
                 HorizontalOptions="CenterAndExpand" 
