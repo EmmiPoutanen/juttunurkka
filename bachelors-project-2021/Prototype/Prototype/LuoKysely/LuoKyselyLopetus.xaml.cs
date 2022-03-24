@@ -43,6 +43,15 @@ namespace Prototype
             //KeyEditor.Text = SurveyManager.GetInstance().GetSurvey().RoomCode;
         }
 
+        async void EdellinenButtonClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new LuoKyselyToimenpiteet());
+        }
+
+        async void JatkaButtonClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new Esikatselu());
+        }
         /*
         async void TallennaJaPoistuClicked(object sender, EventArgs e)
         {
@@ -66,6 +75,7 @@ namespace Prototype
             
         }*/
 
+        /*
         async void PeruutaClicked(object sender, EventArgs e)
         {
 
@@ -90,7 +100,7 @@ namespace Prototype
 
             }
             else return;
-        }
+        }*/
 
         void JaaClicked(object sender, EventArgs e)
         {

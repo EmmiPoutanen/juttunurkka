@@ -21,11 +21,12 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
              x:Class="Prototype.LuoKyselyLopetus"
              Title="Juttunurkka">
 
-
+    <!--
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Peruuta"
                      Clicked="PeruutaClicked"/>
     </ContentPage.ToolbarItems>
+    -->
 
     <StackLayout Spacing="0">
 
@@ -82,6 +83,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
 
             <Button Grid.Column="1"
                 Text="Edellinen"
+                Clicked="EdellinenButtonClicked"
                 VerticalOptions="EndAndExpand"
                 HorizontalOptions="CenterAndExpand" 
                 Font="19"
@@ -93,6 +95,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
 
             <Button Grid.Column="2" 
                 Text="Jatka"
+                Clicked="JatkaButtonClicked" 
                 VerticalOptions="EndAndExpand" 
                 HorizontalOptions="CenterAndExpand" 
                 Font="19"

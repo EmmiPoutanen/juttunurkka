@@ -71,6 +71,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
         </StackLayout>
 
         <Button Text="Vaihtoehdot"
+            FontAttributes="Bold"
             VerticalOptions="CenterAndExpand" 
             HorizontalOptions="CenterAndExpand" 
             BorderColor="#4383EF"
