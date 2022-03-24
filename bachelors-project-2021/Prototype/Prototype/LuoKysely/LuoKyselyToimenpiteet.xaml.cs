@@ -87,28 +87,33 @@ namespace Prototype
             else return;
         }
 
-        void btnPopupButton_Clicked(object sender, EventArgs e)
+        /*
+        private void btnPopupButton_Clicked(object sender, EventArgs e)
         {
-            // :DDD
-            if (sender is Button b && b.Parent is Grid g && g.Children[2] is Frame f)
-			{
-                if (f.IsVisible == false)
-                {
 
-                    f.IsVisible = true;
-                }
 
-                else if (f.IsVisible == true)
-                {
+            if (popupSelection.IsVisible == false)
+            {
 
-                    f.IsVisible = false;
-                }
+                popupSelection.IsVisible = true;
             }
+
+            else if (popupSelection.IsVisible == true)
+            {
+
+                popupSelection.IsVisible = false;
+            }
+
+        }*/
+        
+        void ButtonClicked(object sender, EventArgs e)
+        {
+            
         }
 
     
 
-        /*
+        
         void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 			if (sender is CollectionView cv && cv.SelectionChangedCommandParameter is CollectionItem item)
@@ -116,7 +121,7 @@ namespace Prototype
                 
 			}
         }
-        */
+        
 
         async void JatkaButtonClicked(object sender, EventArgs e)
         {
