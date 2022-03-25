@@ -50,6 +50,7 @@ namespace Prototype
 
             //alustetaan emojit kyselyn emojeilla
             Emojit = new List<CollectionItem>();
+
             List<Emoji> temp = SurveyManager.GetInstance().GetSurvey().emojis;
 
 			//alustetaan radionappien valinnat
@@ -78,7 +79,7 @@ namespace Prototype
 
         void OnCheckBoxCheckedChanged(object sender, CheckedChangedEventArgs e)
         {
-           
+            JatkaBtn.IsEnabled = true;
         }
 
         void OnAllCheckBoxCheckedChanged(object sender, CheckedChangedEventArgs e)
