@@ -105,7 +105,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
                   ColumnDefinitions="Auto, *"-->
 
                 <Button
-                 x:Name="minButton"
+                 x:Name="MinButton"
                  Grid.Row="0"
                  Text="5 minuutin tauko" 
                  Margin="5,10,0,10"
@@ -113,19 +113,23 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
                  BackgroundColor="Transparent"
                  BorderColor="Transparent"
                  FontSize="20"
-                 Clicked="ButtonClicked"/>
+                 IsEnabled="false"
+                 Clicked="Button1Clicked"/>
 
                 <Button 
+                 x:Name="TauluButton"
                  Grid.Row="1"
-                 Text="Piiretään taululle" 
+                 Text="Piirretään taululle" 
                  Margin="5,10,0,10"
                  TextColor="Black"
                  BackgroundColor="Transparent"
                  BorderColor="Transparent"
                  FontSize="20"
-                 Clicked="ButtonClicked"/>
+                 IsEnabled="false"
+                 Clicked="Button2Clicked"/>
 
                 <Button 
+                 x:Name="HirsiButton"
                  Grid.Row="2"
                  Text="Hirsipuu" 
                  Margin="5,10,0,10"
@@ -133,7 +137,8 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
                  BackgroundColor="Transparent"
                  BorderColor="Transparent"
                  FontSize="20"
-                 Clicked="ButtonClicked"/>
+                 IsEnabled="false"
+                 Clicked="Button3Clicked"/>
 
             </Grid>
 

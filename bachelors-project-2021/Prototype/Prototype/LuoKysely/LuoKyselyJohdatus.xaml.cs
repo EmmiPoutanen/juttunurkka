@@ -95,10 +95,8 @@ namespace Prototype
                 {
                     await Navigation.PushAsync(new Omakysymys());
                 }
-                //ottaa talteen kysymyksen(ainaki yrittää)
-                //string selectedItem = string.Empty;
+                //ottaa talteen kysymyksen
                 selectedItem = KysymysPicker.Items[KysymysPicker.SelectedIndex];
-                //var selectedItem = KysymysPicker[selectedIndex];
                 JatkaBtn.IsEnabled = true;
             }
 
@@ -112,11 +110,11 @@ namespace Prototype
 
         async void JatkaButtonClicked(object sender, EventArgs e)
         {
-            //kyselyn johdatuslause asetetaan.
+            //tallentaa kyselyn kysymyksen
             SurveyManager.GetInstance().GetSurvey().introMessage = selectedItem;
           
 
-            //siirrytään "luo uus kysely 2/3" sivulle 
+            //siirrytään emojin valinta sivulle 
             await Navigation.PushAsync(new LuoKyselyEmojit());
         }
 

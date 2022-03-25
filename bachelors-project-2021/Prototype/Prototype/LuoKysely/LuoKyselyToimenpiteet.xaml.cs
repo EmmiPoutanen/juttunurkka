@@ -87,6 +87,8 @@ namespace Prototype
             else return;
         }
 
+        //valintanapit ensin disabled.
+
         /*
         private void btnPopupButton_Clicked(object sender, EventArgs e)
         {
@@ -106,14 +108,23 @@ namespace Prototype
 
         }*/
         
-        void ButtonClicked(object sender, EventArgs e)
+        void Button1Clicked(object sender, EventArgs e)
         {
-            
+            MinButton.IsEnabled = true;
         }
 
-    
+        void Button2Clicked(object sender, EventArgs e)
+        {
+            TauluButton.IsEnabled = true;
+        }
 
-        
+        void Button3Clicked(object sender, EventArgs e)
+        {
+            HirsiButton.IsEnabled = true;
+        }
+
+
+
         void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 			if (sender is CollectionView cv && cv.SelectionChangedCommandParameter is CollectionItem item)
