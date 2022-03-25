@@ -88,29 +88,9 @@ namespace Prototype
         }
 
 
-        async void EdellinenButtonClicked(object sender, EventArgs e) //menee vielä alkuun
-    {
-            var res = await DisplayAlert("Tahdotko varmasti keskeytää kyselyn luonnin?", "", "Kyllä", "Ei");
-
-            if (res == true)
-            {
-                //survey resetoidaan
-                SurveyManager.GetInstance().ResetSurvey();
-
-                //Jos ollaan edit tilassa, niin siirrytään takaisin kyselyntarkastelu sivulle, muutoin main menuun
-                if (Main.GetInstance().GetMainState() == Main.MainState.Editing)
-                {
-                    Main.GetInstance().BrowseSurveys();
-                    await Navigation.PopAsync();
-                }
-                else
-                {
-                    // siirrytään etusivulle
-                    await Navigation.PopToRootAsync();
-                }
-
-            }
-            else return;
+        async void EdellinenButtonClicked(object sender, EventArgs e) 
+        {
+            await Navigation.PushAsync(new LuoKyselyJohdatus());
         }
     async void JatkaButtonClicked(object sender, EventArgs e)
         {
@@ -128,8 +108,8 @@ namespace Prototype
 			}
             SurveyManager.GetInstance().GetSurvey().emojis = temp;
 
-            // siirrytään "luo uus kysely 3/3" sivulle 
-            await Navigation.PushAsync(new LuoKyselyToimenpiteet()); ;
+            // siirrytään aktiviteetit sivulle sivulle 
+            await Navigation.PushAsync(new LuoKyselyToimenpiteet()); 
         }
     }
 }

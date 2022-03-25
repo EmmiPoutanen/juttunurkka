@@ -64,27 +64,7 @@ namespace Prototype
 
         async void EdellinenButtonClicked(object sender, EventArgs e)
         {
-            var res = await DisplayAlert("Tahdotko varmasti keskeytää kyselyn luonnin?", "", "Kyllä", "Ei");
-
-            if (res == true)
-            {
-                //survey resetoidaan
-                SurveyManager.GetInstance().ResetSurvey();
-
-                //Jos ollaan edit tilassa, niin siirrytään takaisin kyselyntarkastelu sivulle, muutoin main menuun
-                if (Main.GetInstance().GetMainState() == Main.MainState.Editing)
-                {
-                    Main.GetInstance().BrowseSurveys();
-                    await Navigation.PopAsync();
-                }
-                else
-                {
-                    // siirrytään etusivulle
-                    await Navigation.PopToRootAsync();
-                }
-
-            }
-            else return;
+            await Navigation.PushAsync(new LuoKyselyEmojit());
         }
 
         //valintanapit ensin disabled.

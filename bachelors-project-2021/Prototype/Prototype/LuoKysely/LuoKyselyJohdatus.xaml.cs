@@ -60,37 +60,13 @@ namespace Prototype
  
         }
 
-        private void btnPopupButton_Clicked(object sender, EventArgs e)
-        {
-           /*
-
-            if (popupSelection.IsVisible == false)
-            {
-
-                popupSelection.IsVisible = true; 
-            }
-
-            else if (popupSelection.IsVisible == true)
-            {
-
-                popupSelection.IsVisible = false;
-            }*/
-
-        }
-
-   
-
 
         async void OnPickerSelectedIndexChanged(object sender, EventArgs e)
         {
             var picker = (Picker)sender;
             int selectedIndex = picker.SelectedIndex;
-            //selectedItem = e.CurrentSelection[0] as string;
-
-            //Change the text of the button based on selected intro message
-
+            
             if (selectedIndex != -1) {
-                //JButton.Text = selectedItem;
                 if(selectedIndex == 2)
                 {
                     await Navigation.PushAsync(new Omakysymys());
@@ -103,7 +79,6 @@ namespace Prototype
             else {
                 JatkaBtn.IsEnabled = false;
             }
-                //JButton.Text = "Valitse johdatuslause";
         }
 
 
@@ -118,22 +93,12 @@ namespace Prototype
             await Navigation.PushAsync(new LuoKyselyEmojit());
         }
 
-        async void EdellinenButtonClicked(object sender, EventArgs e) //menee vielä kokonaan alkuun
+        async void EdellinenButtonClicked(object sender, EventArgs e) 
         {
             //survey resetoidaan
             SurveyManager.GetInstance().ResetSurvey();
 
-            //Jos ollaan edit tilassa, niin siirrytään takaisin kyselyntarkastelu sivulle, muutoin main menuun
-            if(Main.GetInstance().GetMainState() == Main.MainState.Editing)
-            {
-                Main.GetInstance().BrowseSurveys();
-                await Navigation.PopAsync();
-            }
-            else
-            {
-                // siirrytään etusivulle
-                await Navigation.PopToRootAsync();
-            }
+            await Navigation.PushAsync(new Opettajanhuone());
         }
     }
 
