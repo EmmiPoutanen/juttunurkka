@@ -32,7 +32,19 @@ namespace Prototype
 
         async void ValmisButtonClicked(object sender, EventArgs e)
         {
-            //await Navigation.PushAsync(new Opettajanhuone());
+            var res = await DisplayAlert("Juttunurkka tallennettu! Haluatko avata juttunurkan heti?", "", "Kyllä", "Ei");
+
+            if (res == true)
+            {
+                //vaihda odotetaan osallistujia näkymään kun se on tehty
+                await Navigation.PushAsync(new LuoKyselyJohdatus());  
+
+            }
+            else
+            {
+                await Navigation.PushAsync(new Opettajanhuone());
+            }
+            
         }
     }
 }
