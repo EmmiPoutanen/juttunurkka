@@ -28,14 +28,17 @@ namespace Prototype
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LuoKyselyToimenpiteet : ContentPage
     {
+
         public IList<CollectionItem> Items { get; set; }
+        public List<string> tempActivities = new List<string>();
+
         public class CollectionItem
+ 
         {
             public Emoji Emoji { get; set; }
             public IList<string> ActivityChoises { get; set; }
             public ObservableCollection<object> Selected { get; set; }
-
-			public CollectionItem(Emoji emoji, IList<string> activities)
+            public CollectionItem(Emoji emoji, IList<string> activities)
 			{
 				Emoji = emoji;
 				ActivityChoises = activities;
@@ -64,7 +67,7 @@ namespace Prototype
 
         async void EdellinenButtonClicked(object sender, EventArgs e)
         {
-            var res = await DisplayAlert("Tahdotko varmasti keskeytää kyselyn luonnin?", "", "Kyllä", "Ei");
+            var res = await DisplayAlert("Tahdotko varmasti keskeyttää kyselynluonnin?", "", "Kyllä", "Ei");
 
             if (res == true)
             {
@@ -105,15 +108,43 @@ namespace Prototype
             }
 
         }*/
-        
+
         void ButtonClicked(object sender, EventArgs e)
         {
-            
+            String valinta1 = "5 minuutin tauko";
+            String valinta2 = "Piirretään taululle";
+ 
+            if (sender is Button b && b.Parent is Grid g)
+            {
+                if (b.Text.Equals(valinta1))
+                {
+
+                    b.TextColor = Color.White;
+                    b.BackgroundColor = Color.Blue;
+                    Console.WriteLine(valinta1);
+                    tempActivities.Add(valinta1);
+                }                
+                if (b.Text.Equals(valinta2))
+                {
+                    b.TextColor = Color.White;
+                    b.BackgroundColor = Color.Blue;
+                    Console.WriteLine(valinta2);
+                    tempActivities.Add(valinta2);
+                }
+            }
+            else
+            {
+                //doSomething
+            }
+            foreach (var word in tempActivities)
+            {
+                Console.WriteLine(word);
+            }
+
+
         }
 
-    
 
-        
         void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 			if (sender is CollectionView cv && cv.SelectionChangedCommandParameter is CollectionItem item)
@@ -137,12 +168,12 @@ namespace Prototype
             List<Emoji> tempEmojis = new List<Emoji>();
 			foreach (var item in Items)
 			{
-                List<string> tempActivities = new List<string>();
+ //         otin pois ja siirsin ylös//PP    List<string> tempActivities = new List<string>();
 				foreach (var selection in item.Selected)
 				{
-                    tempActivities.Add(selection as string);
+ //otin pois ja siirsin ylös/PP                  tempActivities.Add(selection as string);
 				}
-                item.Emoji.activities = tempActivities;
+                // otin pois ja siirsin ylös/PP              item.Emoji.activities = tempActivities;
                 tempEmojis.Add(item.Emoji);
 			}
             SurveyManager.GetInstance().GetSurvey().emojis = tempEmojis;            
