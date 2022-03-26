@@ -25,7 +25,6 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
 
     <StackLayout Spacing="40">
         <CollectionView ItemsSource="{Binding Items} " IsVisible="false"></CollectionView>
-
         <StackLayout Orientation="Horizontal"
                      VerticalOptions="Start"
                      HorizontalOptions="CenterAndExpand"
@@ -42,7 +41,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
               Margin="0,40,0,0"
              />
 
-        <!--Tämä pitää tehdä .cs koodiin niin että hakee oikean hymiön kuvan tähän-->
+            <!--Tämä pitää tehdä .cs koodiin niin että hakee oikean hymiön kuvan tähän-->
             <Image Source="Emoji2.jpg"
                    WidthRequest="60"
                    HeightRequest="60"
@@ -82,8 +81,8 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
             CornerRadius="10"
             HeightRequest="50"
             WidthRequest="340" />
-            <!--Clicked="btnPopupButton_Clicked"-->
-         
+        <!--Clicked="btnPopupButton_Clicked"-->
+
 
 
         <!--"dropdown"-->
@@ -102,12 +101,12 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
             IsVisible="true">
 
             <Grid Padding="1">
-                
+
                 <!--="Auto, *"
                   ColumnDefinitions="Auto, *"-->
 
                 <Button
-                 x:Name="MinButton"
+                 x:Name="minButton"
                  Grid.Row="0"
                  Text="5 minuutin tauko" 
                  Margin="5,10,0,10"
@@ -115,11 +114,9 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
                  BackgroundColor="Transparent"
                  BorderColor="Transparent"
                  FontSize="20"
-                 IsEnabled="false"
-                 Clicked="Button1Clicked"/>
+                 Clicked="ButtonClicked"/>
 
                 <Button 
-                 x:Name="TauluButton"
                  Grid.Row="1"
                  Text="Piirretään taululle" 
                  Margin="5,10,0,10"
@@ -127,11 +124,9 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
                  BackgroundColor="Transparent"
                  BorderColor="Transparent"
                  FontSize="20"
-                 IsEnabled="false"
-                 Clicked="Button2Clicked"/>
+                 Clicked="ButtonClicked"/>
 
                 <Button 
-                 x:Name="HirsiButton"
                  Grid.Row="2"
                  Text="Hirsipuu" 
                  Margin="5,10,0,10"
@@ -139,8 +134,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
                  BackgroundColor="Transparent"
                  BorderColor="Transparent"
                  FontSize="20"
-                 IsEnabled="false"
-                 Clicked="Button3Clicked"/>
+                 Clicked="ButtonClicked"/>
 
             </Grid>
 

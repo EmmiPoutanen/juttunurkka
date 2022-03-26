@@ -28,6 +28,8 @@ namespace Prototype
 		public int ID {get; set;} = 0;
 		public string Name { get; set; } = "default";
 		public string Impact { get; set; } = "default";
+
+		public bool IsChecked { get; set; } = false;
 		public IList<string> activities { get; set; } = null;
 		public string ImageSource { get; set; } = "missing.png";
 
@@ -36,11 +38,12 @@ namespace Prototype
 			activities = new List<string>() { "foo", "bar" };
 		}
 
-		public Emoji(int ID, string Name, string impact, List<string> activities, string ImageSource)
+		public Emoji(int ID, string Name, string impact, bool isChecked, List<string> activities, string ImageSource)
 		{
 			this.ID = ID;
 			this.Name = Name;
 			this.Impact = impact;
+			this.IsChecked = IsChecked;
 			this.activities = activities;
 			this.ImageSource = ImageSource;
 		}

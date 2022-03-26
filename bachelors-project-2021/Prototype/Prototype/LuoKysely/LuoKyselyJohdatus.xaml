@@ -44,7 +44,6 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
             Margin="0,0,0,250"
             ItemsSource="{Binding Intros}"
             ItemDisplayBinding="{Binding introMessage}">
-
             
             <Picker.Items>
                 <x:String>Mitä kuuluu tänään?</x:String>

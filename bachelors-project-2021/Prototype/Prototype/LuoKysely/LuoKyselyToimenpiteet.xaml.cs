@@ -33,22 +33,22 @@ namespace Prototype
         public List<string> tempActivities = new List<string>();
 
         public class CollectionItem
- 
+
         {
             public Emoji Emoji { get; set; }
             public IList<string> ActivityChoises { get; set; }
             public ObservableCollection<object> Selected { get; set; }
             public CollectionItem(Emoji emoji, IList<string> activities)
-			{
-				Emoji = emoji;
-				ActivityChoises = activities;
+            {
+                Emoji = emoji;
+                ActivityChoises = activities;
 
                 Selected = new ObservableCollection<object>();
-				foreach (var item in emoji.activities)
-				{
+                foreach (var item in emoji.activities)
+                {
                     Selected.Add(ActivityChoises[ActivityChoises.IndexOf(item)]);
-				}
-			}
+                }
+            }
         }
 
         public LuoKyselyToimenpiteet()
@@ -56,11 +56,11 @@ namespace Prototype
             InitializeComponent();
 
             //alustus
-            Items = new List<CollectionItem>();   
-			foreach (var item in SurveyManager.GetInstance().GetSurvey().emojis)
-			{
+            Items = new List<CollectionItem>();
+            foreach (var item in SurveyManager.GetInstance().GetSurvey().emojis)
+            {
                 Items.Add(new CollectionItem(item, Const.activities[item.ID]));
-			}
+            }
 
             BindingContext = this;
         }
@@ -86,7 +86,9 @@ namespace Prototype
                     await Navigation.PopToRootAsync();
                 }
 
-        //valintanapit ensin disabled.
+            }
+            else return;
+        }
 
         /*
         private void btnPopupButton_Clicked(object sender, EventArgs e)
@@ -111,49 +113,110 @@ namespace Prototype
         {
             String valinta1 = "5 minuutin tauko";
             String valinta2 = "Piirretään taululle";
- 
+            String valinta3 = "Hirsipuu";
+
             if (sender is Button b && b.Parent is Grid g)
             {
-                if (b.Text.Equals(valinta1))
+                //tassa harjoitusta
+                
+                 
+                if (b.TextColor == Color.Black)
+                {
+                    b.TextColor = Color.White;
+                    b.BackgroundColor = Color.Blue;
+                    Console.WriteLine(b.Text + " klikattu");
+                    tempActivities.Add(b.Text);
+                }
+                else if (b.TextColor == Color.White)
+                {
+                    b.TextColor = Color.Black;
+                    b.BackgroundColor = Color.White;
+                    foreach (var word in tempActivities)
+                    {
+                        if (word.Equals(b.Text))
+                        {
+                            tempActivities.Remove(word);
+                            break;
+                        }
+                        else
+                        {
+                            //just go on
+                        }
+                    }
+                }
+                else
+                {
+
+                }
+            /*    if (b.Text.Equals(valinta1))
                 {
 
                     b.TextColor = Color.White;
                     b.BackgroundColor = Color.Blue;
-                    Console.WriteLine(valinta1);
+                    Console.WriteLine(valinta1+ " klikattu");
                     tempActivities.Add(valinta1);
-                }                
+                }
                 if (b.Text.Equals(valinta2))
+                {
+                    if (b.TextColor == Color.Black) {
+                        b.TextColor = Color.White;
+                        b.BackgroundColor = Color.Blue;
+                        tempActivities.Add(valinta2);
+
+                    }
+                    else
+                    {
+                        b.TextColor = Color.Black;
+                        b.BackgroundColor = Color.White;
+                        foreach (var word in tempActivities)
+                        {
+                            if (word.Equals(valinta2)){
+                              //  tempActivities.Remove(word);   
+                            }
+                            else
+                            {
+                                //just go on
+                            }
+                        }
+                    }
+                    Console.WriteLine(valinta2 + " klikattu");
+                }
+
+                if (b.Text.Equals(valinta3))
                 {
                     b.TextColor = Color.White;
                     b.BackgroundColor = Color.Blue;
-                    Console.WriteLine(valinta2);
-                    tempActivities.Add(valinta2);
+                    Console.WriteLine(valinta3 + " klikattu");
+                    tempActivities.Add(valinta3);
                 }
+
+
             }
             else
             {
-                //doSomething
+                //doSomething*/
+            }
+            else
+            {
+
             }
             foreach (var word in tempActivities)
             {
                 Console.WriteLine(word);
             }
 
-        void Button3Clicked(object sender, EventArgs e)
-        {
-            HirsiButton.IsEnabled = true;
-        }
 
+        }
 
 
         void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-			if (sender is CollectionView cv && cv.SelectionChangedCommandParameter is CollectionItem item)
-			{
-                
-			}
+            if (sender is CollectionView cv && cv.SelectionChangedCommandParameter is CollectionItem item)
+            {
+
+            }
         }
-        
+
 
         async void JatkaButtonClicked(object sender, EventArgs e)
         {
@@ -167,17 +230,17 @@ namespace Prototype
 
             //asetetaan emojit survey olioon
             List<Emoji> tempEmojis = new List<Emoji>();
-			foreach (var item in Items)
-			{
- //         otin pois ja siirsin ylös//PP    List<string> tempActivities = new List<string>();
-				foreach (var selection in item.Selected)
-				{
- //otin pois ja siirsin ylös/PP                  tempActivities.Add(selection as string);
-				}
+            foreach (var item in Items)
+            {
+                //         otin pois ja siirsin ylös//PP    List<string> tempActivities = new List<string>();
+                foreach (var selection in item.Selected)
+                {
+                    //otin pois ja siirsin ylös/PP                  tempActivities.Add(selection as string);
+                }
                 // otin pois ja siirsin ylös/PP              item.Emoji.activities = tempActivities;
                 tempEmojis.Add(item.Emoji);
-			}
-            SurveyManager.GetInstance().GetSurvey().emojis = tempEmojis;            
+            }
+            SurveyManager.GetInstance().GetSurvey().emojis = tempEmojis;
 
             // siirrytään "Luo kysely -lopetus" sivulle 
             await Navigation.PushAsync(new LuoKyselyLopetus()); ;
@@ -185,16 +248,16 @@ namespace Prototype
 
         //function which checks whether the user has selected at least 1 activity for each emoji.
         private bool ActivitiesSet()
-		{
-			foreach (var item in Items)
-			{
-				if (item.Selected.Count == 0)
-				{
+        {
+            foreach (var item in Items)
+            {
+                if (item.Selected.Count == 0)
+                {
                     return false;
-				}
-			}
+                }
+            }
 
             return true;
-		}
+        }
     }
 }

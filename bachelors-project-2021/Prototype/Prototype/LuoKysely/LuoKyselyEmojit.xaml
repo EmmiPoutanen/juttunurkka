@@ -52,7 +52,6 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
                    FontSize="20"
                    />
             <CheckBox Color="Black"
-                      IsChecked="False"
                       CheckedChanged="OnAllCheckBoxCheckedChanged"/>
 
         </StackLayout>
@@ -89,7 +88,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
 
                         <!-- Green-->
                         <CheckBox x:Name="Checkbox"
-                                  IsChecked = "false"
+                                  IsChecked = "{Binding CheckBox}"
                                   CheckedChanged="OnCheckBoxCheckedChanged"
                                   Color="Black"
                                   Grid.Row="1"

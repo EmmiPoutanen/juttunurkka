@@ -36,7 +36,7 @@ namespace Prototype
         
         public class CollectionItem {
             public Emoji Item { get; set; } = null;
-            public bool CheckBox { get; set; }
+            public bool CheckBox { get; set; } = false;
             public bool IsNegative { get; set; } = false;
             public bool IsNeutral { get; set; } = false;
             public bool IsPositive { get; set; } = false;
@@ -59,6 +59,7 @@ namespace Prototype
 			{
                 CollectionItem i = new CollectionItem();
 				i.Item = item;
+
 				switch (item.Impact)
 				{
 					case "positive":
@@ -71,6 +72,7 @@ namespace Prototype
                         i.IsNegative = true;
                         break;
                 }
+                i.CheckBox = false;
                 Emojit.Add(i);
 			}
 
@@ -79,6 +81,27 @@ namespace Prototype
 
         void OnCheckBoxCheckedChanged(object sender, CheckedChangedEventArgs e)
         {
+            List<Emoji> tempEmojis= new List<Emoji>();
+            List<string> tempNames = new List<string>();
+
+            if (sender is CheckBox c && c.Parent is Grid g)
+            {
+                c.Color=Color.Pink;
+        // testing oikea emoji,voi poistaa PP        g.Children[0].IsVisible=false;
+                if (c.IsChecked == true)
+                {
+                    Console.WriteLine("on");
+                //    tempEmojis.Add();
+                }
+                else
+                {
+
+                }
+            }
+            else
+            {
+                //doSmthng
+            }
             JatkaBtn.IsEnabled = true;
         }
 
@@ -104,11 +127,28 @@ namespace Prototype
                     item.Item.Impact = "neutral";
                 } else if (item.IsNegative)
                     item.Item.Impact = "negative";
-                temp.Add(item.Item);
-			}
+                if (item.CheckBox ==true )
+                {
+                    Console.WriteLine("on tosi");
+                    item.Item.IsChecked = true;
+                    // vain jos emojiin liittyvä checkbox on chekattu niin lisätään se emojilistaan.PP
+                    temp.Add(item.Item);
+
+                }
+                else
+                {
+                    //
+                }
+ 
+                //entistä koodia
+               // temp.Add(item.Item);
+
+            }
+            //katsotaan mikä on listan pituus konsolilta PP
+            Console.WriteLine(temp.Count);
             SurveyManager.GetInstance().GetSurvey().emojis = temp;
 
-            // siirrytään aktiviteetit sivulle sivulle 
+            // siirrytään aktiviteetit sivulle 
             await Navigation.PushAsync(new LuoKyselyToimenpiteet()); 
         }
     }
