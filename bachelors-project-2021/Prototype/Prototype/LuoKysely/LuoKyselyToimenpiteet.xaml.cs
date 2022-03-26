@@ -86,9 +86,7 @@ namespace Prototype
                     await Navigation.PopToRootAsync();
                 }
 
-            }
-            else return;
-        }
+        //valintanapit ensin disabled.
 
         /*
         private void btnPopupButton_Clicked(object sender, EventArgs e)
@@ -141,8 +139,11 @@ namespace Prototype
                 Console.WriteLine(word);
             }
 
-
+        void Button3Clicked(object sender, EventArgs e)
+        {
+            HirsiButton.IsEnabled = true;
         }
+
 
 
         void OnSelectionChanged(object sender, SelectionChangedEventArgs e)

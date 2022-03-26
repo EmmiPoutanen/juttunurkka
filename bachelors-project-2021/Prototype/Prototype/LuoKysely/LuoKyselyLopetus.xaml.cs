@@ -39,8 +39,8 @@ namespace Prototype
             introMessage += s.introMessage;
             BindingContext = this;
 
-            //NameEditor.Text = SurveyManager.GetInstance().GetSurvey().Name;
-            //KeyEditor.Text = SurveyManager.GetInstance().GetSurvey().RoomCode;
+            NameEditor.Text = SurveyManager.GetInstance().GetSurvey().Name;
+            KeyEditor.Text = SurveyManager.GetInstance().GetSurvey().RoomCode;
         }
 
         async void EdellinenButtonClicked(object sender, EventArgs e)
@@ -50,7 +50,23 @@ namespace Prototype
 
         async void JatkaButtonClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new Esikatselu());
+            if (NameEditor != null && !string.IsNullOrEmpty(NameEditor.Text) && KeyEditor != null && !string.IsNullOrEmpty(KeyEditor.Text))
+            {
+
+                SurveyManager man = SurveyManager.GetInstance();
+                //save survey code and name
+                man.GetSurvey().RoomCode = KeyEditor.Text;
+                man.GetSurvey().Name = NameEditor.Text;
+                //save survey
+                man.SaveSurvey(NameEditor.Text + ".txt");
+
+                // siirrytään esikatseluun
+                await Navigation.PushAsync(new Esikatselu());
+
+            }
+
+            else await DisplayAlert("Nimi tai avainkoodi puuttuu", "Sinun on asetettava kyselylle nimi ja avainkoodi", "OK");
+          
         }
         /*
         async void TallennaJaPoistuClicked(object sender, EventArgs e)
@@ -120,7 +136,7 @@ namespace Prototype
         {
 
            // Suljetaan popup
-            //popupSelection.IsVisible = false;
+           //popupSelection.IsVisible = false;
 
         }
 

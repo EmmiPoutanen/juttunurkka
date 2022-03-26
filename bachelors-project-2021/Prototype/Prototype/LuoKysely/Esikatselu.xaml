@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Prototype.Esikatselu">
+             x:Class="Prototype.Esikatselu"
+             Title="Juttunurkka">
     <ContentPage.Content>
         <StackLayout>
             <Label 
@@ -12,10 +13,49 @@
             FontAttributes="Bold"
             FontSize="30"
             TextColor="#4383EF" 
-            Margin="0,50,0,10"
+            Margin="0,40,0,-40"
         />
+            
 
             <Button Text="{Binding introMessage}"
+            VerticalOptions="CenterAndExpand" 
+            HorizontalOptions="CenterAndExpand" 
+            BorderColor="#4383EF"
+            BackgroundColor="Transparent"
+            Font="19"
+            Margin="20,0,20,0"
+            CornerRadius="10"
+            HeightRequest="50"
+            WidthRequest="340" />
+
+            <!-- tänne sisään emojit ja aktiviteetit-->
+            <Frame
+            HorizontalOptions="CenterAndExpand" 
+            VerticalOptions="CenterAndExpand"
+            x:Name="popupSelection"
+            HasShadow="True"
+            WidthRequest="340"
+            HeightRequest="300"
+            Margin="20,-20,20,0"
+            Padding="1"
+            BackgroundColor="Transparent"
+            BorderColor="#4383EF"
+            CornerRadius="10"
+            IsVisible="true">
+            </Frame>
+
+            <Grid>
+            <Label 
+            Text="Avainkoodi"
+            VerticalOptions="StartAndExpand" 
+            HorizontalOptions="StartAndExpand"
+            HorizontalTextAlignment="Center"
+            FontSize="20"
+            TextColor="Black" 
+            Margin="30,0,0,10"
+            />
+
+            <Button Text="{Binding RoomCode}"
             VerticalOptions="CenterAndExpand" 
             HorizontalOptions="CenterAndExpand" 
             BorderColor="#4383EF"
@@ -24,34 +64,41 @@
             Margin="20,-40,20,-30"
             CornerRadius="10"
             HeightRequest="50"
-            WidthRequest="340" />
+            WidthRequest="100" />
 
-            <Frame
-            HorizontalOptions="CenterAndExpand" 
-            VerticalOptions="CenterAndExpand"
-            x:Name="popupSelection"
-            HasShadow="True"
-            WidthRequest="340"
-            HeightRequest="400"
-            Padding="1"
-            BackgroundColor="Transparent"
-            BorderColor="#4383EF"
-            CornerRadius="10"
-            IsVisible="true">
+            </Grid>
 
-             
+            <Grid 
+            RowDefinitions="Auto, Auto"
+            ColumnDefinitions="Auto, Auto"
+            VerticalOptions="EndAndExpand"
+            HorizontalOptions="CenterAndExpand">
 
-            </Frame>
-
-            <Label 
-            Text="Avainkoodi"
-            VerticalOptions="StartAndExpand" 
-            HorizontalOptions="StartAndExpand"
-            HorizontalTextAlignment="Center"
-            FontSize="20"
-            TextColor="Black" 
-            Margin="30,10,0,10"
+                <Button Grid.Column="1"
+                Text="Keskeytä"
+                Clicked="KeskeytäButtonClicked"
+                VerticalOptions="EndAndExpand"
+                HorizontalOptions="CenterAndExpand" 
+                Font="19"
+                Margin="20,0,10,40"
+                CornerRadius="10"
+                HeightRequest="50"
+                WidthRequest="150"
             />
+
+                <Button Grid.Column="2" 
+                Text="Valmis"
+                Clicked="ValmisButtonClicked" 
+                VerticalOptions="EndAndExpand" 
+                HorizontalOptions="CenterAndExpand" 
+                Font="19"
+                Margin="20,0,10,40"
+                CornerRadius="10"
+                HeightRequest="50"
+                WidthRequest="150"
+            />
+            </Grid>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
