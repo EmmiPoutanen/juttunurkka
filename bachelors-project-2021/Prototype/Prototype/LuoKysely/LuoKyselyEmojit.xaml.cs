@@ -66,7 +66,7 @@ namespace Prototype
                         i.IsPositive = true;
 						break;
                     case "neutral":
-                        i.IsNeutral = true;
+                        i.IsNeutral =true;
                         break;
                     case "negative":
                         i.IsNegative = true;
@@ -133,7 +133,7 @@ namespace Prototype
                     item.Item.IsChecked = true;
                     // vain jos emojiin liittyvä checkbox on chekattu niin lisätään se emojilistaan.PP
                     temp.Add(item.Item);
-
+                    Console.WriteLine(item.Item.Name);
                 }
                 else
                 {
@@ -147,6 +147,7 @@ namespace Prototype
             //katsotaan mikä on listan pituus konsolilta PP
             Console.WriteLine(temp.Count);
             SurveyManager.GetInstance().GetSurvey().emojis = temp;
+            
 
             // siirrytään aktiviteetit sivulle 
             await Navigation.PushAsync(new LuoKyselyToimenpiteet()); 

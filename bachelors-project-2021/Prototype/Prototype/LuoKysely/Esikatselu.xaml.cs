@@ -15,13 +15,14 @@ namespace Prototype
         public string introMessage { get; set; }
         public string RoomCode { get; set; }
         public string Name { get; set; }
+
         public Esikatselu()
         {
             InitializeComponent();
             Survey s = SurveyManager.GetInstance().GetSurvey();
             introMessage += s.introMessage;
             RoomCode = s.RoomCode;
-            Name = s.Name;  
+            Name = s.Name;
             BindingContext = this;
         }
 

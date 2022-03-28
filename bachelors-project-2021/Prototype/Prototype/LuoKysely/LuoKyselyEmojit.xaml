@@ -100,29 +100,8 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
                                 VerticalOptions="Start" 
                                 HorizontalOptions="CenterAndExpand"/>
                         -->
-
-
-
-
-                        <!--
-                            CheckedChanged = "OnCheckBoxCheckedChanged" /> 
-                            -->
-
-                        <!-- Orange-->
-                        
-                        <!-- Red-->
                     
                     
-                        <!--
-                        <RadioButton Grid.Row="1"
-                                     Grid.Column="3"
-                                     Content=":("
-                                     TextColor="DarkRed"
-                                     BackgroundColor="Red"
-                                     Value="negative"
-                                     IsChecked="{Binding IsNegative}"
-                                />
-                        -->
                     </Grid>
               </DataTemplate>
            </CollectionView.ItemTemplate>

@@ -54,7 +54,7 @@ namespace Prototype
 
 			value += $"ID: {ID}, ";
 			value += $"Name: {Name}, ";
-			value += $"Impact: {Impact}, ";
+		//	value += $"Impact: {Impact}, ";
 
 			value += "Activities: [";			
 			foreach (var item in activities)

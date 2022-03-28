@@ -111,19 +111,16 @@ namespace Prototype
 
         void ButtonClicked(object sender, EventArgs e)
         {
-            String valinta1 = "5 minuutin tauko";
-            String valinta2 = "Piirretään taululle";
-            String valinta3 = "Hirsipuu";
 
             if (sender is Button b && b.Parent is Grid g)
             {
                 //tassa harjoitusta
-                
                  
                 if (b.TextColor == Color.Black)
                 {
                     b.TextColor = Color.White;
                     b.BackgroundColor = Color.Blue;
+                    b.CornerRadius = 10;
                     Console.WriteLine(b.Text + " klikattu");
                     tempActivities.Add(b.Text);
                 }
@@ -131,6 +128,7 @@ namespace Prototype
                 {
                     b.TextColor = Color.Black;
                     b.BackgroundColor = Color.White;
+                    b.CornerRadius=10;
                     foreach (var word in tempActivities)
                     {
                         if (word.Equals(b.Text))
@@ -148,53 +146,6 @@ namespace Prototype
                 {
 
                 }
-            /*    if (b.Text.Equals(valinta1))
-                {
-
-                    b.TextColor = Color.White;
-                    b.BackgroundColor = Color.Blue;
-                    Console.WriteLine(valinta1+ " klikattu");
-                    tempActivities.Add(valinta1);
-                }
-                if (b.Text.Equals(valinta2))
-                {
-                    if (b.TextColor == Color.Black) {
-                        b.TextColor = Color.White;
-                        b.BackgroundColor = Color.Blue;
-                        tempActivities.Add(valinta2);
-
-                    }
-                    else
-                    {
-                        b.TextColor = Color.Black;
-                        b.BackgroundColor = Color.White;
-                        foreach (var word in tempActivities)
-                        {
-                            if (word.Equals(valinta2)){
-                              //  tempActivities.Remove(word);   
-                            }
-                            else
-                            {
-                                //just go on
-                            }
-                        }
-                    }
-                    Console.WriteLine(valinta2 + " klikattu");
-                }
-
-                if (b.Text.Equals(valinta3))
-                {
-                    b.TextColor = Color.White;
-                    b.BackgroundColor = Color.Blue;
-                    Console.WriteLine(valinta3 + " klikattu");
-                    tempActivities.Add(valinta3);
-                }
-
-
-            }
-            else
-            {
-                //doSomething*/
             }
             else
             {
@@ -220,16 +171,27 @@ namespace Prototype
 
         async void JatkaButtonClicked(object sender, EventArgs e)
         {
-            /*
+            
 			//error if not all emojis have at least 1 selected activity
-			if (!ActivitiesSet())
+/*			if (!ActivitiesSet())
 			{
                 await DisplayAlert("Kaikkia valintoja ei ole tehty", "Sinun on valittava jokaiselle mielialalle vähintään yksi aktiviteetti", "OK");
                 return;
-            }*/
-
+            }
+*/
             //asetetaan emojit survey olioon
-            List<Emoji> tempEmojis = new List<Emoji>();
+            //tässä kokeilua if-else jatka tasta
+            if (SurveyManager.GetInstance().GetSurvey().emojis[0].Name.Equals("Iloinen"))
+            {
+                Console.WriteLine("eka emoji listassa iloinen");
+                SurveyManager.GetInstance().GetSurvey().emojis[0].activities=tempActivities;
+            }
+            else
+            {
+
+            }
+            //kokonaan kommenttiin PP
+     /*       List<Emoji> tempEmojis = new List<Emoji>();
             foreach (var item in Items)
             {
                 //         otin pois ja siirsin ylös//PP    List<string> tempActivities = new List<string>();
@@ -240,12 +202,12 @@ namespace Prototype
                 // otin pois ja siirsin ylös/PP              item.Emoji.activities = tempActivities;
                 tempEmojis.Add(item.Emoji);
             }
-            SurveyManager.GetInstance().GetSurvey().emojis = tempEmojis;
+            SurveyManager.GetInstance().GetSurvey().emojis = tempEmojis;*/
 
             // siirrytään "Luo kysely -lopetus" sivulle 
             await Navigation.PushAsync(new LuoKyselyLopetus()); ;
         }
-
+/*
         //function which checks whether the user has selected at least 1 activity for each emoji.
         private bool ActivitiesSet()
         {
@@ -258,6 +220,6 @@ namespace Prototype
             }
 
             return true;
-        }
+        }*/
     }
 }
