@@ -42,6 +42,45 @@
             BorderColor="#4383EF"
             CornerRadius="10"
             IsVisible="true">
+
+                <CollectionView ItemsSource="{Binding Emojit}">
+
+                    <CollectionView.ItemTemplate >
+                        <DataTemplate >
+                            <Grid Padding="10"
+                      RowDefinitions="Auto, *"
+                      ColumnDefinitions="Auto, *">
+
+
+                                <!-- Kuva näkyy JOS kuvan lähteen (linkin) laittaa Jokin ongelma drawable kansion kanssa (ei näytä sinne ladattua kuvaa)-->
+                                <Image Grid.Column="0"
+                               Source="{Binding Item.ImageSource}"     
+                               Aspect="AspectFill"
+                               Scale="1"
+                               HeightRequest="60"
+                               WidthRequest="60" />
+
+                               <Label Grid.Column="1"
+                                Text="{Binding ActivityChoises}" 
+                                TextColor="Black"
+                                FontSize="18"/>
+
+                                <!--
+                                <CheckBox x:Name="Checkbox"
+                                  IsChecked = "{Binding CheckBox}"
+                                  CheckedChanged="OnCheckBoxCheckedChanged"
+                                  Color="Black"
+                                  Grid.Row="1"
+                                  Grid.Column="1"
+                                />
+                              -->
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+
+
+
+                </CollectionView>
             </Frame>
 
             <Grid>

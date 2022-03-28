@@ -15,15 +15,36 @@ namespace Prototype
         public string introMessage { get; set; }
         public string RoomCode { get; set; }
         public string Name { get; set; }
+        public IList<CollectionItem> Emojit { get; private set; } = null;
+
+        public class CollectionItem
+        {
+            public Emoji Item { get; set; } = null;
+            public IList<string> ActivityChoises { get; set; } = null;
+        }
+
         public Esikatselu()
         {
             InitializeComponent();
             Survey s = SurveyManager.GetInstance().GetSurvey();
             introMessage += s.introMessage;
             RoomCode = s.RoomCode;
-            Name = s.Name;  
+            Name = s.Name;
+
+            Emojit = new List<CollectionItem>();
+            List<Emoji> temp = s.emojis;
+
+            foreach (var item in temp)
+            {
+                CollectionItem i = new CollectionItem();
+                i.Item = item;
+                i.ActivityChoises = item.activities;
+                Emojit.Add(i);
+            }
+
             BindingContext = this;
         }
+        
 
         async void KeskeytäButtonClicked(object sender, EventArgs e)
         {
@@ -36,8 +57,8 @@ namespace Prototype
 
             if (res == true)
             {
-                //vaihda odotetaan osallistujia näkymään kun se on tehty
-                await Navigation.PushAsync(new LuoKyselyJohdatus());  
+                //siirrytään odottamaan osallistujia
+                await Navigation.PushAsync(new OdotetaanOsallistujiaOpettaja());  
 
             }
             else
