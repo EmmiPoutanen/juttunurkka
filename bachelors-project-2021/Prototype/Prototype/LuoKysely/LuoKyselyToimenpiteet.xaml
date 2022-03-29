@@ -24,7 +24,6 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
              >
 
     <StackLayout Spacing="40">
-        <CollectionView ItemsSource="{Binding Items} " IsVisible="false"></CollectionView>
         <StackLayout Orientation="Horizontal"
                      VerticalOptions="Start"
                      HorizontalOptions="CenterAndExpand"
