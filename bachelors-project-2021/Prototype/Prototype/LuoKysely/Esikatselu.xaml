@@ -42,7 +42,6 @@
             BorderColor="#4383EF"
             CornerRadius="10"
             IsVisible="true">
-
             </Frame>
 
             <Grid>
