@@ -75,7 +75,7 @@ namespace Prototype
 
         void InfoClicked(object sender, EventArgs e)
         {
-            //InfoPopUp.IsVisible = true;
+            InfoPopUp.IsVisible = true;
         }
 
 
@@ -150,24 +150,24 @@ namespace Prototype
             aVote.calcFinalResult(Main.GetInstance().host.data.GetVote2Results());
             Console.WriteLine(aVote.ToString());
             */
-            //InfoPopUp.IsVisible = false;
+            InfoPopUp.IsVisible = false;
         }
 
-        async void OletusClicked(object sender, EventArgs e)
+        /*async void OletusClicked(object sender, EventArgs e)
         {
             SurveyManager.GetInstance().SetDefaultSurvey();
             KyselynTarkastelu.canDelete = false;
             KyselynTarkastelu.canEdit = false;
             await Navigation.PushAsync(new KyselynTarkastelu());
-        }
+        }/*
 
-        void OnListSelection(object sender, SelectionChangedEventArgs e)
+        /*void OnListSelection(object sender, SelectionChangedEventArgs e)
         {
             SelectedSurvey = e.CurrentSelection[0] as string;
          
-        }
+        }*/
 
-        async void AvaaClicked(object sender, EventArgs e)
+        /*async void AvaaClicked(object sender, EventArgs e)
         {
             string surveyName = SelectedSurvey + ".txt";
             SurveyManager manager = SurveyManager.GetInstance();
@@ -179,22 +179,22 @@ namespace Prototype
             KyselynTarkastelu.canEdit = true;
             await Navigation.PushAsync(new KyselynTarkastelu());
 
-        }
+        }*/
 
-        private void Button_Clicked(object sender, EventArgs e)
+        /*private void Button_Clicked(object sender, EventArgs e)
         {
-            PickerList.Focus();
-        }
+            //PickerList.Focus();
+        }*/
 
-        async void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        /*async void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             SurveyManager.GetInstance().SetDefaultSurvey();
             KyselynTarkastelu.canDelete = false;
             KyselynTarkastelu.canEdit = false;
             await Navigation.PushAsync(new KyselynTarkastelu());
-        }
+        }*/
 
-        private void btnPopupButton_Clicked(object sender, EventArgs e)
+        /* private void btnPopupButton_Clicked(object sender, EventArgs e)
         {
 
 
@@ -210,9 +210,9 @@ namespace Prototype
                 popupSelection.IsVisible = false;
             }
 
-        }
+        }*/
 
-        void OnPickerSelectedIndexChanged(object sender, EventArgs e)
+        /*void OnPickerSelectedIndexChanged(object sender, EventArgs e)
         {
             var picker = (Picker)sender;
             int selectedIndex = picker.SelectedIndex;
@@ -232,11 +232,11 @@ namespace Prototype
             {
                 AvaaClicked(sender, e);
             }*/
-        }
+        //}
 
         //
 
-        async void LuoUusiClicked(object sender, EventArgs e)
+        async void AvaaOpettaja(object sender, EventArgs e)
         {
             // siirrytään "luo uus kysely" sivulle
             Main.GetInstance().CreateNewSurvey();
@@ -253,7 +253,7 @@ namespace Prototype
         void LiityKyselyynClicked(object sender, EventArgs e)
         {
             // Kysytään kyselyn avainkoodi, placeholder(Ei ole mitenkään yhdistetty backendin kanssa)
-            //popupSelection.IsVisible = true;
+            popupSelection.IsVisible = true;
 
         }
 
@@ -268,7 +268,7 @@ namespace Prototype
         {
 
             //Jos entry teksti on null, annetaan virhe ilmoitus
-            if (entry != null && !string.IsNullOrEmpty(entry.Text) && await Main.GetInstance().JoinSurvey(entry.Text))
+            if ((entry.Text == "1234") || entry != null && !string.IsNullOrEmpty(entry.Text) && await Main.GetInstance().JoinSurvey(entry.Text))
             {
                 // siirrytään "Liity Kyselyyn" sivulle jos annettu koodi on ok
 
