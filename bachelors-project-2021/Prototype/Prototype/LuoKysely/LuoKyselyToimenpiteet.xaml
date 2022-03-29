@@ -81,9 +81,6 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
             CornerRadius="10"
             HeightRequest="50"
             WidthRequest="340" />
-        <!--Clicked="btnPopupButton_Clicked"-->
-
-
 
         <!--"dropdown"-->
         <Frame

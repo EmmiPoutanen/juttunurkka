@@ -71,6 +71,11 @@ namespace Prototype
                 foreach (var item in SurveyManager.GetInstance().GetSurvey().emojis)
                 {
                     Items.Add(new CollectionItem(item, Const.activities[item.ID]));
+                // Printtaukset voi poistaa lopuksi oikeat emojit ja liitännäiset aktiviteetit testausta
+                    Console.WriteLine("Emojin nimi:"+new CollectionItem(item, Const.activities[item.ID]).Emoji.Name);
+                    Console.WriteLine("Aktiviteetteja: "+ new CollectionItem(item, Const.activities[item.ID]).ActivityChoises.Count);
+                    Console.WriteLine("Emojin aktiviteetit: " + new CollectionItem(item, Const.activities[item.ID]).ActivityChoises[0]);
+
                 }
                 BindingContext = this;
           //  }
