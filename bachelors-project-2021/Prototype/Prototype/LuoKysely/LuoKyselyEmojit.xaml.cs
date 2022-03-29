@@ -86,7 +86,6 @@ namespace Prototype
 
             if (sender is CheckBox c && c.Parent is Grid g)
             {
-                c.Color=Color.Pink;
                 if (c.IsChecked == true)
                 {
                     Console.WriteLine("on");
