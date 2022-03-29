@@ -30,7 +30,7 @@ namespace Prototype
     {
 
         public IList<CollectionItem> Items { get; set; }
-        public List<string> tempActivities = new List<string>();
+      //  public List<string> tempActivities = new List<string>();
 
         public class CollectionItem
 
@@ -116,7 +116,7 @@ namespace Prototype
 
         }*/
 
-        void ButtonClicked(object sender, EventArgs e)
+  /*      void ButtonClicked(object sender, EventArgs e)
         {
 
             if (sender is Button b && b.Parent is Grid g)
@@ -164,7 +164,7 @@ namespace Prototype
             }
 
 
-        }
+        }*/
 
 
         void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -188,28 +188,32 @@ namespace Prototype
 */
             //asetetaan emojit survey olioon
             //tässä kokeilua if-else jatka tasta
-            if (SurveyManager.GetInstance().GetSurvey().emojis[0].Name.Equals("Iloinen"))
-            {
-                Console.WriteLine("eka emoji listassa iloinen");
-                SurveyManager.GetInstance().GetSurvey().emojis[0].activities=tempActivities;
-            }
-            else
+    //        if (SurveyManager.GetInstance().GetSurvey().emojis[0].Name.Equals("Iloinen"))
+    //        {
+       //         SurveyManager.GetInstance().GetSurvey().emojis[0].activities=tempActivities;
+      //      }
+      /*      else
             {
 
-            }
+            }*/
             //kokonaan kommenttiin PP
-     /*       List<Emoji> tempEmojis = new List<Emoji>();
+            List<Emoji> tempEmojis = new List<Emoji>();
             foreach (var item in Items)
             {
-                //         otin pois ja siirsin ylös//PP    List<string> tempActivities = new List<string>();
+                //         otin pois ja siirsin ylös//PP
+                List<string> tempActivities = new List<string>();
                 foreach (var selection in item.Selected)
                 {
-                    //otin pois ja siirsin ylös/PP                  tempActivities.Add(selection as string);
+                    Console.WriteLine("Lisätään aktiviteetti:" +selection as string);
+                    Console.WriteLine(item.Emoji.Name +"emojin yhteyteen");
+                    //otin pois ja siirsin ylös/PP
+                    tempActivities.Add(selection as string);
                 }
-                // otin pois ja siirsin ylös/PP              item.Emoji.activities = tempActivities;
+                // otin pois ja siirsin ylös/PP
+                item.Emoji.activities = tempActivities;
                 tempEmojis.Add(item.Emoji);
             }
-            SurveyManager.GetInstance().GetSurvey().emojis = tempEmojis;*/
+            SurveyManager.GetInstance().GetSurvey().emojis = tempEmojis;
 
             // siirrytään "Luo kysely -lopetus" sivulle 
             await Navigation.PushAsync(new LuoKyselyLopetus()); ;
