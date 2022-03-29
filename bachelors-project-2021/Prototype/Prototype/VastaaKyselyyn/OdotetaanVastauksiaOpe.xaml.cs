@@ -48,7 +48,7 @@ namespace Prototype
             }
 
             await Main.GetInstance().host.CloseSurvey();
-            await Navigation.PushAsync(new TabbedViewHost());
+            await Navigation.PushAsync(new LisätiedotHost());
         }
     }
     }

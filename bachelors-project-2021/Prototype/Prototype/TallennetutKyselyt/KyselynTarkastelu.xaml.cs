@@ -103,7 +103,7 @@ namespace Prototype
         async void JaaClicked(object sender, EventArgs e)
         {
             //siirrytään OdotetaanVastauksia sivulle
-            await Navigation.PushAsync(new OdotetaanVastauksia());
+            await Navigation.PushAsync(new OdotetaanOsallistujiaOpettaja());
         }
         async void MuokkaaClicked(object sender, EventArgs e)
         {
