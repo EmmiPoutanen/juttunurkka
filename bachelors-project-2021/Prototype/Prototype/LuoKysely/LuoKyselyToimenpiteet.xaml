@@ -144,7 +144,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
                             </CollectionView>
 
 
-                            <Button
+         <!--        <Button
                  x:Name="minButton"
                  Grid.Row="0"
                  Text="5 minuutin tauko" 
@@ -152,11 +152,10 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
                  TextColor="Black"
                  BackgroundColor="Transparent"
                  BorderColor="Transparent"
-                 FontSize="20"
-                 
+                 FontSize="20"                 
                  Clicked="ButtonClicked"/>
 
-                            <Button 
+                 <Button 
                  Grid.Row="1"
                  Text="Piirretään taululle" 
                  Margin="5,10,0,10"
@@ -166,7 +165,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
                  FontSize="20"
                  Clicked="ButtonClicked"/>
 
-                            <Button 
+                 <Button 
                  Grid.Row="2"
                  Text="Hirsipuu" 
                  Margin="5,10,0,10"
@@ -174,7 +173,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
                  BackgroundColor="Transparent"
                  BorderColor="Transparent"
                  FontSize="20"
-                 Clicked="ButtonClicked"/>
+                 Clicked="ButtonClicked"/>-->
 
                         </Grid>
                     </DataTemplate>

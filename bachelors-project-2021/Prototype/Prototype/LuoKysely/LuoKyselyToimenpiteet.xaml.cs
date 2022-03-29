@@ -56,22 +56,12 @@ namespace Prototype
         {
             InitializeComponent();
 
-  /*          Label otsikko = new Label();
- 
-            
-            otsikko.Text = "näytä tämä teksti";
-            otsikko.FontSize = 14;
-
-//            if (SurveyManager.GetInstance().GetSurvey().emojis.Count == 1)
-//            {
-                this.Content = otsikko;*/
-
-                //alustus
+                  //alustus
                 Items = new List<CollectionItem>();
                 foreach (var item in SurveyManager.GetInstance().GetSurvey().emojis)
                 {
                     Items.Add(new CollectionItem(item, Const.activities[item.ID]));
-                // Printtaukset voi poistaa lopuksi oikeat emojit ja liitännäiset aktiviteetit testausta
+                // Printtaukset poistettava lopuksi oikeat emojit ja liitännäiset aktiviteetit testausta
                     Console.WriteLine("Emojin nimi:"+new CollectionItem(item, Const.activities[item.ID]).Emoji.Name);
                     Console.WriteLine("Aktiviteetteja: "+ new CollectionItem(item, Const.activities[item.ID]).ActivityChoises.Count);
                     Console.WriteLine("Emojin aktiviteetit: " + new CollectionItem(item, Const.activities[item.ID]).ActivityChoises[0]);
