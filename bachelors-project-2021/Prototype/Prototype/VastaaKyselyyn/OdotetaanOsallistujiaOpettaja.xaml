@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
+
+This file is part of "Mieliala kysely".
+
+Mieliala kysely is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, version 3 of the License.
+
+Mieliala kysely is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
+-->
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Prototype.OdotetaanOsallistujiaOpettaja"
+             Title="Juttunurkka">
+
+
+   <!-- <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Peruuta"
+                     Clicked="Peruuta"
+                     />
+    </ContentPage.ToolbarItems> -->
+
+    <ContentPage.Content>
+        <StackLayout>
+
+            <Label 
+            Text="Odotetaan osallistujia"
+            VerticalOptions="StartAndExpand" 
+            HorizontalOptions="CenterAndExpand"
+            HorizontalTextAlignment="Center"
+            FontAttributes="Bold"
+            FontSize="30"
+            TextColor="#4383EF" 
+            Margin="0,50,0,0"
+        />
+
+            <Grid HorizontalOptions="Center"
+                  VerticalOptions="StartAndExpand">
+                
+                <Label Grid.Row="0"
+                Text="{Binding roomCode}"
+                   FontSize="25"
+                   HorizontalOptions="Center"
+                   VerticalOptions="StartAndExpand"
+                   Margin="0,30,0,0"/>
+
+            <!--Tämä .cs koodiin jos ehtii toteuttaa-->
+                <Label Grid.Row="1"
+                Text="Osallistujia x"
+                   FontSize="25"
+                   HorizontalOptions="Center"
+                   VerticalOptions="StartAndExpand"
+                   Margin="0,30,0,0"/>
+            </Grid>
+            
+
+            <Grid>
+                <Button Grid.Row="0"
+                Text="Aloita kysely"
+                x:Name="AloitaBtn"
+                Clicked="AloitaButtonClicked" 
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" 
+                BackgroundColor="#4383EF"
+                TextColor="White"
+                BorderColor="Transparent"
+                Font="19"
+                Margin="20,0,10,0"
+                CornerRadius="10"
+                HeightRequest="50"
+                WidthRequest="300"
+                
+            />
+
+            <Button 
+                Grid.Row="1"
+                Text="Keskeytä"
+                Clicked="KeskeytaButtonClicked"
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="CenterAndExpand" 
+                BackgroundColor="#4383EF"
+                TextColor="White"
+                BorderColor="Transparent"
+                Font="19"
+                Margin="20,0,10,20"
+                CornerRadius="10"
+                HeightRequest="50"
+                WidthRequest="300"
+            />
+            </Grid>
+
+        </StackLayout>
+
+    </ContentPage.Content>
+</ContentPage>

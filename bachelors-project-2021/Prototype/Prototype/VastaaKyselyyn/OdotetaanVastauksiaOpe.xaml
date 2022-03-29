@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Prototype.OdotetaanVastauksiaOpe"
+             Title="Juttunurkka">
+    <ContentPage.Content>
+        <StackLayout >
+
+            <Label 
+            Text="Juttunurkka 1/2"
+            VerticalOptions="StartAndExpand" 
+            HorizontalOptions="CenterAndExpand"
+            HorizontalTextAlignment="Center"
+            FontAttributes="Bold"
+            FontSize="30"
+            TextColor="#4383EF" 
+            Margin="0,50,0,0"
+        />
+
+            <!-- .cs koodin puolella oikeat arvot-->
+
+            <Grid>
+            <Label 
+            Grid.Column="0"
+            Grid.Row="0"
+            Text="Avainkoodi"
+            VerticalOptions="StartAndExpand" 
+            HorizontalOptions="StartAndExpand"
+            HorizontalTextAlignment="Center"
+            FontSize="25"
+            TextColor="Black"
+            Margin="40,0,20,0"
+        />
+            <Label 
+            Grid.Column="1"
+            Grid.Row="0"
+            Text="{Binding RoomCode}"
+            VerticalOptions="StartAndExpand" 
+            HorizontalOptions="StartAndExpand"
+            HorizontalTextAlignment="Center"
+            FontSize="25"
+            TextColor="Black"
+            Margin="40,0,20,0"
+        />
+            <Label 
+            Grid.Column="0"
+            Grid.Row="1"
+            Text="Osallistujia"
+            VerticalOptions="StartAndExpand" 
+            HorizontalOptions="StartAndExpand"
+            HorizontalTextAlignment="Center"
+            FontSize="25"
+            TextColor="Black"
+            Margin="40,0,20,0"
+        />
+            <Label 
+            Grid.Column="0"
+            Grid.Row="2"
+            Text="Vastanneita"
+            VerticalOptions="StartAndExpand" 
+            HorizontalOptions="StartAndExpand"
+            HorizontalTextAlignment="Center"
+            FontSize="25"
+            TextColor="Black"
+            Margin="40,0,20,0"
+        />
+            </Grid>
+
+            <ProgressBar Progress="0.2"
+            VerticalOptions="CenterAndExpand" 
+            HorizontalOptions="CenterAndExpand"
+            WidthRequest="300"
+            ScaleY="14"
+            ProgressColor="#4383EF"/>
+
+            <Button Text="Lopeta ja siirry tuloksiin"
+            VerticalOptions="CenterAndExpand" 
+            HorizontalOptions="CenterAndExpand" 
+            FontSize="15"
+            CornerRadius="10"
+            HeightRequest="50"
+            WidthRequest="255"
+            Clicked="LopetaClicked"
+            />
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
