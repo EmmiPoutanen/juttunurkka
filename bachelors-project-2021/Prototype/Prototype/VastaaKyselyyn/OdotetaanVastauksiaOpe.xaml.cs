@@ -39,13 +39,13 @@ namespace Prototype
         private async void LopetaClicked(object sender, EventArgs e)
         {
             //Back to main and error, if nobody joined the survey!
-            if (Main.GetInstance().host.clientCount == 0)
+            /*if (Main.GetInstance().host.clientCount == 0)
             {
                 Main.GetInstance().host.DestroyHost();
                 await Navigation.PopToRootAsync();
                 await DisplayAlert("Kysely suljettiin automaattisesti", "Kyselyyn ei saatu yhtään vastausta", "OK");
                 return;
-            }
+            }*/
 
             await Main.GetInstance().host.CloseSurvey();
             await Navigation.PushAsync(new LisätiedotHost());
