@@ -40,15 +40,15 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
               TextColor="#4383EF" 
               Margin="0,40,0,0"
              />
-
+ 
             <!--Tämä pitää tehdä .cs koodiin niin että hakee oikean hymiön kuvan tähän-->
             <Image Source="Emoji2.jpg"
                    WidthRequest="60"
                    HeightRequest="60"
                    Margin="0,30,0,0"
             />
-        </StackLayout>
-
+        </StackLayout>        
+        
         <Label Text="Valitse aktiviteetit hymiölle  
                Valitse vähintään 2"
             VerticalOptions="Start" 
@@ -97,12 +97,54 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
             CornerRadius="10"
             IsVisible="true">
 
-            <Grid Padding="1">
+            <CollectionView 
+            HorizontalOptions="CenterAndExpand" 
+            VerticalOptions="CenterAndExpand"
+          
+            HeightRequest="470" 
+            ItemsSource="{Binding Items} "  >
 
-                <!--="Auto, *"
-                  ColumnDefinitions="Auto, *"-->
+                <CollectionView.ItemTemplate >
+                    <DataTemplate >
 
-                <Button
+
+                        <Grid Padding="1"
+                   RowDefinitions="Auto, *"
+                  ColumnDefinitions="Auto, *">
+                            <CollectionView x:Name="Collection" 
+                                        ItemsSource= "{Binding ActivityChoises}"
+                                        SelectionMode= "Multiple" 
+                                        SelectedItems="{Binding Selected, Mode=TwoWay}">
+
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Padding="1"
+                                                  RowDefinitions="Auto, *"
+                                                  ColumnDefinitions="Auto, *"  >
+
+                                            <Label 
+                                                    Text="{Binding .}" 
+                                                    TextColor="Black"
+                                                    FontSize="20"/>
+
+
+                                            <!-- Separator -->
+                                            <BoxView HeightRequest="1"
+                                                        BackgroundColor="DarkGray"
+                                                        Grid.ColumnSpan="2"
+                                                        Grid.Row="2"
+                                                        VerticalOptions="End"/>
+
+
+                                        </Grid>
+
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+
+                            </CollectionView>
+
+
+                            <Button
                  x:Name="minButton"
                  Grid.Row="0"
                  Text="5 minuutin tauko" 
@@ -114,7 +156,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
                  
                  Clicked="ButtonClicked"/>
 
-                <Button 
+                            <Button 
                  Grid.Row="1"
                  Text="Piirretään taululle" 
                  Margin="5,10,0,10"
@@ -124,7 +166,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
                  FontSize="20"
                  Clicked="ButtonClicked"/>
 
-                <Button 
+                            <Button 
                  Grid.Row="2"
                  Text="Hirsipuu" 
                  Margin="5,10,0,10"
@@ -134,8 +176,10 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
                  FontSize="20"
                  Clicked="ButtonClicked"/>
 
-            </Grid>
-
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
         </Frame>
 
 
