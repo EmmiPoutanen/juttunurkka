@@ -35,6 +35,9 @@
     <Compile Update="KyselynTulokset\TabbedViewClient.xaml.cs">
       <DependentUpon>TabbedViewClient.xaml</DependentUpon>
     </Compile>
+    <Compile Update="VastaaKyselyyn\OdotetaanOsallistujiaOpettaja.xaml.cs">
+      <DependentUpon>OdotetaanOsallistujiaOpettaja.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 	
 	
@@ -99,10 +102,13 @@
     <EmbeddedResource Update="KyselynTulokset\TabbedViewClient.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="VastaaKyselyyn\OdotetaanVastauksia.xaml">
+    <EmbeddedResource Update="VastaaKyselyyn\OdotetaanOsallistujiaOpettaja.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="VastaaKyselyyn\OdotetaanVastauksiaClient.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="VastaaKyselyyn\OdotetaanVastauksiaOpe.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>  
   </ItemGroup>

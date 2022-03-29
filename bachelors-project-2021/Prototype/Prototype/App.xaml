@@ -23,14 +23,13 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
         <Thickness x:Key="PageMargin">20</Thickness>
 
         <!-- Colors -->
-        <Color x:Key="AppPrimaryColor">Gold</Color>
-        <!-- Vaihtoehtoja: khaki, Gold, -->
-      
-        <Color x:Key="PrimaryColor">Black</Color> 
-        <Color x:Key="SecondaryColor">black</Color>
+        <Color x:Key="AppPrimaryColor">#4383EF</Color>
+
+        <Color x:Key="PrimaryColor">White</Color>
+        <Color x:Key="SecondaryColor">White</Color>
         <Color x:Key="TertiaryColor">Silver</Color>
         <Color x:Key="QuaternaryColor">Gray</Color>
-        <Color x:Key="QuinaryColor">Orange</Color>
+        <Color x:Key="QuinaryColor">Blue</Color>
 
         <!-- Olisi mahdollista tehdä kokonaan dark mode vaihtoehto appiin, mutta toistaiseksi vain light mode. 
         Korjattu vain se että vaikka dark mode laitteessa, niin värit on silti ok apissa -->
@@ -51,9 +50,11 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
 
         <!-- navigattion bar colors -->
         <Style TargetType ="NavigationPage">
-            <Setter Property="BarBackgroundColor" Value="{StaticResource AppPrimaryColor}"></Setter>
-            <Setter Property="BarTextColor" Value="{StaticResource SecondaryColor}"></Setter>
+            <Setter Property="BarBackgroundColor" Value="White"></Setter>
+            <Setter Property="BarTextColor" Value="#4383EF"></Setter>
         </Style>
+
+
 
         <!-- Implicit styles -->
         <Style TargetType="ContentPage"
@@ -63,7 +64,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
         </Style>
 
         <Style TargetType="Editor">
-                <Setter Property="TextColor"
+            <Setter Property="TextColor"
                     Value="{AppThemeBinding Light={StaticResource LightSecondaryColor}, Dark={StaticResource LightSecondaryColor}}" />
             <Setter Property="PlaceholderColor"
                     Value="{AppThemeBinding Light=Gray, Dark=Gray}" />
@@ -83,9 +84,8 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
         <Style TargetType="Label">
             <Setter Property="TextColor"
                     Value="{AppThemeBinding Light={StaticResource LightSecondaryColor}, Dark={StaticResource LightSecondaryColor}}" />
-           
-        </Style>
 
+        </Style>
 
 
         <Style TargetType="Button">
@@ -99,7 +99,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
                     Value="{StaticResource SecondaryColor}"/>
             <Setter Property="BorderWidth"
                     Value="2"/>
-           
+
         </Style>
     </Application.Resources>
 </Application>

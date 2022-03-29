@@ -50,13 +50,13 @@ namespace Prototype
 
         private void Button_Clicked(object sender, EventArgs e)
         {
-            b0.Scale = 1;
+           /* b0.Scale = 1;
             b1.Scale = 1;
             b2.Scale = 1;
             b3.Scale = 1;
             b4.Scale = 1;
             b5.Scale = 1;
-            b6.Scale = 1;
+            b6.Scale = 1;*/
 
             ImageButton emoji = sender as ImageButton;
             emoji.Scale = 1.75;
