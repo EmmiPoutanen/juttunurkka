@@ -37,12 +37,13 @@ namespace Prototype
         {
             public Emoji Emoji { get; set; }
             public IList<string> ActivityChoises { get; set; }
+
             public ObservableCollection<object> Selected { get; set; }
             public CollectionItem(Emoji emoji, IList<string> activities)
             {
                 Emoji = emoji;
                 ActivityChoises = activities;
-
+         
                 Selected = new ObservableCollection<object>();
                 foreach (var item in emoji.activities)
                 {
@@ -55,14 +56,25 @@ namespace Prototype
         {
             InitializeComponent();
 
-            //alustus
-            Items = new List<CollectionItem>();
-            foreach (var item in SurveyManager.GetInstance().GetSurvey().emojis)
-            {
-                Items.Add(new CollectionItem(item, Const.activities[item.ID]));
-            }
+  /*          Label otsikko = new Label();
+ 
+            
+            otsikko.Text = "näytä tämä teksti";
+            otsikko.FontSize = 14;
 
-            BindingContext = this;
+//            if (SurveyManager.GetInstance().GetSurvey().emojis.Count == 1)
+//            {
+                this.Content = otsikko;*/
+
+                //alustus
+                Items = new List<CollectionItem>();
+                foreach (var item in SurveyManager.GetInstance().GetSurvey().emojis)
+                {
+                    Items.Add(new CollectionItem(item, Const.activities[item.ID]));
+                }
+                BindingContext = this;
+          //  }
+      //      else { }
         }
 
         async void EdellinenButtonClicked(object sender, EventArgs e)

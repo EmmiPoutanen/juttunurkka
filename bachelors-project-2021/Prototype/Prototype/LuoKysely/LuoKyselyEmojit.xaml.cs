@@ -87,7 +87,6 @@ namespace Prototype
             if (sender is CheckBox c && c.Parent is Grid g)
             {
                 c.Color=Color.Pink;
-        // testing oikea emoji,voi poistaa PP        g.Children[0].IsVisible=false;
                 if (c.IsChecked == true)
                 {
                     Console.WriteLine("on");

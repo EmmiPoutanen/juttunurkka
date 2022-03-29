@@ -84,7 +84,6 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
                            FontAttributes="Bold" />
                         -->
 
-                        <!-- En ole vielä keksinyt miten itse radiobuttonin värin voisi vaihtaa-->
 
                         <!-- Green-->
                         <CheckBox x:Name="Checkbox"
@@ -94,13 +93,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
                                   Grid.Row="1"
                                   Grid.Column="1"
                                 />
-                        <!--
-                        <Button BackgroundColor="Transparent"
-                                BorderColor="#4383EF"
-                                VerticalOptions="Start" 
-                                HorizontalOptions="CenterAndExpand"/>
-                        -->
-                    
+                   
                     
                     </Grid>
               </DataTemplate>
@@ -150,16 +143,5 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
             />
 
         </Grid>
-
-            
-        <!--
-        <Button Text="Jatka"
-                Clicked="JatkaButtonClicked" 
-                CornerRadius="100"
-                HorizontalOptions="Center"
-                WidthRequest="150"
-                HeightRequest="50"/>
-        -->
- 
     </StackLayout>
 </ContentPage>

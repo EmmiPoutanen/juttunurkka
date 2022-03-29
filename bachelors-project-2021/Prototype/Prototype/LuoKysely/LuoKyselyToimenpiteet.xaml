@@ -31,7 +31,8 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
                      >
 
             <!--Tämä pitää tehdä .cs koodiin niin että hakee oikeat aktiviteettien numerot tähän-->
-            <Label Text="Aktiviteetti 1/3"
+            <Label x:Name="Aktiviteetti"
+              Text="Aktiviteetti 1/3"
               VerticalOptions="Start" 
               HorizontalOptions="CenterAndExpand"
               HorizontalTextAlignment="Center"
@@ -114,6 +115,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
                  BackgroundColor="Transparent"
                  BorderColor="Transparent"
                  FontSize="20"
+                 
                  Clicked="ButtonClicked"/>
 
                 <Button 
