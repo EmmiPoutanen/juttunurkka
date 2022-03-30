@@ -19,141 +19,117 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Prototype.LisätiedotHost"
-             Title="Lisätiedot">
+             Title="Juttunurkka">
     <ContentPage.Content>
-        <StackLayout>
-            <Grid Margin="20, 50, 20, 50">
+        <StackLayout Margin="0,0,0,130">
+
+            <Label Text="Tulokset"
+                   VerticalOptions="Start"
+                   HorizontalOptions="CenterAndExpand"
+                   FontSize="30"
+                   TextColor="#4383EF"
+                   FontAttributes="Bold"
+                   Margin="0,40,0,0"/>
+
+            <Grid Margin="40, 50, 40, 20"
+                  ColumnSpacing="40">
+
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="0.75*"/>
+                    <RowDefinition Height="0.125*"/>
                     <RowDefinition Height="0.125*"/>
                     <RowDefinition Height="0.125*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.14*"/>
-                    <ColumnDefinition Width="0.14*"/>
-                    <ColumnDefinition Width="0.14*"/>
-                    <ColumnDefinition Width="0.14*"/>
-                    <ColumnDefinition Width="0.14*"/>
-                    <ColumnDefinition Width="0.14*"/>
-                    <ColumnDefinition Width="0.14*"/>
+
                 </Grid.ColumnDefinitions>
+
+                <Image Source="emoji0.png"
+                       Grid.Column="0"/>
                 <Rectangle WidthRequest="50" 
                            HeightRequest="50"
-                           Stroke="blue"
+                           Stroke="black"
                            Fill="blue"
-                           Grid.Column="0"
+                           Grid.Row="1"
                            ScaleY="{Binding resultScale[0]}"
                            AnchorY="1"/>
-                <Image Source="{Binding resultImages[0]}"
-                       Grid.Row="1"/>
                 <Label Text="{Binding resultAmount[0]}"
                        Grid.Row="2"
                        HorizontalOptions="CenterAndExpand"/>
 
+                <Image Source="emoji1.jpg"
+                       Grid.Column="1"/>
                 <Rectangle WidthRequest="50" 
                            HeightRequest="50"
-                           Stroke="red"
-                           Fill="red"
+                           Stroke="black"
+                           Fill="blue"
                            Grid.Column="1"
+                           Grid.Row="1"
                            ScaleY="{Binding resultScale[1]}"
                            AnchorY="1"/>
-                <Image Source="{Binding resultImages[1]}"
-                       Grid.Row="1"
-                       Grid.Column="1"/>
                 <Label Text="{Binding resultAmount[1]}"
                        Grid.Column="1"
                        Grid.Row="2"
                        HorizontalOptions="CenterAndExpand"/>
 
+
+                <Image Source="emoji2.jpg"
+                       Grid.Row="0"
+                       Grid.Column="2"/>
                 <Rectangle WidthRequest="50" 
                            HeightRequest="50"
-                           Stroke="green"
-                           Fill="green"
+                           Stroke="black"
+                           Fill="blue"
+                           Grid.Row="1"
                            Grid.Column="2"
                            ScaleY="{Binding resultScale[2]}"
                            AnchorY="1"/>
-                <Image Source="{Binding resultImages[2]}"
-                       Grid.Row="1"
-                       Grid.Column="2"/>
                 <Label Text="{Binding resultAmount[2]}"
                        Grid.Column="2"
                        Grid.Row="2"
                        HorizontalOptions="CenterAndExpand"/>
 
-                <Rectangle WidthRequest="50" 
-                           HeightRequest="50"
-                           Stroke="gold"
-                           Fill="gold"
-                           Grid.Column="3"
-                           ScaleY="{Binding resultScale[3]}"
-                           AnchorY="1"/>
-                <Image Source="{Binding resultImages[3]}"
-                       Grid.Row="1"
-                       Grid.Column="3"/>
-                <Label Text="{Binding resultAmount[3]}"
-                       Grid.Column="3"
-                       Grid.Row="2"
-                       HorizontalOptions="CenterAndExpand"/>
-
-                <Rectangle WidthRequest="50" 
-                           HeightRequest="50"
-                           Stroke="gray"
-                           Fill="gray"
-                           Grid.Column="4"
-                           ScaleY="{Binding resultScale[4]}"
-                           AnchorY="1"/>
-                <Image Source="{Binding resultImages[4]}"
-                       Grid.Row="1"
-                       Grid.Column="4"/>
-                <Label Text="{Binding resultAmount[4]}"
-                       Grid.Column="4"
-                       Grid.Row="2"
-                       HorizontalOptions="CenterAndExpand"/>
-
-                <Rectangle WidthRequest="50" 
-                           HeightRequest="50"
-                           Stroke="gray"
-                           Fill="gray"
-                           Grid.Column="5"
-                           ScaleY="{Binding resultScale[5]}"
-                           AnchorY="1"/>
-                <Image Source="{Binding resultImages[5]}"
-                       Grid.Row="1"
-                       Grid.Column="5"/>
-                <Label Text="{Binding resultAmount[5]}"
-                       Grid.Column="5"
-                       Grid.Row="2"
-                       HorizontalOptions="CenterAndExpand"/>
-
-                <Rectangle WidthRequest="50" 
-                           HeightRequest="50"
-                           Stroke="gray"
-                           Fill="gray"
-                           Grid.Column="6"
-                           ScaleY="{Binding resultScale[6]}"
-                           AnchorY="1"/>
-                <Image Source="{Binding resultImages[6]}"
-                       Grid.Row="1"
-                       Grid.Column="6"/>
-                <Label Text="{Binding resultAmount[6]}"
-                       Grid.Column="6"
-                       Grid.Row="2"
-                       HorizontalOptions="CenterAndExpand"/>
             </Grid>
-            <Button Text="Lopeta Kysely"
-                    Margin="0, 0, 0, 20"
-                    Clicked="LopetaClicked"
-                    CornerRadius="15"
-                    VerticalOptions="End"
-                    HorizontalOptions="Center"
-                    BackgroundColor="Gold"/>
-            <Button Text="Jatka harjoitukseen"
-                    Margin="0, 0, 0, 20"
-                    Clicked="JatkaClicked"
-                    CornerRadius="15"
-                    VerticalOptions="End"
-                    HorizontalOptions="Center"
-                    BackgroundColor="Gold"/>
+
+            <Rectangle HorizontalOptions="CenterAndExpand"
+                Margin="0,-225,0,60"
+                WidthRequest="320"
+                HeightRequest="10"
+                Stroke="Black"
+                Fill="Black"
+                       />
+
+            <Grid 
+            RowDefinitions="Auto, Auto"
+            ColumnDefinitions="Auto, Auto"
+            VerticalOptions="EndAndExpand"
+            HorizontalOptions="CenterAndExpand">
+
+                <Button Grid.Column="1"
+                Text="Keskeytä"
+                Clicked="KeskeytäClicked"
+                VerticalOptions="EndAndExpand"
+                HorizontalOptions="CenterAndExpand" 
+                Font="19"
+                Margin="20,40,10,0"
+                CornerRadius="10"
+                HeightRequest="50"
+                WidthRequest="150"
+            />
+
+                <Button Grid.Column="2" 
+                Text="Jatka"
+                Clicked="JatkaClicked" 
+                VerticalOptions="EndAndExpand" 
+                HorizontalOptions="CenterAndExpand" 
+                Font="19"
+                Margin="20,40,10,0"
+                CornerRadius="10"
+                HeightRequest="50"
+                WidthRequest="150"
+            />
+            </Grid>
+
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

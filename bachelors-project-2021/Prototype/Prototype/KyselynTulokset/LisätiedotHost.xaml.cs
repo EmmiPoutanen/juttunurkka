@@ -69,12 +69,12 @@ namespace Prototype
 
             BindingContext = this;
         }
-        async void LopetaClicked(object sender, EventArgs e)
+        async void KeskeytäClicked(object sender, EventArgs e)
         {
             //Sulkee kyselyn kaikilta osallisujilta (linjat poikki höhö XD)
            
 
-            var res = await DisplayAlert("Oletko varma että tahdot sulkea kyselyn?", "", "Kyllä", "Ei");
+            var res = await DisplayAlert("Haluatko varmasti sulkea huoneen?", "", "Kyllä", "Ei");
 
             if (res == true)
             {

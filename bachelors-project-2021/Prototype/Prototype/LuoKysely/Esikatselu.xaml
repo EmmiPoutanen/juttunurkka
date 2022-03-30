@@ -28,7 +28,6 @@
             HeightRequest="50"
             WidthRequest="340" />
 
-            <!-- tänne sisään emojit ja aktiviteetit-->
             <Frame
             HorizontalOptions="CenterAndExpand" 
             VerticalOptions="CenterAndExpand"
@@ -42,6 +41,32 @@
             BorderColor="#4383EF"
             CornerRadius="10"
             IsVisible="true">
+
+                <CollectionView ItemsSource="{Binding Emojit}">
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Padding="5"
+                              RowDefinitions="Auto, *"
+                             ColumnDefinitions="Auto, *">
+
+                                <Image Grid.Column="0"
+                                       Source="{Binding Item.ImageSource}"
+                                       Aspect="AspectFill"
+                                       HeightRequest="60"
+                                       WidthRequest="60"/>
+
+
+                                <Label Grid.Column="1"
+                                       Text="{Binding ActivityChoises}" 
+                                       TextColor="Black"
+                                       FontSize="18"/>
+
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
             </Frame>
 
             <Grid>

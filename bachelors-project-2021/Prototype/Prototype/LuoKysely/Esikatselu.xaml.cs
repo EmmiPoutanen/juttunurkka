@@ -58,7 +58,7 @@ namespace Prototype
             if (res == true)
             {
                 //siirrytään odottamaan osallistujia
-         //       await Navigation.PushAsync(new OdotetaanOsallistujiaOpettaja());  
+               await Navigation.PushAsync(new OdotetaanOsallistujiaOpettaja());  
 
             }
             else
