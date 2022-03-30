@@ -28,19 +28,41 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
                      VerticalOptions="Start"
                      HorizontalOptions="CenterAndExpand"
                      >
-
             <!--Tämä pitää tehdä .cs koodiin niin että hakee oikeat aktiviteettien numerot tähän-->
+<!-- nyt menee aktiviteetin otsikko joku binding tähän cs:n puolelle -->
             <Label x:Name="Aktiviteetti"
-              Text="Aktiviteetti 1/3"
+                              Text="Aktiviteetti 1/3"
               VerticalOptions="Start" 
               HorizontalOptions="CenterAndExpand"
               HorizontalTextAlignment="Center"
               FontAttributes="Bold"
               FontSize="30"
               TextColor="#4383EF" 
-              Margin="0,40,0,0"
-             />
- 
+              Margin="0,40,0,0"/>
+            <!--   Text="{Binding Teksti, Mode=OneWay}"-->
+
+
+     <!--       <CollectionView 
+            HorizontalOptions="CenterAndExpand" 
+            VerticalOptions="CenterAndExpand"
+          
+            HeightRequest="270" 
+            ItemsSource="{Binding Items} "  >
+                <CollectionView.ItemTemplate >
+                    <DataTemplate >
+                        <Grid Padding="1"
+                        RowDefinitions="Auto, *"
+                        ColumnDefinitions="Auto, *">
+                            <Image Grid.RowSpan="1"
+                                Source="{Binding Emoji.ImageSource}"     
+                                Aspect="AspectFill"
+                                HeightRequest="60"
+                                WidthRequest="60"/>
+                        </Grid>
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView> -->
             <!--Tämä pitää tehdä .cs koodiin niin että hakee oikean hymiön kuvan tähän-->
             <Image Source="Emoji2.jpg"
                    WidthRequest="60"
@@ -146,36 +168,6 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
                             </CollectionView>
 
 
-         <!--        <Button
-                 x:Name="minButton"
-                 Grid.Row="0"
-                 Text="5 minuutin tauko" 
-                 Margin="5,10,0,10"
-                 TextColor="Black"
-                 BackgroundColor="Transparent"
-                 BorderColor="Transparent"
-                 FontSize="20"                 
-                 Clicked="ButtonClicked"/>
-
-                 <Button 
-                 Grid.Row="1"
-                 Text="Piirretään taululle" 
-                 Margin="5,10,0,10"
-                 TextColor="Black"
-                 BackgroundColor="Transparent"
-                 BorderColor="Transparent"
-                 FontSize="20"
-                 Clicked="ButtonClicked"/>
-
-                 <Button 
-                 Grid.Row="2"
-                 Text="Hirsipuu" 
-                 Margin="5,10,0,10"
-                 TextColor="Black"
-                 BackgroundColor="Transparent"
-                 BorderColor="Transparent"
-                 FontSize="20"
-                 Clicked="ButtonClicked"/>-->
 
                         </Grid>
                     </DataTemplate>
