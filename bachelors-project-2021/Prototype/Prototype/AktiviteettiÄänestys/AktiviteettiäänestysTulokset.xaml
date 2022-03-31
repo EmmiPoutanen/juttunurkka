@@ -19,33 +19,82 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Prototype.AktiviteettiäänestysTulokset"
-             Title="Äänestyksen tulos">
-    
+             Title="Juttunurkka">
+
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout Margin="0,0,0,130">
 
-            <AbsoluteLayout Margin="15"  VerticalOptions ="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-                <Label x:Name="result" Margin="5"  
-                       Text="Tähän äänestyksen tulos"
-                       FontSize="25" 
-                       HeightRequest="500"
-                       VerticalTextAlignment="Center" 
-                       HorizontalTextAlignment="Center"
-                   />
-                
-               
-            </AbsoluteLayout>
+            <Label Text="Tulokset"
+                   VerticalOptions="Start"
+                   HorizontalOptions="CenterAndExpand"
+                   FontSize="30"
+                   TextColor="#4383EF"
+                   FontAttributes="Bold"
+                   Margin="0,40,0,0"/>
 
-            <AbsoluteLayout Margin="15"  VerticalOptions ="EndAndExpand" HorizontalOptions="CenterAndExpand">
-                <Button Text="Poistu"
-                     Clicked="PoistuClicked"
-                    
-                     CornerRadius="100"
-                     HorizontalOptions="Center"
-                     WidthRequest="150"
-                     HeightRequest="50"/>
-            </AbsoluteLayout>
+            <Grid Margin="40, 50, 40, 20"
+                  ColumnSpacing="40">
 
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.125*"/>
+                    <RowDefinition Height="0.125*"/>
+                    <RowDefinition Height="0.125*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+
+                </Grid.ColumnDefinitions>
+
+                <Label Text="Luetaan kirjaa"
+                       FontSize="20"
+                       Grid.Column="0"/>
+                <Rectangle WidthRequest="50" 
+                           HeightRequest="50"
+                           Stroke="black"
+                           Fill="blue"
+                           Grid.Row="1"
+                           ScaleY="{Binding resultScale[0]}"
+                           AnchorY="1"/>
+                <Label Text="{Binding resultAmount[0]}"
+                       Grid.Row="2"
+                       HorizontalOptions="CenterAndExpand"/>
+
+                <Label Text="Kehu kaveria"
+                       FontSize="20"
+                       Grid.Column="1"/>
+                <Rectangle WidthRequest="50" 
+                           HeightRequest="50"
+                           Stroke="black"
+                           Fill="blue"
+                           Grid.Column="1"
+                           Grid.Row="1"
+                           ScaleY="{Binding resultScale[1]}"
+                           AnchorY="1"/>
+                <Label Text="{Binding resultAmount[1]}"
+                       Grid.Column="1"
+                       Grid.Row="2"
+                       HorizontalOptions="CenterAndExpand"/>
+
+            </Grid>
+
+            <Rectangle HorizontalOptions="CenterAndExpand"
+                Margin="0,-90,0,0"
+                WidthRequest="320"
+                HeightRequest="10"
+                Stroke="Black"
+                Fill="Black"
+                       />
+
+            <Button Grid.Column="2" 
+                Text="Sulje huone"
+                Clicked="SuljeClicked" 
+                VerticalOptions="EndAndExpand" 
+                HorizontalOptions="CenterAndExpand" 
+                Font="19"
+                Margin="20,0,10,0"
+                CornerRadius="10"
+                HeightRequest="50"
+                WidthRequest="150"
+            />
 
         </StackLayout>
     </ContentPage.Content>
