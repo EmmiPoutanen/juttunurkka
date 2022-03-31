@@ -36,6 +36,18 @@ namespace Prototype
             }
         }
 
+        async protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            await UpdateProgressBar(1, 5000);
+        }
+
+        async Task UpdateProgressBar(double Progress, uint time)
+        {
+            await progressBar.ProgressTo(Progress, time, Easing.Linear);
+        }
+
         private async void LopetaClicked(object sender, EventArgs e)
         {
             //Back to main and error, if nobody joined the survey!

@@ -31,12 +31,14 @@ namespace Prototype
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TulostenOdotus : ContentPage
     {
-
+        public string RoomCode { get; set; }
         private int _countSeconds = 10;
 
         public TulostenOdotus()
         {
             InitializeComponent();
+            Survey s = SurveyManager.GetInstance().GetSurvey();
+            RoomCode = s.RoomCode;
 
             //poistetaan turha navigointipalkki
             NavigationPage.SetHasNavigationBar(this, false);
@@ -49,7 +51,7 @@ namespace Prototype
             {
                 _countSeconds--;
 
-                 timer.Text = _countSeconds.ToString();
+                 //timer.Text = _countSeconds.ToString();
 
 				if (Main.GetInstance().host.isVoteConcluded)
 				{
@@ -69,6 +71,33 @@ namespace Prototype
 
                 return Convert.ToBoolean(_countSeconds);
             });
+        }
+
+        async protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            await UpdateProgressBar(1, 5000);
+        }
+
+        async Task UpdateProgressBar(double Progress, uint time)
+        {
+            await progressBar.ProgressTo(Progress, time, Easing.Linear);
+        }
+
+        private async void LopetaClicked(object sender, EventArgs e)
+        {
+            //Back to main and error, if nobody joined the survey!
+            /*if (Main.GetInstance().host.clientCount == 0)
+            {
+                Main.GetInstance().host.DestroyHost();
+                await Navigation.PopToRootAsync();
+                await DisplayAlert("Kysely suljettiin automaattisesti", "Kyselyyn ei saatu yhtään vastausta", "OK");
+                return;
+            }*/
+
+            await Main.GetInstance().host.CloseSurvey();
+            await Navigation.PushAsync(new AktiviteettiäänestysTulokset());
         }
 
         //Device back button disabled
