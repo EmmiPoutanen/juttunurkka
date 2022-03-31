@@ -26,7 +26,7 @@ using Xamarin.Forms.Xaml;
 namespace Prototype
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LuoKyselyToimenpiteet : ContentPage
+    public partial class LuoKyselyToimenpiteetHammastynyt : ContentPage
     {
 
         public IList<CollectionItem> Items { get; set; }
@@ -49,38 +49,33 @@ namespace Prototype
             }
         }
 
-        public LuoKyselyToimenpiteet()
+        public LuoKyselyToimenpiteetHammastynyt()
         {
             InitializeComponent();
 
                   //alustus
                 Items = new List<CollectionItem>();
-                if(SurveyManager.GetInstance().GetSurvey().emojis[0].Name == "Iloinen")
-            {
-                Items.Add(new CollectionItem(SurveyManager.GetInstance().GetSurvey().emojis[0], Const.activities[0]));
-                Console.WriteLine("Emojin nimi:" + new CollectionItem(SurveyManager.GetInstance().GetSurvey().emojis[0], Const.activities[0]).Emoji.Name);
-                Console.WriteLine("Aktiviteetteja: " + new CollectionItem(SurveyManager.GetInstance().GetSurvey().emojis[0], Const.activities[0]).ActivityChoises.Count);
-                Console.WriteLine("Emojin aktiviteetit: " + new CollectionItem(SurveyManager.GetInstance().GetSurvey().emojis[0], Const.activities[0]).ActivityChoises[0]);
+                int numero = 0;
+                foreach( var individual in SurveyManager.GetInstance().GetSurvey().emojis)
+                {
+                if(individual.Name== "Hämmästynyt")
+                {
+                    Items.Add(new CollectionItem(SurveyManager.GetInstance().GetSurvey().emojis[numero], Const.activities[1]));
+                    Console.WriteLine("Emojin nimi:" + new CollectionItem(SurveyManager.GetInstance().GetSurvey().emojis[numero], Const.activities[1]).Emoji.Name);
+                    Console.WriteLine("Aktiviteetteja: " + new CollectionItem(SurveyManager.GetInstance().GetSurvey().emojis[numero], Const.activities[1]).ActivityChoises.Count);
+                    Console.WriteLine("Emojin aktiviteetit: " + new CollectionItem(SurveyManager.GetInstance().GetSurvey().emojis[numero], Const.activities[1]).ActivityChoises[0]);
 
+
+                }
+                else
+                {
+                    numero++;
+                }
             }
-            else {
-                //dosmthing else
-            }
-            /*  foreach (var item in SurveyManager.GetInstance().GetSurvey().emojis)
-              {
-                  Items.Add(new CollectionItem(item, Const.activities[item.ID]));
-              // Printtaukset poistettava lopuksi oikeat emojit ja liitännäiset aktiviteetit testausta
-                  Console.WriteLine("Emojin nimi:"+new CollectionItem(item, Const.activities[item.ID]).Emoji.Name);
-                  Console.WriteLine("Aktiviteetteja: "+ new CollectionItem(item, Const.activities[item.ID]).ActivityChoises.Count);
-                  Console.WriteLine("Emojin aktiviteetit: " + new CollectionItem(item, Const.activities[item.ID]).ActivityChoises[0]);
-
-              }*/
-
             BindingContext = this;
-          //  }
-      //      else { }
         }
 
+ 
         async void EdellinenButtonClicked(object sender, EventArgs e)
         {
             var res = await DisplayAlert("Tahdotko varmasti keskeyttää kyselyn tekemisen?", "", "Kyllä", "Ei");
@@ -128,9 +123,10 @@ namespace Prototype
 */
             //asetetaan emojit survey olioon
             List<Emoji> tempEmojis = new List<Emoji>();
+            List<string> tempActivities = new List<string>();
+
             foreach (var item in Items)
             {
-                List<string> tempActivities = new List<string>();
                 foreach (var selection in item.Selected)
                 {
                     Console.WriteLine("Lisätään aktiviteetti:" +selection as string);
@@ -140,10 +136,30 @@ namespace Prototype
                 item.Emoji.activities = tempActivities;
                 tempEmojis.Add(item.Emoji);
             }
-            SurveyManager.GetInstance().GetSurvey().emojis = tempEmojis;
+            int numero = 0;
+            foreach (var individual in SurveyManager.GetInstance().GetSurvey().emojis)
+            {
+                if (individual.Name == "Hämmästynyt")
+                {
+                    SurveyManager.GetInstance().GetSurvey().emojis[numero].activities = tempActivities;
+                    break;
+                }
+                else
+                {
+                    numero++;
+                }
+            }
 
             // siirrytään "Luo kysely -lopetus" sivulle 
-            await Navigation.PushAsync(new LuoKyselyLopetus()); ;
+            if (SurveyManager.GetInstance().GetSurvey().emojis[numero + 1].Name == "Neutraali")
+            {
+                await Navigation.PushAsync(new LuoKyselyToimenpiteetNeutraali()); ;
+
+            }
+            else
+            {
+                await Navigation.PushAsync(new LuoKyselyLopetus());
+            };
         }
 /*
         //function which checks whether the user has selected at least 1 activity for each emoji.

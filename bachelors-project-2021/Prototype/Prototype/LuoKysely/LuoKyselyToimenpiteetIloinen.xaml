@@ -19,7 +19,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
 
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Prototype.LuoKyselyToimenpiteet"
+             x:Class="Prototype.LuoKyselyToimenpiteetIloinen"
              Title="Juttunurkka"
              >
 
@@ -64,7 +64,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
                 </CollectionView.ItemTemplate>
             </CollectionView> -->
             <!--Tämä pitää tehdä .cs koodiin niin että hakee oikean hymiön kuvan tähän-->
-            <Image Source="Emoji2.jpg"
+            <Image Source="Emoji0.jpg"
                    WidthRequest="60"
                    HeightRequest="60"
                    Margin="0,30,0,0"
@@ -123,9 +123,9 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
 
             <CollectionView 
             HorizontalOptions="CenterAndExpand" 
-            VerticalOptions="StartAndExpand"
+            VerticalOptions="CenterAndExpand"
           
-            HeightRequest="100" 
+            HeightRequest="470" 
             ItemsSource="{Binding Items} "  >
 
                 <CollectionView.ItemTemplate >

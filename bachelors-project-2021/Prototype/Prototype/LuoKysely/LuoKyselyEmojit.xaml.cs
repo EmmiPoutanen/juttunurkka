@@ -145,10 +145,18 @@ namespace Prototype
             //katsotaan mikä on listan pituus konsolilta PP
             Console.WriteLine(temp.Count);
             SurveyManager.GetInstance().GetSurvey().emojis = temp;
-            
+
 
             // siirrytään aktiviteetit sivulle 
-            await Navigation.PushAsync(new LuoKyselyToimenpiteet()); 
+            //    await Navigation.PushAsync(new LuoKyselyToimenpiteet());
+            //kokeillaan siirtymää "Iloinen" sivulle
+            if (SurveyManager.GetInstance().GetSurvey().emojis[0].Name == "Iloinen")
+            {
+                await Navigation.PushAsync(new LuoKyselyToimenpiteetIloinen());
+            }
+            else
+                await Navigation.PushAsync(new LuoKyselyLopetus());
+
         }
     }
 }
