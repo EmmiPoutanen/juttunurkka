@@ -150,12 +150,28 @@ namespace Prototype
             // siirrytään aktiviteetit sivulle 
             //    await Navigation.PushAsync(new LuoKyselyToimenpiteet());
             //kokeillaan siirtymää "Iloinen" sivulle
-            if (SurveyManager.GetInstance().GetSurvey().emojis[0].Name == "Iloinen")
+            String name = SurveyManager.GetInstance().GetSurvey().emojis[0].Name;
+                        {
+                if (name == "Iloinen")
+                {
+                    await Navigation.PushAsync(new LuoKyselyToimenpiteetIloinen());
+                }
+                else if (name == "Hämmästynyt")
+                {
+                    await Navigation.PushAsync(new LuoKyselyToimenpiteetHammastynyt());
+                }
+                else
+                {
+                    await Navigation.PushAsync(new LuoKyselyLopetus());
+                }
+                
+             }
+        /*    if (SurveyManager.GetInstance().GetSurvey().emojis[0].Name == "Iloinen")
             {
                 await Navigation.PushAsync(new LuoKyselyToimenpiteetIloinen());
-            }
-            else
-                await Navigation.PushAsync(new LuoKyselyLopetus());
+            }*/
+          //  else
+           //     await Navigation.PushAsync(new LuoKyselyLopetus());
 
         }
     }

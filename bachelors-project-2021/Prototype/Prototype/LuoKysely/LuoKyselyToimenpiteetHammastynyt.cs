@@ -149,17 +149,24 @@ namespace Prototype
                     numero++;
                 }
             }
-
-            // siirrytään "Luo kysely -lopetus" sivulle 
-            if (SurveyManager.GetInstance().GetSurvey().emojis[numero + 1].Name == "Neutraali")
+            Console.WriteLine("seuraava sivu");
+    /*        if (SurveyManager.GetInstance().GetSurvey().emojis[numero + 1] != null )
             {
-                await Navigation.PushAsync(new LuoKyselyToimenpiteetNeutraali()); ;
+                Console.WriteLine("tässä"); 
+                if (SurveyManager.GetInstance().GetSurvey().emojis[numero + 1].Name == "Neutraali")
+                {
+                    Console.WriteLine(" eteenpäin");
 
+                    await Navigation.PushAsync(new LuoKyselyToimenpiteetNeutraali()); ;
+
+                }
             }
+            // siirrytään "Luo kysely -lopetus" sivulle 
+
             else
-            {
+            {*/
                 await Navigation.PushAsync(new LuoKyselyLopetus());
-            };
+         //   };
         }
 /*
         //function which checks whether the user has selected at least 1 activity for each emoji.

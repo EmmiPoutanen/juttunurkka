@@ -35,6 +35,7 @@ namespace Prototype
         {
             public Emoji Emoji { get; set; }
             public IList<string> ActivityChoises { get; set; }
+
             public ObservableCollection<object> Selected { get; set; }
             public CollectionItem(Emoji emoji, IList<string> activities)
             {
