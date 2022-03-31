@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Prototype.JuttunurkkaSuljettu">
+    <AbsoluteLayout
+        Padding="0"
+        HorizontalOptions="FillAndExpand"
+        VerticalOptions="FillAndExpand">
+
+
+        <StackLayout AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                     AbsoluteLayout.LayoutFlags="All" 
+                     >
+
+            <StackLayout Padding="0,10,0,0">
+
+
+
+                <Label Text="Juttunurkka"
+                   Margin="5,10,0,20"
+                   HorizontalOptions="Center"
+                   TextColor="#4383EF"
+                   Font="Bold"
+                   FontSize="50"
+                 />
+
+                <StackLayout Orientation="Horizontal"  
+                    HorizontalOptions="CenterAndExpand"
+                    HeightRequest="500"
+                    WidthRequest="280"         
+                    BackgroundColor="#CBD6E5"
+                    Margin="0,20,0,0">
+
+                </StackLayout>
+
+                <Button Text="Palaa alkuun"
+                    VerticalOptions="CenterAndExpand" 
+                    HorizontalOptions="CenterAndExpand" 
+                    Font="19"
+                    Margin="20,10,10,35"
+                    CornerRadius="10"
+                    HeightRequest="50"
+                    WidthRequest="255"
+                    Clicked="AlkuunClicked"
+                 />
+
+            </StackLayout>
+
+        </StackLayout>
+
+        <ContentView
+            x:Name="popupSelection"
+            Padding="10,0"
+            AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+            AbsoluteLayout.LayoutFlags="All"
+            
+            IsVisible="true">
+
+            <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+
+
+                <StackLayout
+               BackgroundColor="White"
+               HeightRequest="175"
+               Orientation="Vertical"
+               WidthRequest="300"
+                    
+                    >
+
+                    <Label Text="Juttunurkka on nyt suljettu" 
+                           FontSize="24" 
+                           TextColor="#4383EF" 
+                           Margin="10,20,10,0" 
+                           HorizontalOptions="Center"
+                           HorizontalTextAlignment="Center"/>
+
+                    <Image Source="lukko.png"
+                           WidthRequest="70"
+                           />
+
+
+                </StackLayout>
+
+            </StackLayout>
+
+        </ContentView>
+
+
+    </AbsoluteLayout>
+</ContentPage>

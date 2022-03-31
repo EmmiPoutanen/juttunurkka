@@ -37,16 +37,16 @@ namespace Prototype
             NavigationPage.SetHasBackButton(this, false);
             if (Main.GetInstance().state == Main.MainState.Participating)
             {
-                result.Text = Main.GetInstance().client.voteResult;
+                //result.Text = Main.GetInstance().client.voteResult;
             }
             else
             {
-                result.Text = Main.GetInstance().host.data.voteResult;
+                //result.Text = Main.GetInstance().host.data.voteResult;
             }
             
         }
 
-        async void PoistuClicked(object sender, EventArgs e)
+        async void SuljeClicked(object sender, EventArgs e)
         {
 			if (Main.GetInstance().state == Main.MainState.Participating)
 			{
@@ -54,7 +54,7 @@ namespace Prototype
 			} else {
                 Main.GetInstance().host.DestroyHost();
 			}
-            await Navigation.PushAsync(new MainPage());
+            await Navigation.PushAsync(new JuttunurkkaSuljettu());
         }
 
 
