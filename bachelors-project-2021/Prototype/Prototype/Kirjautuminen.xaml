@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Prototype.Kirjautuminen"
+             Title="Juttunurkka"
+             >
+
+    <StackLayout VerticalOptions="CenterAndExpand" Spacing="20" Padding="0,0,0,90">
+        <Label Text="Kirjaudu sisään opettajanhuoneeseen"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand"
+                HorizontalTextAlignment="Center"
+                FontAttributes="Bold"
+                FontSize="30"
+                TextColor="#4383EF"
+                Padding="0,0,0,40"
+             />
+
+        <Label Text="Käyttäjätunnus"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand"
+                Padding="-125,0,0,-10"
+             />
+        <Entry x:Name="txtUsername" Placeholder="Username" TextColor="White" PlaceholderColor="Gray"></Entry>
+        <Entry x:Name="txtPassword" Placeholder="Password" IsPassword="True" TextColor="White" PlaceholderColor="Gray"></Entry>
+        
+        <Entry 
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand"  
+                HeightRequest="50"
+                WidthRequest="250"                  
+             />
+
+        <Label Text="Salasana"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand"
+                Padding="-125,0,0,-10"     
+             />
+
+        <Entry 
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand"  
+                HeightRequest="50"
+                WidthRequest="250"
+                IsPassword="True"
+             />
+
+
+        
+        <Button Click="{x:Bind MyClick}" 
+                Text="Kirjaudu"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" 
+                Font="19"
+              Margin="20,10,10,35"
+              CornerRadius="10"
+              HeightRequest="50"
+              WidthRequest="255" />
+
+    </StackLayout>
+
+</ContentPage>
