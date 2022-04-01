@@ -22,33 +22,21 @@
                 HorizontalOptions="CenterAndExpand"
                 Padding="-125,0,0,-10"
              />
-        <Entry x:Name="txtUsername" Placeholder="Username" TextColor="White" PlaceholderColor="Gray"></Entry>
-        <Entry x:Name="txtPassword" Placeholder="Password" IsPassword="True" TextColor="White" PlaceholderColor="Gray"></Entry>
+        <Entry x:Name="txtUsername" TextColor="black" PlaceholderColor="Gray" HeightRequest="50"
+                WidthRequest="250" HorizontalOptions="CenterAndExpand"></Entry>
         
-        <Entry 
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand"  
-                HeightRequest="50"
-                WidthRequest="250"                  
-             />
-
         <Label Text="Salasana"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand"
                 Padding="-125,0,0,-10"     
              />
 
-        <Entry 
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand"  
-                HeightRequest="50"
-                WidthRequest="250"
-                IsPassword="True"
-             />
-
+        <Entry x:Name="txtPassword" IsPassword="True" TextColor="black" PlaceholderColor="Gray" HeightRequest="50"
+                WidthRequest="250" HorizontalOptions="CenterAndExpand"></Entry>
+       
 
         
-        <Button Click="{x:Bind MyClick}" 
+        <Button  
                 Text="Kirjaudu"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" 
@@ -56,7 +44,8 @@
               Margin="20,10,10,35"
               CornerRadius="10"
               HeightRequest="50"
-              WidthRequest="255" />
+              WidthRequest="255"
+              Clicked="KirjauduClicked"/>
 
     </StackLayout>
 

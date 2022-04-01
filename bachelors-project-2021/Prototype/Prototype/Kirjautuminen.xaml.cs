@@ -28,5 +28,18 @@ namespace Prototype
                 DisplayAlert("VIRHE", "Vaara salasana tai kayttajatunnus", "OK");
             }
         }
+
+        async void KirjauduClicked(object sender, EventArgs e)
+        {
+            if (txtUsername.Text == "opettaja" && txtPassword.Text == "opehuone")
+            {
+                await Navigation.PushAsync(new Opettajanhuone());
+            }
+            else
+            {
+                await DisplayAlert("VIRHE", "Vaara salasana tai kayttajatunnus", "OK");
+            }
+            
+        }
     }
 }
