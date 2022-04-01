@@ -30,6 +30,18 @@ namespace Prototype
     {
 
         public IList<CollectionItem> Items { get; set; }
+        private string myStringProperty;
+
+        public string MyStringProperty
+        {
+            get { return myStringProperty; }
+            set
+            {
+                myStringProperty = value;
+                OnPropertyChanged(nameof(MyStringProperty)); // Notify that there was a change on this property
+            }
+        }
+
         public class CollectionItem
 
         {
@@ -64,7 +76,7 @@ namespace Prototype
                     Console.WriteLine("Emojin nimi:" + new CollectionItem(SurveyManager.GetInstance().GetSurvey().emojis[numero], Const.activities[1]).Emoji.Name);
                     Console.WriteLine("Aktiviteetteja: " + new CollectionItem(SurveyManager.GetInstance().GetSurvey().emojis[numero], Const.activities[1]).ActivityChoises.Count);
                     Console.WriteLine("Emojin aktiviteetit: " + new CollectionItem(SurveyManager.GetInstance().GetSurvey().emojis[numero], Const.activities[1]).ActivityChoises[0]);
-
+                    break;
 
                 }
                 else
@@ -73,9 +85,15 @@ namespace Prototype
                 }
             }
             BindingContext = this;
+
+            int selectedEmojis = SurveyManager.GetInstance().GetSurvey().emojis.Count;
+            int emojiNumber = numero + 1;
+            String title = "Aktiviteetti " +emojiNumber+ "/"+selectedEmojis ;
+            MyStringProperty = title;
+
         }
 
- 
+
         async void EdellinenButtonClicked(object sender, EventArgs e)
         {
             var res = await DisplayAlert("Tahdotko varmasti keskeyttää kyselyn tekemisen?", "", "Kyllä", "Ei");
@@ -149,24 +167,45 @@ namespace Prototype
                     numero++;
                 }
             }
-            Console.WriteLine("seuraava sivu");
-    /*        if (SurveyManager.GetInstance().GetSurvey().emojis[numero + 1] != null )
-            {
-                Console.WriteLine("tässä"); 
-                if (SurveyManager.GetInstance().GetSurvey().emojis[numero + 1].Name == "Neutraali")
-                {
-                    Console.WriteLine(" eteenpäin");
+            Console.WriteLine("tämä emoji oli listassa numero: "+numero);
+            int nextEmojiNumber = numero + 1;
 
-                    await Navigation.PushAsync(new LuoKyselyToimenpiteetNeutraali()); ;
+            String name = "";
+            if (SurveyManager.GetInstance().GetSurvey().emojis[nextEmojiNumber] != null)
+            {
+                name = SurveyManager.GetInstance().GetSurvey().emojis[nextEmojiNumber].Name;
+
+                if (name == "Neutraali")
+                {
+                    await Navigation.PushAsync(new LuoKyselyToimenpiteetNeutraali());
 
                 }
-            }
-            // siirrytään "Luo kysely -lopetus" sivulle 
-
-            else
-            {*/
+                else { }
+            }else
+                {
                 await Navigation.PushAsync(new LuoKyselyLopetus());
-         //   };
+
+            }
+
+
+
+            /*        if (SurveyManager.GetInstance().GetSurvey().emojis[numero + 1] != null )
+                    {
+                        Console.WriteLine("tässä"); 
+                        if (SurveyManager.GetInstance().GetSurvey().emojis[numero + 1].Name == "Neutraali")
+                        {
+                            Console.WriteLine(" eteenpäin");
+
+                            await Navigation.PushAsync(new LuoKyselyToimenpiteetNeutraali()); ;
+
+                        }
+                    }
+                    // siirrytään "Luo kysely -lopetus" sivulle 
+
+                    else
+                    {*/
+            //    await Navigation.PushAsync(new LuoKyselyLopetus());
+            //   };
         }
 /*
         //function which checks whether the user has selected at least 1 activity for each emoji.

@@ -30,6 +30,17 @@ namespace Prototype
     {
 
         public IList<CollectionItem> Items { get; set; }
+        private string myStringProperty;
+
+        public string MyStringProperty
+        {
+            get { return myStringProperty; }
+            set
+            {
+                myStringProperty = value;
+                OnPropertyChanged(nameof(MyStringProperty)); // Notify that there was a change on this property
+            }
+        }
         public class CollectionItem
 
         {
@@ -67,8 +78,9 @@ namespace Prototype
                 //dosmthing else
             }
             BindingContext = this;
-          //  }
-      //      else { }
+            int selectedEmojis=SurveyManager.GetInstance().GetSurvey().emojis.Count;
+            String title = "Aktiviteetti 1/";
+            MyStringProperty = title + selectedEmojis;
         }
 
         async void EdellinenButtonClicked(object sender, EventArgs e)
@@ -133,17 +145,22 @@ namespace Prototype
                 tempEmojis.Add(item.Emoji);
             }
             SurveyManager.GetInstance().GetSurvey().emojis[0].activities = tempActivities;
-
-            // siirrytään "Luo kysely -lopetus" sivulle 
-            if (SurveyManager.GetInstance().GetSurvey().emojis[1].Name == "Hämmästynyt")
+            String name = SurveyManager.GetInstance().GetSurvey().emojis[1].Name;
+            // siirrytään seuraavalle aktiviteettien valintasivulle 
+            if (name == "Hämmästynyt")
             {
                 await Navigation.PushAsync(new LuoKyselyToimenpiteetHammastynyt()); ;
             }
-            else
+            else if (name == "Neutraali")
             {
-                await Navigation.PushAsync(new LuoKyselyLopetus()); ;
+                await Navigation.PushAsync(new LuoKyselyToimenpiteetNeutraali());
 
             }
+            else
+            {
+                await Navigation.PushAsync(new LuoKyselyLopetus());
+            }
+
         }
 /*
         //function which checks whether the user has selected at least 1 activity for each emoji.

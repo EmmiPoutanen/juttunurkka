@@ -149,7 +149,7 @@ namespace Prototype
 
             // siirrytään aktiviteetit sivulle 
             //    await Navigation.PushAsync(new LuoKyselyToimenpiteet());
-            //kokeillaan siirtymää "Iloinen" sivulle
+            //Siirtymä aktiviteettien valintaan eri emojien sivuille
             String name = SurveyManager.GetInstance().GetSurvey().emojis[0].Name;
                         {
                 if (name == "Iloinen")
@@ -159,6 +159,11 @@ namespace Prototype
                 else if (name == "Hämmästynyt")
                 {
                     await Navigation.PushAsync(new LuoKyselyToimenpiteetHammastynyt());
+                }
+                else if (name == "Neutraali")
+                {
+                    await Navigation.PushAsync(new LuoKyselyToimenpiteetNeutraali());
+
                 }
                 else
                 {
