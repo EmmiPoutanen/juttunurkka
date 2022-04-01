@@ -31,12 +31,40 @@ namespace Prototype
         public string introMessage { get; set; }
         private int answer;
 
+        // <---
+        public IList<CollectionItem> Emojit { get; private set; } = null;
+        // --->
+
+        //Haettu esikatseluosiosta apuun
+        //<---
+        public class CollectionItem
+        {
+            public Emoji Item { get; set; } = null;
+        }
+        //--->
+
         public EmojinValinta()
         {
             InitializeComponent();
             NavigationPage.SetHasBackButton(this, false);
 
-            introMessage = Main.GetInstance().client.intro;
+            //<---
+            Survey s = SurveyManager.GetInstance().GetSurvey();
+            introMessage += s.introMessage; // VAIKO TÄMÄ INTRO MESSAGE??
+
+            Emojit = new List<CollectionItem>();
+            List<Emoji> temp = s.emojis;
+
+            foreach (var item in temp)
+            {
+                CollectionItem i = new CollectionItem();
+                i.Item = item;
+                Emojit.Add(i);
+            }
+            //--->
+
+            // Onko ero mainin kautta haettaessa vs. surveyn?
+            //introMessage = Main.GetInstance().client.intro;
 
             BindingContext = this;
         }
@@ -48,21 +76,19 @@ namespace Prototype
 
         }
 
+
         private void Button_Clicked(object sender, EventArgs e)
         {
-           /* b0.Scale = 1;
-            b1.Scale = 1;
-            b2.Scale = 1;
-            b3.Scale = 1;
-            b4.Scale = 1;
-            b5.Scale = 1;
-            b6.Scale = 1;*/
 
             ImageButton emoji = sender as ImageButton;
+
             emoji.Scale = 1.75;
             answer = int.Parse(emoji.ClassId.ToString());
-            Console.WriteLine(answer);
+
+            // Tarkistetaan, että vaan yhden valihtee
+            Console.WriteLine("valittu " + answer);
             Vastaus.IsEnabled = true;
+
         }
 
         private async void Vastaa_Clicked(object sender, EventArgs e)

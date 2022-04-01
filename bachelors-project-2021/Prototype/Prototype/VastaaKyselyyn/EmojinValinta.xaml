@@ -49,6 +49,31 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
             WidthRequest="310"
             >
 
+            <CollectionView ItemsSource="{Binding Emojit}"
+                            ItemsLayout="VerticalGrid, 3">  <!-- Tämä lisäämällä haki kaikki seittemän emojia jostain -->
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="5"
+                              RowDefinitions="Auto, *"
+                             ColumnDefinitions="Auto, *">
+
+                            <ImageButton Grid.Column="0"
+                                       Source="{Binding Item.ImageSource}"
+                                         ClassId="{Binding Item.ID}"
+                                       BackgroundColor="Transparent"
+                                       HeightRequest="60"
+                                       WidthRequest="60"
+                                       Clicked="Button_Clicked"/>
+
+
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+
+            <!--
             <StackLayout Orientation="Horizontal">
 
                 <ImageButton Source="emoji0.png"
@@ -70,6 +95,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
                     BackgroundColor="Transparent"/>
 
             </StackLayout>
+            -->
 
 
         </Frame>
