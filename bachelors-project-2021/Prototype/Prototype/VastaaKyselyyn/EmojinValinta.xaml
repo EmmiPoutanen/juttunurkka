@@ -45,7 +45,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
             HorizontalOptions="CenterAndExpand"
             BorderColor="#4383EF"
             CornerRadius="10"
-            HeightRequest="100"
+            HeightRequest="220"
             WidthRequest="310"
             >
 
@@ -64,6 +64,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
                                        BackgroundColor="Transparent"
                                        HeightRequest="60"
                                        WidthRequest="60"
+                                       Margin="10,0,0,0"
                                        Clicked="Button_Clicked"/>
 
 
