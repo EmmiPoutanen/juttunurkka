@@ -26,7 +26,7 @@ using Xamarin.Forms.Xaml;
 namespace Prototype
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LuoKyselyToimenpiteetIloinen : ContentPage
+    public partial class LuoKyselyToimenpiteetVihainen : ContentPage
     {
 
         public IList<CollectionItem> Items { get; set; }
@@ -41,6 +41,7 @@ namespace Prototype
                 OnPropertyChanged(nameof(MyStringProperty)); // Notify that there was a change on this property
             }
         }
+
         public class CollectionItem
 
         {
@@ -60,27 +61,36 @@ namespace Prototype
             }
         }
 
-        public LuoKyselyToimenpiteetIloinen()
+        public LuoKyselyToimenpiteetVihainen()
         {
             InitializeComponent();
 
                   //alustus
                 Items = new List<CollectionItem>();
-                if(SurveyManager.GetInstance().GetSurvey().emojis[0].Name == "Iloinen")
-            {
-                Items.Add(new CollectionItem(SurveyManager.GetInstance().GetSurvey().emojis[0], Const.activities[0]));
-                Console.WriteLine("Emojin nimi:" + new CollectionItem(SurveyManager.GetInstance().GetSurvey().emojis[0], Const.activities[0]).Emoji.Name);
-                Console.WriteLine("Aktiviteetteja: " + new CollectionItem(SurveyManager.GetInstance().GetSurvey().emojis[0], Const.activities[0]).ActivityChoises.Count);
-                Console.WriteLine("Emojin aktiviteett 1: " + new CollectionItem(SurveyManager.GetInstance().GetSurvey().emojis[0], Const.activities[0]).ActivityChoises[0]);
+                int numero = 0;
+                foreach( var individual in SurveyManager.GetInstance().GetSurvey().emojis)
+                {
+                if(individual.Name== "Vihainen")
+                {
+                    Items.Add(new CollectionItem(SurveyManager.GetInstance().GetSurvey().emojis[numero], Const.activities[3]));
+                    Console.WriteLine("Emojin nimi:" + new CollectionItem(SurveyManager.GetInstance().GetSurvey().emojis[numero], Const.activities[3]).Emoji.Name);
+                    Console.WriteLine("Aktiviteetteja: " + new CollectionItem(SurveyManager.GetInstance().GetSurvey().emojis[numero], Const.activities[3]).ActivityChoises.Count);
+                    Console.WriteLine("Emojin aktiviteetit: " + new CollectionItem(SurveyManager.GetInstance().GetSurvey().emojis[numero], Const.activities[3]).ActivityChoises[0]);
+                    break;
 
-            }
-            else {
-                //dosmthing else
+                }
+                else
+                {
+                    numero++;
+                }
             }
             BindingContext = this;
-            int selectedEmojis=SurveyManager.GetInstance().GetSurvey().emojis.Count;
-            String title = "Aktiviteetti 1/";
-            MyStringProperty = title + selectedEmojis;
+
+            int selectedEmojis = SurveyManager.GetInstance().GetSurvey().emojis.Count;
+            int emojiNumber = numero + 1;
+            String title = "Aktiviteetti " +emojiNumber+ "/"+selectedEmojis ;
+            MyStringProperty = title;
+
         }
 
         async void EdellinenButtonClicked(object sender, EventArgs e)
@@ -141,16 +151,14 @@ namespace Prototype
                     tempActivities.Add(selection as string);
                 }
                 item.Emoji.activities = tempActivities;
-
                 tempEmojis.Add(item.Emoji);
             }
             int numero = 0;
             foreach (var individual in SurveyManager.GetInstance().GetSurvey().emojis)
             {
-                if (individual.Name == "Iloinen")
+                if (individual.Name == "Vihainen")
                 {
                     SurveyManager.GetInstance().GetSurvey().emojis[numero].activities = tempActivities;
-                    Console.WriteLine("Tallennettiin aktiviteettilista");
                     break;
                 }
                 else
@@ -158,55 +166,50 @@ namespace Prototype
                     numero++;
                 }
             }
-
-       //     SurveyManager.GetInstance().GetSurvey().emojis[0].activities = tempActivities;
- //           String name = SurveyManager.GetInstance().GetSurvey().emojis[1].Name;
-            // siirrytään seuraavalle aktiviteettien valintasivulle 
-
+  //          Console.WriteLine("tämä emoji oli listassa numero: "+numero);
             int nextEmojiNumber = numero + 1;
-            int luku = SurveyManager.GetInstance().GetSurvey().emojis.Count;
 
+            int luku = SurveyManager.GetInstance().GetSurvey().emojis.Count;
+//            Console.WriteLine(nextEmojiNumber + "on seuraava taulukon luku ja emojeita on listassa: " + luku);
             if (nextEmojiNumber < luku)
             {
                 String name = SurveyManager.GetInstance().GetSurvey().emojis[nextEmojiNumber].Name;
 
-                if (name == "Hämmästynyt")
-                {
-                    await Navigation.PushAsync(new LuoKyselyToimenpiteetHammastynyt()); ;
-                }
-                else if (name == "Neutraali")
-                {
-                    await Navigation.PushAsync(new LuoKyselyToimenpiteetNeutraali());
+                    if (name == "Neutraali")
+                    {
+                        await Navigation.PushAsync(new LuoKyselyToimenpiteetNeutraali());
 
-                }
+                    }
                 else if (name == "Vihainen")
                 {
                     await Navigation.PushAsync(new LuoKyselyToimenpiteetVihainen());
 
                 }
-
                 else if (name == "Väsynyt")
-                {
+                    {
                     await Navigation.PushAsync(new LuoKyselyToimenpiteetVasynyt());
 
                 }
-                else if(name == "Miettivä")
-                {
+                else if (name == "Miettivä")
+                    {
                     await Navigation.PushAsync(new LuoKyselyToimenpiteetMiettiva());
 
                 }
-                else
-                {
-                    await Navigation.PushAsync(new LuoKyselyLopetus());
+                else if (name == "Itkunauru")
+                    {
 
-                }
-            }
+                    }
+                    else
+                    {
+                 //       await Navigation.PushAsync(new LuoKyselyLopetus());
+
+                    }
+             }
             else
             {
                 await Navigation.PushAsync(new LuoKyselyLopetus());
 
             }
-
 
         }
 /*

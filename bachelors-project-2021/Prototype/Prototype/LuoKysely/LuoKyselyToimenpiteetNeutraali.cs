@@ -30,6 +30,18 @@ namespace Prototype
     {
 
         public IList<CollectionItem> Items { get; set; }
+        private string myStringProperty;
+
+        public string MyStringProperty
+        {
+            get { return myStringProperty; }
+            set
+            {
+                myStringProperty = value;
+                OnPropertyChanged(nameof(MyStringProperty)); // Notify that there was a change on this property
+            }
+        }
+
         public class CollectionItem
 
         {
@@ -64,8 +76,7 @@ namespace Prototype
                     Console.WriteLine("Emojin nimi:" + new CollectionItem(SurveyManager.GetInstance().GetSurvey().emojis[numero], Const.activities[2]).Emoji.Name);
                     Console.WriteLine("Aktiviteetteja: " + new CollectionItem(SurveyManager.GetInstance().GetSurvey().emojis[numero], Const.activities[2]).ActivityChoises.Count);
                     Console.WriteLine("Emojin aktiviteetit: " + new CollectionItem(SurveyManager.GetInstance().GetSurvey().emojis[numero], Const.activities[2]).ActivityChoises[0]);
-
-
+                    break;
                 }
                 else
                 {
@@ -73,9 +84,15 @@ namespace Prototype
                 }
             }
             BindingContext = this;
+
+            int selectedEmojis = SurveyManager.GetInstance().GetSurvey().emojis.Count;
+            int emojiNumber = numero + 1;
+            String title = "Aktiviteetti " + emojiNumber + "/" + selectedEmojis;
+            MyStringProperty = title;
+
         }
 
- 
+
         async void EdellinenButtonClicked(object sender, EventArgs e)
         {
             var res = await DisplayAlert("Tahdotko varmasti keskeyttää kyselyn tekemisen?", "", "Kyllä", "Ei");
@@ -149,10 +166,70 @@ namespace Prototype
                     numero++;
                 }
             }
+            int nextEmojiNumber = numero + 1;
+
+            
+            int luku = SurveyManager.GetInstance().GetSurvey().emojis.Count;
+            Console.WriteLine(nextEmojiNumber +"on seuraava taulukon luku ja emojeita on listassa: " + luku);
+            if(nextEmojiNumber < luku)
+            {
+                String name = SurveyManager.GetInstance().GetSurvey().emojis[nextEmojiNumber].Name;
+                if (name == "Vihainen")
+                {
+                    await Navigation.PushAsync(new LuoKyselyToimenpiteetVihainen());
+
+                }
+                else if(name == "Väsynyt")
+                {
+                    await Navigation.PushAsync(new LuoKyselyToimenpiteetVasynyt());
+
+                }
+                else if(name == "Miettivä")
+                {
+                    await Navigation.PushAsync(new LuoKyselyToimenpiteetMiettiva());
+
+                }
+                else
+                {
+                    await Navigation.PushAsync(new LuoKyselyLopetus());
+
+                }
+
+            }
+            else
+            {
+                await Navigation.PushAsync(new LuoKyselyLopetus());
+
+            }
+            //            if (SurveyManager.GetInstance().GetSurvey().emojis[nextEmojiNumber] != null)
+            //            {
+            //  name = SurveyManager.GetInstance().GetSurvey().emojis[nextEmojiNumber].Name;
+
+            /*               if (name == "Vihainen")
+                           {
+                               await Navigation.PushAsync(new LuoKyselyToimenpiteetVihainen());
+
+                           }
+                           else if (name == "Väsynyt")
+                           {
+
+                           }
+                           else if (name == "Miettivä")
+                           {
+
+                           }
+                           else if (name == "Itkunauru")
+                           {
+
+                           }*/
+            //                else {
+   //         await Navigation.PushAsync(new LuoKyselyLopetus());
+//                }
+
 
             // siirrytään "Luo kysely -lopetus" sivulle 
-//            if(SurveyManager.GetInstance().GetSurvey().emojis[numero +1].Name == "Hämmästy")
-            await Navigation.PushAsync(new LuoKyselyLopetus()); ;
+            //            if(SurveyManager.GetInstance().GetSurvey().emojis[numero +1].Name == "Hämmästy")
+//            await Navigation.PushAsync(new LuoKyselyLopetus()); ;
         }
 /*
         //function which checks whether the user has selected at least 1 activity for each emoji.
