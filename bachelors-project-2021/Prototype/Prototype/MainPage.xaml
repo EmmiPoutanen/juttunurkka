@@ -113,7 +113,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
                         <Grid Margin="0,0,0,0">
                             <Button Grid.Column="1"
                           x:Name="OkButton"
-                          TextColor="#4383EF"
+                          TextColor="{StaticResource QuinaryColor}"
                           FontAttributes="Bold"
                           BackgroundColor="Transparent"
                           BorderColor="Transparent"
