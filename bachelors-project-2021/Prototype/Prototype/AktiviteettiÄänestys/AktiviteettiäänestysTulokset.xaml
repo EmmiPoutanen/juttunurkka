@@ -93,7 +93,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
                 Margin="20,0,10,0"
                 CornerRadius="10"
                 HeightRequest="50"
-                WidthRequest="150"
+                WidthRequest="255"
             />
 
         </StackLayout>
