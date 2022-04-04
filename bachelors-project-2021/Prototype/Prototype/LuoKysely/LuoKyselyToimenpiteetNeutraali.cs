@@ -174,17 +174,30 @@ namespace Prototype
             if(nextEmojiNumber < luku)
             {
                 String name = SurveyManager.GetInstance().GetSurvey().emojis[nextEmojiNumber].Name;
-                if (name == "Vihainen")
+                if (name == "Iloinen")
+                {
+                    await Navigation.PushAsync(new LuoKyselyToimenpiteetIloinen());
+                }
+                else if (name == "Hämmästynyt")
+                {
+                    await Navigation.PushAsync(new LuoKyselyToimenpiteetHammastynyt());
+                }
+                else if (name == "Neutraali")
+                {
+                    await Navigation.PushAsync(new LuoKyselyToimenpiteetNeutraali());
+
+                }
+                else if (name == "Vihainen")
                 {
                     await Navigation.PushAsync(new LuoKyselyToimenpiteetVihainen());
 
                 }
-                else if(name == "Väsynyt")
+                else if (name == "Väsynyt")
                 {
                     await Navigation.PushAsync(new LuoKyselyToimenpiteetVasynyt());
 
                 }
-                else if(name == "Miettivä")
+                else if (name == "Miettivä")
                 {
                     await Navigation.PushAsync(new LuoKyselyToimenpiteetMiettiva());
 

@@ -173,7 +173,15 @@ namespace Prototype
             {
                 String name = SurveyManager.GetInstance().GetSurvey().emojis[nextEmojiNumber].Name;
 
-                if (name == "Neutraali")
+                if (name == "Iloinen")
+                {
+                    await Navigation.PushAsync(new LuoKyselyToimenpiteetIloinen());
+                }
+                else if (name == "Hämmästynyt")
+                {
+                    await Navigation.PushAsync(new LuoKyselyToimenpiteetHammastynyt());
+                }
+                else if (name == "Neutraali")
                 {
                     await Navigation.PushAsync(new LuoKyselyToimenpiteetNeutraali());
 
@@ -183,7 +191,9 @@ namespace Prototype
                     await Navigation.PushAsync(new LuoKyselyToimenpiteetVihainen());
 
                 }
-                else if (name == "Väsynyt") {
+                else if (name == "Väsynyt")
+                {
+                    await Navigation.PushAsync(new LuoKyselyToimenpiteetVasynyt());
 
                 }
                 else if (name == "Miettivä")
