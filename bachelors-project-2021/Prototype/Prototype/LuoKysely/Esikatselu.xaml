@@ -20,6 +20,7 @@
             <Button Text="{Binding introMessage}"
             VerticalOptions="CenterAndExpand" 
             HorizontalOptions="CenterAndExpand" 
+            TextColor="Black"        
             BorderColor="#4383EF"
             BackgroundColor="Transparent"
             Font="19"
