@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Prototype.JuttunurkkaSuljettu">
+             x:Class="Prototype.JuttunurkkaSuljettu"
+             NavigationPage.HasNavigationBar="False">
     <AbsoluteLayout
         Padding="0"
         HorizontalOptions="FillAndExpand"
@@ -12,7 +13,7 @@
                      AbsoluteLayout.LayoutFlags="All" 
                      >
 
-            <StackLayout Padding="0,10,0,0">
+            <StackLayout Padding="0,60,0,0">
 
 
 
@@ -31,8 +32,36 @@
                     BackgroundColor="#CBD6E5"
                     Margin="0,20,0,0">
 
+                    <Frame
+                        BackgroundColor="White"
+                        BorderColor="#4383EF"
+                        CornerRadius="10"
+                        HeightRequest="150" 
+                        WidthRequest="300"
+                        HorizontalOptions="Center" 
+                        VerticalOptions="Center"
+                        >
+
+                        <Grid>
+                            <Label Text="Juttunurkka on nyt suljettu" 
+                            Grid.Row="0"       
+                            FontSize="24" 
+                            TextColor="#4383EF" 
+                            Margin="10,10,10,0" 
+                            HorizontalOptions="Center"
+                            HorizontalTextAlignment="Center"/>
+
+                            <Image Source="lukko.png"
+                            Grid.Row="1"
+                            WidthRequest="70"
+                            />
+                        </Grid>
+
+                    </Frame>
+
                 </StackLayout>
 
+                
                 <Button Text="Palaa alkuun"
                     VerticalOptions="CenterAndExpand" 
                     HorizontalOptions="CenterAndExpand" 
@@ -47,44 +76,6 @@
             </StackLayout>
 
         </StackLayout>
-
-        <ContentView
-            x:Name="popupSelection"
-            Padding="10,0"
-            AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
-            AbsoluteLayout.LayoutFlags="All"
-            
-            IsVisible="true">
-
-            <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
-
-
-                <StackLayout
-               BackgroundColor="White"
-               HeightRequest="175"
-               Orientation="Vertical"
-               WidthRequest="300"
-                    
-                    >
-
-                    <Label Text="Juttunurkka on nyt suljettu" 
-                           FontSize="24" 
-                           TextColor="#4383EF" 
-                           Margin="10,20,10,0" 
-                           HorizontalOptions="Center"
-                           HorizontalTextAlignment="Center"/>
-
-                    <Image Source="lukko.png"
-                           WidthRequest="70"
-                           />
-
-
-                </StackLayout>
-
-            </StackLayout>
-
-        </ContentView>
-
 
     </AbsoluteLayout>
 </ContentPage>

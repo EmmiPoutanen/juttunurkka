@@ -96,7 +96,6 @@ namespace Prototype
             var res = await DisplayAlert("Oletko varma että tahdot keskeyttää kyselyn?", "", "Kyllä", "Ei");
 
             if (res == true) {
-                Main.GetInstance().host.DestroyHost();
                 await Navigation.PopToRootAsync();
             }
             else return; 

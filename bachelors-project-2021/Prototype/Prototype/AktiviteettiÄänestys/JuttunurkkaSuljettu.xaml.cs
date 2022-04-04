@@ -28,9 +28,9 @@ namespace Prototype
         async void AlkuunClicked(object sender, EventArgs e)
         {
             //palataan etusivulle
+            Console.WriteLine("Alkuun clicked");
             await Navigation.PopToRootAsync();
         }
 
-        //hae lukko ja kirja yms peukku kuvat
     }
 }
