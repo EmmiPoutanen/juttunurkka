@@ -189,6 +189,7 @@ namespace Prototype
                 }
                 else if (name == "Itkunauru")
                 {
+                    await Navigation.PushAsync(new LuoKyselyToimenpiteetItkunauru());
 
                 }
                 else { }
