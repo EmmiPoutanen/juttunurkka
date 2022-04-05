@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
+
+This file is part of "Mieliala kysely".
+
+Mieliala kysely is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, version 3 of the License.
+
+Mieliala kysely is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
+-->
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Prototype.EmojinValintaTallennettu"
+             Title="Juttunurkka"
+             >
+
+    <StackLayout >
+
+        <!--Tähän labeliin voi sitten laittaa tekstin kohdalle "{Binding introMessage }" kun opettaja puolelta valmista,
+        niin hakee tähän siellä kyselyn kysymykseksi asetetun kysymyksen -->
+
+        <Label 
+            Text="Mitä kuuluu tänään?"
+            VerticalOptions="CenterAndExpand" 
+            HorizontalOptions="CenterAndExpand"
+            HorizontalTextAlignment="Center"
+            FontAttributes="Bold"
+            FontSize="30"
+            TextColor="#4383EF" 
+            
+        />
+
+        <!--Tähän frameen sisälle .cs koodin puolella oikeat opettajan valitsemat hymiöt vaihtoehdoiksi-->
+
+        <Frame Padding="10"
+            VerticalOptions="CenterAndExpand" 
+            HorizontalOptions="CenterAndExpand"
+            BorderColor="#4383EF"
+            CornerRadius="10"
+            HeightRequest="100"
+            WidthRequest="310"
+            >
+
+            <CollectionView ItemsSource="{Binding Emojit}"
+                            ItemsLayout="VerticalGrid, 3">
+                <!-- Tämä lisäämällä haki kaikki seittemän emojia jostain -->
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="5"
+                              RowDefinitions="Auto, *"
+                             ColumnDefinitions="Auto, *">
+
+                            <!-- SE, jonka oppilas on valinnut pitäisi olla ainut, joka jää väriltään vahvaksi -->
+                            <ImageButton Grid.Column="0"
+                                       Source="{Binding Item.ImageSource}"
+                                         ClassId="{Binding Item.ID}"
+                                       BackgroundColor="Transparent"
+                                       HeightRequest="60"
+                                       WidthRequest="60"
+                                       Clicked="Button_Clicked"/>
+
+
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+
+            <!--  TODELLISUUDESSA pitäisikö hardkoodata tämä esiteltävään protoon?!
+                    Ei voi, koska jos pyrimme siihen, että olemme itse koekaniineja opettajan pitämässä testissä
+            <StackLayout Orientation="Horizontal">
+
+                <ImageButton Source="emoji0.png"
+                    Clicked="Button_Clicked"  
+                    ClassId="0"
+                    x:Name="b0"         
+                    BackgroundColor="Transparent"/>
+
+                <ImageButton Source="emoji2.png"
+                    Clicked="Button_Clicked"   
+                    ClassId="2"
+                    x:Name="b2"         
+                    BackgroundColor="Transparent"/>
+
+                <ImageButton Source="emoji5.png"
+                    Clicked="Button_Clicked"  
+                    ClassId="5"
+                    x:Name="b5"         
+                    BackgroundColor="Transparent"/>
+
+            </StackLayout>
+            -->
+
+
+        </Frame>
+
+        <!--Miten progressbar etenee jos ei osallistujamäärää oteta tähän versioon tehtäväksi? Esim ajan mukaan
+        kuten alkuperäisessä? Selvitä-->
+
+        <ProgressBar Progress="0.2"
+            VerticalOptions="CenterAndExpand" 
+            HorizontalOptions="CenterAndExpand"
+            WidthRequest="300"
+            ScaleY="14"
+            ProgressColor="#4383EF"/>
+
+
+        <!-- TÄMÄ kohta tarkista Figmasta miten kuuluisi mennä ulkonäöllisesti !!! -->
+        <Button Text="Tallennettu"
+            x:Name="Vastaus"    
+            Clicked="Vastaa_Clicked"    
+            VerticalOptions="CenterAndExpand" 
+            HorizontalOptions="CenterAndExpand" 
+            IsEnabled="False"    
+            FontSize="19"
+            CornerRadius="10"
+            HeightRequest="50"
+            WidthRequest="255"
+            />
+
+
+    </StackLayout>
+
+</ContentPage>
