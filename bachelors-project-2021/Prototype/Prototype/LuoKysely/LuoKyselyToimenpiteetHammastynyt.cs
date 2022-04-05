@@ -93,7 +93,6 @@ namespace Prototype
 
         }
 
-
         async void EdellinenButtonClicked(object sender, EventArgs e)
         {
             var res = await DisplayAlert("Tahdotko varmasti keskeyttää kyselyn tekemisen?", "", "Kyllä", "Ei");
@@ -167,17 +166,44 @@ namespace Prototype
                     numero++;
                 }
             }
-            Console.WriteLine("tämä emoji oli listassa numero: "+numero);
             int nextEmojiNumber = numero + 1;
+            int luku = SurveyManager.GetInstance().GetSurvey().emojis.Count;
 
-            String name = "";
-            if (SurveyManager.GetInstance().GetSurvey().emojis[nextEmojiNumber] != null)
+            if (nextEmojiNumber < luku)
             {
-                name = SurveyManager.GetInstance().GetSurvey().emojis[nextEmojiNumber].Name;
+                String name = SurveyManager.GetInstance().GetSurvey().emojis[nextEmojiNumber].Name;
 
-                if (name == "Neutraali")
+                if (name == "Iloinen")
+                {
+                    await Navigation.PushAsync(new LuoKyselyToimenpiteetIloinen());
+                }
+                else if (name == "Hämmästynyt")
+                {
+                    await Navigation.PushAsync(new LuoKyselyToimenpiteetHammastynyt());
+                }
+                else if (name == "Neutraali")
                 {
                     await Navigation.PushAsync(new LuoKyselyToimenpiteetNeutraali());
+
+                }
+                else if (name == "Vihainen")
+                {
+                    await Navigation.PushAsync(new LuoKyselyToimenpiteetVihainen());
+
+                }
+                else if (name == "Väsynyt")
+                {
+                    await Navigation.PushAsync(new LuoKyselyToimenpiteetVasynyt());
+
+                }
+                else if (name == "Miettivä")
+                {
+                    await Navigation.PushAsync(new LuoKyselyToimenpiteetMiettiva());
+
+                }
+                else if (name == "Itkunauru")
+                {
+                    await Navigation.PushAsync(new LuoKyselyToimenpiteetItkunauru());
 
                 }
                 else { }
@@ -189,23 +215,6 @@ namespace Prototype
 
 
 
-            /*        if (SurveyManager.GetInstance().GetSurvey().emojis[numero + 1] != null )
-                    {
-                        Console.WriteLine("tässä"); 
-                        if (SurveyManager.GetInstance().GetSurvey().emojis[numero + 1].Name == "Neutraali")
-                        {
-                            Console.WriteLine(" eteenpäin");
-
-                            await Navigation.PushAsync(new LuoKyselyToimenpiteetNeutraali()); ;
-
-                        }
-                    }
-                    // siirrytään "Luo kysely -lopetus" sivulle 
-
-                    else
-                    {*/
-            //    await Navigation.PushAsync(new LuoKyselyLopetus());
-            //   };
         }
 /*
         //function which checks whether the user has selected at least 1 activity for each emoji.

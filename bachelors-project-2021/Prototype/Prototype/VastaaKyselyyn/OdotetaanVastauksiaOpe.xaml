@@ -66,11 +66,23 @@
         />
             </Grid>
 
+            <Label
+            Text="Aikaa jäljellä:"
+            VerticalOptions="StartAndExpand" 
+            HorizontalOptions="StartAndExpand"
+            HorizontalTextAlignment="Center"
+            Margin="40,50,20,-60"
+            FontAttributes="Bold"
+            FontSize="20"/>
+
             <ProgressBar x:Name="progressBar"
+            FlowDirection="RightToLeft"
+            Progress="1"
             VerticalOptions="CenterAndExpand" 
             HorizontalOptions="CenterAndExpand"
             WidthRequest="300"
             ScaleY="14"
+            Margin="10,-70,20,0"
             ProgressColor="#4383EF"/>
 
             <Button Text="Lopeta ja siirry tuloksiin"

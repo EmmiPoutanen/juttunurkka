@@ -165,6 +165,26 @@ namespace Prototype
                     await Navigation.PushAsync(new LuoKyselyToimenpiteetNeutraali());
 
                 }
+                else if (name == "Vihainen")
+                {
+                    await Navigation.PushAsync(new LuoKyselyToimenpiteetVihainen());
+
+                }
+                else if (name == "Väsynyt")
+                {
+                    await Navigation.PushAsync(new LuoKyselyToimenpiteetVasynyt());
+
+                }
+                else if (name == "Miettivä")
+                {
+                    await Navigation.PushAsync(new LuoKyselyToimenpiteetMiettiva());
+
+                }
+                else if (name == "Itkunauru")
+                {
+                    await Navigation.PushAsync(new LuoKyselyToimenpiteetItkunauru());
+
+                }         
                 else
                 {
                     await Navigation.PushAsync(new LuoKyselyLopetus());

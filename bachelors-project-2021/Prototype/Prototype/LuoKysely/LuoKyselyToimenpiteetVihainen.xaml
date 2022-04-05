@@ -19,7 +19,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
 
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Prototype.LuoKyselyToimenpiteetNeutraali"
+             x:Class="Prototype.LuoKyselyToimenpiteetVihainen"
              Title="Juttunurkka"
              >
 
@@ -32,7 +32,6 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
 <!-- nyt menee aktiviteetin otsikko joku binding tähän cs:n puolelle -->
             <Label
               Text="{Binding MyStringProperty}"
-
               VerticalOptions="Start" 
               HorizontalOptions="CenterAndExpand"
               HorizontalTextAlignment="Center"
@@ -43,29 +42,8 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
             <!--   Text="{Binding Teksti, Mode=OneWay}"-->
 
 
-     <!--       <CollectionView 
-            HorizontalOptions="CenterAndExpand" 
-            VerticalOptions="CenterAndExpand"
-          
-            HeightRequest="270" 
-            ItemsSource="{Binding Items} "  >
-                <CollectionView.ItemTemplate >
-                    <DataTemplate >
-                        <Grid Padding="1"
-                        RowDefinitions="Auto, *"
-                        ColumnDefinitions="Auto, *">
-                            <Image Grid.RowSpan="1"
-                                Source="{Binding Emoji.ImageSource}"     
-                                Aspect="AspectFill"
-                                HeightRequest="60"
-                                WidthRequest="60"/>
-                        </Grid>
-
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView> -->
             <!--Tämä pitää tehdä .cs koodiin niin että hakee oikean hymiön kuvan tähän-->
-            <Image Source="Emoji2.jpg"
+            <Image Source="Emoji3.jpg"
                    WidthRequest="60"
                    HeightRequest="60"
                    Margin="0,30,0,0"

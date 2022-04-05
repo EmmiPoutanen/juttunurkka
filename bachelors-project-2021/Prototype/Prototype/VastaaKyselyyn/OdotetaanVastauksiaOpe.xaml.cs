@@ -40,12 +40,18 @@ namespace Prototype
         {
             base.OnAppearing();
 
-            await UpdateProgressBar(1, 5000);
+            await UpdateProgressBar(0, 60000);
         }
 
         async Task UpdateProgressBar(double Progress, uint time)
         {
             await progressBar.ProgressTo(Progress, time, Easing.Linear);
+            //siirtyy eteenpäin automaattisesti 60 sekunnin jälkeen
+            if(progressBar.Progress == 0)
+            {
+                await Main.GetInstance().host.CloseSurvey();
+                await Navigation.PushAsync(new LisätiedotHost());
+            }
         }
 
         private async void LopetaClicked(object sender, EventArgs e)

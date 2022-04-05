@@ -44,7 +44,7 @@ namespace Prototype
 
             BindingContext = this;
         }
-        
+
 
         async void KeskeytäButtonClicked(object sender, EventArgs e)
         {
@@ -58,14 +58,14 @@ namespace Prototype
             if (res == true)
             {
                 //siirrytään odottamaan osallistujia
-               await Navigation.PushAsync(new OdotetaanOsallistujiaOpettaja());  
+                await Navigation.PushAsync(new OdotetaanOsallistujiaOpettaja());
 
             }
             else
             {
                 await Navigation.PushAsync(new Opettajanhuone());
             }
-            
+
         }
     }
 }

@@ -15,11 +15,12 @@
             TextColor="#4383EF" 
             Margin="0,40,0,-40"
         />
-            
+
 
             <Button Text="{Binding introMessage}"
             VerticalOptions="CenterAndExpand" 
             HorizontalOptions="CenterAndExpand" 
+            TextColor="Black"        
             BorderColor="#4383EF"
             BackgroundColor="Transparent"
             Font="19"
@@ -27,50 +28,137 @@
             CornerRadius="10"
             HeightRequest="50"
             WidthRequest="340" />
-
-            <Frame
+                        <Frame
             HorizontalOptions="CenterAndExpand" 
             VerticalOptions="CenterAndExpand"
             x:Name="popupSelection"
             HasShadow="True"
             WidthRequest="340"
             HeightRequest="300"
-            Margin="20,-20,20,0"
+            Margin="20,-40,20,0"
             Padding="1"
             BackgroundColor="Transparent"
             BorderColor="#4383EF"
             CornerRadius="10"
             IsVisible="true">
 
-                <CollectionView ItemsSource="{Binding Emojit}">
+                            <CollectionView ItemsSource="{Binding Emojit}"
+                                HeightRequest="400">
 
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid Padding="5"
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Padding="5"
                               RowDefinitions="Auto, *"
-                             ColumnDefinitions="Auto, *">
+                             ColumnDefinitions="Auto, *"
+                                              
+                                             >
 
-                                <Image Grid.Column="0"
+                                            <Image Grid.RowSpan="1"                                           
+                                                    Margin="10,10,10,0"
                                        Source="{Binding Item.ImageSource}"
                                        Aspect="AspectFill"
                                        HeightRequest="60"
-                                       WidthRequest="60"/>
+                                       WidthRequest="60" />
+
+                                            <Button Grid.Column="2"
+                                        Grid.ColumnSpan="3"
+                                        Margin="0,0,5,0"
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="CenterAndExpand"
+                                        WidthRequest="300"
+                                        HeightRequest="45"
+                                        CornerRadius="10"
+                                        Text="aktiviteetit" 
+                                        
+                                />
 
 
-                                <Label Grid.Column="1"
+                                            <!-- drop down menu -->
+
+                                            <Frame
+                                Grid.Column="2"
+                                Grid.ColumnSpan="3"
+                                Grid.Row="1"                               
+                              
+                                VerticalOptions="Center"
+                                HorizontalOptions="Center"
+                                HeightRequest="150"
+                                Padding="5"
+                                HasShadow="True"
+                                WidthRequest="160"
+                                BorderColor="Gray"  
+                                CornerRadius="10"
+                                BackgroundColor="White" 
+                                IsVisible="true">
+
+                                                <StackLayout HorizontalOptions="Center" VerticalOptions="Center"
+									
+                                    Orientation="Vertical"
+                                    WidthRequest="200">
+
+
+                                                    <CollectionView x:Name="Collection" 
+                                                        ItemsSource= "{Binding ActivityChoises}"
+                                                        SelectionMode="None">
+
+                                                        <CollectionView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid 
+                                                        Padding="0"
+                                                          RowDefinitions="Auto, *"
+                                                          ColumnDefinitions="Auto, *"  >
+
+                                                                    <Label 
+                                                            Text="{Binding .}" 
+                                                            TextColor="Black"
+                                                            FontSize="18"/>
+
+
+                                                                    <!-- Separator -->
+                                                                    <BoxView HeightRequest="1"
+                                                                BackgroundColor="DarkGray"
+                                                                Grid.ColumnSpan="2"
+                                                                Grid.Row="2"
+                                                                VerticalOptions="End"/>
+
+
+                                                                </Grid>
+
+                                                            </DataTemplate>
+                                                        </CollectionView.ItemTemplate>
+                                                    </CollectionView>
+                                                </StackLayout>
+
+                                            </Frame>
+
+
+                                            <!-- "Liikennevalot" -->
+
+                                            <Rectangle Grid.RowSpan="1"
+                                           Grid.Row="0"
+                                           Grid.Column="1"
+                                           BackgroundColor="{Binding Color}"                                                             
+                                />
+
+                                        </Grid>
+
+
+
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+
+                            </CollectionView>
+                        </Frame>
+                    
+
+                    <!--           <Label Grid.Column="1"
                                        Text="{Binding ActivityChoises}" 
                                        TextColor="Black"
-                                       FontSize="18"/>
+                                       FontSize="18"/> -->
 
-                            </Grid>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-
-            </Frame>
 
             <Grid>
-            <Label 
+                <Label 
             Text="Avainkoodi"
             VerticalOptions="StartAndExpand" 
             HorizontalOptions="StartAndExpand"
@@ -80,12 +168,13 @@
             Margin="30,0,0,10"
             />
 
-            <Button Text="{Binding RoomCode}"
+                <Button Text="{Binding RoomCode}"
             VerticalOptions="CenterAndExpand" 
             HorizontalOptions="CenterAndExpand" 
             BorderColor="#4383EF"
             BackgroundColor="Transparent"
             Font="19"
+            TextColor="Black"
             Margin="20,-40,20,-30"
             CornerRadius="10"
             HeightRequest="50"

@@ -26,7 +26,7 @@ using Xamarin.Forms.Xaml;
 namespace Prototype
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LuoKyselyToimenpiteetIloinen : ContentPage
+    public partial class LuoKyselyToimenpiteetMiettiva : ContentPage
     {
 
         public IList<CollectionItem> Items { get; set; }
@@ -41,6 +41,7 @@ namespace Prototype
                 OnPropertyChanged(nameof(MyStringProperty)); // Notify that there was a change on this property
             }
         }
+
         public class CollectionItem
 
         {
@@ -60,27 +61,33 @@ namespace Prototype
             }
         }
 
-        public LuoKyselyToimenpiteetIloinen()
+        public LuoKyselyToimenpiteetMiettiva()
         {
             InitializeComponent();
 
                   //alustus
                 Items = new List<CollectionItem>();
-                if(SurveyManager.GetInstance().GetSurvey().emojis[0].Name == "Iloinen")
-            {
-                Items.Add(new CollectionItem(SurveyManager.GetInstance().GetSurvey().emojis[0], Const.activities[0]));
-                Console.WriteLine("Emojin nimi:" + new CollectionItem(SurveyManager.GetInstance().GetSurvey().emojis[0], Const.activities[0]).Emoji.Name);
-                Console.WriteLine("Aktiviteetteja: " + new CollectionItem(SurveyManager.GetInstance().GetSurvey().emojis[0], Const.activities[0]).ActivityChoises.Count);
-                Console.WriteLine("Emojin aktiviteett 1: " + new CollectionItem(SurveyManager.GetInstance().GetSurvey().emojis[0], Const.activities[0]).ActivityChoises[0]);
+                int numero = 0;
+                foreach( var individual in SurveyManager.GetInstance().GetSurvey().emojis)
+                {
+                if(individual.Name== "Miettivä")
+                {
+                    Items.Add(new CollectionItem(SurveyManager.GetInstance().GetSurvey().emojis[numero], Const.activities[5]));
+                    break;
 
-            }
-            else {
-                //dosmthing else
+                }
+                else
+                {
+                    numero++;
+                }
             }
             BindingContext = this;
-            int selectedEmojis=SurveyManager.GetInstance().GetSurvey().emojis.Count;
-            String title = "Aktiviteetti 1/";
-            MyStringProperty = title + selectedEmojis;
+
+            int selectedEmojis = SurveyManager.GetInstance().GetSurvey().emojis.Count;
+            int emojiNumber = numero + 1;
+            String title = "Aktiviteetti " +emojiNumber+ "/"+selectedEmojis ;
+            MyStringProperty = title;
+
         }
 
         async void EdellinenButtonClicked(object sender, EventArgs e)
@@ -136,21 +143,17 @@ namespace Prototype
             {
                 foreach (var selection in item.Selected)
                 {
-                    Console.WriteLine("Lisätään aktiviteetti:" +selection as string);
-                    Console.WriteLine(item.Emoji.Name +"emojin yhteyteen");
                     tempActivities.Add(selection as string);
                 }
                 item.Emoji.activities = tempActivities;
-
                 tempEmojis.Add(item.Emoji);
             }
             int numero = 0;
             foreach (var individual in SurveyManager.GetInstance().GetSurvey().emojis)
             {
-                if (individual.Name == "Iloinen")
+                if (individual.Name == "Miettivä")
                 {
                     SurveyManager.GetInstance().GetSurvey().emojis[numero].activities = tempActivities;
-                    Console.WriteLine("Tallennettiin aktiviteettilista");
                     break;
                 }
                 else
@@ -158,11 +161,6 @@ namespace Prototype
                     numero++;
                 }
             }
-
-       //     SurveyManager.GetInstance().GetSurvey().emojis[0].activities = tempActivities;
- //           String name = SurveyManager.GetInstance().GetSurvey().emojis[1].Name;
-            // siirrytään seuraavalle aktiviteettien valintasivulle 
-
             int nextEmojiNumber = numero + 1;
             int luku = SurveyManager.GetInstance().GetSurvey().emojis.Count;
 
@@ -203,17 +201,13 @@ namespace Prototype
                     await Navigation.PushAsync(new LuoKyselyToimenpiteetItkunauru());
 
                 }
-                else
+                else { }
+            }else
                 {
-                    await Navigation.PushAsync(new LuoKyselyLopetus());
-
-                }
-            }
-            else
-            {
                 await Navigation.PushAsync(new LuoKyselyLopetus());
 
             }
+
 
 
         }

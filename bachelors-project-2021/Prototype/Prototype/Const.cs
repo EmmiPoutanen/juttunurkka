@@ -38,17 +38,18 @@ namespace Prototype
 
 		public static Dictionary<int, List<string>> activities = new Dictionary<int, List<string>>() {
 			{ 0, new List<string>() {
-				"Jokainen kertoo mikä oli kivaa",
+				"Jokainen kertoo mikä on kivaa",
 				"Kehu vieressä istuvaa",
+				"Valitaan päivän apuope",
 			}},
 			{ 1, new List<string>() {
 				"Kerrotaan ohjaajalle mikä hämmästyttää",
 				"Kerrotaan ryhmälle mikä hämmästyttää",
 			}},
 			{ 2, new List<string>() {
-				"Jokainen sanoo jonkin iloisen asian",
-				"Jokainen kertoo ohjaajalle yhden mietteen",
-				"Jokainen kertoo ryhmälle yhden mietteen",
+				"Piirretään taululle",
+				"Jokainen kertoo opettajalle yhden mietteen",
+				"Jokainen kertoo ryhmälle yhden ajatuksen",
 			}},
 			{ 3, new List<string>() {
 				"Positiivinen palloleikki",
@@ -64,7 +65,7 @@ namespace Prototype
 				"Jokainen kysyy kysymyksen ryhmältä",
 			}},
 			{ 6, new List<string>() {
-				"Matkustetaan kuuhun",
+				"Naurujoogatuokio",
 				"Katsotaan video",
 				"Kerrotaan vitsi",
 			}}
