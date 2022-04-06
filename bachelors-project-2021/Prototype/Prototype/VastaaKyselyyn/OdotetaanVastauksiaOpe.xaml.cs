@@ -19,6 +19,8 @@ namespace Prototype
             NavigationPage.SetHasBackButton(this, false);
             Survey s = SurveyManager.GetInstance().GetSurvey();
             RoomCode = s.RoomCode;
+            BindingContext = this;
+
             Host();
         }
 

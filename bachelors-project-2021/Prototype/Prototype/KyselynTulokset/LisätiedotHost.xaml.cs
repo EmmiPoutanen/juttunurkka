@@ -31,15 +31,24 @@ namespace Prototype
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LisätiedotHost : ContentPage
     {
+        public IList<CollectionItem> Emojit { get; private set; } = null;
         public IList<string> resultImages { get; set; }
         public IList<double> resultScale { get; set; }
         public IList<int> resultAmount { get; set; }
+        public class CollectionItem
+        {
+            public Emoji Item { get; set; } = null;
+        }
         public LisätiedotHost()
         {
             InitializeComponent();
             resultImages = new List<string>();
             resultScale = new List<double>();
             resultAmount = new List<int>();
+
+            Survey s = SurveyManager.GetInstance().GetSurvey();
+            Emojit = new List<CollectionItem>();
+            List<Emoji> temp = s.emojis;
 
             int count = 0;
             double calculateScale = 0.0;
