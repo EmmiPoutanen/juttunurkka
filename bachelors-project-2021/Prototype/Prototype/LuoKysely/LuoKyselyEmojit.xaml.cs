@@ -52,7 +52,7 @@ namespace Prototype
             Emojit = new List<CollectionItem>();
 
             List<Emoji> temp = SurveyManager.GetInstance().GetSurvey().emojis;
-
+            //aiempaa koodia, emojien skaalautuvuus määritetään
 			//alustetaan radionappien valinnat
             //ei saa kyseenalaistaa tätä toteutusta, radionappeihin ei oikeastaan pääse käsiksi collection view layoutin sisältä
 			foreach (var item in temp)
@@ -81,26 +81,15 @@ namespace Prototype
 
         void OnCheckBoxCheckedChanged(object sender, CheckedChangedEventArgs e)
         {
-            List<Emoji> tempEmojis= new List<Emoji>();
-            List<string> tempNames = new List<string>();
-
-            if (sender is CheckBox c && c.Parent is Grid g)
+            if (EmojisSet())
             {
-                if (c.IsChecked == true)
-                {
-                    Console.WriteLine("on");
-                //    tempEmojis.Add();
-                }
-                else
-                {
-
-                }
+                JatkaBtn.IsEnabled = true;
             }
             else
             {
-                //doSmthng
+                JatkaBtn.IsEnabled = false; 
+               
             }
-            JatkaBtn.IsEnabled = true;
         }
 
         void OnAllCheckBoxCheckedChanged(object sender, CheckedChangedEventArgs e)
@@ -111,10 +100,16 @@ namespace Prototype
 
         async void EdellinenButtonClicked(object sender, EventArgs e) 
         {
-            await Navigation.PushAsync(new LuoKyselyJohdatus());
+            await Navigation.PopAsync();
         }
-    async void JatkaButtonClicked(object sender, EventArgs e)
+        async void JatkaButtonClicked(object sender, EventArgs e)
         {
+            if (!EmojisSet())
+            {
+                await DisplayAlert("Kaikkia valintoja ei ole tehty", "Valitse vähintään kaksi emojia", "OK");
+                return;
+
+            }
             //asetetaan emojit survey olioon
             List<Emoji> temp = new List<Emoji>();
             foreach (var item in Emojit)
@@ -199,5 +194,25 @@ namespace Prototype
            //     await Navigation.PushAsync(new LuoKyselyLopetus());
 
         }
+
+        private bool EmojisSet()
+        {
+            int numberOfSelected = 0;
+
+            foreach (var item in Emojit)
+            {
+                if (item.CheckBox == true)
+                {
+                    numberOfSelected++;
+                    if (numberOfSelected > 1)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
     }
 }

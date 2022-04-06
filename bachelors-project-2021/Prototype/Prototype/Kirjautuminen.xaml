@@ -18,7 +18,7 @@
              />
 
         <Label Text="Käyttäjätunnus"
-                VerticalOptions="CenterAndExpand" 
+                VerticalOptions= "CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand"
                 Padding="-125,0,0,-10"
              />
