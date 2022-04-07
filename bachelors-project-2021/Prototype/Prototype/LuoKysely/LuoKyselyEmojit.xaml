@@ -21,14 +21,6 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
              x:Class="Prototype.LuoKyselyEmojit"
              Title="Juttunurkka">
     
-    <!--
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Peruuta"
-                     Clicked="PeruutaClicked"/>
-    </ContentPage.ToolbarItems>
-    -->
-
-
 
     <StackLayout Margin="20">
 
@@ -43,22 +35,10 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
             Margin="0,50,0,10"
         />
 
-        <StackLayout Orientation="Horizontal"
-                     VerticalOptions="Start"
-                     HorizontalOptions="EndAndExpand"
-                     Margin="0,0,25,25">
-
-            <Label Text="Valitse kaikki"
-                   FontSize="20"
-                   />
-            <CheckBox Color="Black"
-                      CheckedChanged="OnAllCheckBoxCheckedChanged"/>
-
-        </StackLayout>
-
 
         <CollectionView ItemsSource="{Binding Emojit}"
-                        ItemsLayout="VerticalGrid, 2">
+                        ItemsLayout="VerticalGrid, 2"
+                        Margin="15,25,0,0">
 
             <CollectionView.ItemTemplate >
               <DataTemplate >
@@ -98,8 +78,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
                     </Grid>
               </DataTemplate>
            </CollectionView.ItemTemplate>
-            
-            
+             
             
         </CollectionView>
 
