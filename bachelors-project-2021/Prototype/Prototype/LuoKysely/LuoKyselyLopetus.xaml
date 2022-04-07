@@ -30,8 +30,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
 
     <StackLayout Spacing="0">
 
-        <Label Text="Luo nimi ja
-               avainkoodi juttunurkalle"
+        <Label Text="Luo nimi ja avainkoodi juttunurkalle"
             VerticalOptions="CenterAndExpand" 
             HorizontalOptions="CenterAndExpand"
             HorizontalTextAlignment="Center"
