@@ -18,9 +18,9 @@
              />
 
         <Label Text="Käyttäjätunnus"
-                VerticalOptions="CenterAndExpand" 
+                VerticalOptions= "CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand"
-                Padding="-125,0,0,-10"
+                Padding="-125,0,0,0"
              />
         <Entry x:Name="txtUsername" TextColor="black" PlaceholderColor="Gray" HeightRequest="50"
                 WidthRequest="250" HorizontalOptions="CenterAndExpand"></Entry>
@@ -28,7 +28,7 @@
         <Label Text="Salasana"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand"
-                Padding="-125,0,0,-10"     
+                Padding="-125,0,0,0"     
              />
 
         <Entry x:Name="txtPassword" IsPassword="True" TextColor="black" PlaceholderColor="Gray" HeightRequest="50"

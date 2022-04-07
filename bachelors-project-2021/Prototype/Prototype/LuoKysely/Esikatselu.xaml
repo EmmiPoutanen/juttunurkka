@@ -130,19 +130,7 @@
                                                 </StackLayout>
 
                                             </Frame>
-
-
-                                            <!-- "Liikennevalot" -->
-
-                                            <Rectangle Grid.RowSpan="1"
-                                           Grid.Row="0"
-                                           Grid.Column="1"
-                                           BackgroundColor="{Binding Color}"                                                             
-                                />
-
                                         </Grid>
-
-
 
                                     </DataTemplate>
                                 </CollectionView.ItemTemplate>
@@ -188,7 +176,7 @@
             VerticalOptions="EndAndExpand"
             HorizontalOptions="CenterAndExpand">
 
-                <Button Grid.Column="1"
+        <!--       <Button Grid.Column="1"
                 Text="Keskeytä"
                 Clicked="KeskeytäButtonClicked"
                 VerticalOptions="EndAndExpand"
@@ -197,8 +185,9 @@
                 Margin="20,0,10,40"
                 CornerRadius="10"
                 HeightRequest="50"
-                WidthRequest="150"
-            />
+                WidthRequest="150" 
+            /> -->
+                
 
                 <Button Grid.Column="2" 
                 Text="Valmis"

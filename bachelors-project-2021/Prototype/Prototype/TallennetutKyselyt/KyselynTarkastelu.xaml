@@ -159,12 +159,12 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
 
 
                                 <!-- "Liikennevalot" -->
-
-                                <Rectangle Grid.RowSpan="1"
+                                <!-- tässä on jatkokehitystä varten emojien vakavuusasteen visualisointi valmiina-->
+                           <!--     <Rectangle Grid.RowSpan="1"
                                            Grid.Row="0"
                                            Grid.Column="1"
                                            BackgroundColor="{Binding Color}"                                                             
-                                />
+                                /> -->
 
                             </Grid>
                         

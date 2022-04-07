@@ -42,6 +42,9 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
             HorizontalOptions="CenterAndExpand"
             WidthRequest="340"
             Margin="0,0,0,250"
+            TextColor="Black"
+            TitleColor="Black"
+            BackgroundColor="LightGray"    
             ItemsSource="{Binding Intros}"
             ItemDisplayBinding="{Binding introMessage}">
             
@@ -61,8 +64,8 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
 
             <Button Grid.Column="1"
                 x:Name="EdellinenBtn"
+                Clicked="EdellinenButtonClicked"  
                 Text="Edellinen"
-                Clicked="EdellinenButtonClicked"
                 VerticalOptions="EndAndExpand"
                 HorizontalOptions="CenterAndExpand" 
                 Font="19"

@@ -60,7 +60,7 @@ namespace Prototype
 				"Siirretään oppitunti ulos",
 			}},
 			{ 5, new List<string>() {
-				"Jokainen kertoo yhden asia mikä mietityttää",
+				"Jokainen kertoo yhden asian mikä mietityttää",
 				"Jokainen kysyy kysymyksen ohjaajalta",
 				"Jokainen kysyy kysymyksen ryhmältä",
 			}},

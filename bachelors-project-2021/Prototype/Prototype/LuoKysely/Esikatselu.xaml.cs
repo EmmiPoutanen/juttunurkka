@@ -46,10 +46,16 @@ namespace Prototype
         }
 
 
-        async void KeskeytäButtonClicked(object sender, EventArgs e)
+     /*   async void KeskeytäButtonClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new Opettajanhuone());
-        }
+            var res=await DisplayAlert("Oletko varma että haluat keskeyttää juttunurkan luomisen?", "", "Kyllä", "Ei");
+            if (res == true)
+            {
+                await Navigation.PushAsync(new Opettajanhuone());
+            }
+            else
+                return;
+        }*/
 
         async void ValmisButtonClicked(object sender, EventArgs e)
         {
