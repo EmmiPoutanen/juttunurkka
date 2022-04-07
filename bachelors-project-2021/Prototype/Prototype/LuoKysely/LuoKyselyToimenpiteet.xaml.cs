@@ -107,7 +107,7 @@ namespace Prototype
             else return;
         }
 
-
+        //?
         void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (sender is CollectionView cv && cv.SelectionChangedCommandParameter is CollectionItem item)

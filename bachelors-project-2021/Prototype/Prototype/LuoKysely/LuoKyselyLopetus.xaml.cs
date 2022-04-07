@@ -146,13 +146,11 @@ namespace Prototype
             await Navigation.PushAsync(new OdotetaanVastauksia());
         }*/
 
-        /*
+        
         async void Kyllä_Clicked(object sender, EventArgs e)
         {
 
-            //kyselyn tallennus!
-
-            
+            //kyselyn tallennus
             SurveyManager man = SurveyManager.GetInstance();
             //save survey code
             man.GetSurvey().RoomCode = KeyEditor.Text;
@@ -161,8 +159,8 @@ namespace Prototype
             man.SaveSurvey(NameEditor.Text + ".txt");
 
             // siirrytään OdotettaanVastauksia sivulle 
-            await Navigation.PushAsync(new OdotetaanVastauksia());
-        }*/
+            await Navigation.PushAsync(new OdotetaanOsallistujiaOpettaja());
+        }
         private static void OnEntryTextChanged(object sender, TextChangedEventArgs args)
         {
             // jos tekstikenttä ei ole tyhjä

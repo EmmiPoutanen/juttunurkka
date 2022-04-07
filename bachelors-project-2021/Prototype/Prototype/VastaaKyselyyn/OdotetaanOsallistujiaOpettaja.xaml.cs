@@ -34,7 +34,6 @@ namespace Prototype
         public string roomCode { get; set; } = "Roomcode: ";
 
         //public int clientCount { get; set; } = 0;
-
         public OdotetaanOsallistujiaOpettaja()
         {
             InitializeComponent();
@@ -45,9 +44,10 @@ namespace Prototype
             NavigationPage.SetHasBackButton(this, false);
 
             //actually run the survey
-            //Host();
+            //Host(); 
         }
-
+        
+        
         private async void Host()
 		{
             //hakee osallistujien määrän?
@@ -58,35 +58,36 @@ namespace Prototype
                 //host survey ended in a fatal unexpected error, aborting survey.
                 //pop to root and display error
                 await Navigation.PopToRootAsync();
-                await DisplayAlert("Kysely suljettiin automaattisesti", "Tapahtui odottamaton virhe.", "OK");
+                await DisplayAlert("Kysely suljettiin automaattisesti1", "Tapahtui odottamaton virhe.", "OK");
             }
         }
+        
 
         private async void AloitaButtonClicked(object sender, EventArgs e)
         {
             //siirrytään odottamaan vastauksia
             await Navigation.PushAsync(new OdotetaanVastauksiaOpe());
-            //siirrä tämä seuraavalle sivulle
+        }
+            //siirrä tämä seuraavalle sivulle 
             /*
 			//Back to main and error, if nobody joined the survey!
 			if (Main.GetInstance().host.clientCount == 0)
 			{
                 Main.GetInstance().host.DestroyHost();
                 await Navigation.PopToRootAsync();
-                await DisplayAlert("Kysely suljettiin automaattisesti", "Kyselyyn ei saatu yhtään vastausta", "OK");
+                await DisplayAlert("Kysely suljettiin automaattisesti2", "Kyselyyn ei saatu yhtään vastausta", "OK");
                 return;
             }
-
             await Main.GetInstance().host.CloseSurvey();
             await Navigation.PushAsync(new TabbedViewHost());
         }
-
-        //Device back button disabled
-        protected override bool OnBackButtonPressed()
-        {
-            return true;
         */
-        }
+
+            //Device back button disabled
+        //protected override bool OnBackButtonPressed()
+        //{
+        //    return true;
+       // }
 
         private async void KeskeytaButtonClicked(object sender, EventArgs e)
         {

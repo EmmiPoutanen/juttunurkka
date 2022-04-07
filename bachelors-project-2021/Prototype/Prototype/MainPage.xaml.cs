@@ -187,7 +187,7 @@ namespace Prototype
         {
 
             //Jos entry teksti on null, annetaan virhe ilmoitus
-            if ((entry.Text == "1234") || entry != null && !string.IsNullOrEmpty(entry.Text) && await Main.GetInstance().JoinSurvey(entry.Text))
+            if(entry != null && !string.IsNullOrEmpty(entry.Text) && await Main.GetInstance().JoinSurvey(entry.Text))
             {
                 // siirrytään "Liity Kyselyyn" sivulle jos annettu koodi on ok
 
