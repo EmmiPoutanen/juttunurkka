@@ -22,7 +22,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
     <ContentPage.Content>
 		<StackLayout>
 
-            <Label Text="Odotetaan muita vastaajia..."
+            <Label Text="Odotetaan muita osallistujia"
                     Margin="0,20,0,0"
                     FontSize="20"
                     HorizontalOptions="Center"
@@ -34,15 +34,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
                                VerticalOptions="CenterAndExpand"
                                Margin="0,170,0,0"
                                Scale="2.5"/>
-
-            <Button Text="Poistu kyselystä"
-                    Clicked="Poistu"
-                    Margin="0, 0, 0, 10"
-                    CornerRadius="40"
-                    WidthRequest="200"
-                    HeightRequest="75"
-                    HorizontalOptions="Center"
-                    VerticalOptions="EndAndExpand"/>
+			
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
