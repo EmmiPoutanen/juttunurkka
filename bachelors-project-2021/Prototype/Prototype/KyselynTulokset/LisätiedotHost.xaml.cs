@@ -35,6 +35,9 @@ namespace Prototype
         public IList<string> resultImages { get; set; }
         public IList<double> resultScale { get; set; }
         public IList<int> resultAmount { get; set; }
+
+        public string introMessage { get; set; }
+
         public class CollectionItem
         {
             public Emoji Item { get; set; } = null;
@@ -49,7 +52,7 @@ namespace Prototype
             Survey s = SurveyManager.GetInstance().GetSurvey();
             Emojit = new List<CollectionItem>();
             List<Emoji> temp = s.emojis;
-
+            introMessage += s.introMessage;
             foreach (var item in temp)
             {
                 CollectionItem i = new CollectionItem();
@@ -65,11 +68,11 @@ namespace Prototype
                 sorted.Add(item.Key, item.Value);
                 resultAmount.Add(item.Value);
                 count += item.Value;
+                
             }
             foreach (int key in sorted.Keys)
             {
                 resultImages.Add("emoji" + key.ToString() + "lowres.png");
-                Console.WriteLine(key.ToString() +"ja resultimagesissa nyt: "+resultImages.Count);
             }
             foreach (int value in sorted.Values)
             {
