@@ -40,7 +40,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
                 <Label 
             Grid.Column="0"
             Grid.Row="0"
-            Text="Avainkoodi"
+            Text="Avainkoodi:"
             VerticalOptions="StartAndExpand" 
             HorizontalOptions="StartAndExpand"
             HorizontalTextAlignment="Center"
@@ -62,7 +62,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
                 <Label 
             Grid.Column="0"
             Grid.Row="1"
-            Text="Osallistujia"
+            Text="Osallistujia:"
             VerticalOptions="StartAndExpand" 
             HorizontalOptions="StartAndExpand"
             HorizontalTextAlignment="Center"
@@ -73,7 +73,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
                 <Label 
             Grid.Column="0"
             Grid.Row="2"
-            Text="Vastanneita"
+            Text="Vastanneita:"
             VerticalOptions="StartAndExpand" 
             HorizontalOptions="StartAndExpand"
             HorizontalTextAlignment="Center"

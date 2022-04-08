@@ -22,15 +22,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Threading;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace Prototype
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
+
     public partial class TulostenOdotus : ContentPage
     {
+        CancellationTokenSource cts;
         public string RoomCode { get; set; }
         private int _countSeconds = 10;
 
@@ -39,18 +41,16 @@ namespace Prototype
             InitializeComponent();
             Survey s = SurveyManager.GetInstance().GetSurvey();
             RoomCode = s.RoomCode;
+            BindingContext = this;
 
             //poistetaan turha navigointipalkki
             NavigationPage.SetHasNavigationBar(this, false);
 
-            Console.WriteLine("startactivityvote menossa läpi");
-
 
             Main.GetInstance().host.StartActivityVote();
 
-            Console.WriteLine("startactivityvote meni läpi");
             //timer set to vote times, cooldowns, plus one extra
-            _countSeconds = Main.GetInstance().host.voteCalc.vote1Timer + Main.GetInstance().host.voteCalc.vote2Timer + ( 3 * Main.GetInstance().host.voteCalc.coolDown);
+            /*_countSeconds = Main.GetInstance().host.voteCalc.vote1Timer + Main.GetInstance().host.voteCalc.vote2Timer + ( 3 * Main.GetInstance().host.voteCalc.coolDown);
             Device.StartTimer(TimeSpan.FromSeconds(1), () =>
             {
                 _countSeconds--;
@@ -74,19 +74,39 @@ namespace Prototype
                  }
 
                 return Convert.ToBoolean(_countSeconds);
-            });
+            });*/
         }
 
         async protected override void OnAppearing()
         {
+            cts = new CancellationTokenSource();
+            var token = cts.Token;
             base.OnAppearing();
-
-            await UpdateProgressBar(0, 60000);
+            try
+            {
+                await UpdateProgressBar(0, 60000, token);
+            }
+            catch (OperationCanceledException e)
+            {
+                Console.WriteLine("Task cancelled", e.Message);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("ex {0}", e.Message);
+            }
+            finally
+            {
+                cts.Dispose();
+            }
         }
 
-        async Task UpdateProgressBar(double Progress, uint time)
+        async Task UpdateProgressBar(double Progress, uint time, CancellationToken token)
         {
             await progressBar.ProgressTo(Progress, time, Easing.Linear);
+            if (token.IsCancellationRequested)
+            {
+                token.ThrowIfCancellationRequested();
+            }
             //siirtyy eteenpäin automaattisesti 60 sekunnin jälkeen
             if (progressBar.Progress == 0)
             {
@@ -106,6 +126,7 @@ namespace Prototype
                 return;
             }*/
 
+            cts.Cancel(); //cancel task if button clicked
             await Main.GetInstance().host.CloseSurvey();
             await Navigation.PushAsync(new AktiviteettiäänestysTulokset());
         }

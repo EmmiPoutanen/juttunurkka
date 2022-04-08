@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Threading;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -12,6 +12,8 @@ namespace Prototype
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class OdotetaanVastauksiaOpe : ContentPage
     {
+
+        CancellationTokenSource cts;
         public string RoomCode { get; set; }
         public OdotetaanVastauksiaOpe()
         {
@@ -40,20 +42,44 @@ namespace Prototype
 
         async protected override void OnAppearing()
         {
+            cts = new CancellationTokenSource();
+            var token = cts.Token;
             base.OnAppearing();
 
-            await UpdateProgressBar(0, 60000);
+            try
+            {
+                await UpdateProgressBar(0, 60000, token);
+            }
+            catch (OperationCanceledException e)
+            {
+                Console.WriteLine("Task cancelled", e.Message);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("ex {0}", e.Message);
+            }
+            finally
+            {
+                cts.Dispose();
+            }
+            
         }
 
-        async Task UpdateProgressBar(double Progress, uint time)
+        async Task UpdateProgressBar(double Progress, uint time, CancellationToken token)
         {
+
             await progressBar.ProgressTo(Progress, time, Easing.Linear);
-            //siirtyy eteenpäin automaattisesti 60 sekunnin jälkeen
-            if(progressBar.Progress == 0)
+            if (token.IsCancellationRequested)
             {
-                await Main.GetInstance().host.CloseSurvey();
-                await Navigation.PushAsync(new LisätiedotHost());
+                token.ThrowIfCancellationRequested();
             }
+                //siirtyy eteenpäin automaattisesti 60 sekunnin jälkeen
+                if (progressBar.Progress == 0)
+                {
+                    await Main.GetInstance().host.CloseSurvey();
+                    await Navigation.PushAsync(new LisätiedotHost());
+                }   
+            
         }
 
         private async void LopetaClicked(object sender, EventArgs e)
@@ -66,6 +92,8 @@ namespace Prototype
                 await DisplayAlert("Kysely suljettiin automaattisesti", "Kyselyyn ei saatu yhtään vastausta", "OK");
                 return;
             }*/
+
+            cts.Cancel(); //cancel task if button clicked
 
             await Main.GetInstance().host.CloseSurvey();
             await Navigation.PushAsync(new LisätiedotHost());
