@@ -69,6 +69,7 @@ namespace Prototype
             }
             else
             {
+                SurveyManager.GetInstance().ResetSurvey();
                 await Navigation.PushAsync(new Opettajanhuone());
             }
 
