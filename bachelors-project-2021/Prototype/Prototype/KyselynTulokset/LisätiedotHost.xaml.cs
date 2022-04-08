@@ -49,6 +49,13 @@ namespace Prototype
             Survey s = SurveyManager.GetInstance().GetSurvey();
             Emojit = new List<CollectionItem>();
             List<Emoji> temp = s.emojis;
+
+            foreach (var item in temp)
+            {
+                CollectionItem i = new CollectionItem();
+                i.Item = item;
+                Emojit.Add(i);
+            }
             Console.WriteLine("emojeita listassa lisätiedothost.cs:ssä: " +s.emojis.Count);
             int count = 0;
             double calculateScale = 0.0;
@@ -57,12 +64,12 @@ namespace Prototype
             {
                 sorted.Add(item.Key, item.Value);
                 resultAmount.Add(item.Value);
-                count += 5;
+                count += item.Value;
             }
             foreach (int key in sorted.Keys)
             {
                 resultImages.Add("emoji" + key.ToString() + "lowres.png");
-                Console.WriteLine(key.ToString());
+                Console.WriteLine(key.ToString() +"ja resultimagesissa nyt: "+resultImages.Count);
             }
             foreach (int value in sorted.Values)
             {
