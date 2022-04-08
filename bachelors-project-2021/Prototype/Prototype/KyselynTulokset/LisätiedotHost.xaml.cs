@@ -49,7 +49,7 @@ namespace Prototype
             Survey s = SurveyManager.GetInstance().GetSurvey();
             Emojit = new List<CollectionItem>();
             List<Emoji> temp = s.emojis;
-
+            Console.WriteLine("emojeita listassa lisätiedothost.cs:ssä: " +s.emojis.Count);
             int count = 0;
             double calculateScale = 0.0;
             Dictionary<int, int> sorted = new Dictionary<int, int>();
@@ -57,11 +57,12 @@ namespace Prototype
             {
                 sorted.Add(item.Key, item.Value);
                 resultAmount.Add(item.Value);
-                count += item.Value;
+                count += 5;
             }
             foreach (int key in sorted.Keys)
             {
                 resultImages.Add("emoji" + key.ToString() + "lowres.png");
+                Console.WriteLine(key.ToString());
             }
             foreach (int value in sorted.Values)
             {

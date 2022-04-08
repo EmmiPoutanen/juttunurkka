@@ -32,9 +32,9 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
                    FontAttributes="Bold"
                    Margin="0,40,0,0"/>
             
-            <!--
+            
 
-            <CollectionView ItemsSource="{Binding Emojit}"
+           <!-- <CollectionView ItemsSource="{Binding Emojit}"
                             ItemsLayout="VerticalGrid, 3">
                 
 
@@ -46,8 +46,9 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
 
                             
                             <Image Source="{Binding Item.ImageSource}"
-                                   ClassId="{Binding Item.ID}"
-                            Grid.Column="0"/>
+                                     Grid.Column="0"/>
+                                   ClassId="{Binding Item.ID}" 
+                          
                             
                             <Rectangle WidthRequest="50" 
                             HeightRequest="50"

@@ -43,8 +43,12 @@ namespace Prototype
             //poistetaan turha navigointipalkki
             NavigationPage.SetHasNavigationBar(this, false);
 
+            Console.WriteLine("startactivityvote menossa läpi");
+
+
             Main.GetInstance().host.StartActivityVote();
 
+            Console.WriteLine("startactivityvote meni läpi");
             //timer set to vote times, cooldowns, plus one extra
             _countSeconds = Main.GetInstance().host.voteCalc.vote1Timer + Main.GetInstance().host.voteCalc.vote2Timer + ( 3 * Main.GetInstance().host.voteCalc.coolDown);
             Device.StartTimer(TimeSpan.FromSeconds(1), () =>

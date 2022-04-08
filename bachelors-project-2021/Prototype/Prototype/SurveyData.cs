@@ -33,16 +33,54 @@ namespace Prototype
 		public int totalEmojis = 0;
 
 		public SurveyData() {
-			emojiResults = new Dictionary<int, int>();
+			emojiResults = new Dictionary<int, int>(SurveyManager.GetInstance().GetSurvey().emojis.Count);
 			vote1Results = new Dictionary<(int, string), int>();
 			vote2Results = new Dictionary<string, int>();
-			emojiResults.Add(0, 0);
+
+			foreach(var item in SurveyManager.GetInstance().GetSurvey().emojis)
+            {
+				if (item.Name == "Iloinen")
+				{
+					emojiResults.Add(0, 0);
+				}
+				else if (item.Name == "Hämmästynyt")
+				{
+					emojiResults.Add(1, 0);
+				}
+				else if (item.Name == "Neutraali")
+				{
+					emojiResults.Add(2, 0);
+
+				}
+				else if (item.Name == "Vihainen")
+				{
+					emojiResults.Add(3, 0);
+
+				}
+				else if (item.Name == "Väsynyt")
+				{
+					emojiResults.Add(4, 0);
+
+				}
+				else if (item.Name == "Miettivä")
+				{
+					emojiResults.Add(5, 0);
+				}
+				else if (item.Name == "Itkunauru")
+                {
+					emojiResults.Add(6, 0);
+
+				}
+
+			}
+
+			/*	emojiResults.Add(0, 0);
 			emojiResults.Add(1, 0);
 			emojiResults.Add(2, 0);
 			emojiResults.Add(3, 0);
 			emojiResults.Add(4, 0);
 			emojiResults.Add(5, 0);
-			emojiResults.Add(6, 0);
+			emojiResults.Add(6, 0);*/
 		}
 		
 		//Adds a single emoji answer to results

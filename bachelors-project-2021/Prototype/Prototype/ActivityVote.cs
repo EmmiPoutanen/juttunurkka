@@ -50,40 +50,71 @@ namespace Prototype
             double tolerance = 0.0;
             double threat = 0.0;
 
+            Console.WriteLine("ennen foreachia");
+
+            int luku = emojiResults.Count;
+
+            Console.WriteLine(luku);
+            
             foreach (KeyValuePair<int, int> answer in emojiResults)
             {
-                percentage = (double)answer.Value / totalCount;
-                
-                //assigning tolerance for each answer in emojiResults
-                if (emojis[answer.Key].Impact == "negative")
+                KeyValuePair <int, int> yksi= emojiResults.First();
+                int ekaAvain= yksi.Key;
+                if(emojiResults.ContainsKey(answer.Key))
+             //       if (emojiResults.TryGetValue(answer.Key, out int value) != false)
                 {
-                    tolerance = 0;
-                }
-                if (emojis[answer.Key].Impact == "neutral")
-                {
-                    tolerance = 0.25;
-                }
-                if (emojis[answer.Key].Impact == "positive")
-                {
-                    tolerance = 0.5;
-                }
+                    int found = 0;
+                    Console.WriteLine("vastauskey: "+answer.Key);
 
-                //Calculation for the threat value
-                threat = percentage - tolerance;
-                Console.WriteLine("key: {0}, percentage: {1}, threat: {2}", answer.Key, percentage, threat);
+                    percentage = (double)answer.Value / totalCount;
 
-                //Adding each answer to the ranking dictionary
-                ranking.Add(answer.Key, threat);
+                    //assigning tolerance for each answer in emojiResults
+                    foreach (var emoji in emojis)
+                    {
+                        Console.WriteLine(emoji.ID);
+
+                        if (emoji.ID.Equals(answer.Key))
+                        {
+                            if (emojis[found].Impact == "negative")
+                            {
+                                tolerance = 0;
+                            }
+                            if (emojis[found].Impact == "neutral")
+                            {
+                                tolerance = 0.25;
+                            }
+                            if (emojis[found].Impact == "positive")
+                            {
+                                tolerance = 0.5;
+                            }
+                            found++;
+                            break;
+                        }
+                    }
+                    Console.WriteLine("päästiin läpi ifit");
+
+                    //Calculation for the threat value
+                    threat = percentage - tolerance;
+                    Console.WriteLine("key: {0}, percentage: {1}, threat: {2}", answer.Key, percentage, threat);
+                    Console.WriteLine(answer.Key.ToString() + threat);
+                    //Adding each answer to the ranking dictionary
+                    Console.WriteLine("ennen rankingia");
+                    ranking.Add(answer.Key, threat);
+                }
             }
+            Console.WriteLine("foreachi1 jalkeen");
 
             //Sorting each item in ranking by threat value (highest threat is at top)
             foreach (KeyValuePair<int, double> item in ranking.OrderByDescending(key => key.Value))
             {
                 sortedRanking.Add(item.Key, item.Value);
             }
-            
+            Console.WriteLine("foreachi2 jalkeen");
+
+            String sorted= sortedRanking.Values.ElementAt(0).ToString();
+            Console.WriteLine(sorted +"sorted");
             //if top ranking threat is higher than 0 a.k.a. threat is above threshold we add it in the vote1candidates if the threat value is above 0
-            if(sortedRanking.Values.ElementAt(0) > 0)
+            if (sortedRanking.Values.ElementAt(0) > 0)
             {
                 foreach (KeyValuePair<int, double> item in sortedRanking)
                 {
