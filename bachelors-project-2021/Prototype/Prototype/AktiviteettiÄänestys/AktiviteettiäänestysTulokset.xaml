@@ -22,7 +22,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
              Title="Juttunurkka">
 
     <ContentPage.Content>
-        <StackLayout Margin="0,0,0,130">
+        <StackLayout>
 
             <Label Text="Tulokset"
                    VerticalOptions="Start"
@@ -32,70 +32,29 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
                    FontAttributes="Bold"
                    Margin="0,40,0,0"/>
 
-            <Grid Margin="40, 50, 40, 20"
-                  ColumnSpacing="40">
+            <AbsoluteLayout Margin="15"  VerticalOptions ="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                <Label x:Name="result" Margin="5"  
+                       Text="Tähän äänestyksen tulos"
+                       FontSize="25" 
+                       HeightRequest="500"
+                       VerticalTextAlignment="Center" 
+                       HorizontalTextAlignment="Center"
+                   />
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="0.125*"/>
-                    <RowDefinition Height="0.125*"/>
-                    <RowDefinition Height="0.125*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
 
-                </Grid.ColumnDefinitions>
+            </AbsoluteLayout>
 
-                <Label Text="Luetaan kirjaa"
-                       FontSize="20"
-                       Grid.Column="0"/>
-                <Rectangle WidthRequest="50" 
-                           HeightRequest="50"
-                           Stroke="black"
-                           Fill="blue"
-                           Grid.Row="1"
-                           ScaleY="{Binding resultScale[0]}"
-                           AnchorY="1"/>
-                <Label Text="{Binding resultAmount[0]}"
-                       Grid.Row="2"
-                       HorizontalOptions="CenterAndExpand"/>
+            <AbsoluteLayout Margin="15"  VerticalOptions ="EndAndExpand" HorizontalOptions="CenterAndExpand">
+                <Button Text="Sulje huone"
+                     Clicked="SuljeClicked" 
+                     CornerRadius="100"
+                     HorizontalOptions="Center"
+                     WidthRequest="255"
+                     HeightRequest="50"/>
+            </AbsoluteLayout>
 
-                <Label Text="Kehu kaveria"
-                       FontSize="20"
-                       Grid.Column="1"/>
-                <Rectangle WidthRequest="50" 
-                           HeightRequest="50"
-                           Stroke="black"
-                           Fill="blue"
-                           Grid.Column="1"
-                           Grid.Row="1"
-                           ScaleY="{Binding resultScale[1]}"
-                           AnchorY="1"/>
-                <Label Text="{Binding resultAmount[1]}"
-                       Grid.Column="1"
-                       Grid.Row="2"
-                       HorizontalOptions="CenterAndExpand"/>
-
-            </Grid>
-
-            <Rectangle HorizontalOptions="CenterAndExpand"
-                Margin="0,-90,0,0"
-                WidthRequest="320"
-                HeightRequest="10"
-                Stroke="Black"
-                Fill="Black"
-                       />
-
-            <Button Grid.Column="2" 
-                Text="Sulje huone"
-                Clicked="SuljeClicked" 
-                VerticalOptions="EndAndExpand" 
-                HorizontalOptions="CenterAndExpand" 
-                Font="19"
-                Margin="20,0,10,0"
-                CornerRadius="10"
-                HeightRequest="50"
-                WidthRequest="255"
-            />
 
         </StackLayout>
     </ContentPage.Content>
+
 </ContentPage>
