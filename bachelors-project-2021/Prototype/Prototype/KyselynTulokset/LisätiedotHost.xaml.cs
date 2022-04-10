@@ -33,11 +33,9 @@ namespace Prototype
     {
         public IList<CollectionItem> Emojit { get; private set; } = null;
         public IList<string> resultImages { get; set; }
+        public string introMessage { get; set; }
         public IList<double> resultScale { get; set; }
         public IList<int> resultAmount { get; set; }
-
-        public string introMessage { get; set; }
-
         public class CollectionItem
         {
             public Emoji Item { get; set; } = null;
@@ -50,16 +48,18 @@ namespace Prototype
             resultAmount = new List<int>();
 
             Survey s = SurveyManager.GetInstance().GetSurvey();
+            introMessage += s.introMessage;
+
             Emojit = new List<CollectionItem>();
             List<Emoji> temp = s.emojis;
-            introMessage += s.introMessage;
+
             foreach (var item in temp)
             {
                 CollectionItem i = new CollectionItem();
                 i.Item = item;
                 Emojit.Add(i);
             }
-            Console.WriteLine("emojeita listassa lisätiedothost.cs:ssä: " +s.emojis.Count);
+            Console.WriteLine("emojeita listassa lisätiedothost.cs:ssä: " + s.emojis.Count);
             int count = 0;
             double calculateScale = 0.0;
             Dictionary<int, int> sorted = new Dictionary<int, int>();
@@ -68,11 +68,11 @@ namespace Prototype
                 sorted.Add(item.Key, item.Value);
                 resultAmount.Add(item.Value);
                 count += item.Value;
-                
             }
             foreach (int key in sorted.Keys)
             {
                 resultImages.Add("emoji" + key.ToString() + "lowres.png");
+                Console.WriteLine(key.ToString() + "ja resultimagesissa nyt: " + resultImages.Count);
             }
             foreach (int value in sorted.Values)
             {
@@ -86,13 +86,12 @@ namespace Prototype
                     resultScale.Add(calculateScale);
                 }
             }
-
             BindingContext = this;
         }
         async void KeskeytäClicked(object sender, EventArgs e)
         {
             //Sulkee kyselyn kaikilta osallisujilta (linjat poikki höhö XD)
-           
+
 
             var res = await DisplayAlert("Haluatko varmasti sulkea huoneen?", "", "Kyllä", "Ei");
 
