@@ -31,24 +31,158 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
                    TextColor="#4383EF"
                    FontAttributes="Bold"
                    Margin="0,40,0,0"/>
-            
-            
 
-           <!-- <CollectionView ItemsSource="{Binding Emojit}"
+            <Button Text="{Binding introMessage}"
+            VerticalOptions="CenterAndExpand" 
+            HorizontalOptions="CenterAndExpand" 
+            TextColor="Black"        
+            BorderColor="#4383EF"
+            BackgroundColor="Transparent"
+            Font="19"
+            Margin="20,20,20,0"
+            CornerRadius="10"
+            HeightRequest="50"
+            WidthRequest="340" />
+
+
+            <Frame
+            HorizontalOptions="CenterAndExpand" 
+            VerticalOptions="CenterAndExpand"
+            x:Name="popupSelection"
+            HasShadow="True"
+            WidthRequest="340"
+            HeightRequest="350"
+            Margin="20,0,20,0"
+            Padding="1"
+            BackgroundColor="Transparent"
+            BorderColor="#4383EF"
+            CornerRadius="10"
+            IsVisible="true">
+                <!--        <CollectionView ItemsSource="{Binding Emojit}"
+                                HeightRequest="400">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate> 
+                                <Grid Padding="5"
+                              RowDefinitions="Auto, *"
+                             ColumnDefinitions="Auto, *"
+                                              
+                                             >-->
+                <!--   <Grid.RowDefinitions>
+                                    <RowDefinition Height="0.125*"/>
+                                    <RowDefinition Height="0.125*"/>
+                                    <RowDefinition Height="0.125*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions> 
+                                </Grid.ColumnDefinitions>-->
+                <Grid Margin="20, 10, 20, 10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.25*"/>
+                        <RowDefinition Height="0.55*"/>
+
+                        <RowDefinition Height="0.25*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.14*"/>
+                        <ColumnDefinition Width="0.14*"/>
+                        <ColumnDefinition Width="0.14*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image
+                    Source="{Binding resultImages[0]}"
+                       Grid.Row="0"/>
+
+                    <Rectangle WidthRequest="50" 
+                           HeightRequest="50"
+                           Stroke="blue"
+                           Fill="blue"
+                           Grid.Column="0"
+                           ScaleY="{Binding resultScale[0]}"
+                           AnchorY="1"/>
+                    <Label Text="{Binding resultAmount[0]}"
+                       Grid.Row="2"
+                       FontSize="18"
+
+                       HorizontalOptions="CenterAndExpand"/>
+
+                    <Image Source="{Binding resultImages[1]}"
+                       Grid.Row="0"
+                       Grid.Column="1"/>
+
+                    <Rectangle WidthRequest="50" 
+                           HeightRequest="50"
+                           Stroke="red"
+                           Fill="red"
+                           Grid.Column="1"
+                           ScaleY="{Binding resultScale[1]}"
+                           AnchorY="1"/>
+                    <Label Text="{Binding resultAmount[1]}"
+                       Grid.Column="1"
+                       Grid.Row="2"
+                       FontSize="18"
+
+                       HorizontalOptions="CenterAndExpand"/>
+
+                    <Image Source="{Binding resultImages[2]}"
+                       Grid.Row="0"
+                       Grid.Column="2"/>
+
+                    <Rectangle WidthRequest="50" 
+                           HeightRequest="50"
+                           Stroke="green"
+                           Fill="green"
+                           Grid.Column="2"
+                           ScaleY="{Binding resultScale[2]}"
+                           AnchorY="1"/>
+                    <Label Text="{Binding resultAmount[2]}"
+                       Grid.Column="2"
+                       Grid.Row="2"
+                       FontSize="18"
+                       HorizontalOptions="CenterAndExpand"/>
+
+                </Grid>
+
+                <!--    <Image Source="{Binding Item.ImageSource}"
+                       Grid.RowSpan="1"/>
+                                <Rectangle WidthRequest="50" 
+                           HeightRequest="50"
+                           Stroke="black"
+                           Fill="blue"
+                           Grid.Row="1"
+                           ScaleY="{Binding resultScale}"
+                           AnchorY="1"/>
+                                <Label Text="{Binding resultAmount}"
+                       Grid.Row="2"
+                       HorizontalOptions="CenterAndExpand"/>
+                            </Grid>
+                                <Grid Padding="5"
+                              RowDefinitions="Auto, *"
+                             ColumnDefinitions="Auto, *"
+                                              
+                                             >
+                                <Image Grid.RowSpan="1"                                           
+                                                    Margin="10,10,10,0"
+                                       Source="{Binding Item.ImageSource}"
+                                       Aspect="AspectFill"
+                                       HeightRequest="60"
+                                       WidthRequest="60" />
+                            </Grid> -->
+                <!--    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                </CollectionView> -->
+            </Frame>
+
+
+
+            <!--            <CollectionView ItemsSource="{Binding Emojit}"
                             ItemsLayout="VerticalGrid, 3">
                 
-
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Grid Padding="5"
                               RowDefinitions="Auto, *"
                               ColumnDefinitions="Auto, *">
-
-                            
-                            <Image Source="{Binding Item.ImageSource}"
-                                     Grid.Column="0"/>
-                                   ClassId="{Binding Item.ID}" 
-                          
+                            <Image Source="{Binding resultImages[0]}"
+                             Grid.RowSpan="0"
+                             Grid.Column="0"/>
                             
                             <Rectangle WidthRequest="50" 
                             HeightRequest="50"
@@ -61,28 +195,23 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
                             <Label Text="{Binding resultAmount[key]}"
                             Grid.Row="2"
                             HorizontalOptions="CenterAndExpand"/>
-
-
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView> 
-            -->
+           
+-->
 
 
-            
-            <Grid Margin="40, 50, 40, 20"
+            <!--       <Grid Margin="40, 50, 40, 20"
                   ColumnSpacing="40">
-
                 <Grid.RowDefinitions>
                     <RowDefinition Height="0.125*"/>
                     <RowDefinition Height="0.125*"/>
                     <RowDefinition Height="0.125*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-
                 </Grid.ColumnDefinitions>
-
                 <Image Source="emoji0.png"
                        Grid.Column="0"/>
                 <Rectangle WidthRequest="50" 
@@ -95,7 +224,6 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
                 <Label Text="{Binding resultAmount[0]}"
                        Grid.Row="2"
                        HorizontalOptions="CenterAndExpand"/>
-
                 <Image Source="emoji1.jpg"
                        Grid.Column="1"/>
                 <Rectangle WidthRequest="50" 
@@ -110,8 +238,6 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
                        Grid.Column="1"
                        Grid.Row="2"
                        HorizontalOptions="CenterAndExpand"/>
-
-
                 <Image Source="emoji2.jpg"
                        Grid.Row="0"
                        Grid.Column="2"/>
@@ -127,16 +253,15 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
                        Grid.Column="2"
                        Grid.Row="2"
                        HorizontalOptions="CenterAndExpand"/>
+            </Grid> -->
 
-            </Grid> 
-
-            <Rectangle HorizontalOptions="CenterAndExpand"
+            <!--       <Rectangle HorizontalOptions="CenterAndExpand"
                 Margin="0,-225,0,60"
                 WidthRequest="320"
                 HeightRequest="10"
                 Stroke="Black"
                 Fill="Black"
-                       />
+                       /> -->
 
             <Grid 
             RowDefinitions="Auto, Auto"
