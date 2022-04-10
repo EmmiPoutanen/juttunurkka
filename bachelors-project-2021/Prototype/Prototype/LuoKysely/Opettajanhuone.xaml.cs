@@ -73,6 +73,8 @@ namespace Prototype
             var picker = (Picker)sender;
             int selectedIndex = picker.SelectedIndex;
 
+            SelectedSurvey = picker.Items[picker.SelectedIndex];
+
 
             if (selectedIndex == 0)
             {
