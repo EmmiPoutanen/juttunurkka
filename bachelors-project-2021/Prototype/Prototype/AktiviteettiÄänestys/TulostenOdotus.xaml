@@ -73,7 +73,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
                 <Label 
             Grid.Column="0"
             Grid.Row="2"
-            Text="Vastanneita:"
+            Text="Vastauksia:"
             VerticalOptions="StartAndExpand" 
             HorizontalOptions="StartAndExpand"
             HorizontalTextAlignment="Center"
