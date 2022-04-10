@@ -110,13 +110,13 @@ namespace Prototype
         async void JatkaButtonClicked(object sender, EventArgs e)
         {
             
-			//error if not all emojis have at least 1 selected activity
-/*			if (!ActivitiesSet())
+			//error if not all emojis have at least 2 selected activity
+			if (!ActivitiesSet())
 			{
-                await DisplayAlert("Kaikkia valintoja ei ole tehty", "Sinun on valittava jokaiselle mielialalle vähintään yksi aktiviteetti", "OK");
+                await DisplayAlert("Kaikkia valintoja ei ole tehty", "Sinun on valittava vähintään kaksi aktiviteettia", "OK");
                 return;
             }
-*/
+
             //asetetaan emojit survey olioon
             List<Emoji> tempEmojis = new List<Emoji>();
             List<string> tempActivities = new List<string>();
@@ -193,19 +193,19 @@ namespace Prototype
 
 
         }
-/*
-        //function which checks whether the user has selected at least 1 activity for each emoji.
+
+        //function which checks whether the user has selected at least 2 activity for each emoji.
         private bool ActivitiesSet()
         {
             foreach (var item in Items)
             {
-                if (item.Selected.Count == 0)
+                if (item.Selected.Count <2)
                 {
                     return false;
                 }
             }
 
             return true;
-        }*/
+        }
     }
 }
