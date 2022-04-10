@@ -32,9 +32,9 @@ namespace Prototype
 
     public partial class TulostenOdotus : ContentPage
     {
-        CancellationTokenSource cts;
+        
         public string RoomCode { get; set; }
-        private int _countSeconds = 10;
+        //private int _countSeconds = 10;
 
         public TulostenOdotus()
         {
@@ -49,13 +49,14 @@ namespace Prototype
 
             Main.GetInstance().host.StartActivityVote();
 
+            /*
             //timer set to vote times, cooldowns, plus one extra
-            /*_countSeconds = Main.GetInstance().host.voteCalc.vote1Timer + Main.GetInstance().host.voteCalc.vote2Timer + ( 3 * Main.GetInstance().host.voteCalc.coolDown);
+            _countSeconds = Main.GetInstance().host.voteCalc.vote1Timer + Main.GetInstance().host.voteCalc.vote2Timer + ( 3 * Main.GetInstance().host.voteCalc.coolDown);
             Device.StartTimer(TimeSpan.FromSeconds(1), () =>
             {
                 _countSeconds--;
 
-                 //timer.Text = _countSeconds.ToString();
+                 timer.Text = _countSeconds.ToString();
 
 				if (Main.GetInstance().host.isVoteConcluded)
 				{
@@ -79,35 +80,17 @@ namespace Prototype
 
         async protected override void OnAppearing()
         {
-            cts = new CancellationTokenSource();
-            var token = cts.Token;
+           
             base.OnAppearing();
-            try
-            {
-                await UpdateProgressBar(0, 60000, token);
-            }
-            catch (OperationCanceledException e)
-            {
-                Console.WriteLine("Task cancelled", e.Message);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("ex {0}", e.Message);
-            }
-            finally
-            {
-                cts.Dispose();
-            }
+            
+            await UpdateProgressBar(0, 45000);
+            
         }
 
-        async Task UpdateProgressBar(double Progress, uint time, CancellationToken token)
+        async Task UpdateProgressBar(double Progress, uint time)
         {
             await progressBar.ProgressTo(Progress, time, Easing.Linear);
-            if (token.IsCancellationRequested)
-            {
-                token.ThrowIfCancellationRequested();
-            }
-            //siirtyy eteenpäin automaattisesti 60 sekunnin jälkeen
+            //siirtyy eteenpäin automaattisesti 45 sekunnin jälkeen
             if (progressBar.Progress == 0)
             {
                 await Main.GetInstance().host.CloseSurvey();
@@ -115,7 +98,7 @@ namespace Prototype
             }
         }
 
-        private async void LopetaClicked(object sender, EventArgs e)
+        /*private async void LopetaClicked(object sender, EventArgs e)
         {
             //Back to main and error, if nobody joined the survey!
             /*if (Main.GetInstance().host.clientCount == 0)
@@ -125,11 +108,11 @@ namespace Prototype
                 await DisplayAlert("Kysely suljettiin automaattisesti", "Kyselyyn ei saatu yhtään vastausta", "OK");
                 return;
             }*/
-
+        /*
             cts.Cancel(); //cancel task if button clicked
             await Main.GetInstance().host.CloseSurvey();
             await Navigation.PushAsync(new AktiviteettiäänestysTulokset());
-        }
+        }*/
 
         //Device back button disabled
         protected override bool OnBackButtonPressed()

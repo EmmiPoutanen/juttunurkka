@@ -85,25 +85,28 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
                 
             </Grid>
 
+            
             <Label
             Text="Aikaa jäljellä:"
-            VerticalOptions="StartAndExpand" 
+            VerticalOptions="EndAndExpand" 
             HorizontalOptions="StartAndExpand"
             HorizontalTextAlignment="Center"
-            Margin="40,70,20,-60"
+            Margin="40,0,20,30"
             FontAttributes="Bold"
             FontSize="20"/>
 
             <ProgressBar x:Name="progressBar"
             FlowDirection="RightToLeft"
             Progress="1"             
-            VerticalOptions="CenterAndExpand" 
+            VerticalOptions="StartAndExpand" 
             HorizontalOptions="CenterAndExpand"
             WidthRequest="300"
             ScaleY="14"
-            Margin="10,-70,20,0"
+            Margin="10,0,20,0"
             ProgressColor="#4383EF"/>
+           
 
+            <!--
             <Button Text="Lopeta ja siirry tuloksiin"
             VerticalOptions="CenterAndExpand" 
             HorizontalOptions="CenterAndExpand" 
@@ -112,7 +115,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
             HeightRequest="50"
             WidthRequest="255"
             Clicked="LopetaClicked"
-            />
+            /> -->
 
         </StackLayout>
     </ContentPage.Content>
