@@ -37,11 +37,11 @@ namespace Prototype
             NavigationPage.SetHasBackButton(this, false);
             if (Main.GetInstance().state == Main.MainState.Participating)
             {
-                //result.Text = Main.GetInstance().client.voteResult;
+                result.Text = Main.GetInstance().client.voteResult;
             }
             else
             {
-                //result.Text = Main.GetInstance().host.data.voteResult;
+                result.Text = Main.GetInstance().host.data.voteResult;
             }
             
         }
