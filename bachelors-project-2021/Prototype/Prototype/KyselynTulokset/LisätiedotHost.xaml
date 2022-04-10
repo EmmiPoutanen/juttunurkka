@@ -95,6 +95,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
                            Stroke="blue"
                            Fill="blue"
                            Grid.Column="0"
+                           Grid.Row="1"
                            ScaleY="{Binding resultScale[0]}"
                            AnchorY="1"/>
                     <Label Text="{Binding resultAmount[0]}"
@@ -112,6 +113,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
                            Stroke="red"
                            Fill="red"
                            Grid.Column="1"
+                           Grid.Row="1"
                            ScaleY="{Binding resultScale[1]}"
                            AnchorY="1"/>
                     <Label Text="{Binding resultAmount[1]}"
@@ -130,6 +132,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
                            Stroke="green"
                            Fill="green"
                            Grid.Column="2"
+                           Grid.Row="1"
                            ScaleY="{Binding resultScale[2]}"
                            AnchorY="1"/>
                     <Label Text="{Binding resultAmount[2]}"
