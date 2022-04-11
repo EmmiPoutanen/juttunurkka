@@ -41,6 +41,8 @@ namespace Prototype
             resultScale = new List<double>();
             resultAmount = new List<int>();
 
+            ReceiveVote1();
+
             int count = 0;
             double calculateScale = 0.0;
             Dictionary<int, int> sorted = new Dictionary<int, int>();
@@ -66,9 +68,24 @@ namespace Prototype
                     resultScale.Add(calculateScale);
                 }
             }
+           
 
             BindingContext = this;
+            
         }
+        private async void ReceiveVote1()
+        {
+            bool success = await Main.GetInstance().client.ReceiveVote1Candidates();
+            if (success)
+            {
+                Console.WriteLine("Received Vote1 successfully");
+                await Navigation.PushAsync(new AktiviteettiäänestysEka());
+            }
+            //Did not get candidates, now it is safe to leave this survey, because nothing more is going to happen
+            //TODO maybe indicate that the survey has concluded somehow?? e.g "Poistu" turns green
+            return;
+        }
+    
         async void PoistuClicked(object sender, EventArgs e)
         {
 

@@ -42,7 +42,7 @@ namespace Prototype
             bool success = await Main.GetInstance().client.ReceiveSurveyDataAsync();
 			if (success)
 			{
-                await Navigation.PushAsync(new TabbedViewClient());
+                await Navigation.PushAsync(new LisätiedotClient());
 			} else {
                 Main.GetInstance().client.DestroyClient();
                 await Navigation.PopToRootAsync();

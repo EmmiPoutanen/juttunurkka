@@ -51,6 +51,9 @@ namespace Prototype
 		/// </value>
 		public string intro { get; private set; } = "";
 
+		//Emoji
+		public string emoji1 { get; private set; } = "";
+
 		/// <value>
 		/// Instance of SurveyData object containing the concluded survey's results
 		/// </value>
@@ -166,6 +169,18 @@ namespace Prototype
 								return false;
 							}
 							intro = Encoding.Unicode.GetString(readBuffer, 0, bytesRead);
+
+							// Emoji
+							byte[] readBuffer1 = new byte[512];
+							int bytesRead1 = await ns.ReadAsync(readBuffer1, 0, readBuffer1.Length);
+
+							if (bytesRead1 == 0)
+							{
+								Console.WriteLine("Somehow we just read something from disconnected network, this is fine.");
+								return false;
+							}
+							emoji1 = Encoding.Unicode.GetString(readBuffer1, 0, bytesRead1);
+
 
 							//if no error occurs return success
 							return true;
