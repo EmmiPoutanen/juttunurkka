@@ -46,7 +46,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
             HorizontalTextAlignment="Center"
             FontSize="25"
             TextColor="Black"
-            Margin="40,0,20,0"
+            Margin="30,0,10,0"
         />
                 <Label 
             Grid.Column="1"
@@ -57,7 +57,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
             HorizontalTextAlignment="Center"
             FontSize="25"
             TextColor="Black"
-            Margin="40,0,20,0"
+            Margin="20,0,10,0"
         />
                 <Label 
             Grid.Column="0"
@@ -68,7 +68,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
             HorizontalTextAlignment="Center"
             FontSize="25"
             TextColor="Black"
-            Margin="40,0,20,0"
+            Margin="30,0,10,0"
         />
                 <Label 
             Grid.Column="0"
@@ -79,7 +79,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
             HorizontalTextAlignment="Center"
             FontSize="25"
             TextColor="Black"
-            Margin="40,0,20,0"
+            Margin="30,0,10,0"
         />
                 
                 
@@ -91,7 +91,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
             VerticalOptions="EndAndExpand" 
             HorizontalOptions="StartAndExpand"
             HorizontalTextAlignment="Center"
-            Margin="40,0,20,30"
+            Margin="30,0,20,30"
             FontAttributes="Bold"
             FontSize="20"/>
 
