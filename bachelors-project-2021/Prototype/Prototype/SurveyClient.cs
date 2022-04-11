@@ -176,7 +176,7 @@ namespace Prototype
 							intro = Encoding.Unicode.GetString(readBuffer, 0, bytesRead);
 
 							// Emoji
-							byte[] readBuffer1 = new byte[512];
+							byte[] readBuffer1 = new byte[256];
 							int bytesRead1 = await ns.ReadAsync(readBuffer1, 0, readBuffer1.Length);
 
 							if (bytesRead1 == 0)
