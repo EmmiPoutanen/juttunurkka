@@ -402,6 +402,11 @@ namespace Prototype
 				NetworkStream ns = client.GetStream();
 				await ns.WriteAsync(sendBuffer, 0, sendBuffer.Length);
 
+				//Emoji1
+				byte[] sendBuffer1 = Encoding.Unicode.GetBytes(survey.emojis[0].Name );
+				await ns.WriteAsync(sendBuffer1, 0, sendBuffer1.Length);
+
+
 				//wait for emoji from client, expecting 1 int
 				byte[] buffer = new byte[4];
 				Task<int> emojiReply = ns.ReadAsync(buffer, 0, buffer.Length);

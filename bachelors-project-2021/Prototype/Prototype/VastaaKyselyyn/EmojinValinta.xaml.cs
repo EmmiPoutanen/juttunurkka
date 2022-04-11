@@ -29,6 +29,7 @@ namespace Prototype
     public partial class EmojinValinta : ContentPage
     {
         public string introMessage { get; set; }
+        public string emoji1 { get; set; }
         private int answer;
 
         // <---
@@ -49,22 +50,30 @@ namespace Prototype
             NavigationPage.SetHasBackButton(this, false);
 
             //<---
-            Survey s = SurveyManager.GetInstance().GetSurvey();
-            introMessage += s.introMessage; // VAIKO TÄMÄ INTRO MESSAGE??
+           // Survey s = SurveyManager.GetInstance().GetSurvey();
+//            introMessage += s.introMessage; // VAIKO TÄMÄ INTRO MESSAGE??
 
             Emojit = new List<CollectionItem>();
-            List<Emoji> temp = s.emojis;
+            List<Emoji> temp = SurveyManager.GetInstance().GetSurvey().emojis;
+
+            int numero = 0;
 
             foreach (var item in temp)
             {
                 CollectionItem i = new CollectionItem();
                 i.Item = item;
-                Emojit.Add(i);
+                //string[] emoji2 = Main.GetInstance().client.emoji1.Split(',');
+                string emoji2 = Main.GetInstance().client.emoji1;
+                if (i.Item.Name == emoji2)
+                {
+                    Emojit.Add(i);
+                    numero++;
+                }
             }
             //--->
 
             // Onko ero mainin kautta haettaessa vs. surveyn?
-            //introMessage = Main.GetInstance().client.intro;
+            introMessage = Main.GetInstance().client.intro;
 
             BindingContext = this;
         }

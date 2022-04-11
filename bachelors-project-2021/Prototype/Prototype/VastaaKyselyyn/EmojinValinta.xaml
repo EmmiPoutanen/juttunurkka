@@ -28,7 +28,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
         niin hakee tähän siellä kyselyn kysymykseksi asetetun kysymyksen -->
 
         <Label 
-            Text="Mitä kuuluu tänään?"
+            Text="{Binding  introMessage}"
             VerticalOptions="CenterAndExpand" 
             HorizontalOptions="CenterAndExpand"
             HorizontalTextAlignment="Center"
