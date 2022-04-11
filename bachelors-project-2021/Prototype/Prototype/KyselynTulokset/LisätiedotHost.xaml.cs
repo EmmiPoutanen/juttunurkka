@@ -36,6 +36,7 @@ namespace Prototype
         public string introMessage { get; set; }
         public IList<double> resultScale { get; set; }
         public IList<int> resultAmount { get; set; }
+
         public class CollectionItem
         {
             public Emoji Item { get; set; } = null;
@@ -59,7 +60,7 @@ namespace Prototype
                 i.Item = item;
                 Emojit.Add(i);
             }
-            Console.WriteLine("emojeita listassa lisätiedothost.cs:ssä: " + s.emojis.Count);
+            Console.WriteLine("emojeita listassa lisätiedothost.cs:ssä: " +s.emojis.Count);
             int count = 0;
             double calculateScale = 0.0;
             Dictionary<int, int> sorted = new Dictionary<int, int>();
@@ -72,7 +73,7 @@ namespace Prototype
             foreach (int key in sorted.Keys)
             {
                 resultImages.Add("emoji" + key.ToString() + "lowres.png");
-                Console.WriteLine(key.ToString() + "ja resultimagesissa nyt: " + resultImages.Count);
+                Console.WriteLine(key.ToString());
             }
             foreach (int value in sorted.Values)
             {
@@ -90,21 +91,12 @@ namespace Prototype
         }
         async void KeskeytäClicked(object sender, EventArgs e)
         {
-            //Sulkee kyselyn kaikilta osallisujilta (linjat poikki höhö XD)
-
+            //Sulkee kyselyn kaikilta osallistujilta
 
             var res = await DisplayAlert("Haluatko varmasti sulkea huoneen?", "", "Kyllä", "Ei");
 
             if (res == true)
             {
-                if (Main.GetInstance().state == Main.MainState.Participating)
-                {
-                    Main.GetInstance().client.DestroyClient();
-                }
-                else
-                {
-                    Main.GetInstance().host.DestroyHost();
-                }
                 await Navigation.PopToRootAsync();
             }
             else return;
@@ -115,7 +107,7 @@ namespace Prototype
             //Siirrytään odottamaan äänestyksen tuloksia (HOST)
             await Navigation.PushAsync(new TulostenOdotus());
 
-            //Hox, Clientin pitää päästä vastaamaan kyselyy, ei hostin
+            //Hox, Clientin pitää päästä vastaamaan kyselyyn, ei hostin
         }
     }
 }

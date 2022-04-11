@@ -67,10 +67,10 @@ namespace Prototype
             int selectedIndex = picker.SelectedIndex;
             
             if (selectedIndex != -1) {
-                if(selectedIndex == 2)
+          /*      if(selectedIndex == 2)
                 {
                     await Navigation.PushAsync(new Omakysymys());
-                }
+                }*/
                 //ottaa talteen kysymyksen
                 selectedItem = KysymysPicker.Items[KysymysPicker.SelectedIndex];
                 JatkaBtn.IsEnabled = true;

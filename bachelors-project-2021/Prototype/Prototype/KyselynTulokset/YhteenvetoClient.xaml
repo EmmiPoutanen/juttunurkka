@@ -76,7 +76,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
                     CornerRadius="15"
                     VerticalOptions="EndAndExpand"
                     HorizontalOptions="Center"
-                    BackgroundColor="Orange"/>
+                    BackgroundColor="blue"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

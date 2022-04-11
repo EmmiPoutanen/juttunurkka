@@ -199,7 +199,7 @@ namespace Prototype
 
         }
 
-        //function which checks whether the user has selected at least 1 activity for each emoji.
+        //function which checks whether the user has selected at least 2 activity for each emoji.
         private bool ActivitiesSet()
         {
             foreach (var item in Items)
