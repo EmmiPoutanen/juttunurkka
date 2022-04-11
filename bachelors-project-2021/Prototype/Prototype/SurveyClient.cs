@@ -54,6 +54,8 @@ namespace Prototype
 		//Emoji
 		public string emoji1 { get; private set; } = "";
 
+		public string emojinamesTogetherAsString { get; private set; } = "";
+
 		//List of strings of emojinames
 		public List<string> emojinimet { get; private set; } = null;
 
