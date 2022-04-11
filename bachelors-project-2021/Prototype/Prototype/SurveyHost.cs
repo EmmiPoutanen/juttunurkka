@@ -405,7 +405,18 @@ namespace Prototype
 				//Emoji1
 				byte[] sendBuffer1 = Encoding.Unicode.GetBytes(survey.emojis[0].Name );
 				await ns.WriteAsync(sendBuffer1, 0, sendBuffer1.Length);
+				int nro = 0;
+				List<string> messagesemojis=new List<string>();
 
+				foreach (var emojiname in survey.emojis)
+				{
+					messagesemojis.Add(survey.emojis[nro].Name);
+					nro++;
+				}
+
+				string emojinamesTogetherAsString=messagesemojis.ToString();
+
+				byte[] sendBufferList = Encoding.Unicode.GetBytes(emojinamesTogetherAsString);
 
 				//wait for emoji from client, expecting 1 int
 				byte[] buffer = new byte[4];
