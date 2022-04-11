@@ -32,7 +32,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
                                 Color="{StaticResource AppPrimaryColor}"
                                HorizontalOptions="Center"
                                VerticalOptions="CenterAndExpand"
-                               Margin="0,170,0,0"
+                               Margin="0,120,0,0"
                                Scale="2.5"/>
 			
         </StackLayout>
