@@ -54,6 +54,9 @@ namespace Prototype
 		//Emoji
 		public string emoji1 { get; private set; } = "";
 
+		//List of strings of emojinames
+		public List<string> emojinimet { get; private set; } = null;
+
 		/// <value>
 		/// Instance of SurveyData object containing the concluded survey's results
 		/// </value>
