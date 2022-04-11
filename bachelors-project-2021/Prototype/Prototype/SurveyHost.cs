@@ -402,21 +402,23 @@ namespace Prototype
 				NetworkStream ns = client.GetStream();
 				await ns.WriteAsync(sendBuffer, 0, sendBuffer.Length);
 
+				/*
 				//Emoji1
 				byte[] sendBuffer1 = Encoding.Unicode.GetBytes(survey.emojis[0].Name );
 				await ns.WriteAsync(sendBuffer1, 0, sendBuffer1.Length);
-				int nro = 0;
-				List<string> messagesemojis=new List<string>();
+				*/
 
+				List<string> messagesemojis=new List<string>();
+				//catchingemojinames to list of strings
 				foreach (var emojiname in survey.emojis)
 				{
-					messagesemojis.Add(survey.emojis[nro].Name);
-					nro++;
+					messagesemojis.Add(emojiname.Name);
 				}
 
-				string emojinamesTogetherAsString=messagesemojis.ToString();
+				string emojinamesTogetherAsString=String.Join(",",messagesemojis);
 
 				byte[] sendBufferList = Encoding.Unicode.GetBytes(emojinamesTogetherAsString);
+				await ns.WriteAsync(sendBufferList, 0, sendBufferList.Length);
 
 				//wait for emoji from client, expecting 1 int
 				byte[] buffer = new byte[4];

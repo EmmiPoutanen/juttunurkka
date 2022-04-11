@@ -49,6 +49,16 @@ namespace Prototype
                 Emojit.Add(i);
             }
 
+            List<string> messagesemojis = new List<string>();
+
+            foreach (var emojiname in s.emojis)
+            {
+                messagesemojis.Add(emojiname.Name);
+            }
+
+            string emojinamesTogetherAsString = String.Join(" ", messagesemojis);
+
+            Console.WriteLine("emojeita listassa: " +emojinamesTogetherAsString +"emojeita yhteensä: " +messagesemojis.Count);
             int count = 0;
             double calculateScale = 0.0;
             Dictionary<int, int> sorted = new Dictionary<int, int>();
@@ -61,7 +71,6 @@ namespace Prototype
             foreach (int key in sorted.Keys)
             {
                 resultImages.Add("emoji" + key.ToString() + "lowres.png");
-                Console.WriteLine(key.ToString() + "ja resultimagesissa nyt: " + resultImages.Count);
             }
             foreach (int value in sorted.Values)
             {
