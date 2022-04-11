@@ -97,6 +97,14 @@ namespace Prototype
 
             if (res == true)
             {
+                if (Main.GetInstance().state == Main.MainState.Participating)
+                {
+                    Main.GetInstance().client.DestroyClient();
+                }
+                else
+                {
+                    Main.GetInstance().host.DestroyHost();
+                }
                 await Navigation.PopToRootAsync();
             }
             else return;
