@@ -93,12 +93,12 @@ namespace Prototype
                 
                 
                 
-                string emoji2 = Main.GetInstance().client.emoji1;
-                if (i.Item.Name == emoji2)
+            //    string emoji2 = Main.GetInstance().client.emoji1;
+            /*    if (i.Item.Name == emoji2)
                 {
                     Emojit.Add(i);
                     numero++;
-                }
+                }*/
             }
             //--->
 
