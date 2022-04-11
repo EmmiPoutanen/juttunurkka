@@ -184,8 +184,8 @@ namespace Prototype
 								Console.WriteLine("Somehow we just read something from disconnected network, this is fine.");
 								return false;
 							}
-							emoji1 = Encoding.Unicode.GetString(readBuffer1, 0, bytesRead1);
-
+							//emoji1 = Encoding.Unicode.GetString(readBuffer1, 0, bytesRead1);
+							emojinamesTogetherAsString = Encoding.Unicode.GetString(readBuffer1, 0, bytesRead1);	
 
 							//if no error occurs return success
 							return true;
