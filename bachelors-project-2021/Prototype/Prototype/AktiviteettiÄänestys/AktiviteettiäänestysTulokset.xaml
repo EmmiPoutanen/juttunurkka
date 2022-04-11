@@ -36,7 +36,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
                 <Label x:Name="result" Margin="5"  
                        Text="Tähän äänestyksen tulos"
                        FontSize="25" 
-                       HeightRequest="500"
+                       HeightRequest="200"
                        VerticalTextAlignment="Center" 
                        HorizontalTextAlignment="Center"
                    />
