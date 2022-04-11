@@ -19,7 +19,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Prototype.AktiviteettiäänestysToka"
-             Title="Aktiviteetti äänestys 2/2">
+             Title="Juttunurkka">
     
     <ContentPage.Content>
 
@@ -29,7 +29,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
             <Grid Margin="0">
 
                 <Label Margin="10,0,0,0"
-                       Text="Äänestä aktiviteettiä"
+                       Text="Aktiviteetti valittu"
                        TextColor="Black"
                        VerticalOptions="Start" 
                        HorizontalOptions="Start"
@@ -40,7 +40,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
                    Margin="15,0, 20,0"
                    FontAttributes="Bold"
                    FontSize="20"
-                   TextColor="Gold"
+                   TextColor="#4383EF"
                    VerticalOptions="Start" 
                    HorizontalOptions="End" />
 
