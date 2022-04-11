@@ -30,6 +30,9 @@ namespace Prototype
     {
         public string introMessage { get; set; }
         public string emoji1 { get; set; }
+        public string emojiNimetString { get; set; }
+        public List<string> emojiNames { get; set; }
+
         private int answer;
 
         // <---
@@ -57,6 +60,18 @@ namespace Prototype
             List<Emoji> temp = SurveyManager.GetInstance().GetSurvey().emojis;
 
             int numero = 0;
+
+            string emojiNimetString = Main.GetInstance().client.emojinamesTogetherAsString;
+
+           string [] emojinimetlista= emojiNimetString.Split(',');
+            foreach(string emojinimi in emojinimetlista)
+            {
+                emojiNames.Add(emojinimi);
+                if (emojinimi == ",")
+                {
+                    emojiNames.Remove(emojinimi);
+                }
+            }
 
             foreach (var item in temp)
             {
