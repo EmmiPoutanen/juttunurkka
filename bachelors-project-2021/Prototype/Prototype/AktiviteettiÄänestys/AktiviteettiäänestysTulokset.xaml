@@ -36,7 +36,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
                 <Label x:Name="result" Margin="5"  
                        Text="Tähän äänestyksen tulos"
                        FontSize="25" 
-                       HeightRequest="500"
+                       HeightRequest="200"
                        VerticalTextAlignment="Center" 
                        HorizontalTextAlignment="Center"
                    />
@@ -44,10 +44,10 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
 
             </AbsoluteLayout>
 
-            <AbsoluteLayout Margin="15"  VerticalOptions ="EndAndExpand" HorizontalOptions="CenterAndExpand">
+            <AbsoluteLayout Margin="20"  VerticalOptions ="EndAndExpand" HorizontalOptions="CenterAndExpand">
                 <Button Text="Sulje huone"
                      Clicked="SuljeClicked" 
-                     CornerRadius="100"
+                     CornerRadius="10"
                      HorizontalOptions="Center"
                      WidthRequest="255"
                      HeightRequest="50"/>

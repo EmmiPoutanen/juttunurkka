@@ -143,10 +143,10 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
             <Button Text="Poistu Kyselystä"
                     Margin="0, 0, 0, 20"
                     Clicked="PoistuClicked"
-                    CornerRadius="15"
+                    CornerRadius="10"
                     VerticalOptions="End"
                     HorizontalOptions="Center"
-                    BackgroundColor="Orange"/>
+                    BackgroundColor="#4383EF"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -29,7 +29,7 @@
             HorizontalTextAlignment="Center"
             FontSize="25"
             TextColor="Black"
-            Margin="40,0,20,0"
+            Margin="30,0,10,0"
         />
             <Label 
             Grid.Column="1"
@@ -40,7 +40,7 @@
             HorizontalTextAlignment="Center"
             FontSize="25"
             TextColor="Black"
-            Margin="40,0,20,0"
+            Margin="20,0,10,0"
         />
             <Label 
             Grid.Column="0"
@@ -51,7 +51,7 @@
             HorizontalTextAlignment="Center"
             FontSize="25"
             TextColor="Black"
-            Margin="40,0,20,0"
+            Margin="30,0,10,0"
         />
             <Label 
             Grid.Column="0"
@@ -62,7 +62,7 @@
             HorizontalTextAlignment="Center"
             FontSize="25"
             TextColor="Black"
-            Margin="40,0,20,0"
+            Margin="30,0,10,0"
         />
             </Grid>
 
@@ -71,7 +71,7 @@
             VerticalOptions="StartAndExpand" 
             HorizontalOptions="StartAndExpand"
             HorizontalTextAlignment="Center"
-            Margin="40,50,20,0"
+            Margin="30,50,20,0"
             FontAttributes="Bold"
             FontSize="20"/>
 
