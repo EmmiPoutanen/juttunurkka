@@ -78,6 +78,21 @@ namespace Prototype
                 CollectionItem i = new CollectionItem();
                 i.Item = item;
                 //string[] emoji2 = Main.GetInstance().client.emoji1.Split(',');
+                foreach(string emojinimi1 in emojiNames)
+                {
+                    if(i.Item.Name == emojinimi1)
+                    {
+                        Emojit.Add(i);
+                       
+                    }
+                    if (emojiNames.Count == Emojit.Count)
+                    {
+                        break;
+                    }
+                }
+                
+                
+                
                 string emoji2 = Main.GetInstance().client.emoji1;
                 if (i.Item.Name == emoji2)
                 {
