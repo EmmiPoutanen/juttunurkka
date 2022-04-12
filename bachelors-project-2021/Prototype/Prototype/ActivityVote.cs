@@ -77,15 +77,16 @@ namespace Prototype
                         {
                             if (emojis[found].Impact == "negative")
                             {
-                                tolerance = 0;
+                                tolerance = 0.25;
                             }
                             if (emojis[found].Impact == "neutral")
                             {
                                 tolerance = 0.25;
+                                Console.WriteLine("emojin aktiviteettii kohta1: " + emojis[found].activities[0]);
                             }
                             if (emojis[found].Impact == "positive")
                             {
-                                tolerance = 0.5;
+                                tolerance = 0.25;
                             }
                             found++;
                             break;
@@ -120,7 +121,15 @@ namespace Prototype
                 {
                     if (item.Value > 0)
                     {
-                        vote1Candidates.Add(item.Key, emojis[item.Key].activities);
+                        foreach(var emoj in emojis)
+                        {
+                            if (emoj.ID.Equals(item.Key))
+                            {
+                                int idnro = emoj.ID;
+                                vote1Candidates.Add(item.Key, emojis[idnro].activities);
+                                break;
+                            }
+                        }
                     }
                 }
             }

@@ -26,7 +26,7 @@ namespace Prototype
 	public static class Const
 	{
 		public static int vote1PerEmojiTime = 10;
-		public static int vote2Time = 20;
+		public static int vote2Time = 10;
 
 		public static List<string> intros = new List<string>() {
 			"Tänään minusta tuntuu",

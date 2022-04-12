@@ -34,7 +34,7 @@ namespace Prototype
     {
         
         public string RoomCode { get; set; }
-        //private int _countSeconds = 10;
+        private int _countSeconds = 10;
 
         public TulostenOdotus()
         {
@@ -49,14 +49,14 @@ namespace Prototype
 
             Main.GetInstance().host.StartActivityVote();
 
-            /*
+            
             //timer set to vote times, cooldowns, plus one extra
             _countSeconds = Main.GetInstance().host.voteCalc.vote1Timer + Main.GetInstance().host.voteCalc.vote2Timer + ( 3 * Main.GetInstance().host.voteCalc.coolDown);
             Device.StartTimer(TimeSpan.FromSeconds(1), () =>
             {
                 _countSeconds--;
 
-                 timer.Text = _countSeconds.ToString();
+           //      timer.Text = _countSeconds.ToString();
 
 				if (Main.GetInstance().host.isVoteConcluded)
 				{
@@ -75,7 +75,7 @@ namespace Prototype
                  }
 
                 return Convert.ToBoolean(_countSeconds);
-            });*/
+            });
         }
 
         async protected override void OnAppearing()
@@ -83,7 +83,7 @@ namespace Prototype
            
             base.OnAppearing();
             
-            await UpdateProgressBar(0, 45000);
+            await UpdateProgressBar(0, 38000);
             
         }
 
