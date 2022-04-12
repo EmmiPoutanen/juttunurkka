@@ -69,7 +69,7 @@ namespace Prototype
                     percentage = (double)answer.Value / totalCount;
 
                     //assigning tolerance for each answer in emojiResults
-                    foreach (var emoji in emojis)
+            /*        foreach (var emoji in emojis)
                     {
                         Console.WriteLine(emoji.ID);
 
@@ -91,9 +91,9 @@ namespace Prototype
                             found++;
                             break;
                         }
-                    }
+                    }*/
                     Console.WriteLine("päästiin läpi ifit");
-
+                    tolerance = 0.25;
                     //Calculation for the threat value
                     threat = percentage - tolerance;
                     Console.WriteLine("key: {0}, percentage: {1}, threat: {2}", answer.Key, percentage, threat);
