@@ -37,7 +37,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
               HorizontalOptions="CenterAndExpand"
               HorizontalTextAlignment="Center"
               FontAttributes="Bold"
-              FontSize="30"
+              FontSize="10"
               TextColor="#4383EF" 
               Margin="0,40,0,0"/>
             <!--   Text="{Binding Teksti, Mode=OneWay}"-->
@@ -77,7 +77,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
             VerticalOptions="Start" 
             HorizontalOptions="CenterAndExpand"
             HorizontalTextAlignment="Center"
-            FontSize="25"
+            FontSize="10"
             TextColor="Black"   
             Margin="0,-20,0,0"
          />
@@ -87,9 +87,9 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
                      HorizontalOptions="EndAndExpand"
                      Margin="0,0,25,0">
 
-            <Label Text="Valitse kaikki"
+         <!--   <Label Text="Valitse kaikki"
                    FontSize="25"/>
-            <CheckBox Color="Black"/>
+            <CheckBox Color="Black"/> -->
 
         </StackLayout>
 
@@ -100,7 +100,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
             HorizontalOptions="CenterAndExpand" 
             BorderColor="#4383EF"
             BackgroundColor="Transparent"
-            Font="19"
+            Font="15"
             Margin="20,0,10,-40"
             CornerRadius="10"
             HeightRequest="50"
@@ -150,7 +150,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
                                             <Label 
                                                     Text="{Binding .}" 
                                                     TextColor="Black"
-                                                    FontSize="20"
+                                                    FontSize="10"
                                                     Margin="5,10,0,5"
                                                 />
 

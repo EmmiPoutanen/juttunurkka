@@ -402,13 +402,13 @@ namespace Prototype
 				NetworkStream ns = client.GetStream();
 				await ns.WriteAsync(sendBuffer, 0, sendBuffer.Length);
 
-				/*
+				
 				//Emoji1
-				byte[] sendBuffer1 = Encoding.Unicode.GetBytes(survey.emojis[0].Name );
+				byte[] sendBuffer1 = Encoding.Unicode.GetBytes(survey.emojis[0].Name +"," +survey.emojis[1].Name +"," +survey.emojis[2].Name +",");
 				await ns.WriteAsync(sendBuffer1, 0, sendBuffer1.Length);
-				*/
+				
 
-				List<string> messagesemojis=new List<string>();
+			/*	List<string> messagesemojis=new List<string>();
 				//catchingemojinames to list of strings
 				foreach (var emojiname in survey.emojis)
 				{
@@ -419,7 +419,7 @@ namespace Prototype
 
 				byte[] sendBufferList = Encoding.Unicode.GetBytes(emojinamesTogetherAsString);
 				await ns.WriteAsync(sendBufferList, 0, sendBufferList.Length);
-
+			*/
 				//wait for emoji from client, expecting 1 int
 				byte[] buffer = new byte[4];
 				Task<int> emojiReply = ns.ReadAsync(buffer, 0, buffer.Length);

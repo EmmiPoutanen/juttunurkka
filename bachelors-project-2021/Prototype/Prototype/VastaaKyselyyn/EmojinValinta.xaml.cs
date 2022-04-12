@@ -30,8 +30,8 @@ namespace Prototype
     {
         public string introMessage { get; set; }
         public string emoji1 { get; set; }
-        public string emojiNimetString { get; set; }
-        public List<string> emojiNames { get; set; }
+     //   public string emojiNimetString { get; set; }
+     //   public List<string> emojiNames { get; set; }
 
         private int answer;
 
@@ -59,46 +59,60 @@ namespace Prototype
             Emojit = new List<CollectionItem>();
             List<Emoji> temp = SurveyManager.GetInstance().GetSurvey().emojis;
 
-            int numero = 0;
+            string emoji2 = Main.GetInstance().client.emoji1;
+            string[] emojinimetlista = emoji2.Split(',');
+            List<string> emojiNames = new List<string>();
 
-            string emojiNimetString = Main.GetInstance().client.emojinamesTogetherAsString;
-
-           string [] emojinimetlista= emojiNimetString.Split(',');
-            foreach(string emojinimi in emojinimetlista)
+            foreach (var emojinimi in emojinimetlista)
             {
-                emojiNames.Add(emojinimi);
-                if (emojinimi == ",")
+                if (emojinimi != ",")
                 {
-                    emojiNames.Remove(emojinimi);
+                    emojiNames.Add(emojinimi);
                 }
             }
 
+            /*    string emojiNimetString = Main.GetInstance().client.emojinamesTogetherAsString;
+
+               string [] emojinimetlista= emojiNimetString.Split(',');
+                foreach(string emojinimi in emojinimetlista)
+                {
+                    emojiNames.Add(emojinimi);
+                    if (emojinimi == ",")
+                    {
+                        emojiNames.Remove(emojinimi);
+                    }
+                }
+            */
             foreach (var item in temp)
             {
                 CollectionItem i = new CollectionItem();
                 i.Item = item;
-                //string[] emoji2 = Main.GetInstance().client.emoji1.Split(',');
-                foreach(string emojinimi1 in emojiNames)
+                foreach (var emojistring in emojinimetlista)
                 {
-                    if(i.Item.Name == emojinimi1)
+                    if (i.Item.Name == emojistring)
                     {
                         Emojit.Add(i);
-                       
-                    }
-                    if (emojiNames.Count == Emojit.Count)
-                    {
-                        break;
                     }
                 }
-                
-                
-                
-            //    string emoji2 = Main.GetInstance().client.emoji1;
-            /*    if (i.Item.Name == emoji2)
-                {
-                    Emojit.Add(i);
-                    numero++;
-                }*/
+
+
+                //string[] emoji2 = Main.GetInstance().client.emoji1.Split(',');
+                /*   foreach(string emojinimi1 in emojiNames)
+                   {
+                       if(i.Item.Name == emojinimi1)
+                       {
+                           Emojit.Add(i);
+
+                       }
+                       if (emojiNames.Count == Emojit.Count)
+                       {
+                           break;
+                       }
+                   }*/
+
+
+
+
             }
             //--->
 

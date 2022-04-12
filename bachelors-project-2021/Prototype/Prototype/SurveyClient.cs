@@ -54,10 +54,10 @@ namespace Prototype
 		//Emoji
 		public string emoji1 { get; private set; } = "";
 
-		public string emojinamesTogetherAsString { get; private set; } = "";
+		//public string emojinamesTogetherAsString { get; private set; } = "";
 
 		//List of strings of emojinames
-		public List<string> emojinimet { get; private set; } = null;
+	//	public List<string> emojinimet { get; private set; } = null;
 
 		/// <value>
 		/// Instance of SurveyData object containing the concluded survey's results
@@ -184,8 +184,8 @@ namespace Prototype
 								Console.WriteLine("Somehow we just read something from disconnected network, this is fine.");
 								return false;
 							}
-							//emoji1 = Encoding.Unicode.GetString(readBuffer1, 0, bytesRead1);
-							emojinamesTogetherAsString = Encoding.Unicode.GetString(readBuffer1, 0, bytesRead1);	
+							emoji1 = Encoding.Unicode.GetString(readBuffer1, 0, bytesRead1);
+						//	emojinamesTogetherAsString = Encoding.Unicode.GetString(readBuffer1, 0, bytesRead1);	
 
 							//if no error occurs return success
 							return true;
