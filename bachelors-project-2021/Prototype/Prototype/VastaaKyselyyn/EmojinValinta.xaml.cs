@@ -19,7 +19,8 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
 
 using System;
 using System.Collections.Generic;
-
+using System.Threading;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -28,6 +29,7 @@ namespace Prototype
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class EmojinValinta : ContentPage
     {
+        CancellationTokenSource cts;
         public string introMessage { get; set; }
         public string emoji1 { get; set; }
      //   public string emojiNimetString { get; set; }
@@ -122,6 +124,48 @@ namespace Prototype
             BindingContext = this;
         }
 
+        async protected override void OnAppearing()
+        {
+            cts = new CancellationTokenSource();
+            var token = cts.Token;
+            base.OnAppearing();
+
+            try
+            {
+                await UpdateProgressBar(0, 60000, token);
+            }
+            catch (OperationCanceledException e)
+            {
+                Console.WriteLine("Task cancelled", e.Message);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("ex {0}", e.Message);
+            }
+            finally
+            {
+                cts.Dispose();
+            }
+
+        }
+
+        async Task UpdateProgressBar(double Progress, uint time, CancellationToken token)
+        {
+
+            await progressBar.ProgressTo(Progress, time, Easing.Linear);
+            if (token.IsCancellationRequested)
+            {
+                token.ThrowIfCancellationRequested();
+            }
+            //siirtyy eteenpäin automaattisesti 60 sekunnin jälkeen
+            if (progressBar.Progress == 0)
+            {
+                await Main.GetInstance().host.CloseSurvey();
+                await Navigation.PushAsync(new LisätiedotHost());
+            }
+
+        }
+
         //Device back button disabled
         protected override bool OnBackButtonPressed()
         {
@@ -146,6 +190,7 @@ namespace Prototype
 
         private async void Vastaa_Clicked(object sender, EventArgs e)
         {
+            cts.Cancel(); //cancel task if button clicked
             await Main.GetInstance().client.SendResult(answer.ToString());
             await Navigation.PushAsync(new OdotetaanVastauksiaClient());
         }

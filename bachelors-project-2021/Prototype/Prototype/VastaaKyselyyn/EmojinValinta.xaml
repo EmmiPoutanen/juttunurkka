@@ -104,7 +104,9 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
         <!--Miten progressbar etenee jos ei osallistujamäärää oteta tähän versioon tehtäväksi? Esim ajan mukaan
         kuten alkuperäisessä? Selvitä-->
 
-        <ProgressBar Progress="0.2"
+        <ProgressBar x:Name="progressBar"
+            FlowDirection="RightToLeft"
+            Progress="1"
             VerticalOptions="CenterAndExpand" 
             HorizontalOptions="CenterAndExpand"
             WidthRequest="300"
