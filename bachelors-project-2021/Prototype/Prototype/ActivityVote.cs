@@ -58,12 +58,12 @@ namespace Prototype
             
             foreach (KeyValuePair<int, int> answer in emojiResults)
             {
-                KeyValuePair <int, int> yksi= emojiResults.First();
-                int ekaAvain= yksi.Key;
+
+                
                 if(emojiResults.ContainsKey(answer.Key))
              //       if (emojiResults.TryGetValue(answer.Key, out int value) != false)
                 {
-                    int found = 0;
+            //        int found = 0;
                     Console.WriteLine("vastauskey: "+answer.Key);
 
                     percentage = (double)answer.Value / totalCount;
@@ -95,7 +95,8 @@ namespace Prototype
                     Console.WriteLine("päästiin läpi ifit");
                     tolerance = 0.25;
                     //Calculation for the threat value
-                    threat = percentage - tolerance;
+                    //threat = percentage - tolerance;
+                    threat = 1 - tolerance;
                     Console.WriteLine("key: {0}, percentage: {1}, threat: {2}", answer.Key, percentage, threat);
                     Console.WriteLine(answer.Key.ToString() + threat);
                     //Adding each answer to the ranking dictionary
@@ -126,8 +127,10 @@ namespace Prototype
                             if (emoj.ID.Equals(item.Key))
                             {
                                 int idnro = emoj.ID;
+                                Console.WriteLine("vote1:seen lisätään:itemkey ja idnro: " + item.Key + idnro);
                                 vote1Candidates.Add(item.Key, emojis[idnro].activities);
-                                break;
+                                Console.WriteLine("vote1:seen lisättiin: "+item.Key +emojis[idnro].activities[0]);
+                               // break;
                             }
                         }
                     }
