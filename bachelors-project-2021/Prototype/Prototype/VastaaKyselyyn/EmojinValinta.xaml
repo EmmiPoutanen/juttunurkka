@@ -47,62 +47,41 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
             CornerRadius="10"
             HeightRequest="220"
             WidthRequest="310"
-            >
+               >
 
-            <CollectionView ItemsSource="{Binding Emojit}"
-                            ItemsLayout="VerticalGrid, 3">  <!-- Tämä lisäämällä haki kaikki seittemän emojia jostain -->
+           
 
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid Padding="5"
+                <CollectionView x:Name="Collection"
+                            ItemsSource="{Binding Emojit}"
+                            ItemsLayout="VerticalGrid, 3"
+                            SelectionMode= "Single" 
+                            SelectedItem="{Binding Selected, Mode=TwoWay}">
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Padding="5"
                               RowDefinitions="Auto, *"
                              ColumnDefinitions="Auto, *">
 
-                            <ImageButton Grid.Column="0"
+                                <ImageButton Grid.Column="0"
                                        Source="{Binding Item.ImageSource}"
-                                         ClassId="{Binding Item.ID}"
+                                       ClassId="{Binding Item.ID}"
                                        BackgroundColor="Transparent"
                                        HeightRequest="60"
                                        WidthRequest="60"
                                        Margin="10,0,0,0"
                                        Clicked="Button_Clicked"/>
 
-
-                        </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-
-
-            <!--
-            <StackLayout Orientation="Horizontal">
-
-                <ImageButton Source="emoji0.png"
-                    Clicked="Button_Clicked"  
-                    ClassId="0"
-                    x:Name="b0"         
-                    BackgroundColor="Transparent"/>
-
-                <ImageButton Source="emoji2.png"
-                    Clicked="Button_Clicked"   
-                    ClassId="2"
-                    x:Name="b2"         
-                    BackgroundColor="Transparent"/>
-
-                <ImageButton Source="emoji5.png"
-                    Clicked="Button_Clicked"  
-                    ClassId="5"
-                    x:Name="b5"         
-                    BackgroundColor="Transparent"/>
-
-            </StackLayout>
-            -->
+                               
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+          
 
 
         </Frame>
 
-        <!--Miten progressbar etenee jos ei osallistujamäärää oteta tähän versioon tehtäväksi? Esim ajan mukaan
-        kuten alkuperäisessä? Selvitä-->
 
         <ProgressBar x:Name="progressBar"
             FlowDirection="RightToLeft"

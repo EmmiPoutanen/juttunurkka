@@ -37,26 +37,29 @@ namespace Prototype
 
         private int answer;
 
-        // <---
         public IList<CollectionItem> Emojit { get; private set; } = null;
-        // --->
+       
 
-        //Haettu esikatseluosiosta apuun
-        //<---
-        public class CollectionItem
+        public class CollectionItem 
         {
             public Emoji Item { get; set; } = null;
+            public int ID;
+            public string ImageSource { get; set; }
+            public string Name { get; set; }
+            public string Selected { get; set; }
+
+            public CollectionItem()
+            {
+                this.Selected = null;
+            }
+
         }
-        //--->
 
         public EmojinValinta()
         {
             InitializeComponent();
             NavigationPage.SetHasBackButton(this, false);
 
-            //<---
-           // Survey s = SurveyManager.GetInstance().GetSurvey();
-//            introMessage += s.introMessage; // VAIKO TÄMÄ INTRO MESSAGE??
 
             Emojit = new List<CollectionItem>();
             List<Emoji> temp = SurveyManager.GetInstance().GetSurvey().emojis;
@@ -116,9 +119,7 @@ namespace Prototype
 
 
             }
-            //--->
-
-            // Onko ero mainin kautta haettaessa vs. surveyn?
+            
             introMessage = Main.GetInstance().client.intro;
 
             BindingContext = this;
@@ -179,7 +180,15 @@ namespace Prototype
 
             ImageButton emoji = sender as ImageButton;
 
-            emoji.Scale = 1.75;
+            if (sender is ImageButton b && b.Parent is Grid g && g.Children[0] is Frame f)
+            {
+
+                // change the text of the button to the answer
+                CollectionView view = (f.Children[0] as StackLayout).Children[0] as CollectionView;
+                
+            }
+
+            //Tallennetaan vastaus
             answer = int.Parse(emoji.ClassId.ToString());
 
             // Tarkistetaan, että vaan yhden valihtee
