@@ -60,13 +60,13 @@ namespace Prototype
             {                
                 if(emojiResults.ContainsKey(answer.Key))
                 {
-            //        int found = 0;
+                    int found = 0;
                     Console.WriteLine("vastauskey: "+answer.Key);
 
                     percentage = (double)answer.Value / totalCount;
 
                     //assigning tolerance for each answer in emojiResults
-            /*        foreach (var emoji in emojis)
+                    foreach (var emoji in emojis)
                     {
                         Console.WriteLine(emoji.ID);
 
@@ -78,7 +78,7 @@ namespace Prototype
                             }
                             if (emojis[found].Impact == "neutral")
                             {
-                                tolerance = 0.25;
+                                tolerance = 0.15;
                                 Console.WriteLine("emojin aktiviteettii kohta1: " + emojis[found].activities[0]);
                             }
                             if (emojis[found].Impact == "positive")
@@ -88,12 +88,12 @@ namespace Prototype
                             found++;
                             break;
                         }
-                    }*/
+                    }
                     Console.WriteLine("päästiin läpi ifit");
-                    tolerance = 0.25;
+                 //   tolerance = 0.15;
                     //Calculation for the threat value
-                  //  threat = percentage - tolerance;
-                    threat = 1 - tolerance;
+                    threat = percentage - tolerance;
+                  //  threat = 1 - tolerance;
                     Console.WriteLine("key: {0}, percentage: {1}, threat: {2}", answer.Key, percentage, threat);
                     Console.WriteLine(answer.Key.ToString() + threat);
                     //Adding each answer to the ranking dictionary
@@ -128,8 +128,9 @@ namespace Prototype
                                 vote1Candidates.Add(item.Key, emojis[emojilistanro].activities);
                                 Console.WriteLine("vote1:seen lisättiin: " + item.Key + emojis[emojilistanro].activities[0]);
                                 emojilistanro++;
-
+                                break;
                             }
+                            emojilistanro++;
                           /*  else
                             {
                                 emojilistanro++;
