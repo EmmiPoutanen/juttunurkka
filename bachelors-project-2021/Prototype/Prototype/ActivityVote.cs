@@ -57,11 +57,8 @@ namespace Prototype
             Console.WriteLine(luku);
             
             foreach (KeyValuePair<int, int> answer in emojiResults)
-            {
-
-                
+            {                
                 if(emojiResults.ContainsKey(answer.Key))
-             //       if (emojiResults.TryGetValue(answer.Key, out int value) != false)
                 {
             //        int found = 0;
                     Console.WriteLine("vastauskey: "+answer.Key);
@@ -95,7 +92,7 @@ namespace Prototype
                     Console.WriteLine("päästiin läpi ifit");
                     tolerance = 0.25;
                     //Calculation for the threat value
-                    //threat = percentage - tolerance;
+                  //  threat = percentage - tolerance;
                     threat = 1 - tolerance;
                     Console.WriteLine("key: {0}, percentage: {1}, threat: {2}", answer.Key, percentage, threat);
                     Console.WriteLine(answer.Key.ToString() + threat);
@@ -115,6 +112,7 @@ namespace Prototype
 
             String sorted= sortedRanking.Values.ElementAt(0).ToString();
             Console.WriteLine(sorted +"sorted");
+            int emojilistanro = 0;
             //if top ranking threat is higher than 0 a.k.a. threat is above threshold we add it in the vote1candidates if the threat value is above 0
             if (sortedRanking.Values.ElementAt(0) > 0)
             {
@@ -124,14 +122,26 @@ namespace Prototype
                     {
                         foreach(var emoj in emojis)
                         {
-                            if (emoj.ID.Equals(item.Key))
+                            if (emoj.ID == item.Key)
+                            {
+                                Console.WriteLine("vote1:seen lisätään:itemkey ja idnro: " + item.Key + emojilistanro);
+                                vote1Candidates.Add(item.Key, emojis[emojilistanro].activities);
+                                Console.WriteLine("vote1:seen lisättiin: " + item.Key + emojis[emojilistanro].activities[0]);
+                                emojilistanro++;
+
+                            }
+                          /*  else
+                            {
+                                emojilistanro++;
+                            }*/
+                      /*      if (emoj.ID.Equals(item.Key))
                             {
                                 int idnro = emoj.ID;
                                 Console.WriteLine("vote1:seen lisätään:itemkey ja idnro: " + item.Key + idnro);
                                 vote1Candidates.Add(item.Key, emojis[idnro].activities);
                                 Console.WriteLine("vote1:seen lisättiin: "+item.Key +emojis[idnro].activities[0]);
                                // break;
-                            }
+                            }*/
                         }
                     }
                 }
