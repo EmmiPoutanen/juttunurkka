@@ -70,13 +70,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
                        Grid.Row="2"
                        Scale="{Binding resultScale[6]}"/>
             </Grid>
-            <Button Text="Poistu Kyselystä"
-                    Margin="0, 0, 0, 20"
-                    Clicked="PoistuClicked"
-                    CornerRadius="15"
-                    VerticalOptions="EndAndExpand"
-                    HorizontalOptions="Center"
-                    BackgroundColor="blue"/>
+           
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
