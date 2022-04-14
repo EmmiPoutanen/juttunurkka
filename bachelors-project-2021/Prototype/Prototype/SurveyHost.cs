@@ -45,6 +45,8 @@ namespace Prototype
 		/// </value>
 		private Survey survey;
 
+		private string allEmojiNames;
+
 		/// <value>
 		/// Instance of SurveyData containing the data of the survey results
 		/// </value>
@@ -105,6 +107,7 @@ namespace Prototype
 			cancellableTasks = new List<Task>();
 			tokenSource = new CancellationTokenSource();
 			token = tokenSource.Token;
+			allEmojiNames = "";
 		}
 
 		/// <summary>
@@ -165,7 +168,7 @@ namespace Prototype
 			//wait for all tasks to complete before returning
 			await Task.WhenAll(clientVotes1);
 			Console.WriteLine("Stopped accepting votes in phase 1");
-
+			Console.WriteLine(allEmojiNames.Length);
 			//record all answers
 			foreach (var item in clientVotes1)
 			{
@@ -402,9 +405,19 @@ namespace Prototype
 				NetworkStream ns = client.GetStream();
 				await ns.WriteAsync(sendBuffer, 0, sendBuffer.Length);
 
-				
+				foreach (var emoji in survey.emojis)
+				{
+					allEmojiNames += emoji.Name + ",";
+
+					//	allEmojiNames.Append(emoji.Name +",");
+				}
+
+				/*	string allEmojinames = getAllEmojiNames();
+					Console.WriteLine(allEmojiNames);*/
 				//Emoji1
-				byte[] sendBuffer1 = Encoding.Unicode.GetBytes(survey.emojis[0].Name +"," +survey.emojis[1].Name +"," +survey.emojis[2].Name +",");
+				//		byte[] sendBuffer1 = Encoding.Unicode.GetBytes(survey.emojis[0].Name +"," +survey.emojis[1].Name +"," +survey.emojis[2].Name +",");
+				byte[] sendBuffer1 = Encoding.Unicode.GetBytes(allEmojiNames);
+
 				await ns.WriteAsync(sendBuffer1, 0, sendBuffer1.Length);
 				
 
@@ -683,6 +696,23 @@ namespace Prototype
 				}
 			}
 		}
+	/*	public void setAllEmojiNames()
+        {
+//			StringBuilder allEmojiNames=new StringBuilder(100);
+	//		allEmojiNames
+
+			foreach (var emoji in survey.emojis)
+			{
+				allEmojiNames += emoji.Name +",";
+
+			//	allEmojiNames.Append(emoji.Name +",");
+			}
+			
+		}
+		public string getAllEmojiNames()
+		{
+			return allEmojiNames;
+		}*/
 
 		/// <summary>
 		/// Sufficiently terminates the host processes and client connections when the survey concludes or is aborted

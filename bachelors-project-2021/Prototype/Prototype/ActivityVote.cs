@@ -66,7 +66,7 @@ namespace Prototype
                     percentage = (double)answer.Value / totalCount;
 
                     //assigning tolerance for each answer in emojiResults
-                    foreach (var emoji in emojis)
+              /*      foreach (var emoji in emojis)
                     {
                         Console.WriteLine(emoji.ID);
 
@@ -88,9 +88,9 @@ namespace Prototype
                             found++;
                             break;
                         }
-                    }
+                    }*/
                     Console.WriteLine("päästiin läpi ifit");
-                 //   tolerance = 0.15;
+                    tolerance = 0.15;
                     //Calculation for the threat value
                     threat = percentage - tolerance;
                   //  threat = 1 - tolerance;
@@ -148,13 +148,13 @@ namespace Prototype
                 }
             }
             // if threat value us 0 or lower add the top 2 to the vote1candidates, top 2 works since the ranking list is practically all emojis
-            if(sortedRanking.Values.ElementAt(0) <= 0)
+         /*   if(sortedRanking.Values.ElementAt(0) <= 0)
             {
                 for (int i = 0; i < 2; i++)
                 {
                     vote1Candidates.Add(sortedRanking.Keys.ElementAt(i), emojis[sortedRanking.Keys.ElementAt(i)].activities);
                 }
-            }
+            }*/
             vote1Timer = (Const.vote1PerEmojiTime * vote1Candidates.Count) + 10;
         }
         
