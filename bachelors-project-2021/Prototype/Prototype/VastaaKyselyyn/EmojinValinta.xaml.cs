@@ -31,7 +31,7 @@ namespace Prototype
     {
         CancellationTokenSource cts;
         public string introMessage { get; set; }
-        public string emoji1 { get; set; }
+     //   public string emoji1 { get; set; }
      //   public string emojiNimetString { get; set; }
      //   public List<string> emojiNames { get; set; }
 
@@ -99,7 +99,15 @@ namespace Prototype
                         Emojit.Add(i);
                     }
                 }
+                //NEW APPROACH TO DELETE THE SURVEYMANAGER FROM CLIENT--try this!
+//                trying to solve this puzzle:
 
+  /*              foreach(var emojistring in emojinimetlista)
+                {
+                    CollectionItem i = new CollectionItem();
+                    i.Item.Name= emojistring;
+                    Emojit.Add(i);
+                }*/
 
                 //string[] emoji2 = Main.GetInstance().client.emoji1.Split(',');
                 /*   foreach(string emojinimi1 in emojiNames)
@@ -179,13 +187,11 @@ namespace Prototype
         {
 
             ImageButton emoji = sender as ImageButton;
-
+ 
             if (sender is ImageButton b && b.Parent is Grid g && g.Children[0] is Frame f)
             {
-
                 // change the text of the button to the answer
                 CollectionView view = (f.Children[0] as StackLayout).Children[0] as CollectionView;
-                
             }
 
             //Tallennetaan vastaus

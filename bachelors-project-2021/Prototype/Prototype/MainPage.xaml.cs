@@ -185,20 +185,22 @@ namespace Prototype
 
         async void Ok_Clicked(object sender, EventArgs e)
         {
-
-            //Jos entry teksti on null, annetaan virhe ilmoitus
+            OkButton.IsEnabled = false;
+            //Jos entry teksti on null, annetaan virheilmoitus
             if(entry != null && !string.IsNullOrEmpty(entry.Text) && await Main.GetInstance().JoinSurvey(entry.Text))
             {
-                // siirrytään "Liity Kyselyyn" sivulle jos annettu koodi on ok
+                // siirrytään "Liity Kyselyyn" sivulle jos annettu koodi on ok ja enabloidaan Ok button seuraavalle
 
                 await Navigation.PushAsync(new EmojinValinta());
+                OkButton.IsEnabled = true;
                 popupSelection.IsVisible = false;
-
+                
             }
             else await DisplayAlert("Virheellinen avainkoodi", "Syöttämälläsi avainkoodilla ei löydy avointa kyselyä", "OK");
 
             //clear entry text
             entry.Text = null;
+            OkButton.IsEnabled = true;
 
         }
     }

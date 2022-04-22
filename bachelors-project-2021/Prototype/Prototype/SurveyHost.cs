@@ -45,7 +45,7 @@ namespace Prototype
 		/// </value>
 		private Survey survey;
 
-		private string allEmojiNames;
+	//	private string allEmojiNames;
 
 		/// <value>
 		/// Instance of SurveyData containing the data of the survey results
@@ -107,7 +107,6 @@ namespace Prototype
 			cancellableTasks = new List<Task>();
 			tokenSource = new CancellationTokenSource();
 			token = tokenSource.Token;
-			allEmojiNames = "";
 		}
 
 		/// <summary>
@@ -168,7 +167,7 @@ namespace Prototype
 			//wait for all tasks to complete before returning
 			await Task.WhenAll(clientVotes1);
 			Console.WriteLine("Stopped accepting votes in phase 1");
-			Console.WriteLine(allEmojiNames.Length);
+	//		Console.WriteLine("amount of send emojis to client:"+survey.emojis.Count +"amountof surveydata in bytes: " +Encoding.Unicode.GetByteCount(survey.emojis[0].Name+ survey.emojis[1].Name + survey.emojis[2].Name + survey.emojis[3].Name + survey.emojis[4].Name + survey.emojis[5].Name + survey.emojis[6].Name));
 			//record all answers
 			foreach (var item in clientVotes1)
 			{
@@ -401,40 +400,57 @@ namespace Prototype
 			try
 			{
 				//send intro message
-				byte[] sendBuffer = Encoding.Unicode.GetBytes(survey.introMessage);
+				byte[] sendBuffer = Encoding.Unicode.GetBytes(survey.introMessage);				
 				NetworkStream ns = client.GetStream();
+		//		int numberOfBytesToClient = Encoding.Unicode.GetByteCount(survey.introMessage);
+		//		byte[] sendBufferbytes= new byte[numberOfBytesToClient];
+		//		await ns.WriteAsync(sendBufferbytes, 0, numberOfBytesToClient);
+
 				await ns.WriteAsync(sendBuffer, 0, sendBuffer.Length);
-
-				foreach (var emoji in survey.emojis)
-				{
-					allEmojiNames += emoji.Name + ",";
-
-					//	allEmojiNames.Append(emoji.Name +",");
-				}
-
-				/*	string allEmojinames = getAllEmojiNames();
-					Console.WriteLine(allEmojiNames);*/
-				//Emoji1
-				//		byte[] sendBuffer1 = Encoding.Unicode.GetBytes(survey.emojis[0].Name +"," +survey.emojis[1].Name +"," +survey.emojis[2].Name +",");
-				byte[] sendBuffer1 = Encoding.Unicode.GetBytes(allEmojiNames);
-
-				await ns.WriteAsync(sendBuffer1, 0, sendBuffer1.Length);
 				
-
-			/*	List<string> messagesemojis=new List<string>();
-				//catchingemojinames to list of strings
-				foreach (var emojiname in survey.emojis)
+				//Emoji1
+				if (survey.emojis.Count > 1)
 				{
-					messagesemojis.Add(emojiname.Name);
-				}
+					
+					if (survey.emojis.Count == 2)
+					{
+						byte[] sendBuffer1 = Encoding.Unicode.GetBytes(survey.emojis[0].Name + "," + survey.emojis[1].Name + ",");
+						await ns.WriteAsync(sendBuffer1, 0, sendBuffer1.Length);
 
-				string emojinamesTogetherAsString=String.Join(",",messagesemojis);
+					}
+					else if(survey.emojis.Count == 3)
+                    {
+						byte[] sendBuffer1 = Encoding.Unicode.GetBytes(survey.emojis[0].Name + "," + survey.emojis[1].Name + "," + survey.emojis[2].Name + ",");
+						await ns.WriteAsync(sendBuffer1, 0, sendBuffer1.Length);
 
-				byte[] sendBufferList = Encoding.Unicode.GetBytes(emojinamesTogetherAsString);
-				await ns.WriteAsync(sendBufferList, 0, sendBufferList.Length);
-			*/
+					}
+					else if (survey.emojis.Count == 4)
+					{
+						byte[] sendBuffer1 = Encoding.Unicode.GetBytes(survey.emojis[0].Name + "," + survey.emojis[1].Name + "," + survey.emojis[2].Name + "," + survey.emojis[3].Name + ",");
+						await ns.WriteAsync(sendBuffer1, 0, sendBuffer1.Length);
+					}
+					else if (survey.emojis.Count == 5)
+					{
+						byte[] sendBuffer1 = Encoding.Unicode.GetBytes(survey.emojis[0].Name + "," + survey.emojis[1].Name + "," + survey.emojis[2].Name + "," + survey.emojis[3].Name + "," + survey.emojis[4].Name + ",");
+						await ns.WriteAsync(sendBuffer1, 0, sendBuffer1.Length);
+					}
+					else if (survey.emojis.Count == 6)
+					{
+						byte[] sendBuffer1 = Encoding.Unicode.GetBytes(survey.emojis[0].Name + "," + survey.emojis[1].Name + "," + survey.emojis[2].Name + "," + survey.emojis[3].Name + "," + survey.emojis[4].Name + "," + survey.emojis[5].Name + ",");
+						await ns.WriteAsync(sendBuffer1, 0, sendBuffer1.Length);
+
+					}
+					else if (survey.emojis.Count == 7)
+					{
+						byte[] sendBuffer1 = Encoding.Unicode.GetBytes(survey.emojis[0].Name + "," + survey.emojis[1].Name + "," + survey.emojis[2].Name + "," + survey.emojis[3].Name + "," + survey.emojis[4].Name + "," + survey.emojis[5].Name + "," + survey.emojis[6].Name + ",");
+						await ns.WriteAsync(sendBuffer1, 0, sendBuffer1.Length);
+					}
+			//		byte[] sendBuffer1 = Encoding.Unicode.GetBytes(survey.emojis[0].Name + "," + survey.emojis[1].Name + "," + survey.emojis[2].Name + ",");
+			//	await ns.WriteAsync(sendBuffer1, 0, sendBuffer1.Length);
+
+			}
 				//wait for emoji from client, expecting 1 int
-				byte[] buffer = new byte[4];
+			byte[] buffer = new byte[4];
 				Task<int> emojiReply = ns.ReadAsync(buffer, 0, buffer.Length);
 
 				//allow cancellation of task here.
@@ -467,6 +483,8 @@ namespace Prototype
 				clientCount++;
 				clients.Add(client);
 				clientHistory.Add(((IPEndPoint)client.Client.RemoteEndPoint).Address);
+				//close the netstream for others to use too
+				ns.Flush();
 			}
 			catch (OperationCanceledException)
 			{
@@ -696,23 +714,6 @@ namespace Prototype
 				}
 			}
 		}
-	/*	public void setAllEmojiNames()
-        {
-//			StringBuilder allEmojiNames=new StringBuilder(100);
-	//		allEmojiNames
-
-			foreach (var emoji in survey.emojis)
-			{
-				allEmojiNames += emoji.Name +",";
-
-			//	allEmojiNames.Append(emoji.Name +",");
-			}
-			
-		}
-		public string getAllEmojiNames()
-		{
-			return allEmojiNames;
-		}*/
 
 		/// <summary>
 		/// Sufficiently terminates the host processes and client connections when the survey concludes or is aborted

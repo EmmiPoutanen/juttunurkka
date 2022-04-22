@@ -47,17 +47,13 @@ namespace Prototype
 		private TcpClient client = null;
 
 		/// <value>
-		/// Attended survey's intro message
+		/// Attended survey's intromessage
 		/// </value>
 		public string intro { get; private set; } = "";
 
 		//Emoji
 		public string emoji1 { get; private set; } = "";
 
-		//public string emojinamesTogetherAsString { get; private set; } = "";
-
-		//List of strings of emojinames
-	//	public List<string> emojinimet { get; private set; } = null;
 
 		/// <value>
 		/// Instance of SurveyData object containing the concluded survey's results
@@ -165,6 +161,11 @@ namespace Prototype
 
 							//receive intro message
 							NetworkStream ns = client.GetStream();
+
+			//				byte[] bufferForIntro = new byte[64];
+			//				int bufferIntromessage = await ns.ReadAsync(bufferForIntro, 0, bufferForIntro.Length);
+						
+				//			byte [] readBuffer=new byte[bufferIntromessage];
 							byte[] readBuffer = new byte[128];
 							int bytesRead = await ns.ReadAsync(readBuffer, 0, readBuffer.Length);
 
@@ -174,21 +175,45 @@ namespace Prototype
 								return false;
 							}
 							intro = Encoding.Unicode.GetString(readBuffer, 0, bytesRead);
-
+							//	byte[] readBuffer1 = new byte[128];
+							
 							// Emoji
-							byte[] readBuffer1 = new byte[256];
-							int bytesRead1 = await ns.ReadAsync(readBuffer1, 0, readBuffer1.Length);
+						//	if (ns.CanRead) {
+								byte[] readBuffer1 = new byte[256];
+								int numberOfBytesRead = 0;
+								
+							do
+								{
+									numberOfBytesRead = await ns.ReadAsync(readBuffer1, 0, readBuffer1.Length);
+									if (numberOfBytesRead == 0)
+                                    {
+										Console.WriteLine("Somehow we just read something from disconnected network, this is fine.");
+										return false;
+
+									}
+									emoji1=Encoding.Unicode.GetString(readBuffer1, 0, numberOfBytesRead);
+								} while (ns.DataAvailable);
+						//	}
+							ns.Flush();
+							//original code
+				/*			int bytesRead1 = await ns.ReadAsync(readBuffer1, 0, readBuffer1.Length);
 
 							if (bytesRead1 == 0)
 							{
 								Console.WriteLine("Somehow we just read something from disconnected network, this is fine.");
 								return false;
-							}
-							emoji1 = Encoding.Unicode.GetString(readBuffer1, 0, bytesRead1);
-						//	emojinamesTogetherAsString = Encoding.Unicode.GetString(readBuffer1, 0, bytesRead1);	
+							}*/
+							//original code to comment
+//							emoji1 = Encoding.Unicode.GetString(readBuffer1, 0, bytesRead1);
 
 							//if no error occurs return success
 							return true;
+
+						}
+						catch(IOException ioe)
+                        {
+							Console.WriteLine("Something went wrong when trying to read from buffer");
+							Console.WriteLine(ioe);
 
 						}
 						catch (ObjectDisposedException e)

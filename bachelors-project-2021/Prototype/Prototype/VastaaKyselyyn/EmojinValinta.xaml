@@ -24,11 +24,8 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
 
     <StackLayout >
 
-        <!--Tähän labeliin voi sitten laittaa tekstin kohdalle "{Binding introMessage }" kun opettaja puolelta valmista,
-        niin hakee tähän siellä kyselyn kysymykseksi asetetun kysymyksen -->
-
         <Label 
-            Text="{Binding  introMessage}"
+            Text="{Binding introMessage}"
             VerticalOptions="CenterAndExpand" 
             HorizontalOptions="CenterAndExpand"
             HorizontalTextAlignment="Center"
@@ -63,7 +60,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
                               RowDefinitions="Auto, *"
                              ColumnDefinitions="Auto, *">
 
-                                <ImageButton Grid.Column="0"
+                            <ImageButton Grid.Column="0"
                                        Source="{Binding Item.ImageSource}"
                                        ClassId="{Binding Item.ID}"
                                        BackgroundColor="Transparent"
@@ -71,9 +68,9 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
                                        WidthRequest="60"
                                        Margin="10,0,0,0"
                                        Clicked="Button_Clicked"/>
+                                
 
-                               
-                            </Grid>
+                        </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
