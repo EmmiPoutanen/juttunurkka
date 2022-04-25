@@ -46,7 +46,17 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
                         CornerRadius="10"
                         HeightRequest="60"/>
 
-           
+
+                    <Button Grid.Column="1"
+                        Text="Opettaja"
+                        HorizontalOptions="End" 
+                        Font="19"
+                        Margin="0,10,10,35"
+                        CornerRadius="10"
+                        HeightRequest="60"
+                        Clicked="AvaaOpettaja"/>
+
+
                 </Grid>
 
                 <Label Text="Juttunurkka"
@@ -62,17 +72,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
                     HeightRequest="500"
                     WidthRequest="280"         
                     BackgroundColor="#CBD6E5">
-                   
-                    <Button 
-                        Text="Opettaja"
-                        HorizontalOptions="End" 
-                        Font="19"
-                        Margin="0,10,10,35"
-                        CornerRadius="10"
-                        HeightRequest="60"
-                        Clicked="AvaaOpettaja"/>
-
-
+ 
                     <Button Text="Avaa juttunurkka"
                         Clicked="LiityKyselyynClicked"
                         HorizontalOptions="CenterAndExpand"

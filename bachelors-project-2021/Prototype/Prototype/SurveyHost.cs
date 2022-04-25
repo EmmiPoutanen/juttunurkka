@@ -402,12 +402,8 @@ namespace Prototype
 				//send intro message
 				byte[] sendBuffer = Encoding.Unicode.GetBytes(survey.introMessage);				
 				NetworkStream ns = client.GetStream();
-		//		int numberOfBytesToClient = Encoding.Unicode.GetByteCount(survey.introMessage);
-		//		byte[] sendBufferbytes= new byte[numberOfBytesToClient];
-		//		await ns.WriteAsync(sendBufferbytes, 0, numberOfBytesToClient);
 
 				await ns.WriteAsync(sendBuffer, 0, sendBuffer.Length);
-				
 				//Emoji1
 				if (survey.emojis.Count > 1)
 				{
@@ -447,10 +443,9 @@ namespace Prototype
 					}
 			//		byte[] sendBuffer1 = Encoding.Unicode.GetBytes(survey.emojis[0].Name + "," + survey.emojis[1].Name + "," + survey.emojis[2].Name + ",");
 			//	await ns.WriteAsync(sendBuffer1, 0, sendBuffer1.Length);
-
 			}
 				//wait for emoji from client, expecting 1 int
-			byte[] buffer = new byte[4];
+				byte[] buffer = new byte[4];
 				Task<int> emojiReply = ns.ReadAsync(buffer, 0, buffer.Length);
 
 				//allow cancellation of task here.
@@ -483,7 +478,7 @@ namespace Prototype
 				clientCount++;
 				clients.Add(client);
 				clientHistory.Add(((IPEndPoint)client.Client.RemoteEndPoint).Address);
-				//close the netstream for others to use too
+				//flush the netstream for others to use too
 				ns.Flush();
 			}
 			catch (OperationCanceledException)
@@ -535,7 +530,7 @@ namespace Prototype
 				{
 					return null;
 				}
-
+				
 				//read was successful, expecting JSON string containing Dictionary<int, string>
 				return JsonConvert.DeserializeObject<Dictionary<int, string>>(Encoding.Unicode.GetString(buffer, 0, bytesRead));
 
@@ -624,7 +619,7 @@ namespace Prototype
 			//we don't do that here
 			clients.Remove(client);
 			clientCount--;
-
+		
 			return null;
 		}
 

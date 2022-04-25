@@ -143,7 +143,7 @@ namespace Prototype
 					//broadcast and wait
 					int bytesSent = sendOut.SendTo(message, new IPEndPoint(IPAddress.Broadcast, Const.Network.ServerUDPClientPort));
 					Console.WriteLine($"Bytes sent: {bytesSent}");
-					await Task.Delay(1000);
+					await Task.Delay(2000);
 
 					//did we get a reply?
 					Console.WriteLine($"Reply Status: {reply.Status}");
@@ -178,7 +178,6 @@ namespace Prototype
 							//	byte[] readBuffer1 = new byte[128];
 							
 							// Emoji
-						//	if (ns.CanRead) {
 								byte[] readBuffer1 = new byte[256];
 								int numberOfBytesRead = 0;
 								
@@ -193,7 +192,7 @@ namespace Prototype
 									}
 									emoji1=Encoding.Unicode.GetString(readBuffer1, 0, numberOfBytesRead);
 								} while (ns.DataAvailable);
-						//	}
+
 							ns.Flush();
 							//original code
 				/*			int bytesRead1 = await ns.ReadAsync(readBuffer1, 0, readBuffer1.Length);
@@ -267,6 +266,7 @@ namespace Prototype
 				NetworkStream ns = client.GetStream();
 				await ns.WriteAsync(bytes, 0, bytes.Length);
 
+				await ns.FlushAsync();
 				//no error, returning success
 				return true;
 			}
@@ -305,6 +305,7 @@ namespace Prototype
 				NetworkStream ns = client.GetStream();
 				await ns.WriteAsync(bytes, 0, bytes.Length);
 
+				ns.Flush();
 				//no error, returning success
 				return true;
 			}
@@ -343,6 +344,7 @@ namespace Prototype
 				NetworkStream ns = client.GetStream();
 				await ns.WriteAsync(bytes, 0, bytes.Length);
 
+				ns.Flush();
 				//no error, returning success
 				return true;
 			}
@@ -382,6 +384,8 @@ namespace Prototype
 
 				summary = JsonConvert.DeserializeObject<SurveyData>(Encoding.Unicode.GetString(readBuffer, 0, bytesRead));
 				Console.WriteLine($"Received summary: {summary}");
+
+				ns.Flush();
 				return true;
 			}
 			catch (JsonException e)
@@ -420,6 +424,7 @@ namespace Prototype
 				NetworkStream ns = client.GetStream();
 				byte[] readBuffer = new byte[2048];
 				Console.WriteLine("Waiting for activity vote");
+
 				Task<int> bytesReadTask = ns.ReadAsync(readBuffer, 0, readBuffer.Length);
 
 				//allow cancellation of this task
@@ -459,6 +464,7 @@ namespace Prototype
 
 				//expecting string containing int
 				vote1Time = int.Parse(Encoding.Unicode.GetString(readBuffer, 0, bytesRead));
+				ns.Flush();
 				return true;
 			}
 			catch (JsonException e) 
@@ -529,6 +535,7 @@ namespace Prototype
 
 				//expecting string containing int
 				vote2Time = int.Parse(Encoding.Unicode.GetString(readBuffer, 0, bytesRead));
+				ns.Flush();
 				return true;
 			}
 			catch (JsonException e)
@@ -583,7 +590,7 @@ namespace Prototype
 				//expecting string containing voteResult
 				voteResult = Encoding.Unicode.GetString(readBuffer, 0, bytesRead);
 				Console.WriteLine("Received vote result");
-
+				ns.Flush();
 				return true;
 			}
 			catch (ObjectDisposedException e)

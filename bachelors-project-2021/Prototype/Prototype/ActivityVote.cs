@@ -93,18 +93,16 @@ namespace Prototype
                     tolerance = 0.15;
                     //Calculation for the threat value
                     threat = percentage - tolerance;
-                  //  threat = 1 - tolerance;
                     Console.WriteLine("key: {0}, percentage: {1}, threat: {2}", answer.Key, percentage, threat);
                     Console.WriteLine(answer.Key.ToString() + threat);
                     //Adding each answer to the ranking dictionary
-                    Console.WriteLine("ennen rankingia");
                     ranking.Add(answer.Key, threat);
                 }
             }
             Console.WriteLine("foreachi1 jalkeen");
 
             //Sorting each item in ranking by threat value (highest threat is at top)
-            foreach (KeyValuePair<int, double> item in ranking.OrderByDescending(key => key.Value))
+            foreach (KeyValuePair<int, double> item in ranking.OrderByDescending(key => key.Value).ThenBy(key=>key.Key))
             {
                 sortedRanking.Add(item.Key, item.Value);
             }
@@ -112,15 +110,18 @@ namespace Prototype
 
             String sorted= sortedRanking.Values.ElementAt(0).ToString();
             Console.WriteLine(sorted +"sorted");
-            int emojilistanro = 0;
+
             //if top ranking threat is higher than 0 a.k.a. threat is above threshold we add it in the vote1candidates if the threat value is above 0
             if (sortedRanking.Values.ElementAt(0) > 0)
             {
                 foreach (KeyValuePair<int, double> item in sortedRanking)
                 {
+                    int emojilistanro = 0;
+
                     if (item.Value > 0)
                     {
-                        foreach(var emoj in emojis)
+
+                        foreach (var emoj in emojis)
                         {
                             if (emoj.ID == item.Key)
                             {
@@ -130,19 +131,10 @@ namespace Prototype
                                 emojilistanro++;
                                 break;
                             }
-                            emojilistanro++;
                           /*  else
-                            {
+                            {*/
                                 emojilistanro++;
-                            }*/
-                      /*      if (emoj.ID.Equals(item.Key))
-                            {
-                                int idnro = emoj.ID;
-                                Console.WriteLine("vote1:seen lisätään:itemkey ja idnro: " + item.Key + idnro);
-                                vote1Candidates.Add(item.Key, emojis[idnro].activities);
-                                Console.WriteLine("vote1:seen lisättiin: "+item.Key +emojis[idnro].activities[0]);
-                               // break;
-                            }*/
+                         //   }
                         }
                     }
                 }
@@ -172,7 +164,7 @@ namespace Prototype
 
             //for getting a sorted list out of vote1Results
             Dictionary<(int, string), int> sorted = new Dictionary<(int, string), int>();
-            foreach (KeyValuePair<(int, string), int> item in vote1Results.OrderByDescending(key => key.Value))
+            foreach (KeyValuePair<(int, string), int> item in vote1Results.OrderByDescending(key => key.Value).ThenBy(key=> key.Key))
             {
                 Console.WriteLine("key: {0}, value: {1}", item.Key, item.Value);
                 sorted.Add(item.Key, item.Value);
