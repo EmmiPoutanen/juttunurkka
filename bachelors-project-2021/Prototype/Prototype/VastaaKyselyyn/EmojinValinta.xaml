@@ -46,13 +46,12 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
             WidthRequest="310"
                >
 
-           
 
-                <CollectionView x:Name="Collection"
-                            ItemsSource="{Binding Emojit}"
-                            ItemsLayout="VerticalGrid, 3"
-                            SelectionMode= "Single" 
-                            SelectedItem="{Binding Selected, Mode=TwoWay}">
+
+            <CollectionView  ItemsSource="{Binding Emojit}"
+                            ItemsLayout="VerticalGrid, 3">
+                <!--SelectionMode= "Single" 
+                            SelectedItem="{Binding Selected, Mode=TwoWay}"-->
 
                     <CollectionView.ItemTemplate>
                         <DataTemplate>

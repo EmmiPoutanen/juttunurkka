@@ -43,9 +43,9 @@ namespace Prototype
         public class CollectionItem 
         {
             public Emoji Item { get; set; } = null;
-            public int ID;
-            public string ImageSource { get; set; }
-            public string Name { get; set; }
+           // public int ID;
+            //public string ImageSource { get; set; }
+           // public string Name { get; set; }
             public string Selected { get; set; }
 
             public CollectionItem()
@@ -187,15 +187,19 @@ namespace Prototype
         {
 
             ImageButton emoji = sender as ImageButton;
- 
-            if (sender is ImageButton b && b.Parent is Grid g && g.Children[0] is Frame f)
-            {
-                // change the text of the button to the answer
-                CollectionView view = (f.Children[0] as StackLayout).Children[0] as CollectionView;
-            }
+
+            // Tarkoitus saada päivitetty näkymää niin, että vain yksi kuva kerralaan on valittuna isoksi
+            /* if (sender is ImageButton b && b.Parent is Grid g && g.Children[0] is Frame f)
+             {
+                 // change the text of the button to the answer
+                 CollectionView view = (f.Children[0] as StackLayout).Children[0] as CollectionView;
+             }*/
 
             //Tallennetaan vastaus
             answer = int.Parse(emoji.ClassId.ToString());
+
+            // Nyt kaikki, jotka valitaan, muutetaan isommaksi.
+            emoji.Scale = 1.75;
 
             // Tarkistetaan, että vaan yhden valihtee
             Console.WriteLine("valittu " + answer);
