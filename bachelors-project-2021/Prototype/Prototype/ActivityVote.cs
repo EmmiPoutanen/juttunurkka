@@ -1,20 +1,21 @@
 ﻿
 /*
 Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
+          2022 Pauliina Pihlajaniemi, Viola Niemi, Niina Nikki, Juho Tyni, Aino Reinikainen, Essi Kinnunen
 
-This file is part of "Mieliala kysely".
+This file is part of "Juttunurkka".
 
-Mieliala kysely is free software: you can redistribute it and/or modify
+Juttunurkka is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, version 3 of the License.
 
-Mieliala kysely is distributed in the hope that it will be useful,
+Juttunurkka is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
+along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 using System;
@@ -89,7 +90,7 @@ namespace Prototype
                             break;
                         }
                     }*/
-                    Console.WriteLine("päästiin läpi ifit");
+                    
                     tolerance = 0.15;
                     //Calculation for the threat value
                     threat = percentage - tolerance;
@@ -99,14 +100,14 @@ namespace Prototype
                     ranking.Add(answer.Key, threat);
                 }
             }
-            Console.WriteLine("foreachi1 jalkeen");
+            
 
             //Sorting each item in ranking by threat value (highest threat is at top)
             foreach (KeyValuePair<int, double> item in ranking.OrderByDescending(key => key.Value).ThenBy(key=>key.Key))
             {
                 sortedRanking.Add(item.Key, item.Value);
             }
-            Console.WriteLine("foreachi2 jalkeen");
+            
 
             String sorted= sortedRanking.Values.ElementAt(0).ToString();
             Console.WriteLine(sorted +"sorted");

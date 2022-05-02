@@ -1,20 +1,21 @@
 ﻿
 /*
 Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
+          2022 Pauliina Pihlajaniemi, Viola Niemi, Niina Nikki, Juho Tyni, Aino Reinikainen, Essi Kinnunen
 
-This file is part of "Mieliala kysely".
+This file is part of "Juttunurkka".
 
-Mieliala kysely is free software: you can redistribute it and/or modify
+Juttunurkka is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, version 3 of the License.
 
-Mieliala kysely is distributed in the hope that it will be useful,
+Juttunurkka is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
+along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 using System;
@@ -33,7 +34,6 @@ namespace Prototype
     {
         public string roomCode { get; set; } = "Roomcode: ";
 
-        //public int clientCount { get; set; } = 0;
         public OdotetaanOsallistujiaOpettaja()
         {
             InitializeComponent();
@@ -68,26 +68,7 @@ namespace Prototype
             //siirrytään odottamaan vastauksia
             await Navigation.PushAsync(new OdotetaanVastauksiaOpe());
         }
-            //siirrä tämä seuraavalle sivulle 
-            /*
-			//Back to main and error, if nobody joined the survey!
-			if (Main.GetInstance().host.clientCount == 0)
-			{
-                Main.GetInstance().host.DestroyHost();
-                await Navigation.PopToRootAsync();
-                await DisplayAlert("Kysely suljettiin automaattisesti2", "Kyselyyn ei saatu yhtään vastausta", "OK");
-                return;
-            }
-            await Main.GetInstance().host.CloseSurvey();
-            await Navigation.PushAsync(new TabbedViewHost());
-        }
-        */
-
-            //Device back button disabled
-        //protected override bool OnBackButtonPressed()
-        //{
-        //    return true;
-       // }
+                 
 
         private async void KeskeytaButtonClicked(object sender, EventArgs e)
         {

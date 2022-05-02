@@ -1,20 +1,21 @@
 ﻿
 /*
 Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
+          2022 Pauliina Pihlajaniemi, Viola Niemi, Niina Nikki, Juho Tyni, Aino Reinikainen, Essi Kinnunen
 
-This file is part of "Mieliala kysely".
+This file is part of "Juttunurkka".
 
-Mieliala kysely is free software: you can redistribute it and/or modify
+Juttunurkka is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, version 3 of the License.
 
-Mieliala kysely is distributed in the hope that it will be useful,
+Juttunurkka is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
+along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 using System;
@@ -199,35 +200,7 @@ namespace Prototype
                 await Navigation.PushAsync(new LuoKyselyLopetus());
 
             }
-            //            if (SurveyManager.GetInstance().GetSurvey().emojis[nextEmojiNumber] != null)
-            //            {
-            //  name = SurveyManager.GetInstance().GetSurvey().emojis[nextEmojiNumber].Name;
-
-            /*               if (name == "Vihainen")
-                           {
-                               await Navigation.PushAsync(new LuoKyselyToimenpiteetVihainen());
-
-                           }
-                           else if (name == "Väsynyt")
-                           {
-
-                           }
-                           else if (name == "Miettivä")
-                           {
-
-                           }
-                           else if (name == "Itkunauru")
-                           {
-
-                           }*/
-            //                else {
-   //         await Navigation.PushAsync(new LuoKyselyLopetus());
-//                }
-
-
-            // siirrytään "Luo kysely -lopetus" sivulle 
-            //            if(SurveyManager.GetInstance().GetSurvey().emojis[numero +1].Name == "Hämmästy")
-//            await Navigation.PushAsync(new LuoKyselyLopetus()); ;
+            
         }
 
         //function which checks whether the user has selected at least 2 activity for each emoji.

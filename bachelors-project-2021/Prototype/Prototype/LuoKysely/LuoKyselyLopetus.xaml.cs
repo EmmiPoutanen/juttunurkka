@@ -1,20 +1,21 @@
 ﻿
 /*
 Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
+          2022 Pauliina Pihlajaniemi, Viola Niemi, Niina Nikki, Juho Tyni, Aino Reinikainen, Essi Kinnunen
 
-This file is part of "Mieliala kysely".
+This file is part of "Juttunurkka".
 
-Mieliala kysely is free software: you can redistribute it and/or modify
+Juttunurkka is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, version 3 of the License.
 
-Mieliala kysely is distributed in the hope that it will be useful,
+Juttunurkka is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
+along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 using System;
@@ -68,99 +69,7 @@ namespace Prototype
             else await DisplayAlert("Nimi tai avainkoodi puuttuu", "Sinun on asetettava kyselylle nimi ja avainkoodi", "OK");
           
         }
-        /*
-        async void TallennaJaPoistuClicked(object sender, EventArgs e)
-        {
-            
-            if (NameEditor != null && !string.IsNullOrEmpty(NameEditor.Text) && KeyEditor != null && !string.IsNullOrEmpty(KeyEditor.Text) )
-            {
-
-                SurveyManager man = SurveyManager.GetInstance();
-                //save survey code and name
-                man.GetSurvey().RoomCode = KeyEditor.Text;
-                man.GetSurvey().Name = NameEditor.Text;
-                //save survey
-                man.SaveSurvey(NameEditor.Text + ".txt");
-
-                // siirrytään etusivulle 
-                await Navigation.PushAsync(new MainPage());
-
-            }
-
-            else await DisplayAlert("Nimi tai avainkoodi puuttuu", "Sinun on asetettava kyselylle nimi ja avainkoodi", "OK");
-            
-        }*/
-
-        /*
-        async void PeruutaClicked(object sender, EventArgs e)
-        {
-
-            var res = await DisplayAlert("Tahdotko varmasti keskeytää kyselyn luonnin?", "", "Kyllä", "Ei");
-
-            if (res == true)
-            {
-                //survey resetoidaan
-                SurveyManager.GetInstance().ResetSurvey();
-
-                //Jos ollaan edit tilassa, niin siirrytään takaisin kyselyntarkastelu sivulle, muutoin main menuun
-                if (Main.GetInstance().GetMainState() == Main.MainState.Editing)
-                {
-                    Main.GetInstance().BrowseSurveys();
-                    await Navigation.PopAsync();
-                }
-                else
-                {
-                    // siirrytään etusivulle
-                    await Navigation.PopToRootAsync();
-                }
-
-            }
-            else return;
-        }*/
-
-        void JaaClicked(object sender, EventArgs e)
-        {
-
-
-            /*if(NameEditor.Text != null && KeyEditor.Text != null) {
-
-                // Kysytään kyselyn tallentamisesta
-                popupSelection.IsVisible = true; 
-            }
-
-            else DisplayAlert("Nimi tai avainkoodi puuttuu", "Sinun on asetettava kyselylle nimi ja avainkoodi", "OK");
-            */
-        }
-
-        void X_Clicked(object sender, EventArgs e)
-        {
-
-           // Suljetaan popup
-           //popupSelection.IsVisible = false;
-
-        }
-
-        /*async void Ei_Clicked(object sender, EventArgs e)
-        {
-            // siirrytään OdotettaanVastauksia, ei tallenneta kyselyä
-            await Navigation.PushAsync(new OdotetaanVastauksia());
-        }*/
-
-        
-        async void Kyllä_Clicked(object sender, EventArgs e)
-        {
-
-            //kyselyn tallennus
-            SurveyManager man = SurveyManager.GetInstance();
-            //save survey code
-            man.GetSurvey().RoomCode = KeyEditor.Text;
-            man.GetSurvey().Name = NameEditor.Text;
-            //save survey
-            man.SaveSurvey(NameEditor.Text + ".txt");
-
-            // siirrytään OdotettaanVastauksia sivulle 
-            await Navigation.PushAsync(new OdotetaanOsallistujiaOpettaja());
-        }
+       
         private static void OnEntryTextChanged(object sender, TextChangedEventArgs args)
         {
             // jos tekstikenttä ei ole tyhjä

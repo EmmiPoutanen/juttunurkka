@@ -1,15 +1,20 @@
 ﻿/*
 Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
-This file is part of "Mieliala kysely".
-Mieliala kysely is free software: you can redistribute it and/or modify
+          2022 Pauliina Pihlajaniemi, Viola Niemi, Niina Nikki, Juho Tyni, Aino Reinikainen, Essi Kinnunen
+
+This file is part of "Juttunurkka".
+
+Juttunurkka is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, version 3 of the License.
-Mieliala kysely is distributed in the hope that it will be useful,
+
+Juttunurkka is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
+
 You should have received a copy of the GNU General Public License
-along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
+along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 */
 using System;
 using System.Collections.Generic;
@@ -49,16 +54,7 @@ namespace Prototype
                 Emojit.Add(i);
             }
 
-    /*        List<string> messagesemojis = new List<string>();
-
-            foreach (var emojiname in s.emojis)
-            {
-                messagesemojis.Add(emojiname.Name);
-            }
-
-            string emojinamesTogetherAsString = String.Join(" ", messagesemojis);
-
-            Console.WriteLine("emojeita listassa: " +emojinamesTogetherAsString +"emojeita yhteensä: " +messagesemojis.Count);*/
+    
             int count = 0;
             double calculateScale = 0.0;
             Dictionary<int, int> sorted = new Dictionary<int, int>();
@@ -109,7 +105,7 @@ namespace Prototype
         {
             //Siirrytään odottamaan äänestyksen tuloksia (HOST)
             await Navigation.PushAsync(new TulostenOdotus());
-            //Hox, Clientin pitää päästä vastaamaan kyselyy, ei hostin
+            
         }
     }
 }

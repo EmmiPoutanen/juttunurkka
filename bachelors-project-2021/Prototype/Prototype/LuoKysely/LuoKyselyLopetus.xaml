@@ -1,32 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <!--
 Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
+          2022 Pauliina Pihlajaniemi, Viola Niemi, Niina Nikki, Juho Tyni, Aino Reinikainen, Essi Kinnunen
 
-This file is part of "Mieliala kysely".
+This file is part of "Juttunurkka".
 
-Mieliala kysely is free software: you can redistribute it and/or modify
+Juttunurkka is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, version 3 of the License.
 
-Mieliala kysely is distributed in the hope that it will be useful,
+Juttunurkka is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
+along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 -->
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Prototype.LuoKyselyLopetus"
              Title="Juttunurkka">
 
-    <!--
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Peruuta"
-                     Clicked="PeruutaClicked"/>
-    </ContentPage.ToolbarItems>
-    -->
 
     <StackLayout Spacing="0">
 
@@ -39,11 +34,7 @@ along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
             TextColor="#4383EF" 
             Margin="0,40,0,0"
              />
-        <!--
-        <Label Margin="0,10,0,10"
-                    Text="{Binding introMessage}"
-                    TextColor="Black"
-                    FontSize="20"/> -->
+       
                 <Label
                     Grid.Row="0"
                     Margin="20,10,0,10"

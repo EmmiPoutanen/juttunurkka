@@ -1,20 +1,21 @@
 ﻿
 /*
 Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
+          2022 Pauliina Pihlajaniemi, Viola Niemi, Niina Nikki, Juho Tyni, Aino Reinikainen, Essi Kinnunen
 
-This file is part of "Mieliala kysely".
+This file is part of "Juttunurkka".
 
-Mieliala kysely is free software: you can redistribute it and/or modify
+Juttunurkka is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, version 3 of the License.
 
-Mieliala kysely is distributed in the hope that it will be useful,
+Juttunurkka is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
+along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 using System;
@@ -52,9 +53,7 @@ namespace Prototype
             Emojit = new List<CollectionItem>();
 
             List<Emoji> temp = SurveyManager.GetInstance().GetSurvey().emojis;
-            //aiempaa koodia, emojien skaalautuvuus määritetään
-			//alustetaan radionappien valinnat
-            //ei saa kyseenalaistaa tätä toteutusta, radionappeihin ei oikeastaan pääse käsiksi collection view layoutin sisältä
+            
 			foreach (var item in temp)
 			{
                 CollectionItem i = new CollectionItem();
@@ -133,8 +132,7 @@ namespace Prototype
                     //
                 }
  
-                //entistä koodia
-               // temp.Add(item.Item);
+                
 
             }
             //katsotaan mikä on listan pituus konsolilta PP
@@ -143,7 +141,7 @@ namespace Prototype
 
 
             // siirrytään aktiviteetit sivulle 
-            //    await Navigation.PushAsync(new LuoKyselyToimenpiteet());
+            
             //Siirtymä aktiviteettien valintaan eri emojien sivuille
             String name = SurveyManager.GetInstance().GetSurvey().emojis[0].Name;
                         {
@@ -186,13 +184,6 @@ namespace Prototype
                 }
                 
              }
-        /*    if (SurveyManager.GetInstance().GetSurvey().emojis[0].Name == "Iloinen")
-            {
-                await Navigation.PushAsync(new LuoKyselyToimenpiteetIloinen());
-            }*/
-          //  else
-           //     await Navigation.PushAsync(new LuoKyselyLopetus());
-
         }
 
         private bool EmojisSet()

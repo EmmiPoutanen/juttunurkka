@@ -1,20 +1,21 @@
 ﻿
 /*
 Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
+          2022 Pauliina Pihlajaniemi, Viola Niemi, Niina Nikki, Juho Tyni, Aino Reinikainen, Essi Kinnunen
 
-This file is part of "Mieliala kysely".
+This file is part of "Juttunurkka".
 
-Mieliala kysely is free software: you can redistribute it and/or modify
+Juttunurkka is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, version 3 of the License.
 
-Mieliala kysely is distributed in the hope that it will be useful,
+Juttunurkka is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with Mieliala kysely.  If not, see <https://www.gnu.org/licenses/>.
+along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 using System;
@@ -31,9 +32,7 @@ namespace Prototype
     {
         CancellationTokenSource cts;
         public string introMessage { get; set; }
-     //   public string emoji1 { get; set; }
-     //   public string emojiNimetString { get; set; }
-     //   public List<string> emojiNames { get; set; }
+  
 
         private int answer;
 
@@ -43,9 +42,7 @@ namespace Prototype
         public class CollectionItem 
         {
             public Emoji Item { get; set; } = null;
-           // public int ID;
-            //public string ImageSource { get; set; }
-           // public string Name { get; set; }
+
             public string Selected { get; set; }
 
             public CollectionItem()
@@ -76,18 +73,7 @@ namespace Prototype
                 }
             }
 
-            /*    string emojiNimetString = Main.GetInstance().client.emojinamesTogetherAsString;
-
-               string [] emojinimetlista= emojiNimetString.Split(',');
-                foreach(string emojinimi in emojinimetlista)
-                {
-                    emojiNames.Add(emojinimi);
-                    if (emojinimi == ",")
-                    {
-                        emojiNames.Remove(emojinimi);
-                    }
-                }
-            */
+           
             foreach (var item in temp)
             {
                 CollectionItem i = new CollectionItem();
@@ -99,32 +85,7 @@ namespace Prototype
                         Emojit.Add(i);
                     }
                 }
-                //NEW APPROACH TO DELETE THE SURVEYMANAGER FROM CLIENT--try this!
-//                trying to solve this puzzle:
-
-  /*              foreach(var emojistring in emojinimetlista)
-                {
-                    CollectionItem i = new CollectionItem();
-                    i.Item.Name= emojistring;
-                    Emojit.Add(i);
-                }*/
-
-                //string[] emoji2 = Main.GetInstance().client.emoji1.Split(',');
-                /*   foreach(string emojinimi1 in emojiNames)
-                   {
-                       if(i.Item.Name == emojinimi1)
-                       {
-                           Emojit.Add(i);
-
-                       }
-                       if (emojiNames.Count == Emojit.Count)
-                       {
-                           break;
-                       }
-                   }*/
-
-
-
+                
 
             }
             
