@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!--
 Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
           2022 Pauliina Pihlajaniemi, Viola Niemi, Niina Nikki, Juho Tyni, Aino Reinikainen, Essi Kinnunen
@@ -17,7 +17,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 -->
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Prototype.LisätiedotHost"
              Title="Juttunurkka"
@@ -39,7 +39,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             TextColor="Black"        
             BorderColor="#4383EF"
             BackgroundColor="Transparent"
-            Font="19"
+            FontSize="19"
             Margin="20,20,20,0"
             CornerRadius="10"
             HeightRequest="50"
@@ -76,9 +76,8 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                     Source="{Binding resultImages[0]}"
                        Grid.Row="0"/>
 
-                    <Rectangle WidthRequest="50" 
-                           HeightRequest="50"
-                           Stroke="blue"
+                    <Rectangle Width="50" 
+                           Height="50"
                            Fill="blue"
                            Grid.Column="0"
                            Grid.Row="1"
@@ -145,7 +144,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                 Clicked="KeskeytäClicked"
                 VerticalOptions="EndAndExpand"
                 HorizontalOptions="CenterAndExpand" 
-                Font="19"
+                FontSize="19"
                 Margin="20,40,10,0"
                 CornerRadius="10"
                 HeightRequest="50"
@@ -157,7 +156,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                 Clicked="JatkaClicked" 
                 VerticalOptions="EndAndExpand" 
                 HorizontalOptions="CenterAndExpand" 
-                Font="19"
+                FontSize="19"
                 Margin="20,40,10,0"
                 CornerRadius="10"
                 HeightRequest="50"
