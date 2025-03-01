@@ -1,4 +1,3 @@
-﻿
 /*
 Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
           2022 Pauliina Pihlajaniemi, Viola Niemi, Niina Nikki, Juho Tyni, Aino Reinikainen, Essi Kinnunen
@@ -23,8 +22,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows.Input;
-using Xamarin.Essentials;
-using Xamarin.Forms;
+using Microsoft.Maui.Controls.Compatibility;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui;
+using Microsoft.Maui.ApplicationModel;
 
 namespace Prototype
 {
@@ -154,7 +155,7 @@ namespace Prototype
             InfoPopUp.IsVisible = false;
         }
 
-       
+
 
         async void AvaaOpettaja(object sender, EventArgs e)
         {
@@ -195,7 +196,7 @@ namespace Prototype
                 await Navigation.PushAsync(new EmojinValinta());
                 OkButton.IsEnabled = true;
                 popupSelection.IsVisible = false;
-                
+
             }
             else await DisplayAlert("Virheellinen avainkoodi", "Syöttämälläsi avainkoodilla ei löydy avointa kyselyä", "OK");
 
@@ -206,6 +207,3 @@ namespace Prototype
         }
     }
 }
-    
-    
-
