@@ -22,6 +22,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Prototype.Kirjautuminen"
              Title="Juttunurkka"
+             BackgroundColor="#ffea7f"
              >
 
     <StackLayout VerticalOptions="CenterAndExpand" Spacing="20" Padding="0,0,0,90">
@@ -52,7 +53,6 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
         <Entry x:Name="txtPassword" IsPassword="True" TextColor="black" PlaceholderColor="Gray" HeightRequest="50"
                 WidthRequest="250" HorizontalOptions="CenterAndExpand"></Entry>
        
-
         
         <Button  
                 Text="Kirjaudu"
@@ -63,6 +63,8 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
               CornerRadius="10"
               HeightRequest="50"
               WidthRequest="255"
+              BackgroundColor="#feba4f"
+              BorderWidth="0.1"
               Clicked="KirjauduClicked"/>
 
     </StackLayout>

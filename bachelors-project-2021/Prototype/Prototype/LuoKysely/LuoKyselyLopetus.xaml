@@ -20,6 +20,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Prototype.LuoKyselyLopetus"
+             BackgroundColor="#ffea7f"
              Title="Juttunurkka">
 
 
@@ -63,7 +64,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                 HorizontalOptions="CenterAndExpand"
                 BorderColor="#4383EF"
                 CornerRadius="10" 
-                HeightRequest="30"
+                HeightRequest="50"
                 WidthRequest="100"
                 Margin="25,5,5,5">
 
