@@ -97,7 +97,6 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <!-- Define one column for Grid -->
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
