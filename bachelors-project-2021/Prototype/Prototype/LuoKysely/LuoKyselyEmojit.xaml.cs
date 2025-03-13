@@ -92,10 +92,24 @@ namespace Prototype
             }
         }
 
-        void OnAllCheckBoxCheckedChanged(object sender, CheckedChangedEventArgs e)
+        void OnSelectAllButtonClicked(object sender, EventArgs e)
         {
+            foreach (var item in Emojit)
+            {
+                item.CheckBox = true;  
+            }
 
+            foreach (var item in Emojit)
+            {
+                OnCheckBoxCheckedChanged(this, new CheckedChangedEventArgs(true));
+            }
         }
+
+
+        void OnAllCheckBoxCheckedChanged(object sender, CheckedChangedEventArgs e)
+         {
+
+         }
 
 
         async void EdellinenButtonClicked(object sender, EventArgs e) 

@@ -20,6 +20,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Prototype.Esikatselu"
+             BackgroundColor="#ffea7f"
              Title="Juttunurkka">
     <ContentPage.Content>
         <StackLayout>
@@ -36,7 +37,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 
 
             <Button Text="{Binding introMessage}"
-            VerticalOptions="CenterAndExpand" 
+            VerticalOptions="StartAndExpand" 
             HorizontalOptions="CenterAndExpand" 
             TextColor="Black"        
             BorderColor="#4383EF"
@@ -52,7 +53,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             x:Name="popupSelection"
             HasShadow="True"
             WidthRequest="340"
-            HeightRequest="300"
+            HeightRequest="500"
             Margin="20,-40,20,0"
             Padding="1"
             BackgroundColor="Transparent"
@@ -61,7 +62,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             IsVisible="true">
 
                             <CollectionView ItemsSource="{Binding Emojit}"
-                                HeightRequest="400">
+                                HeightRequest="500">
 
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate>

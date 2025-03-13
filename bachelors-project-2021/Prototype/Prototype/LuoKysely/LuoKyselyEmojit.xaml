@@ -20,6 +20,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Prototype.LuoKyselyEmojit"
+             BackgroundColor="#ffea7f"
              Title="Juttunurkka">
     
 
@@ -36,43 +37,44 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             Margin="0,50,0,10"
         />
 
+        <Button Text="Valitse kaikki" Clicked="OnSelectAllButtonClicked"/>
+
 
         <CollectionView ItemsSource="{Binding Emojit}"
                         ItemsLayout="VerticalGrid, 2"
                         Margin="15,25,0,0">
 
-            <CollectionView.ItemTemplate >
-              <DataTemplate >
-                <Grid Padding="10"
-                      RowDefinitions="Auto, *"
-                      ColumnDefinitions="Auto, *">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Padding="10"
+                           BorderColor="#4383EF"
+                           CornerRadius="5"
+                           Margin="10,10,10,10">   
+                        <Grid RowDefinitions="Auto"
+                              ColumnDefinitions="Auto, *">
 
-                    
-                        
+                            <!-- Image -->
+                            <Image Grid.RowSpan="2"
+                                   Source="{Binding Item.ImageSource}"     
+                                   Aspect="AspectFill"
+                                   Scale="1.5"
+                                   HeightRequest="60"
+                                   WidthRequest="60" /> 
 
-                        <!-- Kuva näkyy JOS kuvan lähteen (linkin) laittaa Jokin ongelma drawable kansion kanssa (ei näytä sinne ladattua kuvaa)-->
-                        <Image Grid.RowSpan="2"
-                               Source="{Binding Item.ImageSource}"     
-                               Aspect="AspectFill"
-                               Scale="1"
-                               HeightRequest="60"
-                               WidthRequest="60" />
-                       
+                            <!-- Checkbox -->
+                            <CheckBox x:Name="Checkbox"
+                                      IsChecked="{Binding CheckBox}"
+                                      CheckedChanged="OnCheckBoxCheckedChanged"
+                                      Color="Black"
+                                      Scale="1.5"
+                                      Grid.Row="1"
+                                      Grid.Column="1" />
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
 
-                        <CheckBox x:Name="Checkbox"
-                                  IsChecked = "{Binding CheckBox}"
-                                  CheckedChanged="OnCheckBoxCheckedChanged"
-                                  Color="Black"
-                                  Grid.Row="1"
-                                  Grid.Column="1"
-                                />
-                   
-                    
-                    </Grid>
-              </DataTemplate>
-           </CollectionView.ItemTemplate>
-             
-            
+
         </CollectionView>
 
         <Grid 

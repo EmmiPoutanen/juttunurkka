@@ -21,6 +21,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Prototype.LuoKyselyJohdatus"
              Title="Juttunurkka"
+             BackgroundColor="#ffea7f"
              >
 
     <StackLayout  Spacing="40">
@@ -39,13 +40,15 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
         <Picker Title="Aseta kysymys"  
             x:Name="KysymysPicker"
             SelectedIndexChanged="OnPickerSelectedIndexChanged"
-            VerticalOptions="StartAndExpand" 
+            VerticalOptions="CenterAndExpand" 
             HorizontalOptions="CenterAndExpand"
             WidthRequest="340"
+            HeightRequest="50"
             Margin="0,0,0,250"
             TextColor="Black"
             TitleColor="Black"
-            BackgroundColor="LightGray"    
+            FontSize="20"
+            BackgroundColor="White"    
             ItemsSource="{Binding Intros}"
             ItemDisplayBinding="{Binding introMessage}">
             
@@ -89,6 +92,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                 FontSize="19"
                 Margin="20,0,10,40"
                 CornerRadius="10"
+                BorderWidth="0.1"
                 HeightRequest="50"
                 WidthRequest="150"
             />
