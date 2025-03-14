@@ -65,7 +65,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 
 
         <Grid HorizontalOptions="EndAndExpand" Margin="0,0,30,0">
-            <Picker x:Name="PickerList" IsVisible="False"
+            <Picker x:Name="PickerList" IsVisible="True"
                 SelectedIndexChanged="OnPickerSelectedIndexChanged"
                              ItemsSource="{Binding Surveys}">
             </Picker>

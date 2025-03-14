@@ -42,10 +42,12 @@ namespace Prototype
             BindingContext = this; 
 
             //Ei enää mahdollista päästä takaisin kysleyn luontiin painamalla navigoinnin backbuttonia 
-            NavigationPage.SetHasBackButton(this, false);
+            NavigationPage.SetHasBackButton(this, true);
 
             //actually run the survey
-            //Host(); 
+            // Uncomment this to run the survey already from this screen.
+            // Can be useful for development.
+            Host(); 
         }
         
         

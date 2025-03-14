@@ -38,7 +38,8 @@ namespace Prototype
         public OdotetaanVastauksiaOpe()
         {
             InitializeComponent();
-            NavigationPage.SetHasBackButton(this, false);
+            // Set as true for testing
+            NavigationPage.SetHasBackButton(this, true);
             Survey s = SurveyManager.GetInstance().GetSurvey();
             RoomCode = s.RoomCode;
             BindingContext = this;
