@@ -25,6 +25,7 @@ using Microsoft.Maui.Controls.Xaml;
 using Microsoft.Maui.Controls.Compatibility;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui;
+using System.Diagnostics;
 
 namespace Prototype
 {
@@ -38,6 +39,7 @@ namespace Prototype
         {
             InitializeComponent();
             TallennetutKyselyt();
+            BindingContext = this;
         }
 
         void TallennetutKyselyt()
