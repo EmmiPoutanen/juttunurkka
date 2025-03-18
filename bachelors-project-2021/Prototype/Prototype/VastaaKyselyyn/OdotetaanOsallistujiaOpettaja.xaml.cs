@@ -45,9 +45,7 @@ namespace Prototype
             NavigationPage.SetHasBackButton(this, true);
 
             //actually run the survey
-            // Uncomment this to run the survey already from this screen.
-            // Can be useful for development.
-            Host(); 
+            //Host();
         }
         
         
