@@ -22,6 +22,8 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Prototype.LuoKyselyToimenpiteetNeutraali"
              Title="Juttunurkka"
+             BackgroundColor = "#ffea7f"
+             
              >
 
     <StackLayout Spacing="40">
@@ -29,31 +31,30 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                      VerticalOptions="Start"
                      HorizontalOptions="CenterAndExpand"
                      >
-       
+
             <Label
               Text="{Binding MyStringProperty}"
-
               VerticalOptions="Start" 
               HorizontalOptions="CenterAndExpand"
               HorizontalTextAlignment="Center"
               FontAttributes="Bold"
-              FontSize="10"
+              FontSize="15"
               TextColor="#4383EF" 
               Margin="0,40,0,0"/>
-            
+
             <Image Source="Emoji2.jpg"
                    WidthRequest="60"
                    HeightRequest="60"
                    Margin="0,30,0,0"
             />
-        </StackLayout>        
-        
+        </StackLayout>
+
         <Label Text="Valitse aktiviteetit hymiölle  
                Valitse vähintään 2"
             VerticalOptions="Start" 
             HorizontalOptions="CenterAndExpand"
             HorizontalTextAlignment="Center"
-            FontSize="10"
+            FontSize="25"
             TextColor="Black"   
             Margin="0,-20,0,0"
          />
@@ -63,7 +64,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                      HorizontalOptions="EndAndExpand"
                      Margin="0,0,25,0">
 
-         <!--   <Label Text="Valitse kaikki"
+            <!--   <Label Text="Valitse kaikki"
                    FontSize="25"/>
             <CheckBox Color="Black"/> -->
 
@@ -76,8 +77,8 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             HorizontalOptions="CenterAndExpand" 
             BorderColor="#4383EF"
             BackgroundColor="Transparent"
-            FontSize="15"
-            Margin="20,0,10,-40"
+            FontSize="19"
+            Margin="0,0,0,0"
             CornerRadius="10"
             HeightRequest="50"
             WidthRequest="340" 
@@ -85,15 +86,15 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 
         <!--"dropdown"-->
         <Frame
-            HorizontalOptions="CenterAndExpand" 
-            VerticalOptions="CenterAndExpand"
+            HorizontalOptions="Center" 
+            VerticalOptions="Center"
             x:Name="popupSelection"
             HasShadow="True"
-            Margin="20,0,10,48" 
+            Margin="10,10,10,10" 
             WidthRequest="340"
-            HeightRequest="200"
+            HeightRequest="300"
             Padding="1"
-            BackgroundColor="Transparent"
+            BackgroundColor="White"
             BorderColor="#4383EF"
             CornerRadius="10"
             IsVisible="true">
@@ -102,7 +103,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             HorizontalOptions="CenterAndExpand" 
             VerticalOptions="CenterAndExpand"
           
-            HeightRequest="470" 
+            HeightRequest="300" 
             ItemsSource="{Binding Items} "  >
 
                 <CollectionView.ItemTemplate >
@@ -121,13 +122,17 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                                     <DataTemplate>
                                         <Grid Padding="1"
                                                   RowDefinitions="Auto, *"
+                                                  HeightRequest="100"
+                                                  WidthRequest="340"
                                                   ColumnDefinitions="Auto, *"  >
 
                                             <Label 
                                                     Text="{Binding .}" 
                                                     TextColor="Black"
-                                                    FontSize="10"
-                                                    Margin="5,10,0,5"
+                                                    FontSize="20"
+                                                    HeightRequest="50"
+                                                    WidthRequest="340"
+                                                    Margin="5,0,0,5"
                                                 />
 
 
