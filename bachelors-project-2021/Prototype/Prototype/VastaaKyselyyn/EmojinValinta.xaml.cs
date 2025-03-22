@@ -33,6 +33,7 @@ namespace Prototype
     public partial class EmojinValinta : ContentPage
     {
         CancellationTokenSource cts;
+        private readonly QuestionToSpeech _questionToSpeechClient = new();
         public string introMessage { get; set; }
   
 
@@ -104,6 +105,7 @@ namespace Prototype
 
             try
             {
+                // Increase this number in order to keep the view visible for longer time
                 await UpdateProgressBar(0, 60000, token);
             }
             catch (OperationCanceledException e)
@@ -168,6 +170,11 @@ namespace Prototype
             Console.WriteLine("valittu " + answer);
             Vastaus.IsEnabled = true;
 
+        }
+
+        private async void QuestionToSpeech_Clicked(object sender, EventArgs e)
+        {
+            await _questionToSpeechClient.Speak(introMessage);
         }
 
         private async void Vastaa_Clicked(object sender, EventArgs e)

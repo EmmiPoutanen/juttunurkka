@@ -25,17 +25,41 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 
     <StackLayout >
 
-        <Label 
-            Text="{Binding introMessage}"
-            VerticalOptions="CenterAndExpand" 
-            HorizontalOptions="CenterAndExpand"
-            HorizontalTextAlignment="Center"
-            FontAttributes="Bold"
-            FontSize="30"
-            TextColor="#4383EF" 
-            
-        />
+        <HorizontalStackLayout
+            HorizontalOptions="Center"
+            VerticalOptions="CenterAndExpand"
+            Spacing="10">
 
+            <Label 
+                Text="{Binding introMessage}"
+                VerticalOptions="Center" 
+                HorizontalTextAlignment="Center"
+                FontAttributes="Bold"
+                FontSize="30"
+                TextColor="#4383EF" 
+            />
+
+            <Frame
+                CornerRadius="5"
+                HasShadow="True"
+                Padding="0"
+                BackgroundColor="#4383EF"
+                HeightRequest="40"
+                WidthRequest="60">
+
+                <ImageButton
+                    x:Name="QuestionToSpeech"
+                    Clicked="QuestionToSpeech_Clicked"    
+                    Source="megaphone.png"
+                    ClassId="{Binding Item.ID}"
+                    BackgroundColor="Transparent"
+                    HeightRequest="35"
+                    WidthRequest="35"
+                    VerticalOptions="Center"
+                />
+            </Frame>
+
+        </HorizontalStackLayout>
 
         <Frame Padding="10"
             VerticalOptions="CenterAndExpand" 
