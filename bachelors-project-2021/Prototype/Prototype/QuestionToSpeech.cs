@@ -11,14 +11,16 @@ namespace Prototype
     /// </summary>
     public class QuestionToSpeech
     {
-        private SpeechOptions settings = new() { };
+        private SpeechOptions? settings;
+
+        private readonly Task<SpeechOptions> initTask;
 
         public QuestionToSpeech()
         {
-            InitializeSettings();
+            initTask = InitializeSettings();
         }
 
-        private async void InitializeSettings()
+        private async Task<SpeechOptions> InitializeSettings()
         {
             IEnumerable<Locale> locales = await TextToSpeech.Default.GetLocalesAsync();
 
@@ -28,11 +30,13 @@ namespace Prototype
                 l.Name.Contains("Finnish") ||
                 l.Name.Contains("Suomi"));
 
-            settings = new SpeechOptions
+            var locale = finnishLocale ?? locales.FirstOrDefault();
+
+            return new SpeechOptions
             {
                 Pitch = 1.0f,
                 Volume = 0.5f,
-                Locale = finnishLocale // Will be null if Finnish isn't found
+                Locale = locale
             };
         }
 
@@ -43,6 +47,9 @@ namespace Prototype
         /// <returns></returns>
         public async Task Speak(string text)
         {
+            // Wait that settings are available
+            settings ??= await initTask;
+
             await TextToSpeech.Default.SpeakAsync(text, settings);
         }
     }
