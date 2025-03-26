@@ -17,50 +17,43 @@ You should have received a copy of the GNU General Public License
 along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 */
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Microsoft.Maui.Controls.Xaml;
+using Microsoft.Maui.Controls.Compatibility;
 using Microsoft.Maui.Controls;
+using Microsoft.Maui;
 
 namespace Prototype
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Omakysymys : ContentPage
     {
-        private string CustomQuestion = ""; // Tallennetaan käyttäjän syöttämä kysymys
-
         public Omakysymys()
         {
             InitializeComponent();
+
+            BindingContext = this;
         }
 
-        // Käsittelee käyttäjän kirjoittaman kysymyksen ja päivittää Jatka-painikkeen tilan
-        private void OnCustomQuestionEntered(object sender, TextChangedEventArgs e)
-        {
-            CustomQuestion = e.NewTextValue?.Trim(); // Tallennetaan käyttäjän syöttämä teksti
-            ((Button)FindByName("JatkaButton")).IsEnabled = !string.IsNullOrWhiteSpace(CustomQuestion);
-        }
-
-        // Jatka-painikkeen toiminnallisuus
         async void JatkaButtonClicked(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(CustomQuestion))
-            {
-                await DisplayAlert("Huomio!", "Kirjoita ensin kysymys.", "OK");
-                return;
-            }
+            //kyselyn johdatuslause asetetaan.
+            //SurveyManager.GetInstance().GetSurvey().introMessage = selectedItem;
 
-            // Tallennetaan kysymys SurveyManageriin
-            SurveyManager.GetInstance().GetSurvey().introMessage = CustomQuestion;
 
-            // Siirrytään seuraavalle sivulle
+            //siirrytään "luo uus kysely 2/3" sivulle 
             await Navigation.PushAsync(new LuoKyselyEmojit());
         }
 
-        // Edellinen-painikkeen toiminnallisuus
-        async void EdellinenButtonClicked(object sender, EventArgs e)
+        async void EdellinenButtonClicked(object sender, EventArgs e) //menee vielä kokonaan alkuun
         {
-            // Nollataan kysely
+            //survey resetoidaan
             SurveyManager.GetInstance().ResetSurvey();
 
-            // Jos ollaan editointitilassa, palataan tarkastelusivulle, muuten etusivulle
+            //Jos ollaan edit tilassa, niin siirrytään takaisin kyselyntarkastelu sivulle, muutoin main menuun
             if (Main.GetInstance().GetMainState() == Main.MainState.Editing)
             {
                 Main.GetInstance().BrowseSurveys();
@@ -68,6 +61,7 @@ namespace Prototype
             }
             else
             {
+                // siirrytään etusivulle
                 await Navigation.PopToRootAsync();
             }
         }

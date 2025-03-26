@@ -34,7 +34,6 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                TextColor="#4383EF"
                Margin="0,50,0,0"/>
 
-        <!-- Kysymyksen valinta Picker -->
         <Picker Title="Aseta kysymys"  
                 x:Name="KysymysPicker"
                 SelectedIndexChanged="OnPickerSelectedIndexChanged"
@@ -58,7 +57,6 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             </Picker.Items>
         </Picker>
 
-        <!-- Navigointipainikkeet -->
         <Grid RowDefinitions="Auto, Auto"
               ColumnDefinitions="Auto, Auto"
               VerticalOptions="End"
