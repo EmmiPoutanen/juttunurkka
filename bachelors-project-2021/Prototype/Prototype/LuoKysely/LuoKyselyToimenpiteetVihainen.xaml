@@ -22,7 +22,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Prototype.LuoKyselyToimenpiteetVihainen"
              Title="Juttunurkka"
-             >
+             BackgroundColor="#ffea7f">
 
     <StackLayout Spacing="40">
         <StackLayout Orientation="Horizontal"
@@ -36,7 +36,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
               HorizontalOptions="CenterAndExpand"
               HorizontalTextAlignment="Center"
               FontAttributes="Bold"
-              FontSize="10"
+              FontSize="15"
               TextColor="#4383EF" 
               Margin="0,40,0,0"/>
            
@@ -75,10 +75,10 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             HorizontalOptions="CenterAndExpand" 
             BorderColor="#4383EF"
             BackgroundColor="Transparent"
-            FontSize="10"
-            Margin="20,0,10,-40"
+            FontSize="19"
+            Margin="0,0,0,0"
             CornerRadius="10"
-            HeightRequest="30"
+            HeightRequest="50"
             WidthRequest="340" 
                 IsVisible="true"/>
 
@@ -88,9 +88,9 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             VerticalOptions="CenterAndExpand"
             x:Name="popupSelection"
             HasShadow="True"
-            Margin="20,0,10,48" 
+            Margin="10,10,10,10" 
             WidthRequest="340"
-            HeightRequest="200"
+            HeightRequest="300"
             Padding="1"
             BackgroundColor="Transparent"
             BorderColor="#4383EF"
@@ -101,7 +101,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             HorizontalOptions="CenterAndExpand" 
             VerticalOptions="CenterAndExpand"
           
-            HeightRequest="470" 
+            HeightRequest="300" 
             ItemsSource="{Binding Items} "  >
 
                 <CollectionView.ItemTemplate >
@@ -120,13 +120,17 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                                     <DataTemplate>
                                         <Grid Padding="1"
                                                   RowDefinitions="Auto, *"
+                                                  HeightRequest="100"
+                                                  WidthRequest="340"
                                                   ColumnDefinitions="Auto, *"  >
 
                                             <Label 
                                                     Text="{Binding .}" 
                                                     TextColor="Black"
-                                                    FontSize="10"
-                                                    Margin="5,10,0,5"
+                                                    FontSize="20"
+                                                    HeightRequest="50"
+                                                    WidthRequest="340"
+                                                    Margin="5,0,0,5"
                                                 />
 
 
