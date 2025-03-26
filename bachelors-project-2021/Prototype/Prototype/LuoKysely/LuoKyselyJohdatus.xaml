@@ -21,84 +21,77 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Prototype.LuoKyselyJohdatus"
              Title="Juttunurkka"
-             BackgroundColor="#ffea7f"
-             >
+             BackgroundColor="#ffea7f">
 
-    <StackLayout  Spacing="40">
+    <StackLayout Spacing="40">
 
-        <Label Grid.Column="2"
-            Text="Luo juttunurkka"
-            VerticalOptions="StartAndExpand" 
-            HorizontalOptions="CenterAndExpand"
-            HorizontalTextAlignment="Center"
-            FontAttributes="Bold"
-            FontSize="30"
-            TextColor="#4383EF" 
-            Margin="0,50,0,0"
-        />
+        <Label Text="Luo juttunurkka"
+               VerticalOptions="StartAndExpand" 
+               HorizontalOptions="CenterAndExpand"
+               HorizontalTextAlignment="Center"
+               FontAttributes="Bold"
+               FontSize="30"
+               TextColor="#4383EF"
+               Margin="0,50,0,0"/>
 
+        <!-- Kysymyksen valinta Picker -->
         <Picker Title="Aseta kysymys"  
-            x:Name="KysymysPicker"
-            SelectedIndexChanged="OnPickerSelectedIndexChanged"
-            VerticalOptions="CenterAndExpand" 
-            HorizontalOptions="CenterAndExpand"
-            WidthRequest="340"
-            HeightRequest="50"
-            Margin="0,0,0,250"
-            TextColor="Black"
-            TitleColor="Black"
-            FontSize="20"
-            BackgroundColor="White"    
-            ItemsSource="{Binding Intros}"
-            ItemDisplayBinding="{Binding introMessage}">
-            
+                x:Name="KysymysPicker"
+                SelectedIndexChanged="OnPickerSelectedIndexChanged"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand"
+                WidthRequest="340"
+                HeightRequest="50"
+                Margin="0,0,0,250"
+                TextColor="Black"
+                TitleColor="Black"
+                FontSize="20"
+                BackgroundColor="White">
+
             <Picker.Items>
                 <x:String>Mitä kuuluu tänään?</x:String>
                 <x:String>Miten viikonloppu meni?</x:String>
                 <x:String>Miten välitunti meni?</x:String>
                 <x:String>Mikä fiilis?</x:String>
                 <x:String>Mikä boogie?</x:String>
-    <!--            <x:String>Luo oma kysymys...</x:String> -->
+                <x:String>Luo oma kysymys...</x:String>
             </Picker.Items>
-           
         </Picker>
 
-        <Grid 
-            RowDefinitions="Auto, Auto"
-            ColumnDefinitions="Auto, Auto"
-            VerticalOptions="End"
-            HorizontalOptions="CenterAndExpand">
+        <!-- Navigointipainikkeet -->
+        <Grid RowDefinitions="Auto, Auto"
+              ColumnDefinitions="Auto, Auto"
+              VerticalOptions="End"
+              HorizontalOptions="CenterAndExpand">
 
             <Button Grid.Column="1"
-                x:Name="EdellinenBtn"
-                Clicked="EdellinenButtonClicked"  
-                Text="Edellinen"
-                VerticalOptions="EndAndExpand"
-                HorizontalOptions="CenterAndExpand" 
-                FontSize="19"
-                Margin="20,0,10,40"
-                CornerRadius="10"
-                HeightRequest="50"
-                WidthRequest="150"
-            />
+                    x:Name="EdellinenBtn"
+                    Clicked="EdellinenButtonClicked"  
+                    Text="Edellinen"
+                    VerticalOptions="EndAndExpand"
+                    HorizontalOptions="CenterAndExpand" 
+                    FontSize="19"
+                    Margin="20,0,10,40"
+                    CornerRadius="10"
+                    HeightRequest="50"
+                    WidthRequest="150"/>
 
             <Button Grid.Column="2" 
-                x:Name="JatkaBtn"
-                Text="Jatka"
-                IsEnabled="False"
-                Clicked="JatkaButtonClicked" 
-                VerticalOptions="EndAndExpand" 
-                HorizontalOptions="CenterAndExpand" 
-                FontSize="19"
-                Margin="20,0,10,40"
-                CornerRadius="10"
-                BorderWidth="0.1"
-                HeightRequest="50"
-                WidthRequest="150"
-            />
-
+                    x:Name="JatkaBtn"
+                    Text="Jatka"
+                    IsEnabled="False"
+                    Clicked="JatkaButtonClicked" 
+                    VerticalOptions="EndAndExpand" 
+                    HorizontalOptions="CenterAndExpand" 
+                    FontSize="19"
+                    Margin="20,0,10,40"
+                    CornerRadius="10"
+                    BorderWidth="0.1"
+                    HeightRequest="50"
+                    WidthRequest="150"/>
         </Grid>
 
     </StackLayout>
 
 </ContentPage>
+

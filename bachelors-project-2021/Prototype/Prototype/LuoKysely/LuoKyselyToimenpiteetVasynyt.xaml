@@ -22,171 +22,146 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Prototype.LuoKyselyToimenpiteetVasynyt"
              Title="Juttunurkka"
-             >
+             BackgroundColor="#ffea7f">
 
     <StackLayout Spacing="40">
         <StackLayout Orientation="Horizontal"
                      VerticalOptions="Start"
-                     HorizontalOptions="CenterAndExpand"
-                     >
-      
-            <Label
-              Text="{Binding MyStringProperty}"
-              VerticalOptions="Start" 
-              HorizontalOptions="CenterAndExpand"
-              HorizontalTextAlignment="Center"
-              FontAttributes="Bold"
-              FontSize="30"
-              TextColor="#4383EF" 
-              Margin="0,40,0,0"/>
-          
+                     HorizontalOptions="CenterAndExpand">
+
+            <Label Text="{Binding MyStringProperty}"
+                   VerticalOptions="Start"
+                   HorizontalOptions="CenterAndExpand"
+                   HorizontalTextAlignment="Center"
+                   FontAttributes="Bold"
+                   FontSize="15"
+                   TextColor="#4383EF"
+                   Margin="0,40,0,0" />
+
             <Image Source="Emoji4.jpg"
                    WidthRequest="60"
                    HeightRequest="60"
-                   Margin="0,30,0,0"
-            />
-        </StackLayout>        
-        
+                   Margin="0,30,0,0" />
+        </StackLayout>
+
         <Label Text="Valitse aktiviteetit hymiölle  
                Valitse vähintään 2"
-            VerticalOptions="Start" 
-            HorizontalOptions="CenterAndExpand"
-            HorizontalTextAlignment="Center"
-            FontSize="25"
-            TextColor="Black"   
-            Margin="0,-20,0,0"
-         />
+               VerticalOptions="Start"
+               HorizontalOptions="CenterAndExpand"
+               HorizontalTextAlignment="Center"
+               FontSize="25"
+               TextColor="Black"
+               Margin="0,-20,0,0" />
 
         <StackLayout Orientation="Horizontal"
                      VerticalOptions="Start"
                      HorizontalOptions="EndAndExpand"
                      Margin="0,0,25,0">
-
-            <!--
-            <Label Text="Valitse kaikki"
-                   FontSize="25"/>
-            <CheckBox Color="Black"/> -->
-
         </StackLayout>
 
         <Button Text="Vaihtoehdot"
-            TextColor="black"
-            FontAttributes="Bold"
-            VerticalOptions="CenterAndExpand" 
-            HorizontalOptions="CenterAndExpand" 
-            BorderColor="#4383EF"
-            BackgroundColor="Transparent"
-            FontSize="19"
-            Margin="20,0,10,-40"
-            CornerRadius="10"
-            HeightRequest="50"
-            WidthRequest="340" 
-                IsVisible="true"/>
+                TextColor="black"
+                FontAttributes="Bold"
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="CenterAndExpand"
+                BorderColor="#4383EF"
+                BackgroundColor="Transparent"
+                FontSize="19"
+                Margin="0,0,0,0"
+                CornerRadius="10"
+                HeightRequest="50"
+                WidthRequest="340"
+                IsVisible="true" />
 
         <!--"dropdown"-->
-        <Frame
-            HorizontalOptions="CenterAndExpand" 
-            VerticalOptions="CenterAndExpand"
-            x:Name="popupSelection"
-            HasShadow="True"
-            Margin="20,0,10,48" 
-            WidthRequest="340"
-            HeightRequest="200"
-            Padding="1"
-            BackgroundColor="Transparent"
-            BorderColor="#4383EF"
-            CornerRadius="10"
-            IsVisible="true">
+        <Frame HorizontalOptions="Center"
+               VerticalOptions="Center"
+               x:Name="popupSelection"
+               HasShadow="True"
+               Margin="10,10,10,10"
+               WidthRequest="340"
+               HeightRequest="300"
+               Padding="1"
+               BackgroundColor="White"
+               BorderColor="#4383EF"
+               CornerRadius="10"
+               IsVisible="true">
 
-            <CollectionView 
-            HorizontalOptions="CenterAndExpand" 
-            VerticalOptions="CenterAndExpand"
-          
-            HeightRequest="470" 
-            ItemsSource="{Binding Items} "  >
+            <CollectionView HorizontalOptions="CenterAndExpand"
+                            VerticalOptions="CenterAndExpand"
+                            HeightRequest="300"
+                            ItemsSource="{Binding Items}">
 
-                <CollectionView.ItemTemplate >
-                    <DataTemplate >
-
-
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
                         <Grid Padding="1"
-                   RowDefinitions="Auto, *"
-                  ColumnDefinitions="Auto, *">
-                            <CollectionView x:Name="Collection" 
-                                        ItemsSource= "{Binding ActivityChoises}"
-                                        SelectionMode= "Multiple" 
-                                        SelectedItems="{Binding Selected, Mode=TwoWay}">
+                              RowDefinitions="Auto, *"
+                              ColumnDefinitions="Auto, *">
+                            <CollectionView x:Name="Collection"
+                                            ItemsSource="{Binding ActivityChoises}"
+                                            SelectionMode="Multiple"
+                                            SelectedItems="{Binding Selected, Mode=TwoWay}">
 
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate>
                                         <Grid Padding="1"
-                                                  RowDefinitions="Auto, *"
-                                                  ColumnDefinitions="Auto, *"  >
+                                              RowDefinitions="Auto, *"
+                                              HeightRequest="100"
+                                              WidthRequest="340"
+                                              ColumnDefinitions="Auto, *">
 
-                                            <Label 
-                                                    Text="{Binding .}" 
-                                                    TextColor="Black"
-                                                    FontSize="20"
-                                                    Margin="5,10,0,5"
-                                                />
-
+                                            <Label Text="{Binding .}"
+                                                   TextColor="Black"
+                                                   FontSize="20"
+                                                   HeightRequest="50"
+                                                   WidthRequest="340"
+                                                   Margin="5,0,0,5" />
 
                                             <!-- erotteluviiva -->
                                             <BoxView HeightRequest="1"
-                                                        BackgroundColor="DarkGray"
-                                                        Grid.ColumnSpan="2"
-                                                        Grid.Row="2"
-                                                        VerticalOptions="End"/>
-
-
+                                                     BackgroundColor="DarkGray"
+                                                     Grid.ColumnSpan="2"
+                                                     Grid.Row="2"
+                                                     VerticalOptions="End" />
                                         </Grid>
-
                                     </DataTemplate>
                                 </CollectionView.ItemTemplate>
-
                             </CollectionView>
-
-
-
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </Frame>
 
-
-
-        <Grid 
-            RowDefinitions="Auto, Auto"
-            ColumnDefinitions="Auto, Auto"
-            VerticalOptions="EndAndExpand"
-            HorizontalOptions="CenterAndExpand">
+        <Grid RowDefinitions="Auto, Auto"
+              ColumnDefinitions="Auto, Auto"
+              VerticalOptions="EndAndExpand"
+              HorizontalOptions="CenterAndExpand">
 
             <Button Grid.Column="1"
-                Text="Edellinen"
-                Clicked="EdellinenButtonClicked"
-                VerticalOptions="EndAndExpand"
-                HorizontalOptions="CenterAndExpand" 
-                FontSize="19"
-                Margin="20,0,10,40"
-                CornerRadius="10"
-                HeightRequest="50"
-                WidthRequest="150"
-            />
+                    Text="Edellinen"
+                    Clicked="EdellinenButtonClicked"
+                    VerticalOptions="EndAndExpand"
+                    HorizontalOptions="CenterAndExpand"
+                    FontSize="19"
+                    TextColor="Black"
+                    Margin="20,0,10,40"
+                    CornerRadius="10"
+                    HeightRequest="50"
+                    WidthRequest="150" />
 
-            <Button Grid.Column="2" 
-                Text="Jatka"
-                Clicked="JatkaButtonClicked" 
-                VerticalOptions="EndAndExpand" 
-                HorizontalOptions="CenterAndExpand" 
-                FontSize="19"
-                Margin="20,0,10,40"
-                CornerRadius="10"
-                HeightRequest="50"
-                WidthRequest="150"
-            />
+            <Button Grid.Column="2"
+                    Text="Jatka"
+                    Clicked="JatkaButtonClicked"
+                    VerticalOptions="EndAndExpand"
+                    HorizontalOptions="CenterAndExpand"
+                    FontSize="19"
+                    TextColor="Black"
+                    BackgroundColor="#FFA500"
+                    Margin="20,0,10,40"
+                    CornerRadius="10"
+                    HeightRequest="50"
+                    WidthRequest="150" />
         </Grid>
-
     </StackLayout>
-
 </ContentPage>
