@@ -46,17 +46,17 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                    HeightRequest="60"
                    Margin="0,30,0,0"
             />
-        </StackLayout>        
-        
-   <!--     <Label Text="Valitse aktiviteetit hymiölle  
-               Valitse vähintään 2"
-            VerticalOptions="Start" 
-            HorizontalOptions="CenterAndExpand"
-            HorizontalTextAlignment="Center"
-            FontSize="25"
-            TextColor="Black"   
-            Margin="0,-20,0,0"
-          -->
+        </StackLayout>
+
+        <Label Text="Valitse aktiviteetit hymiölle  
+               Valitese vähintään 2"
+               VerticalOptions="Start"
+               HorizontalOptions="CenterAndExpand"
+               HorizontalTextAlignment="Center"
+               FontSize="25"
+               TextColor="Black"
+               Margin="0,-20,0,0" />
+       
 
         <StackLayout Orientation="Horizontal"
                      VerticalOptions="Start"
@@ -76,8 +76,8 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             HorizontalOptions="CenterAndExpand" 
             BorderColor="#4383EF"
             BackgroundColor="Transparent"
-            FontSize="15"
-            Margin="20,0,10,-40"
+            FontSize="19"
+            Margin="0,0,0,0"
             CornerRadius="10"
             HeightRequest="50"
             WidthRequest="340" 
@@ -89,9 +89,9 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             VerticalOptions="Center"
             x:Name="popupSelection"
             HasShadow="True"
-            Margin="20,0,10,48" 
+            Margin="10,10,10,10" 
             WidthRequest="340"
-            HeightRequest="200"
+            HeightRequest="300"
             Padding="1"
             BackgroundColor="White"
             BorderColor="#4383EF"
@@ -101,7 +101,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             <CollectionView 
             HorizontalOptions="CenterAndExpand" 
             VerticalOptions="CenterAndExpand"
-            HeightRequest="150" 
+            HeightRequest="300" 
             ItemsSource="{Binding Items} "  >
 
                 <CollectionView.ItemTemplate >
