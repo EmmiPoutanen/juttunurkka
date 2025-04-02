@@ -20,30 +20,32 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Prototype.EmojinValinta"
-             Title="Juttunurkka"
+             BackgroundColor="#FFEA7F"
              >
 
-    <StackLayout >
+    <StackLayout Padding="50" Spacing="50">
 
-        <HorizontalStackLayout
+        <HorizontalStackLayout 
             HorizontalOptions="Center"
-            VerticalOptions="CenterAndExpand"
+            VerticalOptions="Center"
             Spacing="10">
 
+            <!-- Question -->
             <Label 
                 Text="{Binding introMessage}"
                 VerticalOptions="Center" 
                 HorizontalTextAlignment="Center"
-                FontAttributes="Bold"
-                FontSize="30"
-                TextColor="#4383EF" 
+                FontSize="35"
+                TextColor="Black"
+                FontFamily="BebasNeue"
             />
 
+            <!-- Sound Button and its frame -->
             <Frame
                 CornerRadius="5"
                 HasShadow="True"
                 Padding="0"
-                BackgroundColor="#4383EF"
+                BackgroundColor="#FEBA4F"
                 HeightRequest="40"
                 WidthRequest="60">
 
@@ -58,28 +60,22 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                     VerticalOptions="Center"
                 />
             </Frame>
-
         </HorizontalStackLayout>
 
-        <Frame Padding="10"
-            VerticalOptions="CenterAndExpand" 
-            HorizontalOptions="CenterAndExpand"
-            BorderColor="#4383EF"
-            CornerRadius="10"
-            HeightRequest="220"
-            WidthRequest="310"
-               >
+        <!-- Emoji selection frame -->
+        <Frame  Padding="15"
+                HorizontalOptions="Center"
+                BorderColor="White"
+                CornerRadius="15"
+                WidthRequest="300">
 
 
-
-            <CollectionView  ItemsSource="{Binding Emojit}"
+            <CollectionView ItemsSource="{Binding Emojit}"
                             ItemsLayout="VerticalGrid, 3">
-              
-
-                    <CollectionView.ItemTemplate>
+                <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <Grid Padding="5"
-                              RowDefinitions="Auto, *"
+                             RowDefinitions="Auto, *"
                              ColumnDefinitions="Auto, *">
 
                             <ImageButton Grid.Column="0"
@@ -90,40 +86,47 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                                        WidthRequest="60"
                                        Margin="10,0,0,0"
                                        Clicked="Button_Clicked"/>
-                                
-
-                        </Grid>
+                            </Grid>
                         </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
+                 </CollectionView.ItemTemplate>
+             </CollectionView>
           
-
-
         </Frame>
 
-
+        <!-- Progress Bar -->
         <ProgressBar x:Name="progressBar"
-            FlowDirection="RightToLeft"
-            Progress="1"
-            VerticalOptions="CenterAndExpand" 
-            HorizontalOptions="CenterAndExpand"
-            WidthRequest="300"
-            ScaleY="14"
-            ProgressColor="#4383EF"/>
-
-
-        <Button Text="Tallenna"
+                    FlowDirection="LeftToRight"
+                    Progress="1"
+                    VerticalOptions="CenterAndExpand" 
+                    HorizontalOptions="CenterAndExpand"
+                    WidthRequest="300"
+                    ScaleY="15"
+                    ProgressColor="#FEBA4F"/>
+        
+        <!-- Response Count Label -->
+        <Label Text="Vastauksia 0 / 19"
+               FontSize="24"
+               TextColor="Black"
+               FontAttributes="Bold"
+               FontFamily="RobotoMedium"
+               HorizontalOptions="Center"/>
+        
+        <!-- Submit Button -->
+        <Button Text="TALLENNA"
             x:Name="Vastaus"    
             Clicked="Vastaa_Clicked"    
             VerticalOptions="CenterAndExpand" 
             HorizontalOptions="CenterAndExpand" 
             IsEnabled="False"    
-            FontSize="19"
-            CornerRadius="10"
-            HeightRequest="50"
-            WidthRequest="255"
-            />
-
+            FontSize="30"
+            TextColor="Black"
+            FontFamily="RobotoMedium"
+            FontAttributes="Bold"
+            BorderColor="Transparent"
+            CornerRadius="15"
+            HeightRequest="95"
+            WidthRequest="270"
+            BackgroundColor="#FEBA4F"/>
 
     </StackLayout>
 
