@@ -35,9 +35,8 @@ namespace Prototype
         CancellationTokenSource cts;
         private readonly QuestionToSpeech _questionToSpeechClient = new();
         public string introMessage { get; set; }
-  
-
         private int answer;
+        private ImageButton _lastClickedEmoji;
 
         public IList<CollectionItem> Emojit { get; private set; } = null;
        
@@ -147,24 +146,24 @@ namespace Prototype
 
         }
 
-
         private void Button_Clicked(object sender, EventArgs e)
         {
 
             ImageButton emoji = sender as ImageButton;
 
-            // Tarkoitus saada päivitetty näkymää niin, että vain yksi kuva kerralaan on valittuna isoksi
-            /* if (sender is ImageButton b && b.Parent is Grid g && g.Children[0] is Frame f)
-             {
-                 // change the text of the button to the answer
-                 CollectionView view = (f.Children[0] as StackLayout).Children[0] as CollectionView;
-             }*/
+            if (_lastClickedEmoji != null && _lastClickedEmoji != emoji)
+            {
+                _lastClickedEmoji.Scale = 1.0; //palauta alkuperäiseen kokoon
+            }
 
             //Tallennetaan vastaus
             answer = int.Parse(emoji.ClassId.ToString());
 
             // Nyt kaikki, jotka valitaan, muutetaan isommaksi.
             emoji.Scale = 1.75;
+
+            // Tallennetaan nykyinen emoji viimeksi klikatuksi
+            _lastClickedEmoji = emoji;
 
             // Tarkistetaan, että vaan yhden valihtee
             Console.WriteLine("valittu " + answer);

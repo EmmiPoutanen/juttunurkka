@@ -20,128 +20,69 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Prototype.LisätiedotClient"
-             Title="Tulokset">
+             Title="Tulokset"
+             BackgroundColor="#FFEA7F">
+
     <ContentPage.Content>
-        <StackLayout>
-            <Grid Margin="20, 50, 20, 50">
+        <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+            <!-- Title -->
+            <Label Text="TULOKSET"
+                   FontSize="40"
+                   FontAttributes="Bold"
+                   TextColor="Black"
+                   FontFamily="BebasNeue"
+                   HorizontalOptions="Center"
+                   Margin="0,20,0,20"/>
+
+            <Grid HorizontalOptions="Center" Margin="0,30,0,30">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="0.75*"/>
-                    <RowDefinition Height="0.125*"/>
-                    <RowDefinition Height="0.125*"/>
+                    <RowDefinition Height="Auto"/>
+                    <!-- Smileys -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Bars -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Numbers -->
                 </Grid.RowDefinitions>
+
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.14*"/>
-                    <ColumnDefinition Width="0.14*"/>
-                    <ColumnDefinition Width="0.14*"/>
-                    <ColumnDefinition Width="0.14*"/>
-                    <ColumnDefinition Width="0.14*"/>
-                    <ColumnDefinition Width="0.14*"/>
-                    <ColumnDefinition Width="0.14*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <Rectangle Width="50" 
-                           Height="50"
-                           Stroke="blue"
-                           Fill="blue"
-                           Grid.Column="0"
-                           ScaleY="{Binding resultScale[0]}"
-                           AnchorY="1"/>
-                <Image Source="{Binding resultImages[0]}"
-                       Grid.Row="1"/>
-                <Label Text="{Binding resultAmount[0]}"
-                       Grid.Row="2"
-                       HorizontalOptions="CenterAndExpand"/>
-                
-                <Rectangle WidthRequest="50" 
-                           HeightRequest="50"
-                           Stroke="red"
-                           Fill="red"
-                           Grid.Column="1"
-                           ScaleY="{Binding resultScale[1]}"
-                           AnchorY="1"/>
-                <Image Source="{Binding resultImages[1]}"
-                       Grid.Row="1"
-                       Grid.Column="1"/>
-                <Label Text="{Binding resultAmount[1]}"
-                       Grid.Column="1"
-                       Grid.Row="2"
-                       HorizontalOptions="CenterAndExpand"/>
-                
-                <Rectangle WidthRequest="50" 
-                           HeightRequest="50"
-                           Stroke="green"
-                           Fill="green"
-                           Grid.Column="2"
-                           ScaleY="{Binding resultScale[2]}"
-                           AnchorY="1"/>
-                <Image Source="{Binding resultImages[2]}"
-                       Grid.Row="1"
-                       Grid.Column="2"/>
-                <Label Text="{Binding resultAmount[2]}"
-                       Grid.Column="2"
-                       Grid.Row="2"
-                       HorizontalOptions="CenterAndExpand"/>
-                
-                <Rectangle WidthRequest="50" 
-                           HeightRequest="50"
-                           Stroke="gold"
-                           Fill="gold"
-                           Grid.Column="3"
-                           ScaleY="{Binding resultScale[3]}"
-                           AnchorY="1"/>
-                <Image Source="{Binding resultImages[3]}"
-                       Grid.Row="1"
-                       Grid.Column="3"/>
-                <Label Text="{Binding resultAmount[3]}"
-                       Grid.Column="3"
-                       Grid.Row="2"
-                       HorizontalOptions="CenterAndExpand"/>
-                
-                <Rectangle WidthRequest="50" 
-                           HeightRequest="50"
-                           Stroke="gray"
-                           Fill="gray"
-                           Grid.Column="4"
-                           ScaleY="{Binding resultScale[4]}"
-                           AnchorY="1"/>
-                <Image Source="{Binding resultImages[4]}"
-                       Grid.Row="1"
-                       Grid.Column="4"/>
-                <Label Text="{Binding resultAmount[4]}"
-                       Grid.Column="4"
-                       Grid.Row="2"
-                       HorizontalOptions="CenterAndExpand"/>
-                
-                <Rectangle WidthRequest="50" 
-                           HeightRequest="50"
-                           Stroke="gray"
-                           Fill="gray"
-                           Grid.Column="5"
-                           ScaleY="{Binding resultScale[5]}"
-                           AnchorY="1"/>
-                <Image Source="{Binding resultImages[5]}"
-                       Grid.Row="1"
-                       Grid.Column="5"/>
-                <Label Text="{Binding resultAmount[5]}"
-                       Grid.Column="5"
-                       Grid.Row="2"
-                       HorizontalOptions="CenterAndExpand"/>
-                
-                <Rectangle WidthRequest="50" 
-                           HeightRequest="50"
-                           Stroke="gray"
-                           Fill="gray"
-                           Grid.Column="6"
-                           ScaleY="{Binding resultScale[6]}"
-                           AnchorY="1"/>
-                <Image Source="{Binding resultImages[6]}"
-                       Grid.Row="1"
-                       Grid.Column="6"/>
-                <Label Text="{Binding resultAmount[6]}"
-                       Grid.Column="6"
-                       Grid.Row="2"
-                       HorizontalOptions="CenterAndExpand"/>
+
+                <CollectionView ItemsSource="{Binding Results}" Grid.Row="0" Grid.ColumnSpan="7">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Horizontal" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout HorizontalOptions="Center">
+                                <Image Source="{Binding Image}" HeightRequest="40" />
+
+                                <Frame WidthRequest="50" 
+                                       HeightRequest="{Binding Scale}" 
+                                       BackgroundColor="Orange" 
+                                       CornerRadius="5"
+                                       BorderColor="#C381FD"
+                                       Padding="0" HasShadow="False"
+                                       VerticalOptions="End">
+                                    <Label Text="{Binding Amount}" 
+                                           TextColor="White" 
+                                           FontSize="36"
+                                           FontAttributes="Bold"
+                                           FontFamily="RobotoMedium"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center"/>
+                                </Frame>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
             </Grid>
-            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
