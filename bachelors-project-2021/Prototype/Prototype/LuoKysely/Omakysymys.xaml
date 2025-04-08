@@ -34,7 +34,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             HorizontalTextAlignment="Center"
             FontAttributes="Bold"
             FontSize="30"
-            TextColor="#4383EF" 
+            TextColor="Black" 
             Margin="0,50,0,0"
         />
 
@@ -48,7 +48,8 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             HeightRequest="150"
             WidthRequest="300"
             >
-            <Entry Placeholder="Kirjoita teksti..."
+            <Entry     x:Name="Kysymys"
+                       Placeholder="Kirjoita teksti..."
                        VerticalOptions="StartAndExpand"
                        MaxLength="50"
                        BackgroundColor="White"
@@ -61,6 +62,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             ColumnDefinitions="Auto, Auto"
             VerticalOptions="End"
             HorizontalOptions="CenterAndExpand">
+            
 
             <Button Grid.Column="1"
                 Text="Edellinen"
@@ -84,6 +86,8 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                 CornerRadius="10"
                 HeightRequest="50"
                 WidthRequest="150"
+                BackgroundColor="#feba4f"
+                TextColor="Black"
                 
             />
 

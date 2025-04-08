@@ -45,6 +45,10 @@ namespace Prototype
 
 
             //siirrytään "luo uus kysely 2/3" sivulle 
+
+            string omaKysymys = Kysymys.Text;
+            SurveyManager.GetInstance().GetSurvey().introMessage = omaKysymys;
+
             await Navigation.PushAsync(new LuoKyselyEmojit());
         }
 

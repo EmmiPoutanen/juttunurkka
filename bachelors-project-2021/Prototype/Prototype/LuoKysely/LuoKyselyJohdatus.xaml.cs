@@ -68,11 +68,14 @@ namespace Prototype
             int selectedIndex = picker.SelectedIndex;
             
             if (selectedIndex != -1) {
-          /*      if(selectedIndex == 2)
+
+                selectedItem = KysymysPicker.Items[selectedIndex];
+
+                if (selectedItem == "Luo oma kysymys...")
                 {
                     await Navigation.PushAsync(new Omakysymys());
-                }*/
-                //ottaa talteen kysymyksen
+                    return;
+                }
                 selectedItem = KysymysPicker.Items[KysymysPicker.SelectedIndex];
                 JatkaBtn.IsEnabled = true;
             }
