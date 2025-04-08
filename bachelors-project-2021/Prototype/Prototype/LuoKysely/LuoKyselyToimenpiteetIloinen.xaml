@@ -188,6 +188,8 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                 CornerRadius="10"
                 HeightRequest="50"
                 WidthRequest="150"
+                BackgroundColor="#feba4f"
+                TextColor="Black"
             />
         </Grid>
 

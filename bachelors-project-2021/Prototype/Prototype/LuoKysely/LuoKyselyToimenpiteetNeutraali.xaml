@@ -94,7 +94,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             WidthRequest="340"
             HeightRequest="300"
             Padding="1"
-            BackgroundColor="Transparent"
+            BackgroundColor="White"
             BorderColor="#4383EF"
             CornerRadius="10"
             IsVisible="true">
@@ -129,7 +129,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                                             <Label 
                                                     Text="{Binding .}" 
                                                     TextColor="Black"
-                                                    FontSize="10"
+                                                    FontSize="20"
                                                     Margin="5,0,0,5"
                                                 />
 
@@ -187,6 +187,8 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                 CornerRadius="10"
                 HeightRequest="50"
                 WidthRequest="150"
+                BackgroundColor="#feba4f"
+                TextColor="Black"
             />
         </Grid>
 
