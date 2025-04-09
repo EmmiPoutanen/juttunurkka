@@ -26,6 +26,8 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Threading;
 using Newtonsoft.Json;
+using Microsoft.Maui;
+using System.IO;
 
 namespace Prototype
 {
@@ -40,9 +42,14 @@ namespace Prototype
 	// Many of the functions here can be converted to generic ReceiveData and SendData functions to improve efficiency and error tolerance
     public class SurveyHost
     {
-		/// <value>
-		/// Instance of Survey containing the details of the hosted survey
-		/// </value>
+        /// <summary>
+        ///     If this is true, host uses TCP client instead of the UDP. This enables developing with two Android emulators.
+        /// </summary>
+        private readonly bool _testMode;
+
+        /// <value>
+        /// Instance of Survey containing the details of the hosted survey
+        /// </value>
         private Survey survey;
 
 		/// <value>
@@ -90,13 +97,14 @@ namespace Prototype
 		/// </value>
         public bool isVoteConcluded { get; private set; } = false;
 
-		/// <summary>
-		/// Default constructor
-		/// <remarks>
-		/// The instance created does not start running any tasks automatically
-		/// </remarks>
-		/// </summary>
-        public SurveyHost() {
+        /// <summary>
+        /// Default constructor
+        /// <remarks>
+        /// The instance created does not start running any tasks automatically
+        /// </remarks>
+        /// </summary>
+        /// <param name="testMode">Run host in test mode</param>
+        public SurveyHost(bool testMode) {
             data = new SurveyData();
             survey = SurveyManager.GetInstance().GetSurvey();
             clientCount = 0;
@@ -105,6 +113,7 @@ namespace Prototype
             cancellableTasks = new List<Task>();
             tokenSource = new CancellationTokenSource();
             token = tokenSource.Token;
+            _testMode = testMode;
         }
 
 		/// <summary>
@@ -118,21 +127,35 @@ namespace Prototype
 		/// </returns>
         public async Task<bool> RunSurvey()
         {
-
-			//Phase 1 - making client connections and collecting emojis
-            Task<bool> task1 = ReplyBroadcast();
-            Task<bool> task2 = AcceptClient();
-            cancellableTasks.Add(task1);
-            cancellableTasks.Add(task2);
-
-            await Task.WhenAll(cancellableTasks.ToArray());
-            if (task1.Result == false || task2.Result == false)
+            if (_testMode)
             {
-				//Fatal unexpected error do something...
-                return false;
+                // In emulator testing mode, only start the TCP server
+                Console.WriteLine("Running in emulator testing mode (TCP only)");
+                Task<bool> tcpTask = AcceptClient();
+                cancellableTasks.Add(tcpTask);
+                await Task.WhenAll(cancellableTasks.ToArray());
+                if (tcpTask.Result == false)
+                {
+                    // Fatal unexpected error
+                    return false;
+                }
             }
+            else
+            {
+                //Phase 1 - making client connections and collecting emojis
+                Task<bool> task1 = ReplyBroadcast();
+                Task<bool> task2 = AcceptClient();
+                cancellableTasks.Add(task1);
+                cancellableTasks.Add(task2);
 
-			//Phase 2 - time after the survey has concluded in which users view results
+                await Task.WhenAll(cancellableTasks.ToArray());
+                if (task1.Result == false || task2.Result == false)
+                {
+                    //Fatal unexpected error do something...
+                    return false;
+                }
+            }
+            //Phase 2 - time after the survey has concluded in which users view results
             Console.WriteLine($"Results: {data}");
             Console.WriteLine("Sending results to clients");
             SendToAllClients(data);
@@ -248,44 +271,47 @@ namespace Prototype
 		/// Task resulting in a boolean indicating whether the task ended in a fatal error
 		/// </returns>
         private async Task<bool> ReplyBroadcast() {
+            UdpClient? listener = null;
+            Socket? socket = null;
             try
             {
-                UdpClient listener = new UdpClient(Const.Network.ServerUDPClientPort);
-                Socket s = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+                listener = new UdpClient(Const.Network.ServerUDPClientPort);
+                socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+                socket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
 
-				//loop to serve all broadcasts
+                //loop to serve all broadcasts
                 while (true)
                 {
                     Console.WriteLine("Waiting for broadcast");
                     Task<UdpReceiveResult> broadcast = listener.ReceiveAsync();
 
-					//allow cancellation of this task between each udp message
+                    //allow cancellation of this task between each udp message
                     do
                     {
                         if (token.IsCancellationRequested)
                         {
                             listener.Close();
-                            s.Close();
+                            socket.Close();
                             token.ThrowIfCancellationRequested();
                         }
                         await Task.WhenAny(new Task[] { Task.Delay(1000), broadcast });
                     } while (broadcast.Status != TaskStatus.RanToCompletion);
 
-					//message received
+                    //message received
                     string message = Encoding.Unicode.GetString(broadcast.Result.Buffer, 0, broadcast.Result.Buffer.Length);
                     Console.WriteLine($"Received broadcast from {broadcast.Result.RemoteEndPoint} : {message}");
 
                     if (message == survey.RoomCode)
                     {
-						//has this client answered the survey already?
+                        //has this client answered the survey already?
                         if (!clientHistory.Contains(broadcast.Result.RemoteEndPoint.Address))
                         {
-							//prepare message and destination
+                            //prepare message and destination
                             byte[] sendbuf = Encoding.Unicode.GetBytes("Connect please");
                             IPEndPoint ep = new IPEndPoint(broadcast.Result.RemoteEndPoint.Address, Const.Network.ClientUDPClientPort);
-							//reply
+                            //reply
                             Console.WriteLine($"Replying... EP: {ep}");
-                            s.SendTo(sendbuf, ep);
+                            socket.SendTo(sendbuf, ep);
                         }
                         else
                         {
@@ -311,8 +337,23 @@ namespace Prototype
             {
                 Console.WriteLine(e);
             }
+            finally
+            {
+                // Always clean up resources, even if an exception occurs
+                if (listener != null)
+                {
+                    listener.Close();
+                    listener.Dispose();
+                }
 
-			//handle unexpected errors
+                if (socket != null)
+                {
+                    socket.Close();
+                    socket.Dispose();
+                }
+            }
+
+            //handle unexpected errors
             Console.WriteLine("Fatal error occured, aborting survey.");
             tokenSource.Cancel();
             return false;
@@ -328,9 +369,13 @@ namespace Prototype
 		/// Task object resulting in a boolean indicating whether the task ended in a fatal error
 		/// </returns>
         private async Task<bool> AcceptClient() {
+            TcpListener? listener = null;
             try
             {
-                TcpListener listener = new TcpListener(IPAddress.Any, Const.Network.ServerTCPListenerPort);
+                int tcpPort = _testMode ? 8000 : Const.Network.ServerTCPListenerPort;
+                listener = new TcpListener(IPAddress.Any, tcpPort);
+                listener.Server.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
+
                 listener.Start();
 
                 while (true)
@@ -349,8 +394,48 @@ namespace Prototype
                         await Task.WhenAny(new Task[] { Task.Delay(1000), newClient });
                     } while (newClient.Status != TaskStatus.RanToCompletion);
 
-					//Child task to communicate with new client
-                    Task childtask = Task.Run(() => ServeNewClient(newClient.Result, token));
+                    // For emulator testing, assume any connection is valid and allowed
+                    // Otherwise stick with the normal validation logic in ServeNewClient
+                    if (_testMode)
+                    {
+                        Console.WriteLine("Emulator testing mode: Accepting client without UDP validation");
+                        TcpClient client = newClient.Result;
+                        IPAddress clientIp = ((IPEndPoint)client.Client.RemoteEndPoint).Address;
+                        
+                        // Read the room code that the client sent directly
+                        NetworkStream stream = client.GetStream();
+                        byte[] buffer = new byte[128];
+                        int bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length);
+                        string roomCode = Encoding.Unicode.GetString(buffer, 0, bytesRead);
+                        
+                        Console.WriteLine($"Received direct connection with room code: {roomCode}");
+                        
+                        // Validate room code
+                        if (roomCode == survey.RoomCode)
+                        {
+                            // Add to client history to prevent duplicates
+                            if (!clientHistory.Contains(clientIp))
+                            {
+                                clientHistory.Add(clientIp);
+                                Task childTask = Task.Run(() => ServeNewClient(client, token));
+                            }
+                            else
+                            {
+                            Console.WriteLine("Client already connected previously");
+                            // You might want to handle reconnection differently
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid room code received");
+                            client.Close();
+                        }
+                    }
+                    else
+                    {
+                        // Normal operation - use existing ServeNewClient
+                        Task childtask = Task.Run(() => ServeNewClient(newClient.Result, token));
+                    }
                 }
             }
             catch (OperationCanceledException)
@@ -366,8 +451,15 @@ namespace Prototype
             {
                 Console.WriteLine(e);
             }
+            finally
+            {
+                if (listener != null)
+                {
+                    listener.Stop();
+                }
+            }
 
-			//handle unexpected errors
+            //handle unexpected errors
             Console.WriteLine("Fatal error occured, aborting survey.");
             tokenSource.Cancel();
             return false;
@@ -651,6 +743,24 @@ namespace Prototype
             {
                 item.Close();
             }
+
+            // Reset state for new survey
+            clients.Clear();
+            clientCount = 0;
+            data = new SurveyData();
+            survey = SurveyManager.GetInstance().GetSurvey();
+            
+            // Create new cancellation mechanism
+            tokenSource.Dispose();
+            tokenSource = new CancellationTokenSource();
+            token = tokenSource.Token;
+            
+            // Clear task list
+            cancellableTasks.Clear();
+            
+            // Reset voting state
+            voteCalc = null;
+            isVoteConcluded = false;
         }
     }
 }
