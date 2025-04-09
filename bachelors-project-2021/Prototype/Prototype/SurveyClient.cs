@@ -47,6 +47,11 @@ namespace Prototype
 		/// </value>
 		private TcpClient client = null;
 
+		/// <summary>
+		///		If this is true, client uses TCP client instead of the UDP. This enables developing with two Android emulators.
+		/// </summary>
+		private readonly bool _testMode;
+
 		/// <value>
 		/// Attended survey's intromessage
 		/// </value>
@@ -101,40 +106,114 @@ namespace Prototype
 		/// </value>
 		private CancellationToken token;
 
-		/// <summary>
-		/// Default constructor
-		/// <remarks>
-		/// The created instance does not start running any tasks or connect to a host automatically
-		/// </remarks>
-		/// </summary>
-		public SurveyClient() {
+        /// <summary>
+        /// Default constructor
+        /// <remarks>
+        /// The created instance does not start running any tasks or connect to a host automatically
+        /// </remarks>
+        /// </summary>
+        /// <param name="testMode">Run client in test mode</param>
+        public SurveyClient(bool testMode) {
 			cancellableTasks = new List<Task>();
 			tokenSource = new CancellationTokenSource();
 			token = tokenSource.Token;
+			_testMode = testMode;
 		}
 
-		/// <summary>
-		/// Tries to find a host in the local network which hosts a survey with the given room code
-		/// </summary>
-		/// <remarks>
-		/// Upon success the SurveyClient receives values for class parameters client and intro
-		/// </remarks>
-		/// <param name="RoomCode">
-		/// The room code of the hosted survey the client intends to join
-		/// </param>
-		/// <returns>
-		/// Task object resulting in a boolean indicating whether connection to a host was built
-		/// </returns>
-		public async Task<bool> LookForHost(string RoomCode) {
+        /// <summary>
+        /// Tries to find a host in the local network which hosts a survey with the given room code. Uses
+		/// TCP or UDP client based on the value of the _testMode variable.
+        /// </summary>
+        /// <remarks>
+        /// Upon success the SurveyClient receives values for class parameters client and intro
+        /// </remarks>
+        /// <param name="RoomCode">
+        /// The room code of the hosted survey the client intends to join
+        /// </param>
+        /// <returns>
+        /// Task object resulting in a boolean indicating whether connection to a host was built
+        /// </returns>
+        public async Task<bool> LookForHost(string RoomCode)
+        {
+            if (_testMode)
+            {
+                return await ConnectViaTCP(RoomCode);
+            }
+            else
+            {
+                return await ConnectViaUDP(RoomCode);
+            }
+        }
 
-			try
+        private async Task<bool> ConnectViaTCP(string RoomCode)
+        {
+            // Survey port in host Emulator
+            int port = 8001;
+            // Emulator IP address
+            IPAddress hostIp = new([10, 0, 2, 2]);
+
+            try
+            {
+                int hostPort = port > 0 ? port : Const.Network.ServerTCPListenerPort;
+                Console.WriteLine($"Attempting direct TCP connection to {hostIp}:{hostPort}");
+
+                client = new TcpClient();
+                await client.ConnectAsync(hostIp, hostPort);
+
+                NetworkStream stream = client.GetStream();
+                byte[] roomCodeBytes = Encoding.Unicode.GetBytes(RoomCode);
+                await stream.WriteAsync(roomCodeBytes, 0, roomCodeBytes.Length);
+                await stream.FlushAsync();
+
+                byte[] readBuffer = new byte[128];
+                int bytesRead = await stream.ReadAsync(readBuffer, 0, readBuffer.Length);
+                if (bytesRead == 0)
+                {
+                    CleanupClient();
+                    return false;
+                }
+                intro = Encoding.Unicode.GetString(readBuffer, 0, bytesRead);
+
+                byte[] readBuffer1 = new byte[256];
+                StringBuilder emojiBuilder = new StringBuilder();
+
+                do
+                {
+                    int numberOfBytesRead = await stream.ReadAsync(readBuffer1, 0, readBuffer1.Length);
+                    if (numberOfBytesRead == 0)
+                    {
+                        CleanupClient();
+                        return false;
+                    }
+                    emojiBuilder.Append(Encoding.Unicode.GetString(readBuffer1, 0, numberOfBytesRead));
+                } while (stream.DataAvailable);
+
+                emoji1 = emojiBuilder.ToString();
+                stream.Flush();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"TCP connection failed: {ex.Message}");
+                CleanupClient();
+                return false;
+            }
+        }
+
+        private async Task<bool> ConnectViaUDP(string RoomCode)
+		{
+            UdpClient? listener = null;
+            Socket? sendOut = null;
+
+            try
 			{
 				byte[] message = Encoding.Unicode.GetBytes(RoomCode);
 
-				Socket sendOut = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+				sendOut = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
 				sendOut.EnableBroadcast = true;
 
-				UdpClient listener = new UdpClient() { EnableBroadcast = true };
+				listener = new UdpClient() { EnableBroadcast = true };
 				listener.Client.Bind(new IPEndPoint(IPAddress.Any, Const.Network.ClientUDPClientPort));
 				
 				Task<UdpReceiveResult> reply = listener.ReceiveAsync();
@@ -163,10 +242,6 @@ namespace Prototype
 							//receive intro message
 							NetworkStream ns = client.GetStream();
 
-			//				byte[] bufferForIntro = new byte[64];
-			//				int bufferIntromessage = await ns.ReadAsync(bufferForIntro, 0, bufferForIntro.Length);
-						
-				//			byte [] readBuffer=new byte[bufferIntromessage];
 							byte[] readBuffer = new byte[128];
 							int bytesRead = await ns.ReadAsync(readBuffer, 0, readBuffer.Length);
 
@@ -176,40 +251,22 @@ namespace Prototype
 								return false;
 							}
 							intro = Encoding.Unicode.GetString(readBuffer, 0, bytesRead);
-							//	byte[] readBuffer1 = new byte[128];
-							
-							// Emoji
-								byte[] readBuffer1 = new byte[256];
-								int numberOfBytesRead = 0;
-								
-							do
-								{
-									numberOfBytesRead = await ns.ReadAsync(readBuffer1, 0, readBuffer1.Length);
-									if (numberOfBytesRead == 0)
-                                    {
-										Console.WriteLine("Somehow we just read something from disconnected network, this is fine.");
-										return false;
+                            //	byte[] readBuffer1 = new byte[128];
 
-									}
-									emoji1=Encoding.Unicode.GetString(readBuffer1, 0, numberOfBytesRead);
-								} while (ns.DataAvailable);
+                            byte[] readBuffer1 = new byte[256];
+                            StringBuilder emojiBuilder = new StringBuilder();
+                            do
+                            {
+                                int emojiBytes = await ns.ReadAsync(readBuffer1, 0, readBuffer1.Length);
+                                if (emojiBytes == 0) return false;
+                                emojiBuilder.Append(Encoding.Unicode.GetString(readBuffer1, 0, emojiBytes));
+                            } while (ns.DataAvailable);
 
-							ns.Flush();
-							//original code
-				/*			int bytesRead1 = await ns.ReadAsync(readBuffer1, 0, readBuffer1.Length);
+                            emoji1 = emojiBuilder.ToString();
+                            ns.Flush();
 
-							if (bytesRead1 == 0)
-							{
-								Console.WriteLine("Somehow we just read something from disconnected network, this is fine.");
-								return false;
-							}*/
-							//original code to comment
-//							emoji1 = Encoding.Unicode.GetString(readBuffer1, 0, bytesRead1);
-
-							//if no error occurs return success
-							return true;
-
-						}
+                            return true;
+                        }
 						catch(IOException ioe)
                         {
 							Console.WriteLine("Something went wrong when trying to read from buffer");
@@ -242,10 +299,40 @@ namespace Prototype
 				Console.WriteLine("Socket exception occured in LookForHost");
 				Console.WriteLine(e);
 			}
-			
+            finally
+            {
+                listener?.Close();
+                listener?.Dispose();
+                sendOut?.Dispose();
+            }
 
-			return false;
-		}
+
+            return false;
+        }
+
+		/// <summary>
+		/// Helper method to clean up client resources when connection fails
+		/// </summary>
+        private void CleanupClient()
+        {
+            if (client != null)
+            {
+                try
+                {
+                    if (client.Connected)
+                    {
+                        client.GetStream().Close();
+                    }
+                    client.Close();
+                    client.Dispose();
+                    client = null;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error cleaning up client: {ex.Message}");
+                }
+            }
+        }
 
 		/// <summary>
 		/// Tries to send emoji answer to host
@@ -613,11 +700,11 @@ namespace Prototype
 		/// Sufficiently terminates the client instance by closing the TCP connection and cancelling cancellable tasks
 		/// </summary>
 		public async void DestroyClient() {
-
 			//cancel all cancellable tasks
 			tokenSource.Cancel();
-			await Task.WhenAll(cancellableTasks.ToArray());
-			client.Close();
-		}
+            await Task.WhenAll([.. cancellableTasks]);
+            client.Close();
+            client.Dispose();
+        }
 	}
 }

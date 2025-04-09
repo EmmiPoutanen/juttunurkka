@@ -29,6 +29,15 @@ namespace Prototype
 	public class Main
 	{
 		private static Main instance = null;
+        /// <summary>
+        ///		Set this variable to true if you want to debug the application with two Android emulators
+		///		(one host and one client). This changes the behaviour of SurveyHost and SurveyClient. When true,
+		///		connection between host and client is handled only with TCP -client. Note that this requires also
+        ///		port forwardfor the host emulator forward tcp:8001 tcp:8000. Setting up UDP communication between
+		///		two android emulators is not very easy, so this is a workaround for that.
+        /// </summary>
+        private static readonly bool _testMode = true;
+
 		public enum MainState
 		{
 			Default = 0,
@@ -65,7 +74,7 @@ namespace Prototype
 
 		public async Task<bool> JoinSurvey(string RoomCode) {
 			Console.WriteLine($"DEBUG: Attempting new client instance with RoomCode: {RoomCode}");
-			client = new SurveyClient();
+			client = new SurveyClient(_testMode);
 			bool success = await Task.Run(() => client.LookForHost(RoomCode));
 			if (success) {
 				state = MainState.Participating;
@@ -76,7 +85,7 @@ namespace Prototype
 		public async Task<bool> HostSurvey() {
 			Console.WriteLine($"DEBUG: Creating new host instance with selected survey");
 			state = MainState.Hosting;
-			host = new SurveyHost();
+			host = new SurveyHost(_testMode);
 			return await host.RunSurvey();
 		}
 
