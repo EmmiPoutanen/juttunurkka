@@ -36,7 +36,7 @@ namespace Prototype
         ///		port forwardfor the host emulator forward tcp:8001 tcp:8000. Setting up UDP communication between
 		///		two android emulators is not very easy, so this is a workaround for that.
         /// </summary>
-        private static readonly bool _testMode = true;
+        private static readonly bool _testMode = false;
 
 		public enum MainState
 		{
