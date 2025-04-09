@@ -49,7 +49,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
         </StackLayout>
 
         <Label Text="Valitse aktiviteetit hymiölle  
-               Valitese vähintään 2"
+               Valitse vähintään 2"
                VerticalOptions="Start"
                HorizontalOptions="CenterAndExpand"
                HorizontalTextAlignment="Center"
@@ -120,6 +120,8 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                                     <DataTemplate>
                                         <Grid Padding="1"
                                                   RowDefinitions="Auto, *"
+                                                  HeightRequest="100"
+                                                  WidthRequest="340"
                                                   ColumnDefinitions="Auto, *"  >
 
                                             <Label 

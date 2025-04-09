@@ -78,7 +78,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             BorderColor="#4383EF"
             BackgroundColor="Transparent"
             FontSize="19"
-            Margin="0,0,0,0"
+            Margin="0,-95,0,0"
             CornerRadius="10"
             HeightRequest="50"
             WidthRequest="340" 
@@ -111,6 +111,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 
 
                         <Grid Padding="1"
+                              Margin="0,0,0,0"
                    RowDefinitions="Auto, *"
                   ColumnDefinitions="Auto, *">
                             <CollectionView x:Name="Collection" 
@@ -130,6 +131,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                                                     Text="{Binding .}" 
                                                     TextColor="Black"
                                                     FontSize="20"
+                                                    WidthRequest="340"
                                                     Margin="5,0,0,5"
                                                 />
 

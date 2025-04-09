@@ -76,7 +76,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             BorderColor="#4383EF"
             BackgroundColor="Transparent"
             FontSize="19"
-            Margin="0,0,0,0"
+            Margin="0,-95,0,0"
             CornerRadius="10"
             HeightRequest="50"
             WidthRequest="340" 
@@ -88,9 +88,9 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             VerticalOptions="CenterAndExpand"
             x:Name="popupSelection"
             HasShadow="True"
-            Margin="10,10,10,10" 
+            Margin="10,-50,10,10" 
             WidthRequest="340"
-            HeightRequest="300"
+            HeightRequest="280"
             Padding="1"
             BackgroundColor="White"
             BorderColor="#4383EF"
@@ -101,7 +101,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             HorizontalOptions="CenterAndExpand" 
             VerticalOptions="CenterAndExpand"
           
-            HeightRequest="300" 
+            HeightRequest="280" 
             ItemsSource="{Binding Items} "  >
 
                 <CollectionView.ItemTemplate >
@@ -120,13 +120,15 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                                     <DataTemplate>
                                         <Grid Padding="1"
                                                   RowDefinitions="Auto, *"
+                                                  HeightRequest="80"
+                                                  WidthRequest="330"
                                                   ColumnDefinitions="Auto, *"  >
 
                                             <Label Text="{Binding .}"
                                                    TextColor="Black"
                                                    FontSize="20"
-                                                   HeightRequest="50"
-                                                   WidthRequest="340"
+                                                   HeightRequest="60"
+                                                   WidthRequest="330"
                                                    Margin="5,0,0,5" />
 
 

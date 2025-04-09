@@ -229,14 +229,16 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                                      FontAttributes="Bold"
                                      BackgroundColor="Transparent"
                                      BorderColor="Transparent"                                  
-                                     Text="Kyllä"  
+                                     Text="Kyllä"
+                                     Margin="-50,10,10,10"
                                      Clicked="Kyllä_Clicked"/>
                             <Button                               
                                      Text="Ei" 
                                      TextColor="{StaticResource QuinaryColor}"
                                      FontAttributes="Bold"
                                      BackgroundColor="Transparent"
-                                     BorderColor="Transparent"     
+                                     BorderColor="Transparent"
+                                     Margin="50,10,10,10"
                                      Clicked="Ei_Clicked" />
                         </Grid>
 
