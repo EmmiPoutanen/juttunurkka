@@ -71,17 +71,17 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             </Picker>
 
             <Button Text="Arkisto"
-            VerticalOptions="CenterAndExpand" 
-            HorizontalOptions="CenterAndExpand" 
-            BackgroundColor="#feba4f"
-            FontSize="19"
-            Margin="0,0,0,0"
-            CornerRadius="10"
-            HeightRequest="100"
-            WidthRequest="340"
-            BorderWidth="0.1"
-            Clicked="Button_Clicked"
-         />
+               VerticalOptions="CenterAndExpand" 
+               HorizontalOptions="CenterAndExpand" 
+               BackgroundColor="#feba4f"
+               FontSize="19"
+               Margin="0,0,0,0"
+               CornerRadius="10"
+               HeightRequest="100"
+               WidthRequest="340"
+               BorderWidth="0.1"
+               Clicked="ArkistoClicked"
+            />
         </Grid>
 
     </StackLayout>

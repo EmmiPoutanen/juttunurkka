@@ -20,8 +20,9 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Prototype.KyselynTarkastelu"
-             Title="Tarkastele kyselyä">
-
+             Title="Tarkastele kyselyä"
+             BackgroundColor="#ffea7f"
+             >
     <!-- poista kysely -nappi-->
 
     <ContentPage.ToolbarItems>
@@ -95,6 +96,8 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                                         HorizontalOptions="CenterAndExpand"
                                         WidthRequest="300"
                                         HeightRequest="45"
+                                        BackgroundColor="#feba4f"
+                                        BorderWidth="0.1"
                                         Text="toimenpiteet" 
                                         Clicked="btnPopupButton_Clicked"
                                 />
@@ -178,7 +181,8 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                             <Button x:Name="MuokkaaButton"
 								    Text="Muokkaa"
                                     Clicked="MuokkaaClicked"
-                                    BackgroundColor="{StaticResource QuinaryColor}"
+                                    BackgroundColor="#feba4f"
+                                    BorderWidth="0.1"
                                     HeightRequest="65"
                                     CornerRadius="100"/>
                         </Grid>
@@ -199,7 +203,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 
             <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
                 <StackLayout
-                    BackgroundColor="White"
+                    BackgroundColor="#feba4f"
                     HeightRequest="165"
                     Orientation="Vertical"
                     WidthRequest="300">
@@ -225,7 +229,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                     <AbsoluteLayout Margin="20"  VerticalOptions ="EndAndExpand" HorizontalOptions="CenterAndExpand">
                         <Grid Margin="0,0,0,0">
                             <Button Grid.Column="1"   
-                                     TextColor="Gold"
+                                     TextColor="Black"
                                      FontAttributes="Bold"
                                      BackgroundColor="Transparent"
                                      BorderColor="Transparent"                                  
@@ -234,7 +238,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                                      Clicked="Kyllä_Clicked"/>
                             <Button                               
                                      Text="Ei" 
-                                     TextColor="{StaticResource QuinaryColor}"
+                                     TextColor="Black"
                                      FontAttributes="Bold"
                                      BackgroundColor="Transparent"
                                      BorderColor="Transparent"
