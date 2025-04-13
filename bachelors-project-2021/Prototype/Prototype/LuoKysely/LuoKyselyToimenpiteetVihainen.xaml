@@ -112,9 +112,11 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                    RowDefinitions="Auto, *"
                   ColumnDefinitions="Auto, *">
                             <CollectionView x:Name="Collection" 
-                                        ItemsSource= "{Binding ActivityChoises}"
-                                        SelectionMode= "Multiple" 
-                                        SelectedItems="{Binding Selected, Mode=TwoWay}">
+                                            ItemsSource="{Binding ActivityChoises}"
+                                            SelectionMode="Multiple"
+                                            SelectedItems="{Binding Selected, Mode=TwoWay}"
+                                            SelectionChanged="OnSelectionChanged"
+                                            SelectionChangedCommandParameter="{Binding .}">
 
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate>

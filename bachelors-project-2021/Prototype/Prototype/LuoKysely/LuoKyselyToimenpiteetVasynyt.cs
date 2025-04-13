@@ -55,7 +55,12 @@ namespace Prototype
             {
                 Emoji = emoji;
                 ActivityChoises = activities;
-               
+
+                if (!ActivityChoises.Contains("Luo oma vaihtoehto..."))
+                {
+                    ActivityChoises.Add("Luo oma vaihtoehto...");
+                }
+
                 Selected = new ObservableCollection<object>();
                 foreach (var item in emoji.activities)
                 {
@@ -68,12 +73,12 @@ namespace Prototype
         {
             InitializeComponent();
 
-                  //alustus
-                Items = new List<CollectionItem>();
-                int numero = 0;
-                foreach( var individual in SurveyManager.GetInstance().GetSurvey().emojis)
-                {
-                if(individual.Name== "Väsynyt")
+            //alustus
+            Items = new List<CollectionItem>();
+            int numero = 0;
+            foreach (var individual in SurveyManager.GetInstance().GetSurvey().emojis)
+            {
+                if (individual.Name == "Väsynyt")
                 {
                     Items.Add(new CollectionItem(SurveyManager.GetInstance().GetSurvey().emojis[numero], Const.activities[4]));
                     Console.WriteLine("Emojin nimi:" + new CollectionItem(SurveyManager.GetInstance().GetSurvey().emojis[numero], Const.activities[1]).Emoji.Name);
@@ -91,7 +96,7 @@ namespace Prototype
 
             int selectedEmojis = SurveyManager.GetInstance().GetSurvey().emojis.Count;
             int emojiNumber = numero + 1;
-            String title = "Aktiviteetti " +emojiNumber+ "/"+selectedEmojis ;
+            String title = "Aktiviteetti " + emojiNumber + "/" + selectedEmojis;
             MyStringProperty = title;
 
         }
@@ -103,21 +108,35 @@ namespace Prototype
         }
 
 
-        void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        async void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (sender is CollectionView cv && cv.SelectionChangedCommandParameter is CollectionItem item)
             {
+                var valittu = e.CurrentSelection.FirstOrDefault() as string;
 
+                if (valittu == "Luo oma vaihtoehto...")
+                {
+                    cv.SelectedItems.Remove(valittu);
+
+                    await Navigation.PushAsync(new Prototype.LuoKysely.LuoOmaVaihtoehto((syote) =>
+                    {
+                        if (!string.IsNullOrWhiteSpace(syote) && !item.ActivityChoises.Contains(syote))
+                        {
+                            item.ActivityChoises.Insert(item.ActivityChoises.Count - 1, syote);
+                            item.Selected.Add(syote);
+                        }
+                    }));
+                }
             }
         }
 
 
         async void JatkaButtonClicked(object sender, EventArgs e)
         {
-            
-			//error if not all emojis have at least 2 selected activity
-			if (!ActivitiesSet())
-			{
+
+            //error if not all emojis have at least 2 selected activity
+            if (!ActivitiesSet())
+            {
                 await DisplayAlert("Kaikkia valintoja ei ole tehty", "Sinun on valittava vähintään kaksi aktiviteettia", "OK");
                 return;
             }
@@ -130,8 +149,8 @@ namespace Prototype
             {
                 foreach (var selection in item.Selected)
                 {
-                    Console.WriteLine("Lisätään aktiviteetti:" +selection as string);
-                    Console.WriteLine(item.Emoji.Name +"emojin yhteyteen");
+                    Console.WriteLine("Lisätään aktiviteetti:" + selection as string);
+                    Console.WriteLine(item.Emoji.Name + "emojin yhteyteen");
                     tempActivities.Add(selection as string);
                 }
                 item.Emoji.activities = tempActivities;
@@ -191,13 +210,12 @@ namespace Prototype
 
                 }
                 else { }
-            }else
-                {
+            }
+            else
+            {
                 await Navigation.PushAsync(new LuoKyselyLopetus());
 
             }
-
-
 
         }
 
@@ -206,7 +224,7 @@ namespace Prototype
         {
             foreach (var item in Items)
             {
-                if (item.Selected.Count <2)
+                if (item.Selected.Count < 2)
                 {
                     return false;
                 }

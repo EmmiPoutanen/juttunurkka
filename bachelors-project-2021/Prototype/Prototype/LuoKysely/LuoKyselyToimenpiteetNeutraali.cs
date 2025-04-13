@@ -55,11 +55,17 @@ namespace Prototype
             {
                 Emoji = emoji;
                 ActivityChoises = activities;
-               
+
+                if (!ActivityChoises.Contains("Luo oma vaihtoehto..."))
+                {
+                    ActivityChoises.Add("Luo oma vaihtoehto...");
+                }
+
                 Selected = new ObservableCollection<object>();
                 foreach (var item in emoji.activities)
                 {
-                    Selected.Add(ActivityChoises[ActivityChoises.IndexOf(item)]);
+                    if (ActivityChoises.Contains(item))
+                        Selected.Add(item);
                 }
             }
         }
@@ -68,12 +74,12 @@ namespace Prototype
         {
             InitializeComponent();
 
-                  //alustus
-                Items = new List<CollectionItem>();
-                int numero = 0;
-                foreach( var individual in SurveyManager.GetInstance().GetSurvey().emojis)
-                {
-                if(individual.Name== "Neutraali")
+            //alustus
+            Items = new List<CollectionItem>();
+            int numero = 0;
+            foreach (var individual in SurveyManager.GetInstance().GetSurvey().emojis)
+            {
+                if (individual.Name == "Neutraali")
                 {
                     Items.Add(new CollectionItem(SurveyManager.GetInstance().GetSurvey().emojis[numero], Const.activities[2]));
                     Console.WriteLine("Emojin nimi:" + new CollectionItem(SurveyManager.GetInstance().GetSurvey().emojis[numero], Const.activities[2]).Emoji.Name);
@@ -102,21 +108,35 @@ namespace Prototype
 
         }
 
-        void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        async void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (sender is CollectionView cv && cv.SelectionChangedCommandParameter is CollectionItem item)
             {
+                var valittu = e.CurrentSelection.FirstOrDefault() as string;
 
+                if (valittu == "Luo oma vaihtoehto...")
+                {
+                    cv.SelectedItems.Remove(valittu);
+
+                    await Navigation.PushAsync(new Prototype.LuoKysely.LuoOmaVaihtoehto((syote) =>
+                    {
+                        if (!string.IsNullOrWhiteSpace(syote) && !item.ActivityChoises.Contains(syote))
+                        {
+                            item.ActivityChoises.Insert(item.ActivityChoises.Count - 1, syote);
+                            item.Selected.Add(syote);
+                        }
+                    }));
+                }
             }
         }
 
 
         async void JatkaButtonClicked(object sender, EventArgs e)
         {
-            
-			//error if not all emojis have at least 2 selected activity
-			if (!ActivitiesSet())
-			{
+
+            //error if not all emojis have at least 2 selected activity
+            if (!ActivitiesSet())
+            {
                 await DisplayAlert("Kaikkia valintoja ei ole tehty", "Sinun on valittava vähintään kaksi aktiviteettia", "OK");
                 return;
             }
@@ -129,8 +149,8 @@ namespace Prototype
             {
                 foreach (var selection in item.Selected)
                 {
-                    Console.WriteLine("Lisätään aktiviteetti:" +selection as string);
-                    Console.WriteLine(item.Emoji.Name +"emojin yhteyteen");
+                    Console.WriteLine("Lisätään aktiviteetti:" + selection as string);
+                    Console.WriteLine(item.Emoji.Name + "emojin yhteyteen");
                     tempActivities.Add(selection as string);
                 }
                 item.Emoji.activities = tempActivities;
@@ -151,10 +171,10 @@ namespace Prototype
             }
             int nextEmojiNumber = numero + 1;
 
-            
+
             int luku = SurveyManager.GetInstance().GetSurvey().emojis.Count;
-            Console.WriteLine(nextEmojiNumber +"on seuraava taulukon luku ja emojeita on listassa: " + luku);
-            if(nextEmojiNumber < luku)
+            Console.WriteLine(nextEmojiNumber + "on seuraava taulukon luku ja emojeita on listassa: " + luku);
+            if (nextEmojiNumber < luku)
             {
                 String name = SurveyManager.GetInstance().GetSurvey().emojis[nextEmojiNumber].Name;
                 if (name == "Iloinen")
@@ -202,7 +222,7 @@ namespace Prototype
                 await Navigation.PushAsync(new LuoKyselyLopetus());
 
             }
-            
+
         }
 
         //function which checks whether the user has selected at least 2 activity for each emoji.
@@ -210,7 +230,7 @@ namespace Prototype
         {
             foreach (var item in Items)
             {
-                if (item.Selected.Count <2)
+                if (item.Selected.Count < 2)
                 {
                     return false;
                 }
