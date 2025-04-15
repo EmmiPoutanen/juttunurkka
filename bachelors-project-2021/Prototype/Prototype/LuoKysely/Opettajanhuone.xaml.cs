@@ -61,12 +61,24 @@ namespace Prototype
             //siirrytään "luo uus kysely 1/3" sivulle 
             await Navigation.PushAsync(new LuoKyselyJohdatus());
         }
-
+        private async void ArkistoClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new TallennetutKyselyt());
+        }
+        /* Vanha arkisto push up ikkuna
         private void Button_Clicked(object sender, EventArgs e)
         {
-            PickerList.Focus();
-        }
+            PickerList.SelectedIndex = -1;
+            SelectedSurvey = null;
 
+            PickerList.IsEnabled = false;
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                PickerList.IsEnabled = true;
+                PickerList.Focus();
+            });
+        }
+        */
         async void OletusClicked(object sender, EventArgs e)
         {
             SurveyManager.GetInstance().SetDefaultSurvey();
@@ -93,6 +105,11 @@ namespace Prototype
         {
             var picker = (Picker)sender;
             int selectedIndex = picker.SelectedIndex;
+
+            if (selectedIndex == -1)
+            {
+                return;
+            }
 
             SelectedSurvey = picker.Items[picker.SelectedIndex];
 
