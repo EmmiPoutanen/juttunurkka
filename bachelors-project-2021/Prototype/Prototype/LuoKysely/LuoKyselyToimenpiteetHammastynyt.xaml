@@ -128,7 +128,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                                                   ColumnDefinitions="Auto, *"  >
 
                                             <Label 
-                                                    Text="{Binding .}" 
+                                                    Text="{Binding Title}" 
                                                     TextColor="Black"
                                                     FontSize="20"
                                                     Margin="5,10,0,5"

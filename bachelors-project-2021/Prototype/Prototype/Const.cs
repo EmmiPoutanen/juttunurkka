@@ -37,39 +37,41 @@ namespace Prototype
 			"Tämä tunti oli mielestäni"
 		};
 
-		public static Dictionary<int, List<string>> activities = new Dictionary<int, List<string>>() {
-			{ 0, new List<string>() {
-				"Jokainen kertoo mikä on kivaa",
-				"Kehu vieressä istuvaa",
-				"Valitaan päivän apuope",
-			}},
-			{ 1, new List<string>() {
-				"Kerrotaan ohjaajalle mikä hämmästyttää",
-				"Kerrotaan ryhmälle mikä hämmästyttää",
-			}},
-			{ 2, new List<string>() {
-				"Piirretään taululle",
-				"Jokainen kertoo opettajalle yhden mietteen",
-				"Jokainen kertoo ryhmälle yhden ajatuksen",
-			}},
-			{ 3, new List<string>() {
-				"Positiivinen palloleikki",
-				"Kirjoitetaan ohjaajalle salattu lappu",
-			}},
-			{ 4, new List<string>() {
-				"5 minuutin tauko",
-				"Siirretään oppitunti ulos",
-			}},
-			{ 5, new List<string>() {
-				"Jokainen kertoo yhden asian mikä mietityttää",
-				"Jokainen kysyy kysymyksen ohjaajalta",
-				"Jokainen kysyy kysymyksen ryhmältä",
-			}},
-			{ 6, new List<string>() {
-				"Naurujoogatuokio",
-				"Katsotaan video",
-				"Kerrotaan vitsi",
-			}}
+		public static Dictionary<int, List<Activity>> activities = new Dictionary<int, List<Activity>>() {
+            { 0, new List<Activity>()
+			  {
+				  new() { Title = "Jokainen kertoo mikä on kivaa", ImageSource = "thumbsUp.png" },
+				  new() { Title = "Kehu vieressä istuvaa", ImageSource = "thumbsUp.png" },
+				  new() { Title = "Valitaan päivän apuope", ImageSource = "thumbsUp.png" }
+			  }
+			},
+            { 1, new List<Activity>() {
+                new() { Title = "Kerrotaan ohjaajalle mikä hämmästyttää", ImageSource = "thumbsUp.png" },
+                new() { Title = "Kerrotaan ryhmälle mikä hämmästyttää", ImageSource = "thumbsUp.png" },
+            }},
+			{ 2, new List<Activity>() {
+                new() { Title = "Piirretään taululle", ImageSource = "thumbsUp.png" },
+                new() { Title = "Jokainen kertoo opettajalle yhden mietteen", ImageSource = "thumbsUp.png" },
+                new() { Title = "Jokainen kertoo ryhmälle yhden ajatuksen", ImageSource = "thumbsUp.png" },
+            }},
+			{ 3, new List<Activity>() {
+                new() { Title = "Positiivinen palloleikki", ImageSource = "thumbsUp.png" },
+                new() { Title = "Kirjoitetaan ohjaajalle salattu lappu", ImageSource = "thumbsUp.png" },
+            }},
+			{ 4, new List<Activity>() {
+                new() { Title = "5 minuutin tauko", ImageSource = "thumbsUp.png" },
+                new() { Title = "Siirretään oppitunti ulos", ImageSource = "thumbsUp.png" },
+            }},
+			{ 5, new List<Activity>() {
+                new() { Title = "Jokainen kertoo yhden asian mikä mietityttää", ImageSource = "thumbsUp.png" },
+                new() { Title = "Jokainen kysyy kysymyksen ohjaajalta", ImageSource = "thumbsUp.png" },
+                new() { Title = "Jokainen kysyy kysymyksen ryhmältä", ImageSource = "thumbsUp.png" },
+            }},
+			{ 6, new List<Activity>() {
+                new() { Title = "Naurujoogatuokio", ImageSource = "thumbsUp.png" },
+                new() { Title = "Katsotaan video", ImageSource = "thumbsUp.png" },
+                new() { Title = "Kerrotaan vitsi", ImageSource = "thumbsUp.png" },
+            }}
 		};
 	
 		public static class Network {
