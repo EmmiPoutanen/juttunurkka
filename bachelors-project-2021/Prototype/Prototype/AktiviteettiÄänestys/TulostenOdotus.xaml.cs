@@ -49,12 +49,12 @@ namespace Prototype
             //poistetaan turha navigointipalkki
             NavigationPage.SetHasNavigationBar(this, false);
 
-
+            Console.WriteLine("Starting activity vote");
             Main.GetInstance().host.StartActivityVote();
 
             
             //timer set to vote times, cooldowns, plus one extra
-            _countSeconds = Main.GetInstance().host.voteCalc.vote1Timer + Main.GetInstance().host.voteCalc.vote2Timer + ( 3 * Main.GetInstance().host.voteCalc.coolDown);
+            _countSeconds = Main.GetInstance().host.voteCalc.vote1Timer + ( 3 * Main.GetInstance().host.voteCalc.coolDown);
             // TODO Xamarin.Forms.Device.StartTimer is no longer supported. Use Microsoft.Maui.Dispatching.DispatcherExtensions.StartTimer instead. For more details see https://learn.microsoft.com/en-us/dotnet/maui/migration/forms-projects#device-changes
             Device.StartTimer(TimeSpan.FromSeconds(1), () =>
             {

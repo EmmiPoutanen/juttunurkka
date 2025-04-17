@@ -28,27 +28,29 @@ using Microsoft.Maui.Controls.Xaml;
 using Microsoft.Maui.Controls.Compatibility;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui;
+using Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific;
+using Button = Microsoft.Maui.Controls.Button;
 
 namespace Prototype
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class AktiviteettiäänestysEka : ContentPage
 	{
-
 		private int _countSeconds = 10;
+        private const double DefaultBorderWidth = 0;
+        private const double SelectedBorderWidth = 6;
+        private Button _selectedButton;
+        private readonly QuestionToSpeech _questionToSpeechClient = new();
 
-
-		public IList<CollectionItem> Items { get; set; }
+        public IList<CollectionItem> Items { get; set; }
 		public class CollectionItem
 		{
 			public int ID;
 			public string ImageSource { get; set; }
-			public IList<string> ActivityChoises { get; set; }
+			public IList<Activity> ActivityChoises { get; set; }
 			public string Selected { get; set; }
 
-
-
-			public CollectionItem(int ID, string ImageSource, IList<string> ActivityChoises)
+            public CollectionItem(int ID, string ImageSource, IList<Activity> ActivityChoises)
 			{
 				this.ID = ID;
 				this.ImageSource = ImageSource;
@@ -72,14 +74,50 @@ namespace Prototype
 				Console.WriteLine("Key: {0}, Value: {1}", item.Key, item.Value);
 				img = "emoji" + item.Key.ToString() + ".png";
 				Items.Add(new CollectionItem(item.Key, img, item.Value));
-			}
+            }
 
 			BindingContext = this;
 
 			Vote1();
-		}
+            ActivityButton1.Clicked += OnButton1Clicked;
+            ActivityButton2.Clicked += OnButton2Clicked;
+        }
 
-		private async void Vote1()
+        private async void OnButton1Clicked(object sender, EventArgs e)
+        {
+            SelectButton(ActivityButton1);
+            var title = Items[0].ActivityChoises[0].Title;
+            if (!string.IsNullOrEmpty(title))
+            {
+                await _questionToSpeechClient.Speak(title);
+            }
+        }
+
+        private async void OnButton2Clicked(object sender, EventArgs e)
+        {
+            SelectButton(ActivityButton2);
+            var title = Items[0].ActivityChoises[1].Title;
+            if (!string.IsNullOrEmpty(title))
+            {
+                await _questionToSpeechClient.Speak(title);
+            }
+        }
+
+        private void SelectButton(Button selectedButton)
+        {
+            // Reset previously selected button
+            if (_selectedButton != null)
+            {
+                _selectedButton.BorderWidth = DefaultBorderWidth;
+            }
+
+            // Set new selected button
+            _selectedButton = selectedButton;
+            _selectedButton.BorderWidth = SelectedBorderWidth;
+            SaveButton.IsEnabled = true;
+        }
+
+        private async void Vote1()
 		{
 
 			_countSeconds = Main.GetInstance().client.vote1Time;
@@ -88,7 +126,7 @@ namespace Prototype
 		   {
 			   _countSeconds--;
 
-			   timer.Text = _countSeconds.ToString();
+			   //timer.Text = _countSeconds.ToString();
 
 
 			   if (_countSeconds == 0)
@@ -103,68 +141,50 @@ namespace Prototype
 
 			await Task.Delay(Main.GetInstance().client.vote1Time * 1000);
 
-			SendVote1();
-			bool success = await Main.GetInstance().client.ReceiveVote2Candidates();
-			if (success)
-			{
-				//received vote 2 changing view
-				await Navigation.PushAsync(new AktiviteettiäänestysToka());
-			}
+            await SendActivityVote();
+            await Navigation.PushAsync(new AktiviteettiäänestysTulokset());
+
 		}
 
-		//Device back button disabled
-		protected override bool OnBackButtonPressed()
+		private async void SaveAnswer(object sender, EventArgs e)
 		{
-			return true;
+            if (_selectedButton == null)
+            {
+                Console.WriteLine("No activity selected");
+                return;
+            }
 
-		}
+            await SendActivityVote();
+            await Navigation.PushAsync(new AktiviteettiäänestysTulokset());
+        }
 
+        private async Task SendActivityVote()
+        {
+            var currentItem = Items[0];
+            Activity answer = null;
 
-		void btnPopupButton_Clicked(object sender, EventArgs e)
-		{
-			
-			if (sender is Button b && b.Parent is Microsoft.Maui.Controls.Compatibility.Grid g && g.Children[2] is Frame f)
-			{
+            if (_selectedButton == ActivityButton1)
+            {
+                answer = currentItem.ActivityChoises[0];
+            }
+            else if (_selectedButton == ActivityButton2)
+            {
+                answer = currentItem.ActivityChoises[1];
+            }
 
-				if (f.IsVisible == false)
-				{
-
-					f.IsVisible = true;
-
-				}
-
-				else if (f.IsVisible == true)
-				{
-
-					f.IsVisible = false;
-				}
-
-				// change the text of the button to the answer
-				CollectionView view = (f.Children[0] as Microsoft.Maui.Controls.Compatibility.StackLayout).Children[0] as CollectionView;
-				b.Text = view.SelectedItem as string;
-			}
-		}
-
-
-
-
-		async void SendVote1()
-		{
-			//prepare answer to host
-			Dictionary<int, string> answer = new Dictionary<int, string>();
-			foreach (var item in Items)
-			{
-				if (item.Selected == null)
-				{
-					break;
-				}
-				answer.Add(item.ID, item.Selected);
-			}
-			//avoid sending empty answer
-			if (answer.Count != 0)
-			{
-				await Main.GetInstance().client.SendVote1Result(answer);
-			}
-		}
+            if (answer != null)
+            {
+                // TODO: Should send the correct answer, need to change the format in SendVote1Result()
+                var dummyAnswer = new Dictionary<int, string>
+                {
+                    { 1, "Activity Name" } // Replace with realistic test data
+				};
+                await Main.GetInstance().client.SendVote1Result(dummyAnswer);
+            }
+            else
+            {
+                Console.WriteLine("Something went wrong with activity selection.");
+            }
+        }
 	}
 }

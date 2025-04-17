@@ -25,11 +25,8 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 
     <StackLayout >
 
-        <!--Tähän labeliin voi sitten laittaa tekstin kohdalle "{Binding introMessage }" kun opettaja puolelta valmista,
-        niin hakee tähän siellä kyselyn kysymykseksi asetetun kysymyksen -->
-
         <Label 
-            Text="Mitä kuuluu tänään?"
+            Text="{Binding introMessage}"
             VerticalOptions="CenterAndExpand" 
             HorizontalOptions="CenterAndExpand"
             HorizontalTextAlignment="Center"

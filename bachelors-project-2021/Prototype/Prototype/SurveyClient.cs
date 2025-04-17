@@ -69,12 +69,13 @@ namespace Prototype
 		/// <value>
 		/// Dictionary of candidates in the first phase of vote. Key: emojiID, Value: list of activity choises
 		/// </value>
-		public Dictionary<int, IList<string>> voteCandidates1 { get; private set; } = null;
+		public Dictionary<int, IList<Activity>> voteCandidates1 { get; private set; } = null;
 
 		/// <value>
 		/// Integer value containing seconds for the first phase of vote timer
+		/// TODO: See what to do with this. We dont need the time from the client anymore.
 		/// </value>
-		public int vote1Time { get; private set; } = 0;
+		public int vote1Time { get; private set; } = 30;
 
 		/// <value>
 		/// List of candidates in the second phase of vote
@@ -156,40 +157,59 @@ namespace Prototype
             {
                 int hostPort = port > 0 ? port : Const.Network.ServerTCPListenerPort;
                 Console.WriteLine($"Attempting direct TCP connection to {hostIp}:{hostPort}");
-
                 client = new TcpClient();
                 await client.ConnectAsync(hostIp, hostPort);
-
                 NetworkStream stream = client.GetStream();
+
+                // Send room code
                 byte[] roomCodeBytes = Encoding.Unicode.GetBytes(RoomCode);
                 await stream.WriteAsync(roomCodeBytes, 0, roomCodeBytes.Length);
                 await stream.FlushAsync();
 
-                byte[] readBuffer = new byte[128];
-                int bytesRead = await stream.ReadAsync(readBuffer, 0, readBuffer.Length);
-                if (bytesRead == 0)
+                // Read intro message
+                byte[] sizeBuffer = new byte[4];
+                int bytesRead = await stream.ReadAsync(sizeBuffer, 0, sizeBuffer.Length);
+                if (bytesRead != 4)
                 {
+                    Console.WriteLine("Failed to read message size");
                     CleanupClient();
                     return false;
                 }
-                intro = Encoding.Unicode.GetString(readBuffer, 0, bytesRead);
 
-                byte[] readBuffer1 = new byte[256];
-                StringBuilder emojiBuilder = new StringBuilder();
+                int messageSize = BitConverter.ToInt32(sizeBuffer, 0);
+                byte[] messageBuffer = new byte[messageSize];
+                bytesRead = await stream.ReadAsync(messageBuffer, 0, messageSize);
 
-                do
+                if (bytesRead != messageSize)
                 {
-                    int numberOfBytesRead = await stream.ReadAsync(readBuffer1, 0, readBuffer1.Length);
-                    if (numberOfBytesRead == 0)
-                    {
-                        CleanupClient();
-                        return false;
-                    }
-                    emojiBuilder.Append(Encoding.Unicode.GetString(readBuffer1, 0, numberOfBytesRead));
-                } while (stream.DataAvailable);
+                    Console.WriteLine("Failed to read complete intro message");
+                    CleanupClient();
+                    return false;
+                }
 
-                emoji1 = emojiBuilder.ToString();
-                stream.Flush();
+                intro = Encoding.Unicode.GetString(messageBuffer);
+
+                // Read emoji data
+                bytesRead = await stream.ReadAsync(sizeBuffer, 0, sizeBuffer.Length);
+                if (bytesRead != 4)
+                {
+                    Console.WriteLine("Failed to read emoji data size");
+                    CleanupClient();
+                    return false;
+                }
+
+                messageSize = BitConverter.ToInt32(sizeBuffer, 0);
+                messageBuffer = new byte[messageSize];
+                bytesRead = await stream.ReadAsync(messageBuffer, 0, messageSize);
+
+                if (bytesRead != messageSize)
+                {
+                    Console.WriteLine("Failed to read complete emoji data");
+                    CleanupClient();
+                    return false;
+                }
+
+                emoji1 = Encoding.Unicode.GetString(messageBuffer);
 
                 return true;
             }
@@ -234,37 +254,54 @@ namespace Prototype
 						Console.WriteLine($"Message: {replyMessage}");
 
 						try
-						{	
-							//attempt to connect
-							client = new TcpClient();
-							client.Connect(new IPEndPoint(reply.Result.RemoteEndPoint.Address, Const.Network.ServerTCPListenerPort));
+						{
+                            // Attempt to connect to host with TCP client
+                            client = new TcpClient();
+                            client.Connect(new IPEndPoint(reply.Result.RemoteEndPoint.Address, Const.Network.ServerTCPListenerPort));
+                            // receive intro message
+                            NetworkStream ns = client.GetStream();
 
-							//receive intro message
-							NetworkStream ns = client.GetStream();
-
-							byte[] readBuffer = new byte[128];
-							int bytesRead = await ns.ReadAsync(readBuffer, 0, readBuffer.Length);
-
-							if (bytesRead == 0)
-							{
-								Console.WriteLine("Somehow we just read something from disconnected network, this is fine.");
-								return false;
-							}
-							intro = Encoding.Unicode.GetString(readBuffer, 0, bytesRead);
-                            //	byte[] readBuffer1 = new byte[128];
-
-                            byte[] readBuffer1 = new byte[256];
-                            StringBuilder emojiBuilder = new StringBuilder();
-                            do
+                            // Read intro message
+                            byte[] sizeBuffer = new byte[4];
+                            int bytesRead = await ns.ReadAsync(sizeBuffer, 0, sizeBuffer.Length);
+                            if (bytesRead != 4)
                             {
-                                int emojiBytes = await ns.ReadAsync(readBuffer1, 0, readBuffer1.Length);
-                                if (emojiBytes == 0) return false;
-                                emojiBuilder.Append(Encoding.Unicode.GetString(readBuffer1, 0, emojiBytes));
-                            } while (ns.DataAvailable);
+                                Console.WriteLine("Failed to read message size");
+                                return false;
+                            }
 
-                            emoji1 = emojiBuilder.ToString();
+                            int messageSize = BitConverter.ToInt32(sizeBuffer, 0);
+                            byte[] messageBuffer = new byte[messageSize];
+                            bytesRead = await ns.ReadAsync(messageBuffer, 0, messageSize);
+
+                            if (bytesRead != messageSize)
+                            {
+                                Console.WriteLine("Failed to read complete intro message");
+                                return false;
+                            }
+
+                            intro = Encoding.Unicode.GetString(messageBuffer);
+
+                            // Read emoji data
+                            bytesRead = await ns.ReadAsync(sizeBuffer, 0, sizeBuffer.Length);
+                            if (bytesRead != 4)
+                            {
+                                Console.WriteLine("Failed to read emoji data size");
+                                return false;
+                            }
+
+                            messageSize = BitConverter.ToInt32(sizeBuffer, 0);
+                            messageBuffer = new byte[messageSize];
+                            bytesRead = await ns.ReadAsync(messageBuffer, 0, messageSize);
+
+                            if (bytesRead != messageSize)
+                            {
+                                Console.WriteLine("Failed to read complete emoji data");
+                                return false;
+                            }
+
+                            emoji1 = Encoding.Unicode.GetString(messageBuffer);
                             ns.Flush();
-
                             return true;
                         }
 						catch(IOException ioe)
@@ -412,45 +449,6 @@ namespace Prototype
 		}
 
 		/// <summary>
-		/// Tries to send an answer to the second phase of the vote to the host
-		/// </summary>
-		/// <param name="answer">
-		/// The chosen activity
-		/// </param>
-		/// <returns>
-		/// Task object resulting in a boolean indicating whether the message was sent successfully
-		/// </returns>
-		public async Task<bool> SendVote2Result(string answer)
-		{
-
-			try
-			{
-				//prepare message
-				byte[] bytes = Encoding.Unicode.GetBytes(JsonConvert.SerializeObject(answer));
-
-				//send
-				NetworkStream ns = client.GetStream();
-				await ns.WriteAsync(bytes, 0, bytes.Length);
-
-				ns.Flush();
-				//no error, returning success
-				return true;
-			}
-			catch (ObjectDisposedException e)
-			{
-				Console.WriteLine("Host abruptly closed connection, most likely");
-				Console.WriteLine(e);
-			}
-			catch (NotSupportedException e)
-			{
-				Console.WriteLine("Stream does not support that operation");
-				Console.WriteLine(e);
-			}
-
-			return false;
-		}
-
-		/// <summary>
 		/// Tries to receive and parse a JSON string containing the summary of the concluded survey
 		/// </summary>
 		/// <returns>
@@ -460,22 +458,38 @@ namespace Prototype
 
 			try
 			{
-				NetworkStream ns = client.GetStream();
-				byte[] readBuffer = new byte[8192];
-				int bytesRead = await ns.ReadAsync(readBuffer, 0, readBuffer.Length);
+                NetworkStream ns = client.GetStream();
 
-				if (bytesRead == 0)
-				{
-					Console.WriteLine("Somehow we just read something from disconnected network, this is fine.");
-					return false;
-				}
+                // Read size prefix first
+                byte[] sizeBuffer = new byte[4];
+                int bytesRead = await ns.ReadAsync(sizeBuffer, 0, sizeBuffer.Length);
+                if (bytesRead != 4)
+                {
+                    Console.WriteLine("Failed to read message size or connection closed");
+                    return false;
+                }
 
-				summary = JsonConvert.DeserializeObject<SurveyData>(Encoding.Unicode.GetString(readBuffer, 0, bytesRead));
-				Console.WriteLine($"Received summary: {summary}");
+                // Determine message size from the prefix
+                int messageSize = BitConverter.ToInt32(sizeBuffer, 0);
+                Console.WriteLine($"Expecting survey data of size: {messageSize} bytes");
 
-				ns.Flush();
-				return true;
-			}
+                // Create a buffer of the exact size needed
+                byte[] messageBuffer = new byte[messageSize];
+                bytesRead = await ns.ReadAsync(messageBuffer, 0, messageSize);
+
+                if (bytesRead != messageSize)
+                {
+                    Console.WriteLine($"Failed to read complete message. Expected {messageSize} bytes, got {bytesRead}");
+                    return false;
+                }
+
+                // Convert to string and deserialize
+                string jsonString = Encoding.Unicode.GetString(messageBuffer);
+                Console.WriteLine($"Received JSON: {jsonString}");
+                summary = JsonConvert.DeserializeObject<SurveyData>(jsonString);
+                Console.WriteLine($"Received summary: {summary}");
+                return true;
+            }
 			catch (JsonException e)
 			{
 				Console.WriteLine("Received bad Json");
@@ -499,134 +513,100 @@ namespace Prototype
 			return false;
 		}
 
-		/// <summary>
-		/// Tries to receive and parse a JSON string containing candidates for the first phase of the vote
-		/// </summary>
-		/// <returns>
-		/// Task resulting in a boolean indicating whether the message was received successfully
-		/// </returns>
-		public async Task<bool> ReceiveVote1Candidates()  {
+        /// <summary>
+        /// Tries to receive and parse a JSON string containing candidates for the first phase of the vote
+        /// </summary>
+        /// <returns>
+        /// Task resulting in a boolean indicating whether the message was received successfully
+        /// </returns>
+        public async Task<bool> ReceiveVote1Candidates()
+        {
+            try
+            {
+                NetworkStream ns = client.GetStream();
 
-			try
-			{
-				NetworkStream ns = client.GetStream();
-				byte[] readBuffer = new byte[2048];
-				Console.WriteLine("Waiting for activity vote");
+                // First read - vote candidates (with size prefix)
+                byte[] sizeBuffer = new byte[4];
 
-				Task<int> bytesReadTask = ns.ReadAsync(readBuffer, 0, readBuffer.Length);
+                Task<int> bytesReadTask = ns.ReadAsync(sizeBuffer, 0, sizeBuffer.Length);
 
-				//allow cancellation of this task
-				do
-				{
-					if (token.IsCancellationRequested)
-					{
-						return false;
-					}
-					await Task.Delay(1000);
-				} while (bytesReadTask.Status != TaskStatus.RanToCompletion);
+                // Allow cancellation of this task
+                do
+                {
+                    if (token.IsCancellationRequested)
+                    {
+                        return false;
+                    }
+                    await Task.Delay(1000);
+                } while (bytesReadTask.Status != TaskStatus.RanToCompletion);
 
-				if (bytesReadTask.Result == 0)
-				{
-					Console.WriteLine("Somehow we just read something from disconnected network, this is fine.");
-					return false;
-				}
+                if (bytesReadTask.Result != 4)
+                {
+                    Console.WriteLine("Failed to read message size or connection closed");
+                    return false;
+                }
 
-				Console.WriteLine($"Bytes read: {bytesReadTask}");
+                int messageSize = BitConverter.ToInt32(sizeBuffer, 0);
+                byte[] messageBuffer = new byte[messageSize];
 
-				//expecting JSON string containing Dictionary<int, IList<string>>
-				voteCandidates1 = JsonConvert.DeserializeObject<Dictionary<int, IList<string>>>(Encoding.Unicode.GetString(readBuffer, 0, bytesReadTask.Result));
-				Console.WriteLine("Received vote 1 candidates");
+                int bytesRead = await ns.ReadAsync(messageBuffer, 0, messageSize);
+                if (bytesRead != messageSize)
+                {
+                    Console.WriteLine("Failed to read complete message");
+                    return false;
+                }
 
-				//next, receive vote time
-				readBuffer = new byte[64];
-				Console.WriteLine("Waiting for vote 1 timer");
-				int bytesRead = await ns.ReadAsync(readBuffer, 0, readBuffer.Length);
+                string jsonString = Encoding.Unicode.GetString(messageBuffer);
+                Console.WriteLine($"Received JSON: {jsonString}");
+                voteCandidates1 = JsonConvert.DeserializeObject<Dictionary<int, IList<Activity>>>(jsonString);
+                Console.WriteLine("Received vote 1 candidates");
 
-				if (bytesRead == 0)
-				{
-					Console.WriteLine("Somehow we just read something from disconnected network, this is fine.");
-					return false;
-				}
+                Console.WriteLine("First message received successfully, waiting for timer message...");
+                Console.WriteLine($"Stream DataAvailable before timer read: {ns.DataAvailable}");
+                // Second read - vote time (with size prefix)
+                return true;
+				/*
+                byte[] sizeBufferTimer = new byte[4];
+                int bytesReadTimer = await ns.ReadAsync(sizeBufferTimer, 0, sizeBufferTimer.Length);
+                Console.WriteLine($"Read {bytesReadTimer} bytes for timer size prefix");
 
-				Console.WriteLine($"Bytes read: {bytesRead}");
+                do
+                {
+                    if (token.IsCancellationRequested)
+                    {
+                        return false;
+                    }
+                    await Task.Delay(1000);
+                } while (bytesReadTask.Status != TaskStatus.RanToCompletion);
 
-				//expecting string containing int
-				vote1Time = int.Parse(Encoding.Unicode.GetString(readBuffer, 0, bytesRead));
-				ns.Flush();
-				return true;
-			}
-			catch (JsonException e) 
-			{
-				Console.WriteLine("Received bad JSON");
-				Console.WriteLine(e);
-			}
-			catch (ObjectDisposedException e)
-			{
-				Console.WriteLine($"Connection closed or lost to server at: {client.Client.RemoteEndPoint}");
-				Console.WriteLine(e);
-			}
-			catch (FormatException e)
-			{
-				Console.WriteLine("Received bad int");
-				Console.WriteLine(e);
-			}
-			catch (NotSupportedException e)
-			{
-				Console.WriteLine("Stream does not support that operation");
-				Console.WriteLine(e);
-			}
+                if (bytesReadTimer == 4)
+                {
+                    int messageSizeTimer = BitConverter.ToInt32(sizeBufferTimer, 0);
+                    Console.WriteLine($"Timer message size: {messageSizeTimer} bytes");
 
-			return false;
+                    byte[] messageBufferTimer = new byte[messageSizeTimer];
+                    bytesReadTimer = await ns.ReadAsync(messageBufferTimer, 0, messageSizeTimer);
+                    Console.WriteLine($"Read {bytesReadTimer} bytes for timer message content");
 
-		}
-
-		/// <summary>
-		/// Tries to receive and parse a JSON string containing candidates for the second phase of the vote
-		/// </summary>
-		/// <returns>
-		/// Task resulting in a boolean indicating whether the message was received successfully
-		/// </returns>
-		public async Task<bool> ReceiveVote2Candidates()
-		{
-
-			try
-			{
-				NetworkStream ns = client.GetStream();
-				byte[] readBuffer = new byte[2048];
-				Console.WriteLine("Waiting for activity vote 2");
-				int bytesRead = await ns.ReadAsync(readBuffer, 0, readBuffer.Length);
-
-				if (bytesRead == 0)
-				{
-					Console.WriteLine("Somehow we just read something from disconnected network, this is fine.");
-					return false;
-				}
-
-				Console.WriteLine($"Bytes read: {bytesRead}");
-
-				//expecting JSON string containing List<string>
-				voteCandidates2 = JsonConvert.DeserializeObject<List<string>>(Encoding.Unicode.GetString(readBuffer, 0, bytesRead));
-				Console.WriteLine("Received vote 2 candidates");
-
-				//next, receive vote time
-				readBuffer = new byte[64];
-				Console.WriteLine("Waiting for vote 2 timer");
-				bytesRead = await ns.ReadAsync(readBuffer, 0, readBuffer.Length);
-
-				if (bytesRead == 0)
-				{
-					Console.WriteLine("Somehow we just read something from disconnected network, this is fine.");
-					return false;
-				}
-
-				Console.WriteLine($"Bytes read: {bytesRead}");
-
-				//expecting string containing int
-				vote2Time = int.Parse(Encoding.Unicode.GetString(readBuffer, 0, bytesRead));
-				ns.Flush();
-				return true;
-			}
-			catch (JsonException e)
+                    if (bytesReadTimer == messageSizeTimer)
+                    {
+                        string timerString = Encoding.Unicode.GetString(messageBufferTimer);
+                        Console.WriteLine($"Timer string: '{timerString}'");
+                        vote1Time = int.Parse(timerString);
+                        Console.WriteLine($"Received vote time: {vote1Time}");
+                        return true;
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Failed to read complete timer message. Expected {messageSize} bytes, got {bytesRead}");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"Failed to read timer size prefix. Expected 4 bytes, got {bytesRead}");
+                }*/
+            }
+            catch (JsonException e) 
 			{
 				Console.WriteLine("Received bad JSON");
 				Console.WriteLine(e);

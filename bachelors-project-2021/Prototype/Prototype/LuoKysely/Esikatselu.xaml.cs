@@ -46,26 +46,26 @@ namespace Prototype
         public Esikatselu()
         {
             InitializeComponent();
-            Survey s = SurveyManager.GetInstance().GetSurvey();
-            introMessage += s.introMessage;
-            RoomCode = s.RoomCode;
-            Name = s.Name;
+            Survey survey = SurveyManager.GetInstance().GetSurvey();
+            introMessage += survey.introMessage;
+            RoomCode = survey.RoomCode;
+            Name = survey.Name;
 
-            Emojit = new List<CollectionItem>();
-            List<Emoji> temp = s.emojis;
+            Emojit = [];
+            List<Emoji> temp = survey.emojis;
 
             foreach (var item in temp)
             {
-                CollectionItem i = new CollectionItem();
-                i.Item = item;
-                i.ActivityChoises = item.activities;
+                CollectionItem i = new CollectionItem
+                {
+                    Item = item,
+                    ActivityChoises = [.. item.Activities.Select(activity => activity.Title!)]
+                };
                 Emojit.Add(i);
             }
 
             BindingContext = this;
         }
-
-
 
         async void ValmisButtonClicked(object sender, EventArgs e)
         {

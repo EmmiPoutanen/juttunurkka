@@ -75,10 +75,6 @@ namespace Prototype
 
             await Task.Delay(Main.GetInstance().client.vote2Time * 1000);
 
-            if (Selected != null)
-            {
-                await Main.GetInstance().client.SendVote2Result(Selected);
-            }
 
             bool success = await Main.GetInstance().client.ReceiveVoteResult();
             if (success)
