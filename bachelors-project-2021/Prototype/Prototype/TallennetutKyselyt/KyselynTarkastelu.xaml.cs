@@ -42,7 +42,7 @@ namespace Prototype
         public class CollectionItem
         {
             public Emoji Item { get; set; } = null;
-            public IList<string> ActivityChoises { get; set; } = null;
+            public IList<Activity> ActivityChoises { get; set; } = null;
             public string Color { get; set; } = null;
         }
 
@@ -75,7 +75,7 @@ namespace Prototype
             {
                 CollectionItem i = new CollectionItem();
                 i.Item = item;
-                i.ActivityChoises = item.activities;
+                i.ActivityChoises = item.Activities;
                 switch (item.Impact)
                 {
                     case "positive":

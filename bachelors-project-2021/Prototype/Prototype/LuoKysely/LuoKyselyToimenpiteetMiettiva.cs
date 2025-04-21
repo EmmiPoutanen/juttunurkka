@@ -46,23 +46,20 @@ namespace Prototype
         }
 
         public class CollectionItem
-
         {
             public Emoji Emoji { get; set; }
-            public IList<string> ActivityChoises { get; set; }
+            public IList<Activity> ActivityChoises { get; set; }
             public ObservableCollection<object> Selected { get; set; }
-            public CollectionItem(Emoji emoji, IList<string> activities)
+            public CollectionItem(Emoji emoji, IList<Activity> activities)
             {
                 Emoji = emoji;
-                ActivityChoises = activities;
+                ActivityChoises = new ObservableCollection<Activity>(activities);
 
-                if (!ActivityChoises.Contains("Luo oma vaihtoehto..."))
-                {
-                    ActivityChoises.Add("Luo oma vaihtoehto...");
-                }
+                if (emoji.Activities == null)
+                    emoji.Activities = new List<Activity>();
 
-                Selected = new ObservableCollection<object>();
-                foreach (var item in emoji.activities)
+                Selected = [];
+                foreach (var item in emoji.Activities)
                 {
                     if (ActivityChoises.Contains(item))
                         Selected.Add(item);
@@ -81,7 +78,9 @@ namespace Prototype
             {
                 if (individual.Name == "Miettivä")
                 {
-                    Items.Add(new CollectionItem(SurveyManager.GetInstance().GetSurvey().emojis[numero], Const.activities[5]));
+                    var activities = new List<Activity>(Const.activities[5]);
+                    activities.Add(new Activity { Title = "Luo oma vaihtoehto..." });
+                    Items.Add(new CollectionItem(individual, activities));
                     break;
                 }
                 else
@@ -106,20 +105,31 @@ namespace Prototype
         {
             if (sender is CollectionView cv && cv.SelectionChangedCommandParameter is CollectionItem item)
             {
-                var valittu = e.CurrentSelection.FirstOrDefault() as string;
-
-                if (valittu == "Luo oma vaihtoehto...")
+                // See if user has selected the "own choise"
+                foreach (var selectedItem in e.CurrentSelection)
                 {
-                    cv.SelectedItems.Remove(valittu);
+                    var selectedActivity = selectedItem as Activity;
+                    if (selectedActivity == null)
+                        continue;
 
-                    await Navigation.PushAsync(new Prototype.LuoKysely.LuoOmaVaihtoehto((syote) =>
+                    if (selectedActivity.Title == "Luo oma vaihtoehto...")
                     {
-                        if (!string.IsNullOrWhiteSpace(syote) && !item.ActivityChoises.Contains(syote))
+                        // Poista valinta heti, jotta se ei jää aktiiviseksi
+                        cv.SelectedItems.Remove(selectedActivity);
+
+                        await Navigation.PushAsync(new Prototype.LuoKysely.LuoOmaVaihtoehto((syote) =>
                         {
-                            item.ActivityChoises.Insert(item.ActivityChoises.Count - 1, syote);
-                            item.Selected.Add(syote);
-                        }
-                    }));
+                            if (!string.IsNullOrWhiteSpace(syote) && !item.ActivityChoises.Any(activity => activity.Title == syote))
+                            {
+                                var newActivity = new Activity { Title = syote };
+                                item.ActivityChoises.Insert(item.ActivityChoises.Count - 1, newActivity);
+                                item.Selected.Add(newActivity);
+                            }
+                        }));
+
+                        // Break after handling "Luo oma vaihtoehto...
+                        break;
+                    }
                 }
             }
         }
@@ -135,16 +145,17 @@ namespace Prototype
             }
 
             //asetetaan emojit survey olioon
-            List<Emoji> tempEmojis = new List<Emoji>();
-            List<string> tempActivities = new List<string>();
+            List<Emoji> tempEmojis = [];
+            List<Activity> tempActivities = [];
 
             foreach (var item in Items)
             {
                 foreach (var selection in item.Selected)
                 {
-                    tempActivities.Add(selection as string);
+                    if (selection is Activity selectedActivity && !string.IsNullOrEmpty(selectedActivity.Title))
+                        tempActivities.Add(selectedActivity);
                 }
-                item.Emoji.activities = tempActivities;
+                item.Emoji.Activities = tempActivities;
                 tempEmojis.Add(item.Emoji);
             }
             int numero = 0;
@@ -152,7 +163,7 @@ namespace Prototype
             {
                 if (individual.Name == "Miettivä")
                 {
-                    SurveyManager.GetInstance().GetSurvey().emojis[numero].activities = tempActivities;
+                    SurveyManager.GetInstance().GetSurvey().emojis[numero].Activities = tempActivities;
                     break;
                 }
                 else
