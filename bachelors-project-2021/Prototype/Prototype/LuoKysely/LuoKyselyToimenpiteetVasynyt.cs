@@ -98,11 +98,6 @@ namespace Prototype
 
         }
 
-        async void EdellinenButtonClicked(object sender, EventArgs e)
-        {
-            await Navigation.PopAsync();
-
-        }
 
 
         async void OnSelectionChanged(object sender, SelectionChangedEventArgs e)

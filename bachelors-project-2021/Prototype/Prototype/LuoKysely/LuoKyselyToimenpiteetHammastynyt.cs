@@ -97,11 +97,6 @@ namespace Prototype
 
         }
 
-        async void EdellinenButtonClicked(object sender, EventArgs e)
-        {
-            await Navigation.PopAsync();
-        }
-
         async void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (sender is CollectionView cv && cv.BindingContext is CollectionItem item)

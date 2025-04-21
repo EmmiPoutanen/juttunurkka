@@ -45,8 +45,8 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                    HeightRequest="60"
                    Margin="0,30,0,0"
             />
-        </StackLayout>        
-        
+        </StackLayout>
+
         <Label Text="Valitse aktiviteetit hymiölle  
                Valitse vähintään 2"
             VerticalOptions="Start" 
@@ -56,17 +56,6 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             TextColor="Black"   
             Margin="0,-20,0,0"
          />
-
-        <StackLayout Orientation="Horizontal"
-                     VerticalOptions="Start"
-                     HorizontalOptions="EndAndExpand"
-                     Margin="0,0,25,0">
-            <!--
-            <Label Text="Valitse kaikki"
-                   FontSize="25"/>
-            <CheckBox Color="Black"/> -->
-
-        </StackLayout>
 
         <Button Text="Vaihtoehdot"
             TextColor="black"
@@ -164,31 +153,20 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             ColumnDefinitions="Auto, Auto"
             VerticalOptions="EndAndExpand"
             HorizontalOptions="CenterAndExpand">
-
-            <Button Grid.Column="1"
-                Text="Edellinen"
-                Clicked="EdellinenButtonClicked"
-                VerticalOptions="EndAndExpand"
-                HorizontalOptions="CenterAndExpand" 
-                FontSize="19"
-                Margin="20,0,10,40"
-                CornerRadius="10"
-                HeightRequest="50"
-                WidthRequest="150"
-            />
-
+            
+            
             <Button Grid.Column="2" 
-                Text="Jatka"
-                Clicked="JatkaButtonClicked" 
-                VerticalOptions="EndAndExpand" 
-                HorizontalOptions="CenterAndExpand" 
-                FontSize="19"
-                Margin="20,0,10,40"
-                CornerRadius="10"
-                HeightRequest="50"
-                WidthRequest="150"
-                BackgroundColor="#feba4f"
-                TextColor="Black"
+                    Text="Jatka"
+                    Clicked="JatkaButtonClicked" 
+                    VerticalOptions="EndAndExpand" 
+                    HorizontalOptions="CenterAndExpand" 
+                    FontSize="19"
+                    Margin="20,0,10,40"
+                    CornerRadius="10"
+                    HeightRequest="50"
+                    WidthRequest="150"
+                    BackgroundColor="#feba4f"
+                    TextColor="Black"
             />
         </Grid>
 
