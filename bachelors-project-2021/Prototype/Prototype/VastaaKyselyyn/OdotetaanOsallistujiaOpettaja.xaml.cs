@@ -33,7 +33,7 @@ namespace Prototype
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class OdotetaanOsallistujiaOpettaja : ContentPage
     {
-        public string roomCode { get; set; } = "Roomcode: ";
+        public string roomCode { get; set; } = "Avainkoodi: ";
 
         public OdotetaanOsallistujiaOpettaja()
         {
