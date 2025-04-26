@@ -81,36 +81,8 @@ namespace Prototype
 
         void OnCheckBoxCheckedChanged(object sender, CheckedChangedEventArgs e)
         {
-            if (EmojisSet())
-            {
-                JatkaBtn.IsEnabled = true;
-            }
-            else
-            {
-                JatkaBtn.IsEnabled = false; 
-               
-            }
+            JatkaBtn.IsEnabled = EmojisSet();
         }
-
-        void OnSelectAllButtonClicked(object sender, EventArgs e)
-        {
-            foreach (var item in Emojit)
-            {
-                item.CheckBox = true;  
-            }
-
-            foreach (var item in Emojit)
-            {
-                OnCheckBoxCheckedChanged(this, new CheckedChangedEventArgs(true));
-            }
-        }
-
-
-        void OnAllCheckBoxCheckedChanged(object sender, CheckedChangedEventArgs e)
-         {
-
-         }
-
 
         async void EdellinenButtonClicked(object sender, EventArgs e) 
         {

@@ -37,9 +37,6 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             Margin="0,50,0,10"
         />
 
-        <Button Text="Valitse kaikki" Clicked="OnSelectAllButtonClicked"/>
-
-
         <CollectionView ItemsSource="{Binding Emojit}"
                         ItemsLayout="VerticalGrid, 2"
                         Margin="15,25,0,0">
