@@ -101,7 +101,15 @@ namespace Prototype
         {
             if (sender is CollectionView cv && cv.BindingContext is CollectionItem item)
             {
-                // See if user has selected the "own choise"
+                if (item.Selected.Count > 2)
+                {
+                    var lastSelected = e.CurrentSelection[e.CurrentSelection.Count - 1];
+                    item.Selected.Remove(lastSelected);
+                    cv.SelectedItems.Remove(lastSelected);
+                    await DisplayAlert("Vain kaksi aktiviteettia", "Valitse vain kaksi aktiviteettia", "OK");
+                    return;
+                }
+
                 foreach (var selectedItem in e.CurrentSelection)
                 {
                     var selectedActivity = selectedItem as Activity;
@@ -110,7 +118,6 @@ namespace Prototype
 
                     if (selectedActivity.Title == "Luo oma vaihtoehto...")
                     {
-                        // Poista valinta heti, jotta se ei jää aktiiviseksi
                         cv.SelectedItems.Remove(selectedActivity);
 
                         await Navigation.PushAsync(new Prototype.LuoKysely.LuoOmaVaihtoehto((syote) =>
@@ -218,12 +225,12 @@ namespace Prototype
             }
         }
 
-        //function which checks whether the user has selected at least 2 activity for each emoji.
+        //function which checks whether the user has selected only 2 activity for each emoji.
         private bool ActivitiesSet()
         {
             foreach (var item in Items)
             {
-                if (item.Selected.Count < 2)
+                if (item.Selected.Count != 2)
                 {
                     return false;
                 }

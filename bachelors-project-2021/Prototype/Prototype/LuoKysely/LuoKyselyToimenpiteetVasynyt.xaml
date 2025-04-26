@@ -49,7 +49,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
         </StackLayout>        
         
         <Label Text="Valitse aktiviteetit hymiölle  
-               Valitse vähintään 2"
+               Valitse 2"
             VerticalOptions="Start" 
             HorizontalOptions="CenterAndExpand"
             HorizontalTextAlignment="Center"
