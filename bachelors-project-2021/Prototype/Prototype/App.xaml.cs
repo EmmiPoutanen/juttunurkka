@@ -21,6 +21,7 @@ using Microsoft.Maui.Controls.Xaml;
 using Microsoft.Maui.Controls.Compatibility;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui;
+using Microsoft.Maui.Graphics;
 
 namespace Prototype
 {
@@ -30,7 +31,11 @@ namespace Prototype
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new MainPage());
+            MainPage = new NavigationPage(new MainPage())
+            {
+                BarBackgroundColor = Color.FromArgb("#ffea7f"),    //palkin väri
+                BarTextColor = Colors.Transparent                  //tekstin väri
+            };
         }
 
         protected override void OnStart()
