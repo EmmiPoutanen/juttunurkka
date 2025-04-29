@@ -37,10 +37,11 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 
         <StackLayout Orientation="Horizontal" VerticalOptions="Center">
 
-            <Label Text="kyselyn tarkastelu"
+            <Label Text="Kyselyn tarkastelu"
                    x:Name="title"
                    Margin="0 ,0,0,0"
                    FontSize="20" 
+                   FontAttributes="Bold"
                    HorizontalOptions="Center"  
                    VerticalOptions="Center"/>
         </StackLayout>
@@ -65,12 +66,14 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                 <Label Margin="0,10,0,10"
                     Text="{Binding introMessage}"
                     TextColor="Black"
-                    FontSize="20"/>
+                    FontAttributes="Bold"
+                    FontSize="22"/>
 
                 <Label Margin="0,10,0,10"
                         Text="{Binding roomCode}"
                         TextColor="Black"
-                        FontSize="20"/>
+                        FontAttributes="Bold"
+                        FontSize="22"/>
 
                 <CollectionView ItemsSource="{Binding Emojit}"
                    HeightRequest="400" >
@@ -96,9 +99,12 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                                         HorizontalOptions="CenterAndExpand"
                                         WidthRequest="300"
                                         HeightRequest="45"
+                                        FontSize="20"
+                                        TextColor="Black"
+                                        FontAttributes="Bold"
                                         BackgroundColor="#feba4f"
                                         BorderWidth="0.1"
-                                        Text="toimenpiteet" 
+                                        Text="Toimenpiteet" 
                                         Clicked="btnPopupButton_Clicked"
                                 />
 
@@ -180,6 +186,9 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 
                             <Button x:Name="MuokkaaButton"
 								    Text="Muokkaa"
+                                    TextColor="Black"
+                                    FontAttributes="Bold"
+                                    FontSize="20"
                                     Clicked="MuokkaaClicked"
                                     BackgroundColor="#feba4f"
                                     BorderWidth="0.1"

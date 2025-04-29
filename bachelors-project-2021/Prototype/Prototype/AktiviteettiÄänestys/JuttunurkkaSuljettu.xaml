@@ -21,78 +21,80 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Prototype.JuttunurkkaSuljettu"
+             BackgroundColor="#ffea7f"
              NavigationPage.HasNavigationBar="False">
-    <AbsoluteLayout
-        Padding="0"
-        HorizontalOptions="FillAndExpand"
-        VerticalOptions="FillAndExpand">
 
+    <StackLayout Padding="0,40,0,20"
+                 Spacing="40"
+                 VerticalOptions="FillAndExpand"
+                 HorizontalOptions="FillAndExpand">
 
-        <StackLayout AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
-                     AbsoluteLayout.LayoutFlags="All" 
-                     >
+        <!-- Logo -->
+        <Image Source="logo_no_background.png"
+               HeightRequest="300"
+               HorizontalOptions="Center" />
 
-            <StackLayout Padding="0,60,0,0">
+        <!-- Center content -->
+        <Grid HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
+            <!-- Green background base -->
+            <Frame BackgroundColor="#89e077"
+           CornerRadius="10"
+           Padding="20"
+           HasShadow="False"
+           WidthRequest="300"
+           HeightRequest="440"
+           Margin="0,80,0,0"
+           HorizontalOptions="Center"
+           VerticalOptions="Center">
 
+                <!-- Empty content; green serves only as base -->
+            </Frame>
 
+            <!-- Orange content box floating over the green -->
+            <Frame BackgroundColor="#FFBA49"
+           CornerRadius="12"
+           WidthRequest="340"
+           HeightRequest="180"
+           Padding="10"
+           Margin="0,0,0,0"
+           HasShadow="False"
+           HorizontalOptions="Center"
+           VerticalOptions="Start">
 
-                <Label Text="Juttunurkka"
-                   Margin="5,10,0,20"
-                   HorizontalOptions="Center"
-                   TextColor="#4383EF"
-                   FontSize="50"
-                 />
+                <StackLayout Spacing="10" HorizontalOptions="Center" WidthRequest="340">
+                    <Label Text="JUTTUNURKKA ON"
+                   FontSize="30"
+                   FontAttributes="Bold"
+                   TextColor="Black"
+                   LineBreakMode="WordWrap"
+                   HorizontalTextAlignment="Center" />
 
-                <StackLayout Orientation="Horizontal"  
-                    HorizontalOptions="CenterAndExpand"
-                    HeightRequest="500"
-                    WidthRequest="280"         
-                    BackgroundColor="#CBD6E5"
-                    Margin="0,20,0,0">
+                    <Label Text="SULJETTU"
+                   FontSize="30"
+                   FontAttributes="Bold"
+                   TextColor="Black"
+                   Margin="40,0,0,0"
+                   HorizontalTextAlignment="Start" />
 
-                    <Frame
-                        BackgroundColor="White"
-                        BorderColor="#4383EF"
-                        CornerRadius="10"
-                        HeightRequest="150" 
-                        WidthRequest="300"
-                        HorizontalOptions="Center" 
-                        VerticalOptions="Center"
-                        >
-
-                        <Grid>
-                            <Label Text="Juttunurkka on nyt suljettu" 
-                            Grid.Row="0"       
-                            FontSize="24" 
-                            TextColor="#4383EF" 
-                            Margin="10,10,10,0" 
-                            HorizontalOptions="Center"
-                            HorizontalTextAlignment="Center"/>
-
-                            <Image Source="lukko.png"
-                            Grid.Row="1"
-                            WidthRequest="70"
-                            />
-                        </Grid>
-
-                    </Frame>
-
+                    <Image Source="lukko.png"
+                   HeightRequest="100"
+                   Margin="0,-60,40,0"
+                   HorizontalOptions="End"/>
                 </StackLayout>
+            </Frame>
+        </Grid>
 
-                
-                <Button Text="Palaa alkuun"
-                    VerticalOptions="CenterAndExpand" 
-                    HorizontalOptions="CenterAndExpand" 
-                    Margin="20,10,10,35"
-                    CornerRadius="10"
-                    HeightRequest="50"
-                    WidthRequest="255"
-                    Clicked="AlkuunClicked"
-                 />
-
-            </StackLayout>
-
-        </StackLayout>
-
-    </AbsoluteLayout>
+        <!-- Button -->
+        <Button Text="Palaa alkuun"
+                BackgroundColor="#FFBA49"
+                TextColor="Black"
+                CornerRadius="10"
+                FontSize="22"
+                FontAttributes="Bold"
+                HeightRequest="50"
+                WidthRequest="255"
+                HorizontalOptions="Center"
+                BorderColor="Transparent"
+                Clicked="AlkuunClicked"/>
+    </StackLayout>
 </ContentPage>

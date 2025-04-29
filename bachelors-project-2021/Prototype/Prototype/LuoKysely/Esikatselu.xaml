@@ -30,13 +30,14 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             <Label Text="Esikatselu"
                    FontAttributes="Bold"
                    FontSize="28"
-                   TextColor="#4383EF"
+                   TextColor="Black"
                    HorizontalOptions="Center"/>
 
             <!-- Intro Message Button -->
             <Button Text="{Binding introMessage}"
                     TextColor="Black"
                     BorderColor="#4383EF"
+                    FontAttributes="Bold"
                     BackgroundColor="White"
                     FontSize="18"
                     CornerRadius="10"
@@ -93,6 +94,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                 <Label Text="Avainkoodi"
                        FontSize="18"
                        VerticalOptions="Center"
+                       FontAttributes="Bold"
                        TextColor="Black"/>
                 <Label Text="{Binding RoomCode}"
                        FontSize="18"
@@ -101,6 +103,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                        TextColor="Black"
                        HorizontalOptions="Start"
                        WidthRequest="80"
+                       FontAttributes="Bold"
                        HorizontalTextAlignment="Center"
                        VerticalTextAlignment="Center"/>
             </StackLayout>
@@ -112,9 +115,10 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                          Margin="0,20,0,0">
 
                 <Button Text="Valmis"
-                        BackgroundColor="#fb7185"
-                        TextColor="White"
+                        BackgroundColor="#feba4e"
+                        TextColor="Black"
                         CornerRadius="10"
+                        BorderColor="Transparent"
                         HeightRequest="50"
                         WidthRequest="120"
                         Clicked="ValmisButtonClicked"/>

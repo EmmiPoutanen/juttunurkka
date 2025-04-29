@@ -42,8 +42,10 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                     <Button Grid.Column="0" 
                         Text="Info"
                         Clicked="InfoClicked"    
+                        TextColor="Black"
                         HorizontalOptions="Start" 
-                        FontSize="19"
+                        FontSize="20"
+                        FontAttributes="Bold"
                         Margin="10,10,0,35"
                         CornerRadius="10"
                         BackgroundColor="#feba4f"
@@ -54,7 +56,9 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                     <Button Grid.Column="1"
                         Text="Opettaja"
                         HorizontalOptions="End" 
-                        FontSize="19"
+                        FontSize="20"
+                        FontAttributes="Bold"
+                        TextColor="Black"
                         Margin="0,10,10,35"
                         CornerRadius="10"
                         BackgroundColor="#feba4f"
@@ -103,7 +107,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 
                     <Label Text="TERVETULOA JUTTUNURKKAAN!"
                         Grid.Row="0"
-                        TextColor="White"
+                        TextColor="Black"
                         HorizontalOptions="Center"
                         VerticalOptions="Start"
                         FontSize="20"
@@ -114,7 +118,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 
                     <Label Text="AVAA JUTTUNURKKA JA ODOTA OPETTAJAN OHJEITA"
                         Grid.Row="1"
-                        TextColor="White"
+                        TextColor="Black"
                         HorizontalOptions="Center"
                         VerticalOptions="Start"
                         FontSize="20"
@@ -128,14 +132,16 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                         Clicked="LiityKyselyynClicked"
                         HorizontalOptions="Center"
                         VerticalOptions="Center"
-                        FontSize="29"
+                        FontSize="28"
+                        TextColor="Black"
                         Margin="0,60,0,0"
                         BorderColor="#ffea7f"
                         BorderWidth="0"
                         BackgroundColor="#feba4f"
                         CornerRadius="7"
-                        HeightRequest="180"
+                        HeightRequest="160"
                         WidthRequest="250"
+                        FontAttributes="Bold"
                         LineBreakMode="WordWrap"
                         />
                 </Grid>
@@ -216,6 +222,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                             
                              >
                         <Label Text="OpenMoji"
+                           FontAttributes="Bold"
                            HorizontalOptions="Center"
                            Margin="0,15,0,0"
                            BackgroundColor="#89e077"
@@ -224,6 +231,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                         <Label Margin="20,5,15,0" 
                            TextColor="Black"
                            FontSize="18"
+                           FontAttributes="Bold"
                            HorizontalOptions="Center">
                             <Label.FormattedText>
                                 <FormattedString>
@@ -252,7 +260,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                         <AbsoluteLayout Margin="15"  VerticalOptions ="EndAndExpand" HorizontalOptions="CenterAndExpand">
 
                             <Button Text="OK"
-                                    TextColor="{StaticResource QuinaryColor}"
+                                    TextColor="Black"
                                     FontAttributes="Bold"
                                     FontSize="18"
                                     HeightRequest="43"

@@ -50,6 +50,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
         <Label Text="Valitse aktiviteetit hymiölle  
                Valitse vähintään 2"
             VerticalOptions="Start" 
+            FontAttributes="Bold"
             HorizontalOptions="CenterAndExpand"
             HorizontalTextAlignment="Center"
             FontSize="25"
@@ -64,8 +65,8 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             VerticalOptions="CenterAndExpand" 
             HorizontalOptions="CenterAndExpand" 
             BorderColor="#4383EF"
-            BackgroundColor="Transparent"
-            FontSize="19"
+            BackgroundColor="White"
+            FontSize="22"
             Margin="0,-95,0,0"
             CornerRadius="10"
             HeightRequest="50"
@@ -168,6 +169,8 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                 WidthRequest="150"
                 BackgroundColor="#feba4f"
                 TextColor="Black"
+                FontAttributes="Bold"
+                BorderColor="Transparent"
             />
         </Grid>
 

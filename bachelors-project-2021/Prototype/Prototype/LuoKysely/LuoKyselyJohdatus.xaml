@@ -48,6 +48,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             TextColor="Black"
             TitleColor="Black"
             FontSize="20"
+            FontAttributes="Bold"
             BackgroundColor="White"    
             ItemsSource="{Binding Intros}"
             ItemDisplayBinding="{Binding introMessage}">
@@ -95,6 +96,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                 BorderWidth="0.1"
                 HeightRequest="50"
                 WidthRequest="150"
+                FontAttributes="Bold"
                 BackgroundColor="#feba4f"
                 TextColor="Black"
             />
