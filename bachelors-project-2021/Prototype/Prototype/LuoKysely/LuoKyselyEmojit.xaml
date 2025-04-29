@@ -33,8 +33,8 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             HorizontalTextAlignment="Center"
             FontAttributes="Bold"
             FontSize="30"
-            TextColor="#4383EF" 
-            Margin="0,50,0,10"
+            TextColor="Black" 
+            Margin="0,80,0,10"
         />
 
         <CollectionView ItemsSource="{Binding Emojit}"
@@ -78,6 +78,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             RowDefinitions="Auto, Auto"
             ColumnDefinitions="Auto, Auto"
             VerticalOptions="End"
+            Padding="10"
             HorizontalOptions="CenterAndExpand">
 
             <Button Grid.Column="1"
@@ -102,8 +103,9 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                 IsEnabled="false"
                 VerticalOptions="EndAndExpand" 
                 HorizontalOptions="CenterAndExpand" 
-                BackgroundColor="#4383EF"
-                TextColor="White"
+                BackgroundColor="#feba4e"
+                TextColor="Black"
+                FontAttributes="Bold"
                 BorderColor="Transparent"
                 FontSize="19"
                 Margin="20,0,10,40"

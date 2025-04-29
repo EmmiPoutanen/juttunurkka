@@ -32,7 +32,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             HorizontalTextAlignment="Center"
             FontAttributes="Bold"
             FontSize="30"
-            TextColor="#4383EF" 
+            TextColor="Black" 
             Margin="0,40,0,0"
              />
        
@@ -41,13 +41,15 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                     Margin="20,10,0,10"
                     Text="Nimi"
                     TextColor="Black"
-                    FontSize="20"/>
+                    FontAttributes="Bold"
+                    FontSize="22"/>
 
             <Entry   x:Name="NameEditor"
                      Margin="20,10,20,-70"
                      Placeholder="Kirjoita..."
                      VerticalOptions="StartAndExpand"
                      BackgroundColor="White"  
+                     FontAttributes="Bold"
                      TextChanged="OnEntryTextChanged"
                  />
 
@@ -55,9 +57,10 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                      VerticalOptions="Center"
                      HorizontalOptions="CenterAndExpand">
 
-            <Image Source="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Indian_election_symbol_Key.svg/800px-Indian_election_symbol_Key.svg.png?20191030145043"
+            <Image Source="key"
                HeightRequest="60"
                WidthRequest="60"
+               Margin="-10,0,0,0"
                />
 
             <Frame Padding="5"
@@ -65,8 +68,8 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                 BorderColor="#4383EF"
                 CornerRadius="10" 
                 HeightRequest="50"
-                WidthRequest="100"
-                Margin="25,5,5,5">
+                WidthRequest="120"
+                Margin="5,5,5,5">
 
 
                     <Entry x:Name="KeyEditor"
@@ -74,6 +77,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                      VerticalOptions="StartAndExpand"
                      MaxLength="6"
                      BackgroundColor="White"
+                     FontAttributes="Bold"
                      TextChanged="OnEntryTextChanged"
                  />
 
@@ -102,6 +106,8 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 
             <Button Grid.Column="2" 
                 Text="Jatka"
+                TextColor="Black"
+                FontAttributes="Bold"
                 Clicked="JatkaButtonClicked" 
                 VerticalOptions="EndAndExpand" 
                 HorizontalOptions="CenterAndExpand" 
@@ -110,6 +116,8 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                 CornerRadius="10"
                 HeightRequest="50"
                 WidthRequest="150"
+                BackgroundColor="#feba4e"
+                BorderColor="#feba4e"
             />
         </Grid>
 

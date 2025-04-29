@@ -32,22 +32,26 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                 HorizontalTextAlignment="Center"
                 FontAttributes="Bold"
                 FontSize="30"
-                TextColor="#4383EF"
+                TextColor="Black"
                 Padding="0,0,0,40"
              />
 
         <Label Text="Käyttäjätunnus"
-                VerticalOptions= "CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand"
-                Padding="-125,0,0,0"
+               FontAttributes="Bold"
+                VerticalOptions= "EndAndExpand" 
+                HorizontalOptions="StartAndExpand"
+               FontSize="20"
+               Margin="80,0,0,0"
              />
         <Entry x:Name="txtUsername" TextColor="black" PlaceholderColor="Gray" HeightRequest="50"
                 WidthRequest="250" HorizontalOptions="CenterAndExpand"></Entry>
         
         <Label Text="Salasana"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand"
-                Padding="-125,0,0,0"     
+               FontAttributes="Bold"
+                VerticalOptions="EndAndExpand" 
+                HorizontalOptions="StartAndExpand"
+               FontSize="20"
+               Margin="80,0,0,0"
              />
 
         <Entry x:Name="txtPassword" IsPassword="True" TextColor="black" PlaceholderColor="Gray" HeightRequest="50"
@@ -56,15 +60,18 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
         
         <Button  
                 Text="Kirjaudu"
+                FontAttributes="Bold"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" 
                 FontSize="19"
               Margin="20,10,10,35"
+              TextColor="Black"
               CornerRadius="10"
               HeightRequest="50"
               WidthRequest="255"
               BackgroundColor="#feba4f"
               BorderWidth="0.1"
+              BorderColor="Transparent"
               Clicked="KirjauduClicked"/>
 
     </StackLayout>
