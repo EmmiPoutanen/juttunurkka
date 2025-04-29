@@ -41,36 +41,36 @@ namespace Prototype
             { 0, new List<Activity>()
 			  {
 				  new() { Title = "Jokainen kertoo mikä on kivaa", ImageSource = "thumbsUp.png" },
-				  new() { Title = "Kehu vieressä istuvaa", ImageSource = "thumbsUp.png" },
-				  new() { Title = "Valitaan päivän apuope", ImageSource = "thumbsUp.png" }
+				  new() { Title = "Kehu vieressä istuvaa", ImageSource = "compliment.png" },
+				  new() { Title = "Valitaan päivän apuope", ImageSource = "teacher.png" }
 			  }
 			},
             { 1, new List<Activity>() {
-                new() { Title = "Kerrotaan ohjaajalle mikä hämmästyttää", ImageSource = "thumbsUp.png" },
-                new() { Title = "Kerrotaan ryhmälle mikä hämmästyttää", ImageSource = "thumbsUp.png" },
+                new() { Title = "Kerrotaan ohjaajalle mikä hämmästyttää", ImageSource = "amazed2.png" },
+                new() { Title = "Kerrotaan ryhmälle mikä hämmästyttää", ImageSource = "amazed.png" },
             }},
 			{ 2, new List<Activity>() {
-                new() { Title = "Piirretään taululle", ImageSource = "thumbsUp.png" },
-                new() { Title = "Jokainen kertoo opettajalle yhden mietteen", ImageSource = "thumbsUp.png" },
-                new() { Title = "Jokainen kertoo ryhmälle yhden ajatuksen", ImageSource = "thumbsUp.png" },
+                new() { Title = "Piirretään taululle", ImageSource = "draw.png" },
+                new() { Title = "Jokainen kertoo opettajalle yhden mietteen", ImageSource = "tellthought2.png" },
+                new() { Title = "Jokainen kertoo ryhmälle yhden ajatuksen", ImageSource = "tellthought.png" },
             }},
 			{ 3, new List<Activity>() {
-                new() { Title = "Positiivinen palloleikki", ImageSource = "thumbsUp.png" },
-                new() { Title = "Kirjoitetaan ohjaajalle salattu lappu", ImageSource = "thumbsUp.png" },
+                new() { Title = "Positiivinen palloleikki", ImageSource = "ballgame.png" },
+                new() { Title = "Kirjoitetaan ohjaajalle salattu lappu", ImageSource = "note.png" },
             }},
 			{ 4, new List<Activity>() {
-                new() { Title = "5 minuutin tauko", ImageSource = "thumbsUp.png" },
-                new() { Title = "Siirretään oppitunti ulos", ImageSource = "thumbsUp.png" },
+                new() { Title = "5 minuutin tauko", ImageSource = "pause.png" },
+                new() { Title = "Siirretään oppitunti ulos", ImageSource = "outdoor.png" },
             }},
 			{ 5, new List<Activity>() {
-                new() { Title = "Jokainen kertoo yhden asian mikä mietityttää", ImageSource = "thumbsUp.png" },
-                new() { Title = "Jokainen kysyy kysymyksen ohjaajalta", ImageSource = "thumbsUp.png" },
-                new() { Title = "Jokainen kysyy kysymyksen ryhmältä", ImageSource = "thumbsUp.png" },
+                new() { Title = "Jokainen kertoo yhden asian mikä mietityttää", ImageSource = "thought.png" },
+                new() { Title = "Jokainen kysyy kysymyksen ohjaajalta", ImageSource = "question2.png" },
+                new() { Title = "Jokainen kysyy kysymyksen ryhmältä", ImageSource = "question.png" },
             }},
 			{ 6, new List<Activity>() {
-                new() { Title = "Naurujoogatuokio", ImageSource = "thumbsUp.png" },
-                new() { Title = "Katsotaan video", ImageSource = "thumbsUp.png" },
-                new() { Title = "Kerrotaan vitsi", ImageSource = "thumbsUp.png" },
+                new() { Title = "Naurujoogatuokio", ImageSource = "yoga.png" },
+                new() { Title = "Katsotaan video", ImageSource = "video.png" },
+                new() { Title = "Kerrotaan vitsi", ImageSource = "joke.png" },
             }}
 		};
 	
