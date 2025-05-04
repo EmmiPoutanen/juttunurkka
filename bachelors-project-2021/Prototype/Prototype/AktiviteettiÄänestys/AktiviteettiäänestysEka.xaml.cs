@@ -18,17 +18,6 @@ You should have received a copy of the GNU General Public License
 along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Maui.Controls.Xaml;
-using Microsoft.Maui.Controls.Compatibility;
-using Microsoft.Maui.Controls;
-using Microsoft.Maui;
-using Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific;
 using Button = Microsoft.Maui.Controls.Button;
 
 namespace Prototype
@@ -36,7 +25,8 @@ namespace Prototype
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class AktiviteettiäänestysEka : ContentPage
 	{
-		private int _countSeconds = 10;
+        private CancellationTokenSource _cancellationTokenSource;
+        private int _countSeconds = 10;
         private const double DefaultBorderWidth = 0;
         private const double SelectedBorderWidth = 6;
         private Button _selectedButton;
@@ -118,47 +108,72 @@ namespace Prototype
         }
 
         private async void Vote1()
-		{
+        {
+            _cancellationTokenSource = new CancellationTokenSource();
+            var token = _cancellationTokenSource.Token;
 
-			_countSeconds = Main.GetInstance().client.vote1Time;
-			// TODO Xamarin.Forms.Device.StartTimer is no longer supported. Use Microsoft.Maui.Dispatching.DispatcherExtensions.StartTimer instead. For more details see https://learn.microsoft.com/en-us/dotnet/maui/migration/forms-projects#device-changes
-			Device.StartTimer(TimeSpan.FromSeconds(1), () =>
-		   {
-			   _countSeconds--;
+            _countSeconds = Main.GetInstance().client.vote1Time;
+            double totalSeconds = _countSeconds;
 
-			   //timer.Text = _countSeconds.ToString();
+            // Update the ProgressBar and start the timer
+            Dispatcher.StartTimer(TimeSpan.FromSeconds(1), () =>
+            {
+                if (token.IsCancellationRequested)
+                {
+                    return false;
+                }
 
+                _countSeconds--;
 
-			   if (_countSeconds == 0)
-			   {
+                // Update the ProgressBar
+                progressBar.Progress = _countSeconds / totalSeconds;
 
-				   return false;
+                if (_countSeconds == 0)
+                {
+                    return false;
+                }
 
-			   }
+                return true;
+            });
 
-			   return Convert.ToBoolean(_countSeconds);
-		   });
+            try
+            {
+                await Task.Delay(Main.GetInstance().client.vote1Time * 1000, token);
 
-			await Task.Delay(Main.GetInstance().client.vote1Time * 1000);
+                if (!token.IsCancellationRequested)
+                {
+                    // Do we want to try to send the vote when survey is closing?
+                    //var answer = await SendActivityVote();
+                    bool success = await Main.GetInstance().client.ReceiveVoteResult();
+                    if (success)
+                    {
+                        //received result changing view
+                        await Navigation.PushAsync(new AktiviteettiäänestysTulokset());
+                        return;
+                    }
+                    await DisplayAlert("VIRHE", "Tulosten haku epäonnistui", "OK");
+                }
+            }
+            catch (TaskCanceledException)
+            {
+                Console.WriteLine("Vote1 timer was canceled.");
+            }
+        }
 
-            await SendActivityVote();
-            await Navigation.PushAsync(new AktiviteettiäänestysTulokset());
-
-		}
-
-		private async void SaveAnswer(object sender, EventArgs e)
+        private async void SaveAnswer(object sender, EventArgs e)
 		{
             if (_selectedButton == null)
             {
                 Console.WriteLine("No activity selected");
                 return;
             }
+            _cancellationTokenSource?.Cancel();
 
-            await SendActivityVote();
-            await Navigation.PushAsync(new AktiviteettiäänestysTulokset());
+            var answer = await SendActivityVote();
+            await Navigation.PushAsync(new ActivityAnswered(answer, _countSeconds));
         }
 
-        private async Task SendActivityVote()
+        private async Task<Activity?> SendActivityVote()
         {
             var currentItem = Items[0];
             Activity answer = null;
@@ -174,17 +189,20 @@ namespace Prototype
 
             if (answer != null)
             {
-                // TODO: Should send the correct answer, need to change the format in SendVote1Result()
-                var dummyAnswer = new Dictionary<int, string>
+                var answerDict = new Dictionary<string, string>
                 {
-                    { 1, "Activity Name" } // Replace with realistic test data
-				};
-                await Main.GetInstance().client.SendVote1Result(dummyAnswer);
+                    { "title", answer.Title },
+                    { "imageSource", answer.ImageSource }
+                };
+
+                await Main.GetInstance().client.SendVote1Result(answerDict);
             }
             else
             {
-                Console.WriteLine("Something went wrong with activity selection.");
+                Console.WriteLine("No answer was given or something went wrong.");
             }
+
+            return answer;
         }
 	}
 }
