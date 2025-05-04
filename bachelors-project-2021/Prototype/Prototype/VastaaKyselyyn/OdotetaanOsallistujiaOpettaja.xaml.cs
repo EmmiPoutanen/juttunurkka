@@ -31,9 +31,24 @@ using Microsoft.Maui;
 namespace Prototype
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class OdotetaanOsallistujiaOpettaja : ContentPage
+    public partial class OdotetaanOsallistujiaOpettaja : ContentPage, System.ComponentModel.INotifyPropertyChanged
     {
         public string roomCode { get; set; } = "Avainkoodi: ";
+
+        private int participantsCount;
+
+        public int ParticipantsCount
+        {
+            get => participantsCount;
+            set
+            {
+                if (participantsCount != value)
+                {
+                    participantsCount = value;
+                    OnPropertyChanged(nameof(ParticipantsCount));
+                }
+            }
+        }
 
         public OdotetaanOsallistujiaOpettaja()
         {

@@ -36,7 +36,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 
         <StackLayout Spacing="40" HorizontalOptions="Center">
             
-            <Label Text="Osallistujia: x"
+            <Label Text="{Binding ParticipantsCount, StringFormat='Osallistujia: {0}'}"
                    FontSize="25"
                    FontAttributes="Bold"
                    TextColor="Black"
