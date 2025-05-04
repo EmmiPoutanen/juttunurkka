@@ -27,6 +27,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Threading;
+using Newtonsoft.Json.Linq;
 
 namespace Prototype
 {
@@ -90,7 +91,7 @@ namespace Prototype
 		/// <value>
 		/// Attended survey's final vote result
 		/// </value>
-		public string voteResult = null;
+		public Dictionary<Activity, int> voteResult = null;
 
 		/// <value>
 		/// List of running Task instances which can be cancelled
@@ -418,22 +419,26 @@ namespace Prototype
 		/// <returns>
 		/// Task object resulting in a boolean indicating whether message was sent successfully
 		/// </returns>
-		public async Task<bool> SendVote1Result(Dictionary<int, string> answer)
+		public async Task<bool> SendVote1Result(Dictionary<string, string> answer)
 		{
 
 			try
 			{
-				//prepare message
-				byte[] bytes = Encoding.Unicode.GetBytes(JsonConvert.SerializeObject(answer));
+                //prepare message
+                string json = JsonConvert.SerializeObject(answer);
+                byte[] jsonBytes = Encoding.Unicode.GetBytes(json);
 
-				//send
-				NetworkStream ns = client.GetStream();
-				await ns.WriteAsync(bytes, 0, bytes.Length);
+                // Prepare the length prefix
+                byte[] lengthPrefix = BitConverter.GetBytes(jsonBytes.Length);
 
-				ns.Flush();
-				//no error, returning success
-				return true;
-			}
+                // Send the length prefix followed by the JSON message
+                NetworkStream ns = client.GetStream();
+                await ns.WriteAsync(lengthPrefix, 0, lengthPrefix.Length);
+                await ns.WriteAsync(jsonBytes, 0, jsonBytes.Length);
+
+                ns.Flush();
+                return true;
+            }
 			catch (ObjectDisposedException e)
 			{
 				Console.WriteLine("Host abruptly closed connection, most likely");
@@ -560,51 +565,7 @@ namespace Prototype
                 Console.WriteLine($"Received JSON: {jsonString}");
                 voteCandidates1 = JsonConvert.DeserializeObject<Dictionary<int, IList<Activity>>>(jsonString);
                 Console.WriteLine("Received vote 1 candidates");
-
-                Console.WriteLine("First message received successfully, waiting for timer message...");
-                Console.WriteLine($"Stream DataAvailable before timer read: {ns.DataAvailable}");
-                // Second read - vote time (with size prefix)
                 return true;
-				/*
-                byte[] sizeBufferTimer = new byte[4];
-                int bytesReadTimer = await ns.ReadAsync(sizeBufferTimer, 0, sizeBufferTimer.Length);
-                Console.WriteLine($"Read {bytesReadTimer} bytes for timer size prefix");
-
-                do
-                {
-                    if (token.IsCancellationRequested)
-                    {
-                        return false;
-                    }
-                    await Task.Delay(1000);
-                } while (bytesReadTask.Status != TaskStatus.RanToCompletion);
-
-                if (bytesReadTimer == 4)
-                {
-                    int messageSizeTimer = BitConverter.ToInt32(sizeBufferTimer, 0);
-                    Console.WriteLine($"Timer message size: {messageSizeTimer} bytes");
-
-                    byte[] messageBufferTimer = new byte[messageSizeTimer];
-                    bytesReadTimer = await ns.ReadAsync(messageBufferTimer, 0, messageSizeTimer);
-                    Console.WriteLine($"Read {bytesReadTimer} bytes for timer message content");
-
-                    if (bytesReadTimer == messageSizeTimer)
-                    {
-                        string timerString = Encoding.Unicode.GetString(messageBufferTimer);
-                        Console.WriteLine($"Timer string: '{timerString}'");
-                        vote1Time = int.Parse(timerString);
-                        Console.WriteLine($"Received vote time: {vote1Time}");
-                        return true;
-                    }
-                    else
-                    {
-                        Console.WriteLine($"Failed to read complete timer message. Expected {messageSize} bytes, got {bytesRead}");
-                    }
-                }
-                else
-                {
-                    Console.WriteLine($"Failed to read timer size prefix. Expected 4 bytes, got {bytesRead}");
-                }*/
             }
             catch (JsonException e) 
 			{
@@ -631,55 +592,91 @@ namespace Prototype
 
 		}
 
-		/// <summary>
-		/// Tries to receive a message containing the final result of the vote
-		/// </summary>
-		/// <returns>
-		/// Task resulting in a boolean indicating whether the message was received successfully
-		/// </returns>
-		public async Task<bool> ReceiveVoteResult()
-		{
+        /// <summary>
+        /// Tries to receive a message containing the final result of the vote
+        /// </summary>
+        /// <returns>
+        /// Task resulting in a boolean indicating whether the message was received successfully
+        /// </returns>
+        public async Task<bool> ReceiveVoteResult()
+        {
+            try
+            {
+                Console.WriteLine("Reading vote results");
+                if (client == null || !client.Connected)
+                {
+                    Console.WriteLine("Client is not connected or initialized.");
+                }
+                NetworkStream ns = client.GetStream();
 
-			try
-			{
-				NetworkStream ns = client.GetStream();
-				byte[] readBuffer = new byte[256];
-				Console.WriteLine("Waiting for vote result");
-				int bytesRead = await ns.ReadAsync(readBuffer, 0, readBuffer.Length);
+                // Read size prefix first
+                byte[] sizeBuffer = new byte[4];
+                int bytesRead = await ns.ReadAsync(sizeBuffer, 0, sizeBuffer.Length);
+                if (bytesRead != 4)
+                {
+                    Console.WriteLine("Failed to read message size or connection closed");
+                    return false;
+                }
 
-				if (bytesRead == 0)
-				{
-					Console.WriteLine("Somehow we just read something from disconnected network, this is fine.");
-					return false;
-				}
+                // Determine message size from the prefix
+                int messageSize = BitConverter.ToInt32(sizeBuffer, 0);
+                Console.WriteLine($"Expecting vote result data of size: {messageSize} bytes");
 
-				Console.WriteLine($"Bytes read: {bytesRead}");
+                // Create a buffer of the exact size needed
+                byte[] messageBuffer = new byte[messageSize];
+                bytesRead = await ns.ReadAsync(messageBuffer, 0, messageSize);
 
-				//expecting string containing voteResult
-				voteResult = Encoding.Unicode.GetString(readBuffer, 0, bytesRead);
-				Console.WriteLine("Received vote result");
-				ns.Flush();
-				return true;
-			}
-			catch (ObjectDisposedException e)
-			{
-				Console.WriteLine($"Connection closed or lost to server at: {client.Client.RemoteEndPoint}");
-				Console.WriteLine(e);
-			}
-			catch (NotSupportedException e)
-			{
-				Console.WriteLine("Stream does not support that operation");
-				Console.WriteLine(e);
-			}
+                if (bytesRead != messageSize)
+                {
+                    Console.WriteLine($"Failed to read complete message. Expected {messageSize} bytes, got {bytesRead}");
+                    return false;
+                }
 
-			return false;
+                // Convert to string and deserialize
+                string jsonString = Encoding.Unicode.GetString(messageBuffer);
+                Console.WriteLine($"Received JSON: {jsonString}");
 
-		}
+                var jArray = JArray.Parse(jsonString);
 
-		/// <summary>
-		/// Sufficiently terminates the client instance by closing the TCP connection and cancelling cancellable tasks
-		/// </summary>
-		public async void DestroyClient() {
+                voteResult = jArray
+                    .ToDictionary(
+                        item => item["Activity"].ToObject<Activity>(),
+                        item => item["Votes"].ToObject<int>()
+                    );
+
+                Console.WriteLine("Vote results successfully deserialized and stored.");
+                return true;
+
+                Console.WriteLine("Failed to deserialize vote results.");
+                return false;
+            }
+            catch (JsonException e)
+            {
+                Console.WriteLine("Received bad JSON");
+                Console.WriteLine(e);
+            }
+            catch (ObjectDisposedException e)
+            {
+                Console.WriteLine($"Connection closed or lost to server at: {client.Client.RemoteEndPoint}");
+                Console.WriteLine(e);
+            }
+            catch (NotSupportedException e)
+            {
+                Console.WriteLine("Stream does not support that operation");
+                Console.WriteLine(e);
+            }
+            catch (IOException e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Sufficiently terminates the client instance by closing the TCP connection and cancelling cancellable tasks
+        /// </summary>
+        public async void DestroyClient() {
 			//cancel all cancellable tasks
 			tokenSource.Cancel();
             await Task.WhenAll([.. cancellableTasks]);

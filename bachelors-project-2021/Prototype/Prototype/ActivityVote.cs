@@ -39,7 +39,7 @@ namespace Prototype
             vote1Candidates = new Dictionary<int, IList<Activity>>();
         }
 
-        public void calcVote1Candidates(List<Emoji> emojis, Dictionary<int, int> emojiResults)
+        public IList<Activity> calcVote1Candidates(List<Emoji> emojis, Dictionary<int, int> emojiResults)
         {
             int topAnswerKey = 0;
             int topVotes = 0;
@@ -58,6 +58,7 @@ namespace Prototype
             Console.WriteLine($"Added candidates {topAnswerKey} {emojis[topAnswerKey].Activities}");
             // TODO: Check where to get this but it can be hard coded now
             vote1Timer = 30;
+            return emojis[topAnswerKey].Activities;
         }
 
         //get vote1candidates
@@ -69,7 +70,7 @@ namespace Prototype
             vote1Candidates = candidates;
 		}
 
-        public string calcFinalResult(Dictionary<string, int> vote1Results)
+        public string calcFinalResult(Dictionary<Activity, int> vote1Results)
         {
             // TODO: Use the vote 1 results here
             //fallback, if nobody voted in phase 2

@@ -27,25 +27,66 @@ using Microsoft.Maui.Controls.Xaml;
 using Microsoft.Maui.Controls.Compatibility;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui;
+using System.Collections.ObjectModel;
 
 namespace Prototype
 {
+    /// <summary>
+    /// Class for displaying results on UI
+    /// </summary>
+    public class VoteResultViewModel
+    {
+        public string Image { get; set; } = "";
+        public string Title { get; set; } = "";
+        public int Amount { get; set; }
+        public double Scale { get; set; }
+    }
+
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AktiviteettiäänestysTulokset : ContentPage
     {
+        public ObservableCollection<VoteResultViewModel> Results { get; set; }
+
         public AktiviteettiäänestysTulokset()
         {
             InitializeComponent();
             NavigationPage.SetHasBackButton(this, false);
+
+            Results = new ObservableCollection<VoteResultViewModel>();
+
+            Dictionary<Activity, int> voteResults;
             if (Main.GetInstance().state == Main.MainState.Participating)
             {
-                result.Text = Main.GetInstance().client.voteResult;
+                voteResults = Main.GetInstance().client.voteResult;
             }
             else
             {
-                result.Text = Main.GetInstance().host.data.voteResult;
+                voteResults = Main.GetInstance().host.data.vote1Results;
             }
-            
+
+            // Transform voteResults into Results
+            int maxVotes = voteResults.Values.Count != 0 ? voteResults.Values.Max() : 1;
+            foreach (var kvp in voteResults.OrderByDescending(kvp => kvp.Value))
+            {
+                Results.Add(new VoteResultViewModel
+                {
+                    Image = kvp.Key.ImageSource,
+                    Title = kvp.Key.Title,
+                    Amount = kvp.Value,
+                    Scale = (kvp.Value / (double)maxVotes) * 200
+                });
+            }
+
+            // Always add the "vastaamatta" bar TODO: Get the value from somewhere
+            Results.Add(new VoteResultViewModel
+            {
+                Image = "",
+                Title = "Vastaamatta",
+                Amount = 0,
+                Scale = (0 / (double)maxVotes) * 100
+            });
+
+            BindingContext = this;
         }
 
         async void SuljeClicked(object sender, EventArgs e)
