@@ -191,6 +191,8 @@ namespace Prototype
 
 			//prepare result and send it to all clients
             var result = data.GetVote1Results();
+            // Send the number of client that participated to the survey
+            result.Add(new Activity { Title = "Clients", ImageSource = "" }, clientCount);
             var serializableResult = result.Select(kvp => new
             {
                 Activity = new

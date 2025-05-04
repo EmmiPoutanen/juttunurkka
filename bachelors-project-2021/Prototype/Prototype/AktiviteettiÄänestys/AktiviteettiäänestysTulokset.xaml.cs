@@ -55,6 +55,8 @@ namespace Prototype
             Results = new ObservableCollection<VoteResultViewModel>();
 
             Dictionary<Activity, int> voteResults;
+            int clients = 0;
+            int totalAnswers = 0;
             if (Main.GetInstance().state == Main.MainState.Participating)
             {
                 voteResults = Main.GetInstance().client.voteResult;
@@ -62,12 +64,33 @@ namespace Prototype
             else
             {
                 voteResults = Main.GetInstance().host.data.vote1Results;
+                clients = Main.GetInstance().host.clientCount;
             }
 
-            // Transform voteResults into Results
-            int maxVotes = voteResults.Values.Count != 0 ? voteResults.Values.Max() : 1;
+            // Calculate total answers and determine unanswered votes
+            foreach (var kvp in voteResults)
+            {
+                if (kvp.Key.Title == "Clients")
+                {
+                    clients = kvp.Value;
+                    continue;
+                }
+                totalAnswers += kvp.Value;
+            }
+            int unAnswered = clients - totalAnswers;
+
+            // Include unanswered votes in maxVotes calculation
+            int maxVotes = Math.Max(voteResults.Values.Count != 0 ? voteResults.Values.Max() : 1, unAnswered);
+
             foreach (var kvp in voteResults.OrderByDescending(kvp => kvp.Value))
             {
+                // Host sends the count of clients with key "Clients"
+                if (kvp.Key.Title == "Clients")
+                {
+                    clients = kvp.Value;
+                    continue;
+                }
+
                 Results.Add(new VoteResultViewModel
                 {
                     Image = kvp.Key.ImageSource,
@@ -77,13 +100,13 @@ namespace Prototype
                 });
             }
 
-            // Always add the "vastaamatta" bar TODO: Get the value from somewhere
+            // Always add the "vastaamatta" bar
             Results.Add(new VoteResultViewModel
             {
                 Image = "",
                 Title = "Vastaamatta",
-                Amount = 0,
-                Scale = (0 / (double)maxVotes) * 100
+                Amount = unAnswered,
+                Scale = (unAnswered / (double)maxVotes) * 200
             });
 
             BindingContext = this;

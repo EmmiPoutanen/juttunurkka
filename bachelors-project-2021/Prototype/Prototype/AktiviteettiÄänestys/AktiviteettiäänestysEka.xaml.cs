@@ -142,8 +142,16 @@ namespace Prototype
 
                 if (!token.IsCancellationRequested)
                 {
-                    var answer = await SendActivityVote();
-                    await Navigation.PushAsync(new AktiviteettiäänestysTulokset());
+                    // Do we want to try to send the vote when survey is closing?
+                    //var answer = await SendActivityVote();
+                    bool success = await Main.GetInstance().client.ReceiveVoteResult();
+                    if (success)
+                    {
+                        //received result changing view
+                        await Navigation.PushAsync(new AktiviteettiäänestysTulokset());
+                        return;
+                    }
+                    await DisplayAlert("VIRHE", "Tulosten haku epäonnistui", "OK");
                 }
             }
             catch (TaskCanceledException)
@@ -191,7 +199,7 @@ namespace Prototype
             }
             else
             {
-                Console.WriteLine("Something went wrong with activity selection.");
+                Console.WriteLine("No answer was given or something went wrong.");
             }
 
             return answer;
