@@ -74,6 +74,7 @@ namespace Prototype
                 return;
             }
             await DisplayAlert("VIRHE", "Tulosten haku epäonnistui", "OK");
+            await Navigation.PushAsync(new MainPage());
         }
     }
 }

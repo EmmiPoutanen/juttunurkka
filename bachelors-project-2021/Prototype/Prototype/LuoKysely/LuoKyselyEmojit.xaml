@@ -81,22 +81,23 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             Padding="10"
             HorizontalOptions="CenterAndExpand">
 
-            <Button Grid.Column="1"
+            <Button Grid.Column="0"
                 Text="Edellinen"
                 Clicked="EdellinenButtonClicked"
                 VerticalOptions="EndAndExpand"
                 HorizontalOptions="CenterAndExpand" 
-                BackgroundColor="#4383EF"
-                TextColor="White"
+                BackgroundColor="#feba4f"
+                TextColor="Black"
                 BorderColor="Transparent"
                 FontSize="19"
                 Margin="20,0,10,40"
                 CornerRadius="10"
                 HeightRequest="50"
                 WidthRequest="150"
+                FontAttributes="Bold"
             />
 
-            <Button Grid.Column="2" 
+            <Button Grid.Column="1" 
                 Text="Jatka"
                 x:Name="JatkaBtn"
                 Clicked="JatkaButtonClicked" 

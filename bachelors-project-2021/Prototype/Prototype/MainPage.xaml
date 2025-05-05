@@ -82,15 +82,15 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                     VerticalOptions="CenterAndExpand"
                     WidthRequest="40"
                     HeightRequest="40"
-                    Margin="0,50,0,80"
+                    Margin="0,100,0,80"
                     Aspect="AspectFit"
                     Scale="6.5"
                     />
 
                 <Grid HorizontalOptions="CenterAndExpand"
                     Margin="0,50,0,0"
-                    HeightRequest="350"
-                    WidthRequest="280"
+                    HeightRequest="380"
+                    WidthRequest="300"
                     BackgroundColor="#89e077">
 
 
@@ -110,40 +110,72 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                         TextColor="Black"
                         HorizontalOptions="Center"
                         VerticalOptions="Start"
-                        FontSize="20"
-                        FontAttributes="Bold"
+                        FontSize="26"
                         Padding="0"
-                        LineBreakMode="CharacterWrap"
-                        Margin="30,10,5,10" />
+                        LineBreakMode="WordWrap"
+                        HorizontalTextAlignment="Center"
+                        VerticalTextAlignment="Center"
+                        FontFamily="BebasNeue"
+                        Margin="10,20,10,40" />
 
                     <Label Text="AVAA JUTTUNURKKA JA ODOTA OPETTAJAN OHJEITA"
                         Grid.Row="1"
                         TextColor="Black"
                         HorizontalOptions="Center"
                         VerticalOptions="Start"
-                        FontSize="20"
-                        FontAttributes="Bold"
+                        FontSize="26"
+
                         Padding="0"
                         LineBreakMode="WordWrap"
-                        Margin="30,0,5,10" />
+                        FontFamily="BebasNeue"
+                        Margin="10,0,10,0"
+                        HorizontalTextAlignment="Center"
+                        VerticalTextAlignment="Center"/>
 
-                    <Button Text="Avaa juttunurkka"
-                        Grid.Row="2"
-                        Clicked="LiityKyselyynClicked"
-                        HorizontalOptions="Center"
-                        VerticalOptions="Center"
-                        FontSize="28"
-                        TextColor="Black"
-                        Margin="0,60,0,0"
-                        BorderColor="#ffea7f"
-                        BorderWidth="0"
-                        BackgroundColor="#feba4f"
-                        CornerRadius="7"
-                        HeightRequest="160"
-                        WidthRequest="250"
-                        FontAttributes="Bold"
-                        LineBreakMode="WordWrap"
-                        />
+                    <Frame Grid.Row="2"
+                       Margin="0,0,0,-50"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       Padding="0"
+                       HeightRequest="160"
+                       WidthRequest="250"
+                       BackgroundColor="#feba4f"
+                       CornerRadius="5"
+                       BorderColor="Transparent"
+                       HasShadow="True">
+
+                        <Grid Padding="20,0"
+                              ColumnSpacing="0"
+                              RowSpacing="0"
+                              HorizontalOptions="Center"
+                              VerticalOptions="Center">
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label Text="AVAA JUTTUNURKKA"
+                               Grid.Column="0"
+                               HorizontalOptions="Start"
+                               FontSize="30"
+                               TextColor="Black"
+                               FontFamily="BebasNeue"
+                               LineBreakMode="WordWrap"/>
+
+                            <Image Source="lukko.png"
+                               Grid.Column="1"
+                               WidthRequest="80"
+                               HeightRequest="80"
+                               HorizontalOptions="End"
+                               VerticalOptions="Center"
+                               Aspect="AspectFit" />
+                        </Grid>
+
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="LiityKyselyynClicked" />
+                        </Frame.GestureRecognizers>
+                    </Frame>
                 </Grid>
 
             </StackLayout>
