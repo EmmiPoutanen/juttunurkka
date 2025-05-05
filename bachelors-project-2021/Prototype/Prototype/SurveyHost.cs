@@ -175,18 +175,32 @@ namespace Prototype
 			//send first vote to all candidates
             SendToAllClients(voteCalc.GetVote1Candidates());
 
+            // NOTE: This is not very good way to handle this but no time to fix for now.
             //after first vote duration try get replies
-            await Task.Delay(1000 * (voteCalc.vote1Timer + voteCalc.coolDown));
-			//read each client for their answer
-            List<Activity> clientVotes = [];
-            foreach (var client in clients)
+            await Task.Delay(1000 * (voteCalc.vote1Timer + 1));
+            //read each client for their answer
+            var clientVotes = new List<Activity>();
+            int timeoutMs = voteCalc.coolDown;
+
+            var voteTasks = clients.Select(async client =>
             {
-                var activity = await AcceptVote1(client);
-                if (activity != null)
+                var voteTask = AcceptVote1(client);
+                var completedTask = await Task.WhenAny(voteTask, Task.Delay(timeoutMs));
+                if (completedTask == voteTask)
                 {
-                    data.AddVote1Results(activity);
+                    var activity = await voteTask;
+                    if (activity != null)
+                    {
+                        data.AddVote1Results(activity);
+                    }
                 }
-            }
+                else
+                {
+                    Console.WriteLine($"Client {client} did not respond in time.");
+                }
+            });
+
+            await Task.WhenAll(voteTasks);
             Console.WriteLine("Stopped accepting votes in phase 1");
 
 			//prepare result and send it to all clients
