@@ -28,6 +28,7 @@ using System.Threading;
 using Newtonsoft.Json;
 using Microsoft.Maui;
 using System.IO;
+using System.Diagnostics;
 
 namespace Prototype
 {
@@ -177,28 +178,33 @@ namespace Prototype
             //after first vote duration try get replies
             await Task.Delay(1000 * (voteCalc.vote1Timer + voteCalc.coolDown));
 			//read each client for their answer
-            List<Task<Dictionary<int, string>>> clientVotes1 = new List<Task<Dictionary<int, string>>>();
+            List<Activity> clientVotes = [];
             foreach (var client in clients)
             {
-                clientVotes1.Add(AcceptVote1(client));
-            }
-			//wait for all tasks to complete before returning
-            await Task.WhenAll(clientVotes1);
-            Console.WriteLine("Stopped accepting votes in phase 1");
-
-			//record all answers
-            foreach (var item in clientVotes1)
-            {
-                if (item.Result != null)
+                var activity = await AcceptVote1(client);
+                if (activity != null)
                 {
-                    data.AddVote1Results(item.Result);
+                    data.AddVote1Results(activity);
                 }
             }
+            Console.WriteLine("Stopped accepting votes in phase 1");
 
-			//prepare result and send it to all clients TDOD: calculate results from vote 1
-            //string result = voteCalc.calcFinalResult(data.GetVote1Results());
-            //data.voteResult = result;
-            //SendToAllClients(result);
+			//prepare result and send it to all clients
+            var result = data.GetVote1Results();
+            // Send the number of client that participated to the survey
+            result.Add(new Activity { Title = "Clients", ImageSource = "" }, clientCount);
+            var serializableResult = result.Select(kvp => new
+            {
+                Activity = new
+                {
+                    kvp.Key.Title,
+                    kvp.Key.ImageSource
+                },
+                Votes = kvp.Value
+            }).ToList();
+
+            // Send the JSON string to all clients
+            SendToAllClients(serializableResult);
 
             isVoteConcluded = true;
         }
@@ -229,7 +235,13 @@ namespace Prototype
             Console.WriteLine("Start activity vote");
             isVoteConcluded = false;
             voteCalc = new ActivityVote();
-            voteCalc.calcVote1Candidates(survey.emojis, data.GetEmojiResults());
+            var activites = voteCalc.calcVote1Candidates(survey.emojis, data.GetEmojiResults());
+            // Init the vote results to 0 for all candidates
+            foreach (var activity in activites)
+            {
+                Main.GetInstance().host.data.AddVote1Results(activity);
+            }
+
             Task.Run(() =>
             {
                 Task voteTask = RunActivityVote();
@@ -524,32 +536,51 @@ namespace Prototype
 		/// <returns>
 		/// Task representing the work
 		/// </returns>
-        private async Task<Dictionary<int, string>> AcceptVote1(TcpClient client) {
+        private async Task<Activity?> AcceptVote1(TcpClient client)
+        {
             try
             {
-				//waiting for vote for limited time by setting network stream read timeout
-                byte[] buffer = new byte[2048];
                 NetworkStream ns = client.GetStream();
-                int bytesRead = 0;
-                Console.WriteLine("Reading client vote 1");
 
-				//if client does not reply anything, data is not available.
-                if (!ns.DataAvailable)
+                // Read the length prefix (4 bytes)
+                byte[] lengthBuffer = new byte[4];
+                int bytesRead = await ns.ReadAsync(lengthBuffer, 0, lengthBuffer.Length);
+                if (bytesRead != 4)
                 {
+                    Console.WriteLine("Failed to read length prefix or connection closed");
                     return null;
                 }
 
-                bytesRead = await ns.ReadAsync(buffer, 0, buffer.Length);
-                Console.WriteLine($"DEBUG: AcceptVotes 1 read {bytesRead} bytes from: {client}");
+                // Determine the size of the JSON message
+                int messageSize = BitConverter.ToInt32(lengthBuffer, 0);
+                Console.WriteLine($"Expecting JSON message of size: {messageSize} bytes");
 
-				//if client has exited read results in 0 bytes read
-                if (bytesRead <= 0)
+                // Read the JSON message
+                byte[] messageBuffer = new byte[messageSize];
+                bytesRead = await ns.ReadAsync(messageBuffer, 0, messageSize);
+                if (bytesRead != messageSize)
                 {
+                    Console.WriteLine($"Failed to read complete JSON message. Expected {messageSize} bytes, got {bytesRead}");
                     return null;
                 }
 
-				//read was successful, expecting JSON string containing Dictionary<int, string>
-                return JsonConvert.DeserializeObject<Dictionary<int, string>>(Encoding.Unicode.GetString(buffer, 0, bytesRead));
+                // Deserialize the JSON into a dictionary
+                string json = Encoding.Unicode.GetString(messageBuffer);
+                Console.WriteLine($"Received JSON: {json}");
+                var resultDict = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
+
+                if (resultDict != null && resultDict.ContainsKey("title") && resultDict.ContainsKey("imageSource"))
+                {
+                    // Map the dictionary to an Activity object
+                    return new Activity
+                    {
+                        Title = resultDict["title"],
+                        ImageSource = resultDict["imageSource"]
+                    };
+                }
+
+                Console.WriteLine("Invalid data received. Missing required keys.");
+                return null;
             }
             catch (JsonException e)
             {
@@ -596,40 +627,6 @@ namespace Prototype
                         ns.Write(messageData, 0, messageData.Length);
                         // Make sure data is sent
                         ns.Flush();
-                    }
-                }
-                catch (ObjectDisposedException e)
-                {
-                    Console.WriteLine($"Connection lost with client: {client.Client.RemoteEndPoint}. Dropping client");
-                    Console.WriteLine(e);
-                    clients.Remove(client);
-                    clientCount--;
-                }
-                catch (System.IO.IOException e)
-                {
-                    Console.WriteLine("Error reading socket or network");
-                    Console.WriteLine(e);
-                    clients.Remove(client);
-                    clientCount--;
-                }
-            }
-        }
-
-        private void SendToAllClients(string text)
-        {
-            byte[] message = Encoding.Unicode.GetBytes(text);
-
-			//iterate each recorded client
-            foreach (var client in clients)
-            {
-				//catch errors per client
-                try
-                {
-                    NetworkStream ns = client.GetStream();
-
-                    if (ns.CanWrite)
-                    {
-                        ns.Write(message, 0, message.Length);
                     }
                 }
                 catch (ObjectDisposedException e)
