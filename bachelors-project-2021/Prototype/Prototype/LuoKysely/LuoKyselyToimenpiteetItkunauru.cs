@@ -122,7 +122,7 @@ namespace Prototype
                         {
                             if (!string.IsNullOrWhiteSpace(syote) && !item.ActivityChoises.Any(activity => activity.Title == syote))
                             {
-                                var newActivity = new Activity { Title = syote };
+                                var newActivity = new Activity { Title = syote, ImageSource = "dice.png" };
                                 item.ActivityChoises.Insert(item.ActivityChoises.Count - 1, newActivity);
                                 item.Selected.Add(newActivity);
                             }

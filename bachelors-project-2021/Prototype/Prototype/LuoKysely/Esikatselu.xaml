@@ -42,13 +42,14 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                     FontSize="18"
                     CornerRadius="10"
                     HeightRequest="50"
+                    BorderWidth="1"
                     WidthRequest="340"/>
 
             <!-- Aktiviteetit-kehys -->
             <Frame BorderColor="#4383EF"
                    BackgroundColor="White"
                    CornerRadius="10"
-                   Padding="10"
+                   Padding="10, 25, 10, 25"
                    WidthRequest="340">
 
                 <StackLayout Spacing="15">
@@ -63,6 +64,10 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                     <CollectionView ItemsSource="{Binding Emojit}"
                                     SelectionMode="None">
 
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Vertical" ItemSpacing="25"/>
+                        </CollectionView.ItemsLayout>
+
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
                                 <StackLayout Orientation="Horizontal" Spacing="10">
@@ -75,8 +80,8 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 
                                     <!-- Aktiviteettien nimet -->
                                     <StackLayout>
-                                        <Label Text="{Binding ActivityChoises[0]}" FontSize="15" TextColor="Black"/>
-                                        <Label Text="{Binding ActivityChoises[1]}" FontSize="15" TextColor="Black"/>
+                                        <Label Text="{Binding ActivityChoises[0]}" FontSize="18" TextColor="Black" LineBreakMode="WordWrap" WidthRequest="280" HorizontalTextAlignment="Start"/>
+                                        <Label Text="{Binding ActivityChoises[1]}" FontSize="18" TextColor="Black" LineBreakMode="WordWrap" WidthRequest="280" HorizontalTextAlignment="Start"/>
                                     </StackLayout>
 
                                 </StackLayout>
@@ -90,22 +95,26 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             <!-- Avainkoodi -->
             <StackLayout Orientation="Horizontal"
                          HorizontalOptions="Center"
-                         Spacing="10">
+                         Spacing="20">
                 <Label Text="Avainkoodi"
                        FontSize="18"
                        VerticalOptions="Center"
                        FontAttributes="Bold"
                        TextColor="Black"/>
-                <Label Text="{Binding RoomCode}"
+                <Frame
+                    BorderColor="#4383EF"
+                    CornerRadius="10">
+                    
+                    <Label Text="{Binding RoomCode}"
                        FontSize="18"
-                       BackgroundColor="White"
-                       Padding="10,5"
                        TextColor="Black"
                        HorizontalOptions="Start"
-                       WidthRequest="80"
+                       WidthRequest="60"
+                       HeightRequest="20"
                        FontAttributes="Bold"
                        HorizontalTextAlignment="Center"
                        VerticalTextAlignment="Center"/>
+                </Frame>
             </StackLayout>
 
             <!-- Napit -->
@@ -120,7 +129,9 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                         CornerRadius="10"
                         BorderColor="Transparent"
                         HeightRequest="50"
-                        WidthRequest="120"
+                        WidthRequest="150"
+                        FontAttributes="Bold"
+                        FontSize="19"
                         Clicked="ValmisButtonClicked"/>
             </StackLayout>
 

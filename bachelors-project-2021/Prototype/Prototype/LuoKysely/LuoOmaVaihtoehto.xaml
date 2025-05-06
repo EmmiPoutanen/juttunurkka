@@ -32,11 +32,28 @@
                     TextColor="Black" />
         </Frame>
 
-        <Grid RowDefinitions="Auto"
-              ColumnDefinitions="Auto"
+        <Grid RowDefinitions="Auto, Auto"
+              ColumnDefinitions="Auto, Auto"
               VerticalOptions="End"
+              Padding="10"
               HorizontalOptions="CenterAndExpand">
-            <Button Text="Tallenna"
+            <Button Grid.Column="0"
+                Text="Edellinen"
+                Clicked="EdellinenButtonClicked"
+                VerticalOptions="EndAndExpand"
+                HorizontalOptions="CenterAndExpand" 
+                BackgroundColor="#feba4f"
+                TextColor="Black"
+                BorderColor="Transparent"
+                FontSize="19"
+                Margin="20,0,10,40"
+                CornerRadius="10"
+                HeightRequest="50"
+                WidthRequest="150"
+                FontAttributes="Bold"
+            />
+            <Button Grid.Column="1"
+                    Text="Tallenna"
                     Clicked="TallennaButtonClicked"
                     VerticalOptions="EndAndExpand"
                     HorizontalOptions="CenterAndExpand"
@@ -46,6 +63,8 @@
                     HeightRequest="50"
                     WidthRequest="150"
                     BackgroundColor="#feba4f"
+                    BorderColor="Transparent"
+                    FontAttributes="Bold"
                     TextColor="Black" />
         </Grid>
 

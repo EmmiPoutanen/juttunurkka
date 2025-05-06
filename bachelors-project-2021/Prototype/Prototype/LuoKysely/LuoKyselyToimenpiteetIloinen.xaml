@@ -37,8 +37,8 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
               HorizontalOptions="CenterAndExpand"
               HorizontalTextAlignment="Center"
               FontAttributes="Bold"
-              FontSize="15"
-              TextColor="#4383EF" 
+              FontSize="25"
+              TextColor="Black" 
               Margin="0,40,0,0"/>
            
             <Image Source="Emoji0.jpg"
@@ -51,10 +51,9 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
         <Label Text="Valitse aktiviteetit hymiölle  
                Valitse 2"
             VerticalOptions="Start" 
-            FontAttributes="Bold"
             HorizontalOptions="CenterAndExpand"
             HorizontalTextAlignment="Center"
-            FontSize="25"
+            FontSize="24"
             TextColor="Black"   
             Margin="0,-20,0,0"
          />
@@ -158,7 +157,6 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             ColumnDefinitions="Auto, Auto"
             VerticalOptions="EndAndExpand"
             HorizontalOptions="CenterAndExpand">
-
             <Button Grid.Column="2" 
                 Text="Jatka"
                 Clicked="JatkaButtonClicked" 
