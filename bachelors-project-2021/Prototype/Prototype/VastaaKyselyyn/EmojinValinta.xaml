@@ -102,15 +102,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                     WidthRequest="300"
                     ScaleY="15"
                     ProgressColor="#FEBA4F"/>
-        
-        <!-- Response Count Label -->
-        <Label Text="Vastauksia 0 / 19"
-               FontSize="24"
-               TextColor="Black"
-               FontAttributes="Bold"
-               FontFamily="RobotoMedium"
-               HorizontalOptions="Center"/>
-        
+
         <!-- Submit Button -->
         <Button Text="TALLENNA"
             x:Name="Vastaus"    

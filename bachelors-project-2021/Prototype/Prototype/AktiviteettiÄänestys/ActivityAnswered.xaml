@@ -42,7 +42,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                 FontAttributes="Bold"
                 FontSize="15"
                 FontFamily="RobotoMedium"
-                BackgroundColor="#FFA726"
+                BackgroundColor="#feba4e"
                 BorderColor="Transparent"
                 CornerRadius="10"
                 HeightRequest="250"
@@ -60,7 +60,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                 HorizontalOptions="CenterAndExpand"
                 WidthRequest="300"
                 ScaleY="15"
-                ProgressColor="#FFA726"
+                ProgressColor="#feba4e"
                 Margin="0,50,0,0"/>
         </StackLayout>
     </ContentPage.Content>

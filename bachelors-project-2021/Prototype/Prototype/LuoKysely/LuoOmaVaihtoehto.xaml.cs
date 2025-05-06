@@ -21,5 +21,10 @@ namespace Prototype.LuoKysely
             _callback?.Invoke(input);
             await Navigation.PopAsync();
         }
+
+        private async void EdellinenButtonClicked(object sender, EventArgs e)
+        {
+            await Navigation.PopAsync();
+        }
     }
 }

@@ -38,8 +38,8 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
               HorizontalOptions="CenterAndExpand"
               HorizontalTextAlignment="Center"
               FontAttributes="Bold"
-              FontSize="15"
-              TextColor="#4383EF" 
+              FontSize="25"
+              TextColor="Black" 
               Margin="0,40,0,0"/>
             
             <Image Source="Emoji2.jpg"
@@ -54,8 +54,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             VerticalOptions="Start" 
             HorizontalOptions="CenterAndExpand"
             HorizontalTextAlignment="Center"
-            FontAttributes="Bold"
-            FontSize="25"
+            FontSize="24"
             TextColor="Black"   
             Margin="0,-20,0,0"
          />
