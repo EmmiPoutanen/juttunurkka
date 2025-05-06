@@ -2,6 +2,7 @@
 <!--
 Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
           2022 Pauliina Pihlajaniemi, Viola Niemi, Niina Nikki, Juho Tyni, Aino Reinikainen, Essi Kinnunen
+          2025 Petri Pentinpuro
 
 This file is part of "Juttunurkka".
 
@@ -181,58 +182,6 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             </StackLayout>
 
         </StackLayout>
-
-
-        <!--Avainkoodi popup-->
-
-        <ContentView
-            x:Name="popupSelection"
-            Padding="10,0"
-            AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
-            AbsoluteLayout.LayoutFlags="All"
-            BackgroundColor="#C0808080"
-            IsVisible="false">
-
-            <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
-                <StackLayout
-               BackgroundColor="White"
-               HeightRequest="175"
-               Orientation="Vertical"
-               WidthRequest="300">
-                    <Label Text="Anna avainkoodi" FontSize="24" TextColor="Black" Margin="20,10,10,0" HorizontalOptions="Center" />
-                    <Entry x:Name="entry"
-                  Margin="20,10,20,0"                                       
-                  FontSize="22"/>
-
-                    <Grid >
-                        <Button Grid.Column="0"
-                          x:Name="OkButton"
-                          TextColor="{StaticResource QuinaryColor}"
-                          FontAttributes="Bold"
-                          BackgroundColor="Transparent"
-                          BorderColor="Transparent"
-                          CornerRadius="100"
-                          WidthRequest="130"
-                          Text="Ok"
-                          HorizontalOptions="Start"
-                          Clicked="Ok_Clicked"/>
-                        <Button Grid.Column="1"                              
-                          Text="Peruuta" 
-                          TextColor="{StaticResource QuinaryColor}"
-                          FontAttributes="Bold"
-                          CornerRadius="100"
-                          BackgroundColor="Transparent"
-                          BorderColor="Transparent"
-                          WidthRequest="130"
-                          HorizontalOptions="End"
-                          Clicked="Peruuta_Clicked" />
-                    </Grid>
-                </StackLayout>
-
-            </StackLayout>
-
-        </ContentView>
-
 
         <!--Info popup-->
 

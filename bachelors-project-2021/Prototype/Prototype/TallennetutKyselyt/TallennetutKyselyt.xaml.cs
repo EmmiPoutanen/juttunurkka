@@ -36,7 +36,7 @@ namespace Prototype
 
         public enum ToolbarItemPosition { Start, End }
 
- 
+
 
         public string SelectedSurvey { get; set; }
         public List<string> Surveys { get; set; }
@@ -64,13 +64,13 @@ namespace Prototype
 
         }
 
-            void OnListSelection(object sender, SelectionChangedEventArgs e)
+        void OnListSelection(object sender, SelectionChangedEventArgs e)
         {
             SelectedSurvey = e.CurrentSelection[0] as string;
 
             //button enabled only when there is survey selected
 
-            if (SelectedSurvey!= null )
+            if (SelectedSurvey != null)
                 TButton.IsEnabled = true;
 
             else
@@ -78,7 +78,7 @@ namespace Prototype
         }
 
         async void OletusClicked(object sender, EventArgs e)
-		{
+        {
             SurveyManager.GetInstance().SetDefaultSurvey();
 
             KyselynTarkastelu.canDelete = false;
@@ -92,7 +92,7 @@ namespace Prototype
             SurveyManager manager = SurveyManager.GetInstance();
             manager.LoadSurvey(surveyName);
 
-			Console.WriteLine(surveyName);
+            Console.WriteLine(surveyName);
 
             KyselynTarkastelu.canDelete = true;
             KyselynTarkastelu.canEdit = true;
