@@ -1,6 +1,7 @@
 ﻿/*
 Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
           2022 Pauliina Pihlajaniemi, Viola Niemi, Niina Nikki, Juho Tyni, Aino Reinikainen, Essi Kinnunen
+          2025 Petri Pentinpuro
 
 This file is part of "Juttunurkka".
 
@@ -65,20 +66,7 @@ namespace Prototype
         {
             await Navigation.PushAsync(new TallennetutKyselyt());
         }
-        /* Vanha arkisto push up ikkuna
-        private void Button_Clicked(object sender, EventArgs e)
-        {
-            PickerList.SelectedIndex = -1;
-            SelectedSurvey = null;
 
-            PickerList.IsEnabled = false;
-            Device.BeginInvokeOnMainThread(() =>
-            {
-                PickerList.IsEnabled = true;
-                PickerList.Focus();
-            });
-        }
-        */
         async void OletusClicked(object sender, EventArgs e)
         {
             SurveyManager.GetInstance().SetDefaultSurvey();

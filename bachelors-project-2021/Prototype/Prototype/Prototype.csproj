@@ -36,6 +36,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="AvainkoodiOikein.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="LuoKysely\LuoOmaVaihtoehto.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
