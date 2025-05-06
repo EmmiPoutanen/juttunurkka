@@ -17,72 +17,68 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 -->
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Prototype.LisätiedotClient"
-             Title="Tulokset"
-             BackgroundColor="#FFEA7F">
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Prototype.LisätiedotClient"
+    Title="Tulokset"
+    BackgroundColor="#FFEA7F">
 
     <ContentPage.Content>
-        <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
-            <!-- Title -->
-            <Label Text="TULOKSET"
-                   FontSize="40"
-                   FontAttributes="Bold"
-                   TextColor="Black"
-                   FontFamily="BebasNeue"
-                   HorizontalOptions="Center"
-                   Margin="0,20,0,20"/>
+        <StackLayout
+            HorizontalOptions="Center"
+            VerticalOptions="FillAndExpand"
+            Spacing="20"
+            Padding="0,150,0,0">
 
-            <Grid HorizontalOptions="Center" Margin="0,30,0,30">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <!-- Smileys -->
-                    <RowDefinition Height="Auto"/>
-                    <!-- Bars -->
-                    <RowDefinition Height="Auto"/>
-                    <!-- Numbers -->
-                </Grid.RowDefinitions>
+            <Label
+                Text="TULOKSET"
+                FontSize="40"
+                FontAttributes="Bold"
+                TextColor="Black"
+                FontFamily="BebasNeue"
+                HorizontalOptions="Center" />
 
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-
-                <CollectionView ItemsSource="{Binding Results}" Grid.Row="0" Grid.ColumnSpan="7">
-                    <CollectionView.ItemsLayout>
-                        <LinearItemsLayout Orientation="Horizontal" />
-                    </CollectionView.ItemsLayout>
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <StackLayout HorizontalOptions="Center">
-                                <Image Source="{Binding Image}" HeightRequest="40" />
-
-                                <Frame WidthRequest="50" 
-                                       HeightRequest="{Binding Scale}" 
-                                       BackgroundColor="Orange" 
-                                       CornerRadius="5"
-                                       BorderColor="#C381FD"
-                                       Padding="0" HasShadow="False"
-                                       VerticalOptions="End">
-                                    <Label Text="{Binding Amount}" 
-                                           TextColor="White" 
+            <CollectionView ItemsSource="{Binding Results}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout
+                        Orientation="Horizontal"
+                        ItemSpacing="20" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout HorizontalOptions="Center" Spacing="8">
+                            <Image Source="{Binding Image}"
+                                   HeightRequest="70"
+                                   HorizontalOptions="Center"/>
+                            <Grid WidthRequest="50" HeightRequest="200">
+                                <Frame
+                                    HeightRequest="{Binding Scale}"
+                                    WidthRequest="55"
+                                    BackgroundColor="#feba4f"
+                                    CornerRadius="0"
+                                    Padding="0"
+                                    HasShadow="False"
+                                    VerticalOptions="End"
+                                    HorizontalOptions="FillAndExpand">
+                                    <Label Text="{Binding Amount}"
+                                           TextColor="Black"
                                            FontSize="36"
                                            FontAttributes="Bold"
                                            FontFamily="RobotoMedium"
                                            HorizontalOptions="Center"
                                            VerticalOptions="Center"/>
                                 </Frame>
-                            </StackLayout>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-            </Grid>
+                            </Grid>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <BoxView
+                HeightRequest="3"
+                BackgroundColor="#C381FD"
+                HorizontalOptions="FillAndExpand"
+                Margin="0,-20,0,0"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

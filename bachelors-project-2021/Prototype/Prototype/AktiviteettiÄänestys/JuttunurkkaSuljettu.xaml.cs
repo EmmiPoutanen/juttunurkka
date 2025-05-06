@@ -36,7 +36,7 @@ namespace Prototype
         public JuttunurkkaSuljettu()
         {
             InitializeComponent();
-            
+
         }
 
         //Device back button disabled

@@ -18,7 +18,10 @@ You should have received a copy of the GNU General Public License
 along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+using System;
 using System.Collections.ObjectModel;
+using System.Linq;
+using Microsoft.Maui.Controls;
 
 namespace Prototype
 {
@@ -36,44 +39,53 @@ namespace Prototype
             ReceiveVote1();
         }
 
-        private void ProcessEmojiResults()
+        void ProcessEmojiResults()
         {
-            var emojiResults = Main.GetInstance().client.summary.GetEmojiResults()
-                                 .OrderByDescending(key => key.Value);
-            Console.WriteLine(emojiResults.Count());
+            var emojiResults = Main.GetInstance()
+                                   .client.summary
+                                   .GetEmojiResults()
+                                   .OrderByDescending(kvp => kvp.Value);
 
-            int totalVotes = emojiResults.Sum(item => item.Value);
+            int totalVotes = emojiResults.Sum(kvp => kvp.Value);
 
-            foreach (var item in emojiResults)
+            foreach (var kvp in emojiResults)
             {
-                var image = $"emoji{item.Key}lowres.png";
-                var amount = item.Value;
-                var scale = totalVotes == 0 ? 0 : (1.0 * amount / totalVotes) * 200; // Scale bars dynamically
+                var image = $"emoji{kvp.Key}lowres.png";
+                var amount = kvp.Value;
+                var height = totalVotes == 0
+                             ? 0
+                             : (int)((double)amount / totalVotes * 200);
 
                 ViewModel.Results.Add(new ResultItem
                 {
                     Image = image,
                     Amount = amount.ToString(),
-                    Scale = (int)scale
+                    Scale = height
                 });
             }
         }
 
-        private async void ReceiveVote1()
+        async void ReceiveVote1()
         {
-            bool success = await Main.GetInstance().client.ReceiveVote1Candidates();
+            bool success = await Main.GetInstance()
+                                     .client
+                                     .ReceiveVote1Candidates();
             if (success)
             {
-                Console.WriteLine("Received Vote1 successfully");
-                await Navigation.PushAsync(new AktiviteettiäänestysEka());
+                await Navigation.PushAsync(
+                  new AktiviteettiäänestysEka());
             }
         }
 
         async void PoistuClicked(object sender, EventArgs e)
         {
-            var res = await DisplayAlert("Oletko varma että tahdot poistua kyselystä?", "", "Kyllä", "Ei");
+            bool answer = await DisplayAlert(
+              "Oletko varma että tahdot poistua kyselystä?",
+              "",
+              "Kyllä",
+              "Ei");
 
-            if (res)
+            if (answer)
             {
                 Main.GetInstance().client.DestroyClient();
                 await Navigation.PopToRootAsync();
@@ -83,12 +95,8 @@ namespace Prototype
 
     public class ResultsViewModel
     {
-        public ObservableCollection<ResultItem> Results { get; set; }
-
-        public ResultsViewModel()
-        {
-            Results = new ObservableCollection<ResultItem>();
-        }
+        public ObservableCollection<ResultItem> Results { get; }
+            = new ObservableCollection<ResultItem>();
     }
 
     public class ResultItem
