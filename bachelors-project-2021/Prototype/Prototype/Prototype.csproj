@@ -33,6 +33,9 @@
 	  <Compile Update="LuoKysely\LuoOmaVaihtoehto.xaml.cs">
 	    <DependentUpon>LuoOmaVaihtoehto.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="VastaaKyselyyn\EmojiAnswered.xaml.cs">
+	    <DependentUpon>moi.xaml.cs</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -40,6 +43,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="LuoKysely\LuoOmaVaihtoehto.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="VastaaKyselyyn\EmojiAnswered.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

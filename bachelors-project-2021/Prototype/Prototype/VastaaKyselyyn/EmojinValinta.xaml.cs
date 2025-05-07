@@ -2,6 +2,7 @@
 /*
 Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
           2022 Pauliina Pihlajaniemi, Viola Niemi, Niina Nikki, Juho Tyni, Aino Reinikainen, Essi Kinnunen
+          2025 Riina Kaipia
 
 This file is part of "Juttunurkka".
 
@@ -180,7 +181,7 @@ namespace Prototype
         {
             cts.Cancel(); //cancel task if button clicked
             await Main.GetInstance().client.SendResult(answer.ToString());
-            await Navigation.PushAsync(new OdotetaanVastauksiaClient());
+            await Navigation.PushAsync(new EmojiAnswered(answer));
         }
     }
 }

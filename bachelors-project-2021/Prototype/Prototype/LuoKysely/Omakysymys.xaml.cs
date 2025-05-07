@@ -1,6 +1,7 @@
 ﻿/*
 Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
           2022 Pauliina Pihlajaniemi, Viola Niemi, Niina Nikki, Juho Tyni, Aino Reinikainen, Essi Kinnunen
+          2025 Riina Kaipia
 
 This file is part of "Juttunurkka".
 
@@ -40,11 +41,6 @@ namespace Prototype
 
         async void JatkaButtonClicked(object sender, EventArgs e)
         {
-            //kyselyn johdatuslause asetetaan.
-            //SurveyManager.GetInstance().GetSurvey().introMessage = selectedItem;
-
-
-            //siirrytään "luo uus kysely 2/3" sivulle 
 
             string omaKysymys = Kysymys.Text;
             SurveyManager.GetInstance().GetSurvey().introMessage = omaKysymys;

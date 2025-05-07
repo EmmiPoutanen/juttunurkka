@@ -61,10 +61,6 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                      VerticalOptions="Start"
                      HorizontalOptions="EndAndExpand"
                      Margin="0,0,25,0">
-            <!--
-            <Label Text="Valitse kaikki"
-                   FontSize="25"/>
-            <CheckBox Color="Black"/> -->
 
         </StackLayout>
 
