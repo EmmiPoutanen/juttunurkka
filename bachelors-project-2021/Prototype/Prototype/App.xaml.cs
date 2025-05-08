@@ -1,5 +1,6 @@
 ﻿/*
 Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
+          2025 Eemil Alamäki
 
 This file is part of "Mieliala kysely".
 
