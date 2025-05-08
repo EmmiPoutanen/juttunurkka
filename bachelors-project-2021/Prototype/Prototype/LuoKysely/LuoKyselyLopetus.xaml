@@ -2,6 +2,7 @@
 <!--
 Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
           2022 Pauliina Pihlajaniemi, Viola Niemi, Niina Nikki, Juho Tyni, Aino Reinikainen, Essi Kinnunen
+          2025 Eemil Alamäki
 
 This file is part of "Juttunurkka".
 
@@ -38,7 +39,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
        
                 <Label
                     Grid.Row="0"
-                    Margin="20,10,0,10"
+                    Margin="40,10,0,-5"
                     Text="Nimi"
                     TextColor="Black"
                     FontAttributes="Bold"
@@ -47,7 +48,9 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             <Entry   x:Name="NameEditor"
                      Margin="20,10,20,-70"
                      Placeholder="Kirjoita..."
+                     WidthRequest="340"
                      VerticalOptions="StartAndExpand"
+                     FontAttributes="Bold"
                      BackgroundColor="White"  
                      FontSize="20"
                      TextChanged="OnEntryTextChanged"
@@ -76,6 +79,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                      Placeholder="Kirjoita..."
                      VerticalOptions="StartAndExpand"
                      MaxLength="6"
+                    FontAttributes="Bold"
                      BackgroundColor="White"
                      FontSize="20"
                      TextChanged="OnEntryTextChanged"

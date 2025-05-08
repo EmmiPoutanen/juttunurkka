@@ -2,6 +2,7 @@
 <!--
 Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
           2022 Pauliina Pihlajaniemi, Viola Niemi, Niina Nikki, Juho Tyni, Aino Reinikainen, Essi Kinnunen
+          2025 Eemil Alamäki
 
 This file is part of "Juttunurkka".
 
@@ -55,7 +56,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                  Margin="20,20,20,20"
                  TextColor="Black"
                  FontAttributes="Bold"
-                 CornerRadius="5"
+                 CornerRadius="10"
                  HorizontalOptions="Center"
                  WidthRequest="300"
                  FontSize="20"
