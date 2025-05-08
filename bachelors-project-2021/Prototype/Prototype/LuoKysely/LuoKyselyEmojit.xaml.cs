@@ -49,6 +49,7 @@ namespace Prototype
         public LuoKyselyEmojit()
         {
             InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
 
             //alustetaan emojit kyselyn emojeilla
             Emojit = new List<CollectionItem>();

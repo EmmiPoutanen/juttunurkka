@@ -37,6 +37,7 @@ namespace Prototype
         public LuoKyselyLopetus()
         {
             InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
             Survey s = SurveyManager.GetInstance().GetSurvey();
             introMessage += s.introMessage;
             BindingContext = this;

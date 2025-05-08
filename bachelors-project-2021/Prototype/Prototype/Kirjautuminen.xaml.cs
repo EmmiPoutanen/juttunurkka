@@ -35,6 +35,7 @@ namespace Prototype
         {
 
             InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
         }
 
         private void MyClick(object sender, EventArgs e)

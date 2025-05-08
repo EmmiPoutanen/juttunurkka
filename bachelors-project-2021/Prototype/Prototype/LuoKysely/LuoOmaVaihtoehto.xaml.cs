@@ -30,6 +30,7 @@ namespace Prototype.LuoKysely
         public LuoOmaVaihtoehto(Action<string> callback)
         {
             InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
             _callback = callback;
         }
 

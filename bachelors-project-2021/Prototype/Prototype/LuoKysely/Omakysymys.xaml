@@ -36,7 +36,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             FontAttributes="Bold"
             FontSize="30"
             TextColor="Black" 
-            Margin="0,50,0,0"
+            Margin="0,80,0,0"
         />
 
 
@@ -52,7 +52,8 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             <Entry     x:Name="Kysymys"
                        Placeholder="Kirjoita teksti..."
                        VerticalOptions="StartAndExpand"
-                       MaxLength="50"
+                       MaxLength="40"
+                       FontSize="20"
                        BackgroundColor="White"
                  />
         </Frame>
@@ -65,30 +66,36 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             HorizontalOptions="CenterAndExpand">
             
 
-            <Button Grid.Column="1"
+            <Button Grid.Column="0"
                 Text="Edellinen"
                 Clicked="EdellinenButtonClicked"
                 VerticalOptions="EndAndExpand"
                 HorizontalOptions="CenterAndExpand" 
                 FontSize="19"
                 Margin="20,0,10,40"
+                BorderColor="Transparent"
                 CornerRadius="10"
                 HeightRequest="50"
                 WidthRequest="150"
+                BackgroundColor="#feba4f"
+                TextColor="Black"
+                FontAttributes="Bold"
             />
 
-            <Button Grid.Column="2" 
+            <Button Grid.Column="1" 
                 Text="Jatka"
                 Clicked="JatkaButtonClicked" 
                 VerticalOptions="EndAndExpand" 
                 HorizontalOptions="CenterAndExpand" 
                 FontSize="19"
                 Margin="20,0,10,40"
+                BorderColor="Transparent"
                 CornerRadius="10"
                 HeightRequest="50"
                 WidthRequest="150"
                 BackgroundColor="#feba4f"
                 TextColor="Black"
+                FontAttributes="Bold"
                 
             />
 

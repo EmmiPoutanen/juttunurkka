@@ -102,9 +102,7 @@ namespace Prototype
 
         async void BackBtnClicked(object sender, EventArgs e)
         {
-
-            await Navigation.PopToRootAsync();
-
+            await Navigation.PopAsync();
         }
     }
 }

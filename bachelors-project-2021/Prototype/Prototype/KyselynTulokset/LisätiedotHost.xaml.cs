@@ -31,6 +31,7 @@ namespace Prototype
         public LisätiedotHost()
         {
             InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
             BindingContext = this;
             LoadHostEmojiResults();
         }

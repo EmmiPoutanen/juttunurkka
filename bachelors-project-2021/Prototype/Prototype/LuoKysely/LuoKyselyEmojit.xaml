@@ -22,11 +22,11 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
              x:Class="Prototype.LuoKyselyEmojit"
              BackgroundColor="#ffea7f"
              Title="Juttunurkka">
-    
 
-    <StackLayout Margin="20">
 
-        <Label Grid.Column="2"
+    <StackLayout VerticalOptions="FillAndExpand" Spacing="50" Padding="0,100,0,0">
+
+        <Label
             Text="Valitse hymiöt"
             VerticalOptions="StartAndExpand" 
             HorizontalOptions="CenterAndExpand"
@@ -34,7 +34,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             FontAttributes="Bold"
             FontSize="30"
             TextColor="Black" 
-            Margin="0,80,0,10"
+            Margin="0,0,0,0"
         />
 
         <CollectionView ItemsSource="{Binding Emojit}"

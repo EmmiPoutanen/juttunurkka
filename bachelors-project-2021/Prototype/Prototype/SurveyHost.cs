@@ -2,6 +2,7 @@
 /*
 Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
           2022 Pauliina Pihlajaniemi, Viola Niemi, Niina Nikki, Juho Tyni, Aino Reinikainen, Essi Kinnunen
+          2025 Emmi Poutanen
 
 This file is part of "Juttunurkka".
 
@@ -72,6 +73,8 @@ namespace Prototype
 		/// List of IP adresses which have joined the survey. Entries remain even if the client in question disconnects.
 		/// </value>
         private List<IPAddress> clientHistory;
+
+        private int _activityVoteAnswerCount;
 
 		/// <value>
 		/// List of running Tasks which can be cancelled
@@ -175,35 +178,56 @@ namespace Prototype
 			//send first vote to all candidates
             SendToAllClients(voteCalc.GetVote1Candidates());
 
-            // NOTE: This is not very good way to handle this but no time to fix for now.
-            //after first vote duration try get replies
-            await Task.Delay(1000 * (voteCalc.vote1Timer + 1));
-            //read each client for their answer
-            var clientVotes = new List<Activity>();
-            int timeoutMs = voteCalc.coolDown;
+            var voteDurationMs = 1000 * voteCalc.vote1Timer;
+            var cts = new CancellationTokenSource();
+            var token = cts.Token;
 
-            var voteTasks = clients.Select(async client =>
+            var voteTasks = clients.Select(client => Task.Run(async () =>
             {
-                var voteTask = AcceptVote1(client);
-                var completedTask = await Task.WhenAny(voteTask, Task.Delay(timeoutMs));
-                if (completedTask == voteTask)
+                var stream = client.GetStream();
+                var buffer = new byte[4];
+
+                while (!token.IsCancellationRequested)
                 {
-                    var activity = await voteTask;
-                    if (activity != null)
+                    if (stream.DataAvailable)
                     {
-                        data.AddVote1Results(activity);
+                        try
+                        {
+                            var activity = await AcceptVote1(client);
+                            if (activity != null)
+                            {
+                                Console.WriteLine("Vote received");
+                                _activityVoteAnswerCount++;
+                                lock (data)
+                                {
+                                    data.AddVote1Results(activity);
+                                }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine($"Error processing vote from client: {ex.Message}");
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        await Task.Delay(100); // non-blocking wait
                     }
                 }
-                else
-                {
-                    Console.WriteLine($"Client {client} did not respond in time.");
-                }
-            });
+            })).ToList();
+
+            await Task.Delay(voteDurationMs);
+            cts.Cancel();
 
             await Task.WhenAll(voteTasks);
-            Console.WriteLine("Stopped accepting votes in phase 1");
+            Console.WriteLine("Stopped accepting activity votes");
+        }
 
-			//prepare result and send it to all clients
+        public async Task SendActivityVoteResults()
+        {
+            Console.WriteLine("SendingActivity vote results");
+            //prepare result and send it to all clients
             var result = data.GetVote1Results();
             // Send the number of client that participated to the survey
             result.Add(new Activity { Title = "Clients", ImageSource = "" }, clientCount);
@@ -219,6 +243,7 @@ namespace Prototype
 
             // Send the JSON string to all clients
             SendToAllClients(serializableResult);
+            Console.WriteLine("SendingActivity vote results finish");
 
             isVoteConcluded = true;
         }
@@ -660,6 +685,11 @@ namespace Prototype
             }
         }
 
+        public int GetActivityVoteAnswerCount()
+        {
+            return _activityVoteAnswerCount;
+        }
+
 		/// <summary>
 		/// Sufficiently terminates the host processes and client connections when the survey concludes or is aborted
 		/// </summary>
@@ -688,6 +718,7 @@ namespace Prototype
             cancellableTasks.Clear();
 
             // Reset voting state
+            _activityVoteAnswerCount = 0;
             voteCalc = null;
             isVoteConcluded = false;
         }

@@ -69,6 +69,7 @@ namespace Prototype
         public LuoKyselyToimenpiteetVihainen()
         {
             InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
 
             Items = new List<CollectionItem>();
             int numero = 0;

@@ -70,6 +70,7 @@ namespace Prototype
         public LuoKyselyToimenpiteetItkunauru()
         {
             InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
 
             //alustus
             Items = new List<CollectionItem>();

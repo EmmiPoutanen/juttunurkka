@@ -1,7 +1,7 @@
 ﻿/*
 Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
           2022 Pauliina Pihlajaniemi, Viola Niemi, Niina Nikki, Juho Tyni, Aino Reinikainen, Essi Kinnunen
-          2025 Petri Pentinpuro
+          2025 Petri Pentinpuro, Emmi Poutanen
 
 This file is part of "Juttunurkka".
 
@@ -39,6 +39,7 @@ namespace Prototype
         public Opettajanhuone()
         {
             InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
             TallennetutKyselyt();
             BindingContext = this;
         }
