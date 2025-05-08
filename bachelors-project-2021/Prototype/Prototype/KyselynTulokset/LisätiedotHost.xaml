@@ -24,7 +24,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
              BackgroundColor="#FFEA7F">
 
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout Padding="0,80,0,0">
 
             <Label
         Text="TULOKSET"
@@ -102,10 +102,10 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
           Clicked="KeskeytäClicked"
           BackgroundColor="#FEBA4F"
           TextColor="Black"
-          FontSize="24"
+          FontSize="20"
           FontAttributes="Bold"
-          CornerRadius="15"
-          HeightRequest="80"
+          CornerRadius="10"
+          HeightRequest="70"
           WidthRequest="150"
           BorderColor="Transparent"
           BorderWidth="0"/>
@@ -115,10 +115,10 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
           Clicked="JatkaClicked"
           BackgroundColor="#FEBA4F"
           TextColor="Black"
-          FontSize="24"
+          FontSize="20"
           FontAttributes="Bold"
-          CornerRadius="15"
-          HeightRequest="80"
+          CornerRadius="10"
+          HeightRequest="70"
           WidthRequest="150"
           BorderColor="Transparent"
           BorderWidth="0"/>

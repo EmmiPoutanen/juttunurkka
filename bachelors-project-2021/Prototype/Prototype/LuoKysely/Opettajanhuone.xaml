@@ -2,6 +2,7 @@
 <!--
 Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
           2022 Pauliina Pihlajaniemi, Viola Niemi, Niina Nikki, Juho Tyni, Aino Reinikainen, Essi Kinnunen
+          2025 Emmi Poutanen
 
 This file is part of "Juttunurkka".
 
@@ -23,7 +24,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
              BackgroundColor="#ffea7f"
              Title="Juttunurkka">
 
-    <StackLayout VerticalOptions="CenterAndExpand" Spacing="20" Padding="0,0,0,350">
+    <StackLayout VerticalOptions="FillAndExpand" Spacing="50" Padding="0,100,0,0">
 
         <Grid 
               RowDefinitions="Auto, Auto"
@@ -51,42 +52,42 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 
         </Grid>
 
-        <Button Text="Luo uusi juttunurkka"
-            Clicked="UusiJuttunurkkaClicked"
-            VerticalOptions="CenterAndExpand" 
-            HorizontalOptions="CenterAndExpand" 
-            FontSize="25"
-            Margin="20,40,10,0"
-            CornerRadius="10"
-            HeightRequest="100"
-            TextColor="Black"
-            FontAttributes="Bold"
-            BorderColor="Transparent"
-            WidthRequest="340"
-            BorderWidth="0.1"
-            BackgroundColor="#feba4f"
-         />
 
+        <Grid RowDefinitions="Auto, Auto"
+            ColumnDefinitions="Auto, Auto"
+            VerticalOptions="End"
+            Padding="10"
+            HorizontalOptions="CenterAndExpand">
 
-        <Grid HorizontalOptions="EndAndExpand" Margin="0,0,30,0">
-            <Picker x:Name="PickerList" IsVisible="True"
-                SelectedIndexChanged="OnPickerSelectedIndexChanged"
-                             ItemsSource="{Binding Surveys}">
-            </Picker>
+            <Button Grid.Row="0"
+                Text="Luo uusi juttunurkka"
+                Clicked="UusiJuttunurkkaClicked"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" 
+                FontSize="25"
+                Margin="0,0,0,0"
+                CornerRadius="10"
+                HeightRequest="100"
+                TextColor="Black"
+                FontAttributes="Bold"
+                BorderColor="Transparent"
+                WidthRequest="340"
+                BackgroundColor="#feba4f"
+             />
 
-            <Button Text="Arkisto"
+            <Button Grid.Row="1"
+                    Text="Arkisto"
                VerticalOptions="CenterAndExpand" 
                HorizontalOptions="CenterAndExpand" 
                BackgroundColor="#feba4f"
                FontSize="25"
                BorderColor="Transparent"
-               Margin="0,0,0,0"
+               Margin="0,30,0,0"
                CornerRadius="10"
                HeightRequest="100"
                FontAttributes="Bold"
                TextColor="Black"
                WidthRequest="340"
-               BorderWidth="0.1"
                Clicked="ArkistoClicked"
             />
         </Grid>

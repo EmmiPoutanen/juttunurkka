@@ -34,7 +34,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                 FontAttributes="Bold"
                 FontSize="30"
                 TextColor="Black"
-                Margin="0,20,0,0"/>
+                Margin="0,80,0,0"/>
 
             <Grid Padding="50,0,70,20"
                   RowSpacing="20"

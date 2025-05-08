@@ -2,6 +2,7 @@
 <!--
 Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
           2022 Pauliina Pihlajaniemi, Viola Niemi, Niina Nikki, Juho Tyni, Aino Reinikainen, Essi Kinnunen
+          2025 Emmi Poutanen
 
 This file is part of "Juttunurkka".
 
@@ -32,7 +33,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                TextColor="Black"
                FontFamily="BebasNeue"
                HorizontalOptions="Center"
-               Margin="0,30,0,50"/>
+               Margin="0,80,0,50"/>
 
             <CollectionView ItemsSource="{Binding Results}"
                 HorizontalOptions="Center">
@@ -93,15 +94,15 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             <AbsoluteLayout Margin="20"  VerticalOptions ="EndAndExpand" HorizontalOptions="CenterAndExpand">
                 <Button Text="Sulje huone"
                      Clicked="SuljeClicked" 
-                     CornerRadius="15"
+                     CornerRadius="10"
                      HorizontalOptions="Center"
-                     FontSize="30"
+                     FontSize="22"
                      TextColor="Black"
                      FontFamily="RobotoMedium"
                      FontAttributes="Bold"
                      BorderColor="Transparent"
                      BackgroundColor="#FEBA4F"
-                     HeightRequest="95"
+                     HeightRequest="80"
                      WidthRequest="270"/>
             </AbsoluteLayout>
 

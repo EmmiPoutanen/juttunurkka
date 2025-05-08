@@ -97,13 +97,13 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                                         Margin="10,10,10,0"
                                         VerticalOptions="Center"
                                         HorizontalOptions="CenterAndExpand"
-                                        WidthRequest="300"
+                                        WidthRequest="260"
                                         HeightRequest="45"
                                         FontSize="20"
                                         TextColor="Black"
                                         FontAttributes="Bold"
                                         BackgroundColor="#feba4f"
-                                        BorderWidth="0.1"
+                                        BorderColor="Transparent"
                                         Text="Toimenpiteet" 
                                         Clicked="btnPopupButton_Clicked"
                                 />
@@ -177,24 +177,36 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 
             </CollectionView>
 
-                    <Grid  Margin="0,30,0,0">
-                            <Button Grid.Column="1" 
-                                    Text="Jaa kysely"
-                                    Clicked="JaaClicked"
-                                    HeightRequest="65"
-                                    CornerRadius="100"/>
+                <Grid RowDefinitions="Auto, Auto"
+                    ColumnDefinitions="Auto, Auto"
+                    ColumnSpacing="20"
+                    HorizontalOptions="Center"
+                    Margin="0,50,0,0">
+                    <Button Grid.Column="0" 
+                            Text="Jaa kysely"
+                            TextColor="Black"
+                            FontAttributes="Bold"
+                            Clicked="JaaClicked"
+                            FontSize="20"
+                            BorderColor="Transparent"
+                            HeightRequest="65"
+                            CornerRadius="10"
+                            WidthRequest="160"
+                            BackgroundColor="#feba4e"/>
 
-                            <Button x:Name="MuokkaaButton"
-								    Text="Muokkaa"
-                                    TextColor="Black"
-                                    FontAttributes="Bold"
-                                    FontSize="20"
-                                    Clicked="MuokkaaClicked"
-                                    BackgroundColor="#feba4f"
-                                    BorderWidth="0.1"
-                                    HeightRequest="65"
-                                    CornerRadius="100"/>
-                        </Grid>
+                    <Button Grid.Column="1" 
+                            x:Name="MuokkaaButton"
+							Text="Muokkaa"
+                            TextColor="Black"
+                            FontAttributes="Bold"
+                            FontSize="20"
+                            Clicked="MuokkaaClicked"
+                            BackgroundColor="#feba4f"
+                            BorderColor="Transparent"
+                            HeightRequest="65"
+                            WidthRequest="160"
+                            CornerRadius="10"/>
+                </Grid>
 
         </StackLayout>
         </StackLayout>

@@ -1,7 +1,7 @@
 ﻿/*
 Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
           2022 Pauliina Pihlajaniemi, Viola Niemi, Niina Nikki, Juho Tyni, Aino Reinikainen, Essi Kinnunen
-          2025 Riina Kaipia
+          2025 Emmi Poutanen, Riina Kaipia
 
 This file is part of "Juttunurkka".
 
@@ -77,7 +77,7 @@ namespace Prototype
         {
             InitializeComponent();
             // Set as true for testing
-            NavigationPage.SetHasBackButton(this, true);
+            NavigationPage.SetHasNavigationBar(this, false);
             Survey s = SurveyManager.GetInstance().GetSurvey();
             RoomCode = s.RoomCode;
             BindingContext = this;

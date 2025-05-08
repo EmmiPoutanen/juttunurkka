@@ -24,7 +24,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
              BackgroundColor="#ffea7f"
              >
 
-    <StackLayout  Spacing="40">
+    <StackLayout  VerticalOptions="FillAndExpand" Spacing="50" Padding="0,50,0,0">
 
         <Label Grid.Column="2"
             Text="Luo juttunurkka"
@@ -46,10 +46,9 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             HeightRequest="50"
             Margin="0,0,0,250"
             TextColor="Black"
-            TitleColor="Black"
+            TitleColor="Gray"
             FontSize="20"
-            FontAttributes="Bold"
-            BackgroundColor="White"    
+            BackgroundColor="White"
             ItemsSource="{Binding Intros}"
             ItemDisplayBinding="{Binding introMessage}">
             

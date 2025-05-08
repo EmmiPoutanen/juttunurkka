@@ -71,6 +71,7 @@ namespace Prototype
         public LuoKyselyToimenpiteetNeutraali()
         {
             InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
 
             //alustus
             Items = new List<CollectionItem>();

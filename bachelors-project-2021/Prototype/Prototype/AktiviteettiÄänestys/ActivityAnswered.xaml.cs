@@ -28,8 +28,9 @@ namespace Prototype
 
         private readonly Activity? _votedAcitivy;
 		private readonly int _remainingTime;
+        private bool _voteResultReceived = false;
 
-		public ActivityAnswered(Activity? votedActivity, int remainingTime)
+        public ActivityAnswered(Activity? votedActivity, int remainingTime)
 		{
 			_votedAcitivy = votedActivity;
 			_remainingTime = remainingTime;
@@ -38,43 +39,70 @@ namespace Prototype
             InitializeComponent();
             BindingContext = this;
 
-            StartCountdown();
+            StartCountdownAndListen();
         }
 
-        /// <summary>
-        /// Update the progressbar and countdown when the voting should be closing.
-        /// </summary>
-        private async void StartCountdown()
+        private async void StartCountdownAndListen()
         {
             int totalSeconds = _remainingTime;
             int elapsed = 0;
 
+            // Cancellation token to cancel both tasks if needed
+            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+
+            // Start a task to listen for the results while countdown is running
+            var listenTask = ListenForResultsAsync(cancellationTokenSource.Token);
+
             while (elapsed < totalSeconds)
             {
+                if (cancellationTokenSource.Token.IsCancellationRequested)
+                    break;
+
+                // Update progress bar
                 double progress = 1.0 - (double)elapsed / totalSeconds;
                 progressBar.Progress = progress;
+
                 await Task.Delay(1000);
                 elapsed++;
             }
-
             progressBar.Progress = 0;
 
-            await OnCountdownFinished();
+            await Task.Delay(5000);
+            // Timeout, Cancel listen task and handle timeout
+            cancellationTokenSource.Cancel();
+
+            if (!_voteResultReceived)
+            {
+                // If no result received yet, show error and navigate to the main page
+                await DisplayAlert("VIRHE", "Tulosten haku epäonnistui", "OK");
+                await Navigation.PushAsync(new MainPage());
+            }
         }
 
-        private async Task OnCountdownFinished()
+        // Listen for vote results asynchronously
+        private async Task ListenForResultsAsync(CancellationToken cancellationToken)
         {
-            // Try to read the results when countdown is finished
-            // TODO: Can the host cancel the voting?
-            bool success = await Main.GetInstance().client.ReceiveVoteResult();
-            if (success)
+            try
             {
-                //received result changing view
-                await Navigation.PushAsync(new AktiviteettiäänestysTulokset());
-                return;
+                // Loop to try receiving results every 1 second
+                while (!cancellationToken.IsCancellationRequested)
+                {
+                    bool success = await Main.GetInstance().client.ReceiveVoteResult();
+                    if (success)
+                    {
+                        _voteResultReceived = true;
+                        // If successful, navigate to the results page and cancel the countdown
+                        await Navigation.PushAsync(new AktiviteettiäänestysTulokset());
+                        break;
+                    }
+
+                    await Task.Delay(1000);
+                }
             }
-            await DisplayAlert("VIRHE", "Tulosten haku epäonnistui", "OK");
-            await Navigation.PushAsync(new MainPage());
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error while receiving results: {ex.Message}");
+            }
         }
     }
 }

@@ -71,6 +71,7 @@ namespace Prototype
         public LuoKyselyToimenpiteetMiettiva()
         {
             InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
 
             //alustus
             Items = new List<CollectionItem>();

@@ -42,6 +42,7 @@ namespace Prototype
         public LuoKyselyJohdatus()
         {
             InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
 
             introMessage = Const.intros;
 

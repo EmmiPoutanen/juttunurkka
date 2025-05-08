@@ -42,7 +42,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
 
                 <Grid HorizontalOptions="CenterAndExpand"
               Margin="0,110,0,0"
-              HeightRequest="420"
+              HeightRequest="360"
               WidthRequest="300"
               BackgroundColor="#89e077">
                     <Frame BackgroundColor="#feba4f"
@@ -100,7 +100,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                 Clicked="AlkuunClicked"
                 HorizontalOptions="Center"
                 VerticalOptions="EndAndExpand"
-                FontSize="29"
+                FontSize="24"
                 BackgroundColor="#feba4f"
                 BorderColor="#ffea7f"
                 BorderWidth="0"

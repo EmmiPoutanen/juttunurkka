@@ -46,6 +46,7 @@ namespace Prototype
         public Esikatselu()
         {
             InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
             Survey survey = SurveyManager.GetInstance().GetSurvey();
             introMessage += survey.introMessage;
             RoomCode = survey.RoomCode;

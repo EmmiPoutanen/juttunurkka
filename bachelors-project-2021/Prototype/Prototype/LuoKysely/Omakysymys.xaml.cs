@@ -35,6 +35,7 @@ namespace Prototype
         public Omakysymys()
         {
             InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
 
             BindingContext = this;
         }
@@ -62,7 +63,7 @@ namespace Prototype
             else
             {
                 // siirrytään etusivulle
-                await Navigation.PopToRootAsync();
+                await Navigation.PopAsync();
             }
         }
     }

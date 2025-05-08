@@ -25,7 +25,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
              BackgroundColor="#ffea7f"
              >
 
-    <StackLayout VerticalOptions="CenterAndExpand" Spacing="20" Padding="0,0,0,90">
+    <StackLayout VerticalOptions="CenterAndExpand" Spacing="10" Padding="0,0,0,50">
         <Label Text="Kirjaudu sisään opettajanhuoneeseen"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand"
@@ -64,7 +64,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" 
                 FontSize="19"
-              Margin="20,10,10,35"
+              Margin="20,40,10,5"
               TextColor="Black"
               CornerRadius="10"
               HeightRequest="50"

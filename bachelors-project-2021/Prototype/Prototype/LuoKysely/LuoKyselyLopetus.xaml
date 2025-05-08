@@ -49,7 +49,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                      Placeholder="Kirjoita..."
                      VerticalOptions="StartAndExpand"
                      BackgroundColor="White"  
-                     FontAttributes="Bold"
+                     FontSize="20"
                      TextChanged="OnEntryTextChanged"
                  />
 
@@ -58,8 +58,8 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                      HorizontalOptions="CenterAndExpand">
 
             <Image Source="key"
-               HeightRequest="60"
-               WidthRequest="60"
+               HeightRequest="70"
+               WidthRequest="70"
                Margin="-10,0,0,0"
                />
 
@@ -67,7 +67,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                 HorizontalOptions="CenterAndExpand"
                 BorderColor="#4383EF"
                 CornerRadius="10" 
-                HeightRequest="50"
+                HeightRequest="60"
                 WidthRequest="120"
                 Margin="5,5,5,5">
 
@@ -77,7 +77,7 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
                      VerticalOptions="StartAndExpand"
                      MaxLength="6"
                      BackgroundColor="White"
-                     FontAttributes="Bold"
+                     FontSize="20"
                      TextChanged="OnEntryTextChanged"
                  />
 
@@ -92,19 +92,23 @@ along with Juttunurkka.  If not, see <https://www.gnu.org/licenses/>.
             VerticalOptions="EndAndExpand"
             HorizontalOptions="CenterAndExpand">
 
-            <Button Grid.Column="1"
+            <Button Grid.Column="0"
                 Text="Edellinen"
                 Clicked="EdellinenButtonClicked"
                 VerticalOptions="EndAndExpand"
                 HorizontalOptions="CenterAndExpand" 
+                TextColor="Black"
+                FontAttributes="Bold"
                 FontSize="19"
                 Margin="20,0,10,40"
                 CornerRadius="10"
                 HeightRequest="50"
                 WidthRequest="150"
+                BackgroundColor="#feba4e"
+                BorderColor="#feba4e"
             />
 
-            <Button Grid.Column="2" 
+            <Button Grid.Column="1" 
                 Text="Jatka"
                 TextColor="Black"
                 FontAttributes="Bold"
