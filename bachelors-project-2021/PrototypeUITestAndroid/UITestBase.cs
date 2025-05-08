@@ -1,7 +1,4 @@
-/*
-Copyright 2021 Emma Kemppainen, Jesse Huttunen, Tanja Kultala, Niklas Arjasmaa
-          2022 Pauliina Pihlajaniemi, Viola Niemi, Niina Nikki, Juho Tyni, Aino Reinikainen, Essi Kinnunen
-          2025 Emmi Poutanen
+/*Copyright 2025 Emmi Poutanen
 
 This file is part of "Juttunurkka".
 
